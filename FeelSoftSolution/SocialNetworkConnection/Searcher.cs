@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace SocialNetworkConnection
 {
-    public class Search : PublicationSearcher
+    public class Searcher : PublicationSearcher
     {
     }
 }

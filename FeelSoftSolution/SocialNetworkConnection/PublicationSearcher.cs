@@ -8,7 +8,8 @@ namespace SocialNetworkConnection
 {
     public abstract class PublicationSearcher
     {
-        private IEnumerable<IPublication> publications;
+        private IList<IPublication> publications;
+        private IList<IQueryConfiguration> queriesConfigurations;
 
         private Thread searchThread;
 
@@ -20,10 +21,18 @@ namespace SocialNetworkConnection
             }
         }
 
-        public IEnumerable<IPublication> IPublication
+        public IList<IPublication> IPublications
         {
             get => publications;
             
+        }
+
+        public IList<IQueryConfiguration> QueriesConfigurations
+        {
+            get => queriesConfigurations;
+            set
+            {
+            }
         }
     }
 }

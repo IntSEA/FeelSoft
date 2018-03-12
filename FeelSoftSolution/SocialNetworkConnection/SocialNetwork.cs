@@ -11,8 +11,7 @@ namespace SocialNetworkConnection
     {
         private string name;
         private IList<PublicationSearcher> searchers;
-
-
+        
         public string Name
         {
             get => name;

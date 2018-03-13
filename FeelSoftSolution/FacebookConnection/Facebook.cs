@@ -28,7 +28,7 @@ namespace FacebookConnection
 
             FacebookSearcher searcher = new FacebookSearcher(client);
             AddSearcher(searcher);
-            SetName("");
+            SetName("Facebook");
             
         }
 

@@ -15,11 +15,11 @@ namespace SocialNetworkConnection
         private string location;
 
         public string Message { get =>message ; }
-        public string WroteBy { get => throw new NotImplementedException(); }
-        public string Language { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Favorability { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime CreateDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Location { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string WroteBy { get => wroteBy; }
+        public string Language { get => language; }
+        public int Favorability { get => favorability;set => favorability = value; }
+        public DateTime CreateDate { get => createDate; }
+        public string Location { get => location; }
 
         public int CompareBy(IPublication other, Comparison<IPublication> comparator)
         {

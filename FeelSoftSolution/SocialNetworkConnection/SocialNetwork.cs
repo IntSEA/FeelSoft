@@ -20,6 +20,8 @@ namespace SocialNetworkConnection
             searchers = new List<PublicationSearcher>();
         }
 
+      
+
         protected void SetName(string name)
         {
            this.name = name;
@@ -47,6 +49,16 @@ namespace SocialNetworkConnection
         private string GetSocialNetworkName()
         {
             throw new NotImplementedException();
+        }
+
+        public void ImportQueryConfiguration()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ExportQueryConfiguration()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

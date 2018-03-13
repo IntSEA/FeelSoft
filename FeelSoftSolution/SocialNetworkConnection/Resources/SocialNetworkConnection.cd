@@ -1,28 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="SocialNetworkConnection.Publication" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="10.25" Y="5.25" Width="1.5" />
+    <Position X="6.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AQAAAAAACAAAAAwAAAIBAAACAACEAAAAhAABIAAAACA=</HashCode>
       <FileName>Publication.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.1" />
   </Class>
   <Class Name="SocialNetworkConnection.PublicationSearcher">
-    <Position X="10.75" Y="0.5" Width="1.5" />
-    <AssociationLine Name="IPublications" Type="SocialNetworkConnection.IPublication" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+    <Position X="10.75" Y="0.5" Width="2" />
+    <AssociationLine Name="SearchPublications" Type="SocialNetworkConnection.SearchPublications" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="10.75" Y="1.648" />
-        <Point X="8.875" Y="1.648" />
-        <Point X="8.875" Y="5.25" />
+        <Point X="12.75" Y="2.938" />
+        <Point X="12.75" Y="3.003" />
+        <Point X="13.5" Y="3.003" />
+        <Point X="13.5" Y="6.062" />
+        <Point X="14" Y="6.062" />
       </Path>
     </AssociationLine>
+    <AssociationLine Name="IPublications" Type="SocialNetworkConnection.IPublication" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.75" Y="2.449" />
+        <Point X="9.125" Y="2.449" />
+        <Point X="9.125" Y="5.25" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Credential" Type="SocialNetworkConnection.ICredential" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="12.75" Y="2.759" />
+        <Point X="15.059" Y="2.759" />
+        <Point X="15.059" Y="4.543" />
+        <Point X="15.75" Y="4.543" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.802" Y="0.443" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>QABCAAAAAAAAAAAAgAAAAACAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <HashCode>QgBCAAAAAAAAAAAAgAAAAACAAAAAAAAAABAAAAIgAgA=</HashCode>
       <FileName>PublicationSearcher.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="SearchPublications" />
+      <Property Name="Credential" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="IPublications" />
@@ -30,39 +51,42 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="SocialNetworkConnection.QueryConfiguration" BaseTypeListCollapsed="true">
-    <Position X="4.5" Y="0.5" Width="1.5" />
+    <Position X="3.5" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IACAACAACAAAAAhAAAIAUAACABAAAAAAAAAAAAAAgAA=</HashCode>
       <FileName>QueryConfiguration.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.1" />
   </Class>
   <Class Name="SocialNetworkConnection.Searcher">
-    <Position X="11.75" Y="3.25" Width="1.5" />
+    <Position X="11.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Searcher.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SocialNetworkConnection.Stream">
-    <Position X="9.75" Y="3.25" Width="1.5" />
+    <Position X="9.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Stream.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SocialNetworkConnection.SocialNetwork">
-    <Position X="6.25" Y="2.75" Width="1.5" />
+    <Position X="6.25" Y="1.5" Width="1.5" />
     <AssociationLine Name="PublicationSearcher" Type="SocialNetworkConnection.PublicationSearcher" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="7.75" Y="3.728" />
-        <Point X="8.375" Y="3.728" />
-        <Point X="8.375" Y="1.162" />
-        <Point X="10.75" Y="1.162" />
+        <Point X="7.75" Y="3.376" />
+        <Point X="8.125" Y="3.376" />
+        <Point X="8.125" Y="1.624" />
+        <Point X="10.75" Y="1.624" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAIAAAAAAAAAAQAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AgAAAAAIAAAAAAAAAAQAAAQABAAEAIAAIAAAQAAABAA=</HashCode>
       <FileName>SocialNetwork.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -70,29 +94,36 @@
     </ShowAsCollectionAssociation>
     <Lollipop Orientation="Left" Position="0.1" />
   </Class>
-  <Interface Name="SocialNetworkConnection.IPublication" Collapsed="true">
-    <Position X="8.25" Y="5.25" Width="1.5" />
+  <Interface Name="SocialNetworkConnection.IPublication">
+    <Position X="8.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AQAAAAAACAAAAAAAAAIAAAAAAACAAAAABAABIAAAAAA=</HashCode>
       <FileName>IPublication.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="SocialNetworkConnection.IQueryConfiguration" Collapsed="true">
-    <Position X="14.5" Y="0.5" Width="1.5" />
+  <Interface Name="SocialNetworkConnection.IQueryConfiguration">
+    <Position X="15.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAACAACAAAAABAAAIAAAAAABAAAAAAAAAAAAAAgAA=</HashCode>
       <FileName>IQueryConfiguration.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="SocialNetworkConnection.ISocialNetwork" Collapsed="true">
-    <Position X="3.5" Y="2.75" Width="1.5" />
+    <Position X="3.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ISocialNetwork.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Interface Name="SocialNetworkConnection.ICredential">
+    <Position X="15.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABABAAAAAAAAAAAA=</HashCode>
+      <FileName>ICredential.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Delegate Name="SocialNetworkConnection.SearchPublications">
-    <Position X="14.25" Y="1.5" Width="2" />
+    <Position X="14" Y="5.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
       <FileName>SearchPublications.cs</FileName>

@@ -1,0 +1,2 @@
+This project depends of:
+1. Newtonsoft.JSON library.

@@ -11,7 +11,20 @@ namespace SocialNetworkConnection
     {
         private string name;
         private IList<PublicationSearcher> searchers;
-        
+        private ICredential credential;
+
+
+        public SocialNetwork()
+        {
+            name = GetSocialNetworkName();
+            searchers = new List<PublicationSearcher>();
+        }
+
+        protected void SetName(string name)
+        {
+           this.name = name;
+        }
+
         public string Name
         {
             get => name;
@@ -24,6 +37,16 @@ namespace SocialNetworkConnection
             {
                 searchers = value;
             }
+        }
+            
+        public void AddSearcher(PublicationSearcher searcher)
+        {
+            searchers.Add(searcher);
+        }
+
+        private string GetSocialNetworkName()
+        {
+            throw new NotImplementedException();
         }
     }
 }

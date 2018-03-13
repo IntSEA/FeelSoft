@@ -10,21 +10,25 @@ namespace SocialNetworkConnection
     {
         private IList<IPublication> publications;
         private IList<IQueryConfiguration> queriesConfigurations;
+        private ICredential credential;
 
         private Thread searchThread;
+
+        public PublicationSearcher()
+        {
+            publications = new List<IPublication>();
+            queriesConfigurations = new List<IQueryConfiguration>();
+        }
 
         public SearchPublications SearchPublications
         {
             get => default(SearchPublications);
-            set
-            {
-            }
+            
         }
 
         public IList<IPublication> IPublications
         {
-            get => publications;
-            
+            get => publications;            
         }
 
         public IList<IQueryConfiguration> QueriesConfigurations
@@ -32,7 +36,27 @@ namespace SocialNetworkConnection
             get => queriesConfigurations;
             set
             {
+                queriesConfigurations = value;
             }
+        }
+
+        public ICredential Credential
+        {
+            get => credential;
+            set
+            {
+                credential = value;
+            }
+        }
+
+        public IList<IPublication> Search()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void AddQueryConfiguration(IQueryConfiguration queryConfiguration)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

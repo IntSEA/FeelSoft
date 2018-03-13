@@ -103,6 +103,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICredential.cs" />
     <Compile Include="IPublication.cs" />
     <Compile Include="IQueryConfiguration.cs" />
     <Compile Include="ISocialNetwork.cs" />

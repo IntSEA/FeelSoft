@@ -10,7 +10,6 @@ namespace SocialNetworkConnection
     {
         private IList<IPublication> publications;
         private IList<IQueryConfiguration> queriesConfigurations;
-        private ICredential credential;
 
         private Thread searchThread;
 
@@ -40,15 +39,7 @@ namespace SocialNetworkConnection
             }
         }
 
-        public ICredential Credential
-        {
-            get => credential;
-            set
-            {
-                credential = value;
-            }
-        }
-
+       
         public IList<IPublication> Search()
         {
             throw new System.NotImplementedException();

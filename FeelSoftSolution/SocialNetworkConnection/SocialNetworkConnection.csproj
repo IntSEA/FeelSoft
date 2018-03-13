@@ -124,7 +124,6 @@
     <Compile Include="Searcher.cs" />
     <Compile Include="SearchPublications.cs" />
     <Compile Include="SocialNetwork.cs" />
-    <Compile Include="Stream.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

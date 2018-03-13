@@ -12,7 +12,7 @@
     <Position X="10.75" Y="0.5" Width="2" />
     <AssociationLine Name="SearchPublications" Type="SocialNetworkConnection.SearchPublications" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="12.75" Y="2.938" />
+        <Point X="12.75" Y="2.751" />
         <Point X="12.75" Y="3.003" />
         <Point X="13.5" Y="3.003" />
         <Point X="13.5" Y="6.062" />
@@ -21,29 +21,19 @@
     </AssociationLine>
     <AssociationLine Name="IPublications" Type="SocialNetworkConnection.IPublication" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="10.75" Y="2.449" />
-        <Point X="9.125" Y="2.449" />
+        <Point X="10.75" Y="2.3" />
+        <Point X="9.359" Y="2.3" />
+        <Point X="9.359" Y="4.945" />
+        <Point X="9.125" Y="4.945" />
         <Point X="9.125" Y="5.25" />
       </Path>
     </AssociationLine>
-    <AssociationLine Name="Credential" Type="SocialNetworkConnection.ICredential" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="12.75" Y="2.759" />
-        <Point X="15.059" Y="2.759" />
-        <Point X="15.059" Y="4.543" />
-        <Point X="15.75" Y="4.543" />
-      </Path>
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="0.802" Y="0.443" />
-      </MemberNameLabel>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>QgBCAAAAAAAAAAAAgAAAAACAAAAAAAAAABAAAAIgAgA=</HashCode>
+      <HashCode>QABCAAAAAAAAAAAAgAAAAACAAAAAAAAAABAAAAAgAgA=</HashCode>
       <FileName>PublicationSearcher.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="SearchPublications" />
-      <Property Name="Credential" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="IPublications" />
@@ -61,28 +51,14 @@
     </TypeIdentifier>
     <Lollipop Position="0.1" />
   </Class>
-  <Class Name="SocialNetworkConnection.Searcher">
-    <Position X="11.75" Y="3.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Searcher.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SocialNetworkConnection.Stream">
-    <Position X="9.75" Y="3.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Stream.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="SocialNetworkConnection.SocialNetwork">
-    <Position X="6.25" Y="1.5" Width="1.5" />
+    <Position X="6.25" Y="1.5" Width="2" />
     <AssociationLine Name="PublicationSearcher" Type="SocialNetworkConnection.PublicationSearcher" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="7.75" Y="3.376" />
-        <Point X="8.125" Y="3.376" />
-        <Point X="8.125" Y="1.624" />
-        <Point X="10.75" Y="1.624" />
+        <Point X="8.25" Y="3.376" />
+        <Point X="8.625" Y="3.376" />
+        <Point X="8.625" Y="1.538" />
+        <Point X="10.75" Y="1.538" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>

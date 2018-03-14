@@ -10,14 +10,17 @@ namespace SocialNetworkConnection
     public abstract class SocialNetwork : ISocialNetwork
     {
         private string name;
-        private IList<PublicationSearcher> searchers;
+        private PublicationSearcher searcher;
         private ICredential credential;
+        private ISearchDataSet searchDataSet;
+
+
+        public PublicationSearcher Searcher { get => searcher; set => searcher = value; }
+        public ICredential Credential { get => credential; set => credential = value; }
 
 
         public SocialNetwork()
         {
-            name = GetSocialNetworkName();
-            searchers = new List<PublicationSearcher>();
         }
 
       
@@ -32,33 +35,12 @@ namespace SocialNetworkConnection
             get => name;
         }
 
-        public IList<PublicationSearcher> PublicationSearcher
-        {
-            get => searchers;
-            set
-            {
-                searchers = value;
-            }
-        }
-            
-        public void AddSearcher(PublicationSearcher searcher)
-        {
-            searchers.Add(searcher);
-        }
 
-        private string GetSocialNetworkName()
-        {
-            throw new NotImplementedException();
-        }
 
-        public void ImportQueryConfiguration()
+        public ISearchDataSet SearchDataSet
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void ExportQueryConfiguration()
-        {
-            throw new System.NotImplementedException();
+            get => searchDataSet;
+           
         }
     }
 }

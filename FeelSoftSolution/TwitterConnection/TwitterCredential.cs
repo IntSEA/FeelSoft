@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FacebookConnection
+namespace TwitterConnection
 {
-    public interface IFacebook
+    public class TwitterCredential
     {
     }
 }

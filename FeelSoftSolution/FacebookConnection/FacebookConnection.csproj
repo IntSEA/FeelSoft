@@ -46,7 +46,6 @@
     <Compile Include="FacebookCredential.cs" />
     <Compile Include="Facebook.cs" />
     <Compile Include="FacebookSearcher.cs" />
-    <Compile Include="IFacebook.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace SocialNetworkConnection
 {
-    public interface ICredential
+    public enum Languages
     {
-        void SetCredentials(string credentials);
-        void GetCredentials();
+        Spanish,
+        English
     }
 }

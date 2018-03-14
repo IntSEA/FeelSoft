@@ -5,11 +5,9 @@ using System.Text;
 
 namespace SocialNetworkConnection
 {
-    public enum Filters
+    public enum Languages
     {
-        Video,
-        Image,
-        New,
-        Hashtag
+        Spanish,
+        English
     }
 }

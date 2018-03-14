@@ -5,11 +5,9 @@ using System.Text;
 
 namespace SocialNetworkConnection
 {
-    public enum Filters
+    public interface ICredential
     {
-        Video,
-        Image,
-        New,
-        Hashtag
+        void SetCredentials(string credentials);
+        void GetCredentials();
     }
 }

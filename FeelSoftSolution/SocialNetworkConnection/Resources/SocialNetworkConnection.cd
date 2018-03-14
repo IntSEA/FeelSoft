@@ -3,7 +3,7 @@
   <Class Name="SocialNetworkConnection.PublicationSearcher">
     <Position X="10.5" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PublicationSearcher.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -28,7 +28,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SocialNetworkConnection.QueryConfiguration">
-    <Position X="12.5" Y="6" Width="1.5" />
+    <Position X="9" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IACAACAQCAAAAAhAAAIAUAACABAAAAAAAAAAAAAAkAA=</HashCode>
       <FileName>QueryConfiguration.cs</FileName>
@@ -36,7 +36,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SocialNetworkConnection.SearchDataSet">
-    <Position X="12.5" Y="2.75" Width="1.5" />
+    <Position X="8.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAACBIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAgA=</HashCode>
       <FileName>SearchDataSet.cs</FileName>
@@ -52,31 +52,10 @@
   </Interface>
   <Interface Name="SocialNetworkConnection.IQueryConfiguration">
     <Position X="4" Y="5.75" Width="1.5" />
-    <AssociationLine Name="SearchType" Type="SocialNetworkConnection.SearchTypes" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="5.5" Y="7.062" />
-        <Point X="5.875" Y="7.062" />
-        <Point X="5.875" Y="7.969" />
-        <Point X="8.75" Y="7.969" />
-      </Path>
-    </AssociationLine>
-    <AssociationLine Name="Language" Type="SocialNetworkConnection.Languages" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="5.062" Y="7.623" />
-        <Point X="5.062" Y="9.438" />
-        <Point X="6.25" Y="9.438" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAAACAQCAAAAABAAAIAAAAAABAAAAAAAAAAAAAAgAA=</HashCode>
       <FileName>IQueryConfiguration.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Location" />
-      <Property Name="SearchType" />
-      <Property Name="Filter" />
-      <Property Name="Language" />
-    </ShowAsAssociation>
   </Interface>
   <Interface Name="SocialNetworkConnection.ISocialNetwork">
     <Position X="3.25" Y="0.75" Width="1.5" />
@@ -96,32 +75,32 @@
       <Property Name="Publications" />
     </ShowAsCollectionAssociation>
   </Interface>
+  <Enum Name="SocialNetworkConnection.Filters">
+    <Position X="6.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAEAAAAAAg=</HashCode>
+      <FileName>Filters.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SocialNetworkConnection.Languages">
+    <Position X="6.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Languages.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Enum Name="SocialNetworkConnection.Locations">
-    <Position X="8.75" Y="6.25" Width="1.5" />
+    <Position X="6.25" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Locations.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="SocialNetworkConnection.Languages">
-    <Position X="6.25" Y="8.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAQAAAAAAAAAAA=</HashCode>
-      <FileName>Language.cs</FileName>
-    </TypeIdentifier>
-  </Enum>
   <Enum Name="SocialNetworkConnection.SearchTypes">
-    <Position X="8.75" Y="7.75" Width="1.5" />
+    <Position X="4" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAQAAAAABAAAAAAA=</HashCode>
       <FileName>SearchTypes.cs</FileName>
-    </TypeIdentifier>
-  </Enum>
-  <Enum Name="SocialNetworkConnection.Filters">
-    <Position X="3.25" Y="9" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAEAAAAAAg=</HashCode>
-      <FileName>Filters.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

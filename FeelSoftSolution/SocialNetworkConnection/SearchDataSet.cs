@@ -7,17 +7,12 @@ namespace SocialNetworkConnection
 {
     public class SearchDataSet : ISearchDataSet
     {
-        private IList<IQueryConfiguration> queriesConfigurations;
         private IList<IPublication> publications;
+        private IList<IQueryConfiguration> queriesConfiguration;
 
-        public IList<IQueryConfiguration> QueriesConfigurations { get => queriesConfigurations; set => queriesConfigurations = value; }
         public IList<IPublication> Publications { get => publications; set => publications = value; }
-
-        public SearchDataSet()
-        {
-            queriesConfigurations = new List<IQueryConfiguration>();
-            publications = new List<IPublication>();
-        }
+        public IList<IQueryConfiguration> QueriesConfiguration { get => queriesConfiguration; set => queriesConfiguration = value; }
+        public IList<IQueryConfiguration> QueriesConfigurations { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void AddPublications(IList<IPublication> publications)
         {
@@ -48,7 +43,7 @@ namespace SocialNetworkConnection
 
         public void AddQueriesConfigurations(IQueryConfiguration queryConfiguration)
         {
-            this.queriesConfigurations.Add(queryConfiguration);
+            this.queriesConfiguration.Add(queryConfiguration);
         }
     }
 }

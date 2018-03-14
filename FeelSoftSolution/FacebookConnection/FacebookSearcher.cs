@@ -13,7 +13,7 @@ namespace FacebookConnection
     {
         private readonly HttpClient client;
 
-        public FacebookSearcher(HttpClient client) : base()
+        public FacebookSearcher(HttpClient client, ICredential credential) : base(credential)
         {
             this.client = client;
 

@@ -40,9 +40,7 @@ namespace SocialNetworkConnection
         public ISearchDataSet SearchDataSet
         {
             get => searchDataSet;
-            set
-            {
-            }
+           
         }
     }
 }

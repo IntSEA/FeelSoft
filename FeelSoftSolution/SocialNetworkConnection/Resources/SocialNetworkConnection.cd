@@ -3,7 +3,7 @@
   <Class Name="SocialNetworkConnection.PublicationSearcher">
     <Position X="10.5" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAAAAgAAAAACAAAAAEAAAAAAAAAIAAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAIAAAA=</HashCode>
       <FileName>PublicationSearcher.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -24,9 +24,9 @@
     <Lollipop Orientation="Left" Position="0.1" />
   </Class>
   <Interface Name="SocialNetworkConnection.IPublication">
-    <Position X="1.25" Y="3.75" Width="1.5" />
+    <Position X="1.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAAAAACAAAAAAAAAIAAAAAAACAAAAABAABIAIAAAA=</HashCode>
+      <HashCode>AQAAAAAACAAAAAAAAAIAAAAAAACAAAAABAABIAAAAAA=</HashCode>
       <FileName>IPublication.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -58,8 +58,8 @@
       <FileName>ISearchDataSet.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="Publications" />
       <Property Name="QueriesConfigurations" />
+      <Property Name="Publications" />
     </ShowAsCollectionAssociation>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

@@ -8,7 +8,6 @@ namespace SocialNetworkConnection
 {
     public abstract class PublicationSearcher
     {
-        private Thread searchThread;
         private ICredential credential;
 
         public PublicationSearcher(ICredential credential)
@@ -30,12 +29,7 @@ namespace SocialNetworkConnection
         public IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations , int max)
         {
             throw new System.NotImplementedException();
-        }
-
-        private ThreadStart SearchStart(IList<IQueryConfiguration> queriesConfigurations, int max)
-        {
-            throw new System.NotImplementedException();
-        }
+        }        
 
 
     }

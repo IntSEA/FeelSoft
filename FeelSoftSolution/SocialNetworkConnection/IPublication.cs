@@ -15,6 +15,5 @@ namespace SocialNetworkConnection
         string Location { get; }
 
         int CompareBy(IPublication other, Comparison<IPublication> comparator);
-        void GetLenghtMessage();
     }
 }

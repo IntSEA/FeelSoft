@@ -15,5 +15,6 @@ namespace SocialNetworkConnection
         string Filter { get; set; }
         int SearchType { get; set; }
         string Geo { get; set; }
+        int MaxPublicationCount { get; set; }
     }
 }

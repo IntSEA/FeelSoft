@@ -69,5 +69,15 @@ namespace SocialNetworkConnection.Properties {
                 return ResourceManager.GetString("Dependences", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SocialNetworkConnection {
+            get {
+                object obj = ResourceManager.GetObject("SocialNetworkConnection", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

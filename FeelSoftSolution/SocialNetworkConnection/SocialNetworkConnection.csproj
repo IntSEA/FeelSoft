@@ -140,5 +140,8 @@
   <ItemGroup>
     <None Include="Resources\Dependences.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SocialNetworkConnection.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

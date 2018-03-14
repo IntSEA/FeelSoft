@@ -33,7 +33,7 @@
   <Interface Name="SocialNetworkConnection.IQueryConfiguration">
     <Position X="4" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAACAACAAAAABAAAIAAAAAABAAAAAAAAAAAAAAgAA=</HashCode>
+      <HashCode>AAAAACAQCAAAAABAAAIAAAAAABAAAAAAAAAAAAAAgAA=</HashCode>
       <FileName>IQueryConfiguration.cs</FileName>
     </TypeIdentifier>
   </Interface>

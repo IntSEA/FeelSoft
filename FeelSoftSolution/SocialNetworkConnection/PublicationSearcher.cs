@@ -8,46 +8,35 @@ namespace SocialNetworkConnection
 {
     public abstract class PublicationSearcher
     {
-        private IList<IPublication> publications;
-        private IList<IQueryConfiguration> queriesConfigurations;
-
         private Thread searchThread;
+        private ICredential credential;
 
-        public PublicationSearcher()
+        public PublicationSearcher(ICredential credential)
         {
-            publications = new List<IPublication>();
-            queriesConfigurations = new List<IQueryConfiguration>();
+            this.credential = credential;
         }
 
-        public SearchPublications SearchPublications
+        
+        public ICredential Credential
         {
-            get => default(SearchPublications);
-            
+            get => credential;          
         }
 
-        public IList<IPublication> IPublications
-        {
-            get => publications;            
-        }
-
-        public IList<IQueryConfiguration> QueriesConfigurations
-        {
-            get => queriesConfigurations;
-            set
-            {
-                queriesConfigurations = value;
-            }
-        }
-
-       
-        public IList<IPublication> Search()
+        public IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations)
         {
             throw new System.NotImplementedException();
         }
 
-        public void AddQueryConfiguration(IQueryConfiguration queryConfiguration)
+        public IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations , int max)
         {
             throw new System.NotImplementedException();
         }
+
+        private ThreadStart SearchStart(IList<IQueryConfiguration> queriesConfigurations, int max)
+        {
+            throw new System.NotImplementedException();
+        }
+
+
     }
 }

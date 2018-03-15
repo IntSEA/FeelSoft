@@ -9,17 +9,17 @@ namespace SocialNetworkConnection
     {
         private string message;
         private string wroteBy;
-        private string language;
+        private Languages language;
         private int favorability;
         private DateTime createDate;
-        private string location;
+        private Locations location;
 
         public string Message { get => message; set => message = value; }
         public string WroteBy { get => wroteBy; set => wroteBy = value; }
-        public string Language { get => language; set => language = value; }
+        public Languages Language { get => language; set => language = value; }
         public int Favorability { get => favorability; set => favorability = value; }
         public DateTime CreateDate { get => createDate; set => createDate = value; }
-        public string Location { get => location; set => location = value; }
+        public Locations Location { get => location; set => location = value; }
 
         public int CompareBy(IPublication other, Comparison<IPublication> comparator)
         {

@@ -30,8 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Microsoft SDKs\Azure\.NET SDK\v2.9\bin\plugins\Diagnostics\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="project.json" />
     <None Include="Resources\FacebookConnection.cd" />
   </ItemGroup>
   <ItemGroup>

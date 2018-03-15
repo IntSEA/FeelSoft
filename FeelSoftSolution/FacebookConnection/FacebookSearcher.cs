@@ -16,13 +16,13 @@ namespace FacebookConnection
             "QzIkom16Oaxiohi2prjZAEwKs4UglaYZB8pToQEOe8nzY4kG4nAsRZAeTms0i855F0OsVJIKpNZC2SZBuzq8Adn9wtgZDZD";
         private readonly HttpClient client;
 
-        public FacebookSearcher(HttpClient client) : base()
+        public FacebookSearcher(HttpClient client) : base(CREDENTIAL)
         {
             this.client = client;
         }
 
-        override
-        public IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations)
+        
+        public new IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations)
         {
             List<IPublication> publications = new List<IPublication>();
             foreach (var query in queriesConfigurations)
@@ -38,16 +38,36 @@ namespace FacebookConnection
 
         }
 
-        override
-        public IList<IPublication> SearchPublications(IQueryConfiguration queriesConfigurations)
+        
+        public new IList<IPublication> SearchPublications(IQueryConfiguration queryConfiguration)
         {
-            List<IPublication> publications = new List<IPublication>();
+            if (queryConfiguration != null)
+            {
+                List<IPublication> publications = new List<IPublication>();                
+                IDictionary<string, string> args = new Dictionary<string, string>();
+                SetQueryFields(args);               
+
+                if (queryConfiguration.Keywords != null)
+                {
+                    foreach (var keyword in queryConfiguration.Keywords)
+                    {
+                        
+                    }
+                }
+
+            }
+            throw new ArgumentNullException("QueryConfiguration was null");
+           
+        }
+
+        internal void SetQueryFields(IDictionary<string,string> queryFields)
+        {
 
         }
 
         internal async Task<string> GetUserNameAsync(string accessToken)
         {
-            var response = await RequestToGraphAsync<dynamic>(accessToken, "/me",null);
+            var response = await RequestToGraphAsync<dynamic>(accessToken, null);
             Task.WaitAll(response);
             var name = response.result;
             return name;
@@ -55,8 +75,21 @@ namespace FacebookConnection
 
         private async Task<T> RequestToGraphAsync<T>(string endpoint,IDictionary<string,string> args)
         {
-           
-            var response = await client.GetAsync($"{endpoint}?access_token={CREDENTIAL}&{args}");
+
+            string request = $"{endpoint}?access_token={CREDENTIAL}";
+            if (args != null)
+            {
+               ICollection<string> keys= args.Keys;
+                foreach (var key in keys)
+                {
+                    if (args.TryGetValue(key,out string value))
+                    {
+                        request += "&" + value;
+
+                    }
+                }
+            }
+            var response = await client.GetAsync(request);
 
 
             if (!response.IsSuccessStatusCode)

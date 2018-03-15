@@ -11,12 +11,12 @@ namespace SocialNetworkConnection
     {
         private string name;
         private PublicationSearcher searcher;
-        private ICredential credential;
+        private string credential;
         private ISearchDataSet searchDataSet;
 
 
         public PublicationSearcher Searcher { get => searcher; set => searcher = value; }
-        public ICredential Credential { get => credential; set => credential = value; }
+        public string Credential { get => credential; set => credential = value; }
 
 
         public SocialNetwork()

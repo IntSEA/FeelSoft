@@ -3,12 +3,9 @@
   <Class Name="SocialNetworkConnection.PublicationSearcher">
     <Position X="10.5" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PublicationSearcher.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Credential" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="SocialNetworkConnection.SocialNetwork">
     <Position X="6.25" Y="0.5" Width="2" />
@@ -18,10 +15,33 @@
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Searcher" />
-      <Property Name="Credential" />
       <Property Name="SearchDataSet" />
     </ShowAsAssociation>
     <Lollipop Orientation="Left" Position="0.1" />
+  </Class>
+  <Class Name="SocialNetworkConnection.Publication">
+    <Position X="1.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAACAAAAAwAAAIBAAACAACEAAAAhAABIAAAACA=</HashCode>
+      <FileName>Publication.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SocialNetworkConnection.QueryConfiguration">
+    <Position X="9" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAACAQCAAAAAhAAAIAUAACABAAAAAAAAAAAAAAkAA=</HashCode>
+      <FileName>QueryConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SocialNetworkConnection.SearchDataSet">
+    <Position X="8.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAACBIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAgA=</HashCode>
+      <FileName>SearchDataSet.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Interface Name="SocialNetworkConnection.IPublication">
     <Position X="1.25" Y="3.25" Width="1.5" />
@@ -44,13 +64,6 @@
       <FileName>ISocialNetwork.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="SocialNetworkConnection.ICredential">
-    <Position X="6.5" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABABAAAAAAAAAAAA=</HashCode>
-      <FileName>ICredential.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Interface Name="SocialNetworkConnection.ISearchDataSet">
     <Position X="4" Y="3.75" Width="1.5" />
     <TypeIdentifier>
@@ -62,5 +75,33 @@
       <Property Name="Publications" />
     </ShowAsCollectionAssociation>
   </Interface>
+  <Enum Name="SocialNetworkConnection.Filters">
+    <Position X="6.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAEAAAAAAg=</HashCode>
+      <FileName>Filters.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SocialNetworkConnection.Languages">
+    <Position X="6.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Languages.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SocialNetworkConnection.Locations">
+    <Position X="6.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Locations.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SocialNetworkConnection.SearchTypes">
+    <Position X="4" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAQAAAAABAAAAAAA=</HashCode>
+      <FileName>SearchTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

@@ -8,18 +8,13 @@ namespace SocialNetworkConnection
 {
     public abstract class PublicationSearcher
     {
-        private ICredential credential;
+        private string credential;
 
-        public PublicationSearcher(ICredential credential)
+        public PublicationSearcher()
         {
-            this.credential = credential;
-        }
 
+        }       
         
-        public ICredential Credential
-        {
-            get => credential;          
-        }
 
         public IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations)
         {

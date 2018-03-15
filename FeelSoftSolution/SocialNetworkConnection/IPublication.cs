@@ -7,12 +7,12 @@ namespace SocialNetworkConnection
 {
     public interface IPublication: IComparable<IPublication>
     {
-        string Message { get;}
-        string WroteBy { get;}
-        string Language { get; }
+        string Message { get; set; }
+        string WroteBy { get; set; }
+        string Language { get; set; }
         int Favorability { get;set; }
-        DateTime CreateDate { get; }
-        string Location { get; }
+        DateTime CreateDate { get; set; }
+        string Location { get; set; }
 
         int CompareBy(IPublication other, Comparison<IPublication> comparator);
     }

@@ -11,6 +11,8 @@ namespace SocialNetworkConnection
         string Credential { get; }
         PublicationSearcher Searcher { get; set; }
 
-       
+        void Search();
+        void GetFoundPublications();
+        void GetQueriesConfiguration();
     }
 }

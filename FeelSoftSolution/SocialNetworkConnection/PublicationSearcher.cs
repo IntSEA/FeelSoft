@@ -10,7 +10,7 @@ namespace SocialNetworkConnection
     {
         private string credential;
 
-        public PublicationSearcher()
+        public PublicationSearcher(string credential)
         {
 
         }       

@@ -104,7 +104,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Filters.cs" />
-    <Compile Include="ICredential.cs" />
     <Compile Include="IPublication.cs" />
     <Compile Include="IQueryConfiguration.cs" />
     <Compile Include="ISearchDataSet.cs" />

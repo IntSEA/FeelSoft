@@ -10,7 +10,7 @@
   <Class Name="SocialNetworkConnection.SocialNetwork">
     <Position X="6.25" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AgQAAAAEAAAABAAAAAQAAAQAAAAEAAAAAAAAQAIAAAA=</HashCode>
+      <HashCode>AgQAAAAEAAAQBAAAAAQAAAQAAAAEAAAAAAAAQAogAAA=</HashCode>
       <FileName>SocialNetwork.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -36,7 +36,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SocialNetworkConnection.SearchDataSet">
-    <Position X="8.75" Y="3.25" Width="1.5" />
+    <Position X="9.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAACBIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAgA=</HashCode>
       <FileName>SearchDataSet.cs</FileName>
@@ -58,9 +58,9 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="SocialNetworkConnection.ISocialNetwork">
-    <Position X="3.25" Y="0.75" Width="1.5" />
+    <Position X="3.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAQBAAAAAAAAAQAAAAAAAAAAAAAAAogAAA=</HashCode>
       <FileName>ISocialNetwork.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -78,7 +78,7 @@
   <Enum Name="SocialNetworkConnection.Filters">
     <Position X="6.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAEAAAAAAg=</HashCode>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAEAAEAAAg=</HashCode>
       <FileName>Filters.cs</FileName>
     </TypeIdentifier>
   </Enum>

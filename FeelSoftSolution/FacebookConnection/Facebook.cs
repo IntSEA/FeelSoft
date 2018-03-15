@@ -23,13 +23,17 @@ namespace FacebookConnection
                 BaseAddress = new Uri("https://graph.facebook.com/v2.12/")                                
             };
 
-
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             Searcher = new FacebookSearcher(client);
-            SetName("Facebook");                 
+            SetName("Facebook");     
+            
         }
 
+        public 
+
+        
+
+        
         
 
 

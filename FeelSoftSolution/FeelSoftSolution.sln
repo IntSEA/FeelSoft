@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterConnection", "Twitte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{649C8806-2F5C-446A-83B2-8CB8F2494DD0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "View\View.csproj", "{037694BD-F56D-4A38-A980-0AE4C9816B01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{649C8806-2F5C-446A-83B2-8CB8F2494DD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{649C8806-2F5C-446A-83B2-8CB8F2494DD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{649C8806-2F5C-446A-83B2-8CB8F2494DD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{037694BD-F56D-4A38-A980-0AE4C9816B01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{037694BD-F56D-4A38-A980-0AE4C9816B01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{037694BD-F56D-4A38-A980-0AE4C9816B01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{037694BD-F56D-4A38-A980-0AE4C9816B01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

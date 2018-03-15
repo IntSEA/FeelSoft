@@ -10,19 +10,17 @@ namespace SocialNetworkConnection
     {
         private string credential;
 
+        public string Credential { get => credential; set => credential = value; }
+
+
         public PublicationSearcher(string credential)
         {
-
-        }       
-        
-
-        public IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations)
-        {
-            throw new System.NotImplementedException();
+            this.Credential = credential;
         }
 
-           
 
+        public abstract IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations);
 
+        public abstract IList<IPublication> SearchPublications(IQueryConfiguration queryConfiguration);
     }
 }

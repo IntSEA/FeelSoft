@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UnitTestProject;
 
 namespace View
 {
@@ -15,6 +16,14 @@ namespace View
         public WebScrapperViewer()
         {
             InitializeComponent();
+            InitializeTests();
+        }
+
+        private void InitializeTests()
+        {
+            SocialNetworkUnitTest a = new SocialNetworkUnitTest();
+            
+            
         }
     }
 }

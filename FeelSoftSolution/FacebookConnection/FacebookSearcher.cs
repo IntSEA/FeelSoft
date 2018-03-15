@@ -11,7 +11,7 @@ namespace FacebookConnection
 {
     public class FacebookSearcher : PublicationSearcher
     {
-        private const string CREDENTIAL = "EAACEdEose0cBAJeasdq6d76HtCfTZAFvKcKiktVXoNR6jlJc24P6CxI5ApuXkUZBKoRFLTzEh1hO8oAAJfgutPEiaPZAAe4zQbxyqasZCPV5sM3lNcPBG59TyTo3PuCZC8K4qT3C06ATK0uDz3GF7icZACX39JZCOGw5cRtxWZBc40ZCWraZAHZBXgm9WZByqHZABeyI6OBaynjFCN19yOkHeAiYY";
+        private const string CREDENTIAL = "EAACEdEose0cBALWmF6qBGqmXm8ax5J7kdZBpxPQ8il4XlZARi6aFGv6OHwZAYycqnu1Tff7FT4AtmpBVGZCgIZBdIBIr6gyZCUBuVGPc4We2mXvnrWnk2iF4MSeSEFVpfZCMADpqvycPKPu5GNdejM5JW0dnBhSZBU2QZAi14GFag7LfIbrlZAN2YbYArtM6ZAsBue7kZA6vMxc2wVLcyGBdRmZCG";
         private readonly HttpClient client;
 
         public FacebookSearcher(HttpClient client) : base(CREDENTIAL)
@@ -125,6 +125,17 @@ namespace FacebookConnection
         {
             var jsonResponse = RequestToGraphAsync(user, "feed", args).Result;
             IList<IPublication> publications = new List<IPublication>();
+            if (jsonResponse == null)
+            {
+                throw new HttpRequestException("Refresh access token");
+            }
+
+            else if (jsonResponse.data == null)
+            {
+
+                throw new HttpRequestException("Refresh access token");
+
+            }
             foreach (var item in jsonResponse.data)
             {
                 IPublication publication = new Publication()
@@ -133,6 +144,7 @@ namespace FacebookConnection
                     CreateDate = item.created_time,
                     Message = item.message,
                     WroteBy = (item.from.name + item.from.id),
+                    
                 };
                 publications.Add(publication);
 

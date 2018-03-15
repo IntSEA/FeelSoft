@@ -23,6 +23,12 @@ namespace SocialNetworkConnection
         public DateTime CreateDate { get => createDate; set => createDate = value; }
         public Locations Location { get => location; set => location = value; }
 
+
+        public Publication()
+        {
+            Language = Languages.Spanish;
+            Location = Locations.Colombia;
+        }
         public int CompareBy(IPublication other, Comparison<IPublication> comparator)
         {
             throw new NotImplementedException();

@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SocialNetworkConnection;
 using FacebookConnection;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace UnitTestProject
 {
@@ -22,7 +24,7 @@ namespace UnitTestProject
 
             IList<string> words = new List<String>()
             {
-                "Sergio Fajardo",
+                "SergioFajardoV",
             };
 
             configuration = new QueryConfiguration()
@@ -50,7 +52,7 @@ namespace UnitTestProject
 
             IList<string> words = new List<String>()
             {
-                "SergioFajardoV",
+                "GustavoPetroUrrego",
             };
 
             configuration = new QueryConfiguration()
@@ -70,17 +72,59 @@ namespace UnitTestProject
             publication = facebook.Search(configuration)[0];
         }
 
-        [TestMethod]
-        public void TestKeyword()
+        //for project facebook's perfil
+        public void SetupStage3()
         {
-            SetupStage1();
-            String message = publication.Message;
-            message.Contains("Sergio Fajardo");
-            Assert.IsTrue(message.Contains("Sergio Fajardo"));
+            facebook = new Facebook();
+
+            IList<string> words = new List<String>()
+            {
+                "me",
+            };
+
+            configuration = new QueryConfiguration()
+            {
+                Keywords = words,
+                Location = Locations.Colombia,
+                Language = Languages.Spanish,
+                Filter = Filters.None,
+                SearchType = SearchTypes.Mixed,
+                SinceDate = new DateTime(2018, 03, 12),
+                UntilDate = new DateTime(2018, 03, 16),
+                MaxPublicationCount = 10
+
+
+            };
+
+            publication = facebook.Search(configuration)[0];
         }
 
         [TestMethod]
-        public void TestLocation()
+        public void TestKeywordFajardo()
+        {
+            SetupStage1();
+            String wroteBy = publication.WroteBy;
+            Assert.IsTrue(wroteBy.Contains("Fajardo12415375791"));
+        }
+
+        [TestMethod]
+        public void TestKeywordPetro()
+        {
+            SetupStage2();
+            String wroteBy = publication.WroteBy;
+            Assert.IsTrue(wroteBy.Contains("Gustavo Petro95972290770"));
+        }
+
+        [TestMethod]
+        public void TestKeywordFeelSoft()
+        {
+            SetupStage3();
+            String wroteBy = publication.WroteBy;
+            Assert.IsTrue(wroteBy.Contains("FeelSoft InteiProject116534032517988"));
+        }
+
+        [TestMethod]
+        public void TestLocationFajardo()
         {
             SetupStage1();
             if (publication.Location != Locations.Colombia)
@@ -88,14 +132,31 @@ namespace UnitTestProject
                 Assert.Fail();
             }
         }
-        //
+
         [TestMethod]
-        public void TestFilter()
+        public void TestLocationPetro()
         {
+            SetupStage2();
+            if (publication.Location != Locations.Colombia)
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
-        public void TestLanguage()
+        public void TestLocationFeelSoft()
+        {
+            SetupStage3();
+            if (publication.Location != Locations.Colombia)
+            {
+                Assert.Fail();
+            }
+        }
+
+       
+
+        [TestMethod]
+        public void TestLanguageFajardo()
         {
             SetupStage1();
             if (publication.Language != Languages.Spanish)
@@ -103,18 +164,33 @@ namespace UnitTestProject
                 Assert.Fail();
             }
         }
-        //
+
         [TestMethod]
-        public void TestSearchType()
+        public void TestLanguagePetro()
         {
             SetupStage1();
+            if (publication.Language != Languages.Spanish)
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
-        public void TestSinceDate()
+        public void TestLanguageFeelSoft()
         {
             SetupStage1();
-            DateTime sinceDate = new DateTime(2018, 06, 12);
+            if (publication.Language != Languages.Spanish)
+            {
+                Assert.Fail();
+            }
+        }
+
+       
+        [TestMethod]
+        public void TestSinceDateFajardo()
+        {
+            SetupStage1();
+            DateTime sinceDate = new DateTime(2018, 03, 11);
 
             int num = DateTime.Compare(publication.CreateDate, sinceDate);
 
@@ -126,16 +202,81 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void TestUntilDate()
+        public void TestSinceDatePetro()
+        {
+            SetupStage2();
+            DateTime sinceDate = new DateTime(2018, 03, 11);
+
+            int num = DateTime.Compare(publication.CreateDate, sinceDate);
+
+
+            if (num < 0)
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void TestSinceDateFeelSoft()
+        {
+            SetupStage3();
+            DateTime sinceDate = new DateTime(2018, 03, 11);
+
+            int num = DateTime.Compare(publication.CreateDate, sinceDate);
+
+
+            if (num < 0)
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void TestUntilDateFajardo()
         {
             SetupStage1();
-            SetupStage1();
-            DateTime untilDate = new DateTime(2018, 07, 23);
+            DateTime untilDate = new DateTime(2018, 03, 15);
             int num2 = DateTime.Compare(publication.CreateDate, untilDate);
             if (num2 > 0)
             {
                 Assert.Fail();
             }
+        }
+
+        [TestMethod]
+        public void TestUntilDatePetro()
+        {
+            SetupStage2();
+            DateTime untilDate = new DateTime(2018, 03, 15);
+            int num2 = DateTime.Compare(publication.CreateDate, untilDate);
+            if (num2 > 0)
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void TestUntilDateFeelSoft()
+        {
+            SetupStage3();
+            DateTime untilDate = new DateTime(2018, 03, 16);
+            int num2 = DateTime.Compare(publication.CreateDate, untilDate);
+            if (num2 > 0)
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void TestFoundPublicationsFeelSoft()
+        {
+            SetupStage3();
+            Assert.IsTrue(publication.Message.Equals("Test graph FB"));
+            
+           
+            Assert.IsTrue(publication.CreateDate.CompareTo(new DateTime(2018, 03, 16))<= 0);
+
+            Assert.IsTrue(publication.WroteBy.Equals("FeelSoft InteiProject116534032517988"));
         }
     }
 }

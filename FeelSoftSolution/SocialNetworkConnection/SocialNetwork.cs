@@ -31,31 +31,16 @@ namespace SocialNetworkConnection
            this.name = name;
         }
 
-        public IList<IPublication> Search(IList<IQueryConfiguration> queriesConfigurations)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract IList<IPublication> Search(IList<IQueryConfiguration> queriesConfigurations);
 
-        public IList<IPublication> Search(IQueryConfiguration queryConfiguration)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void GetFoundPublications()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract IList<IPublication> Search(IQueryConfiguration queryConfiguration);
 
-        public void GetQueriesConfiguration()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract IList<IPublication> GetFoundPublications();
 
-        public void Search()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract IList<IQueryConfiguration> GetQueriesConfiguration();
 
+        
         public string Name
         {
             get => name;

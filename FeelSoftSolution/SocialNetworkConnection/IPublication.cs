@@ -7,6 +7,7 @@ namespace SocialNetworkConnection
 {
     public interface IPublication: IComparable<IPublication>
     {
+        string Id { get; set ; }
         string Message { get; set; }
         string WroteBy { get; set; }
         Languages Language { get; set; }

@@ -28,14 +28,23 @@ namespace FacebookConnection
 
         }
 
-        override
-        public IList<IPublication> Search(IList<IQueryConfiguration> queriesConfigurations)
+        public override IList<IPublication> GetFoundPublications()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IList<IQueryConfiguration> GetQueriesConfiguration()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IList<IPublication> Search(IList<IQueryConfiguration> queriesConfigurations)
         {
             return Searcher.SearchPublications(queriesConfigurations);
         }
 
-        override
-        public IList<IPublication> Search(IQueryConfiguration queryConfiguration)
+        
+        public override IList<IPublication> Search(IQueryConfiguration queryConfiguration)
         {
             return Searcher.SearchPublications(queryConfiguration);
         }

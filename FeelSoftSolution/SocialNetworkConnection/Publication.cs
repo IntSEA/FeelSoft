@@ -7,6 +7,7 @@ namespace SocialNetworkConnection
 {
     public class Publication : IPublication
     {
+        private string id;
         private string message;
         private string wroteBy;
         private Languages language;
@@ -14,6 +15,7 @@ namespace SocialNetworkConnection
         private DateTime createDate;
         private Locations location;
 
+        public string Id { get => id; set => id = value; }
         public string Message { get => message; set => message = value; }
         public string WroteBy { get => wroteBy; set => wroteBy = value; }
         public Languages Language { get => language; set => language = value; }

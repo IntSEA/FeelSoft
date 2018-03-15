@@ -11,23 +11,78 @@ namespace FacebookConnection
 {
     public class FacebookSearcher : PublicationSearcher
     {
-        private const string CREDENTIAL = "EAACgYLKRHbUBAMCRPrALwP4kal8rUGpBGWl5Gc89" +
-            "wuU4wuJd3zhlICUc75wQvZAlo33xQrF3iT1W0eUpYJvsfmRSZB98RmJLkFwJ16PSuRk00npVfv" +
-            "QzIkom16Oaxiohi2prjZAEwKs4UglaYZB8pToQEOe8nzY4kG4nAsRZAeTms0i855F0OsVJIKpNZC2SZBuzq8Adn9wtgZDZD";
+        private const string CREDENTIAL = "EAACEdEose0cBAJeasdq6d76HtCfTZAFvKcKiktVXoNR6jlJc24P6CxI5ApuXkUZBKoRFLTzEh1hO8oAAJfgutPEiaPZAAe4zQbxyqasZCPV5sM3lNcPBG59TyTo3PuCZC8K4qT3C06ATK0uDz3GF7icZACX39JZCOGw5cRtxWZBc40ZCWraZAHZBXgm9WZByqHZABeyI6OBaynjFCN19yOkHeAiYY";
         private readonly HttpClient client;
 
         public FacebookSearcher(HttpClient client) : base(CREDENTIAL)
         {
             this.client = client;
+
         }
 
-        
-        public new IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations)
+
+        public override IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations)
         {
+            IList<IPublication> publications = InternalSearch(queriesConfigurations);
+            return publications;
+        }
+
+
+        internal IList<IPublication> InternalSearch(IQueryConfiguration queryConfiguration)
+        {
+            if (queryConfiguration != null)
+            {
+                List<IPublication> publications = new List<IPublication>();
+                IDictionary<string, string> fields = new Dictionary<string, string>();
+                SetQueryFields(queryConfiguration, fields);
+
+                if (queryConfiguration.Keywords != null)
+                {
+                    foreach (var keyword in queryConfiguration.Keywords)
+                    {
+                        IList<IPublication> partialPublication = Classify(RequestFeedToGraph(keyword, fields), queryConfiguration);
+                        publications.AddRange(partialPublication);
+                    }
+                }
+
+
+
+                return publications;
+
+            }
+            throw new ArgumentNullException("QueryConfiguration: " + queryConfiguration + "was null");
+        }
+
+        private IList<IPublication> Classify(IList<IPublication> publications, IQueryConfiguration queryConfiguration)
+        {
+            ClassifyByDate(publications, queryConfiguration.SinceDate, queryConfiguration.UntilDate);
+            return publications;
+        }
+
+        private void ClassifyByDate(IList<IPublication> publications, DateTime sinceDate, DateTime untilDate)
+        {
+            if (publications != null)
+            {
+                for (int i = 0; i < publications.Count; i++)
+                {
+                    var item = publications.ElementAt(i);
+                    if (!(item.CreateDate.CompareTo(sinceDate) >= 0 && item.CreateDate.CompareTo(untilDate) <= 0))
+                    {
+                        publications.RemoveAt(i);
+                        i--;
+                    }
+                }
+            }
+
+        }
+
+        internal IList<IPublication> InternalSearch(IList<IQueryConfiguration> queriesConfigurations)
+        {
+
             List<IPublication> publications = new List<IPublication>();
             foreach (var query in queriesConfigurations)
             {
-                IList<IPublication> found = SearchPublications(query);
+                IList<IPublication> found = InternalSearch(query);
                 if (found != null && found.Count > 0)
                 {
                     publications.AddRange(found);
@@ -38,66 +93,91 @@ namespace FacebookConnection
 
         }
 
-        
-        public new IList<IPublication> SearchPublications(IQueryConfiguration queryConfiguration)
-        {
-            if (queryConfiguration != null)
-            {
-                List<IPublication> publications = new List<IPublication>();                
-                IDictionary<string, string> args = new Dictionary<string, string>();
-                SetQueryFields(args);               
 
-                if (queryConfiguration.Keywords != null)
-                {
-                    foreach (var keyword in queryConfiguration.Keywords)
-                    {
-                        
-                    }
-                }
+        public override IList<IPublication> SearchPublications(IQueryConfiguration queryConfiguration)
+        {
+            return InternalSearch(queryConfiguration);
+        }
+
+        private void SetQueryFields(IQueryConfiguration queryConfiguration, IDictionary<string, string> args)
+        {
+            string max = (queryConfiguration.MaxPublicationCount > 0 ? queryConfiguration.MaxPublicationCount : 500) + "";
+            args.Add("limit", max);
+            if (queryConfiguration.SearchType == SearchTypes.Popular)
+            {
+                args["fields"] = "is_popular,";
+            }
+
+            if (args.TryGetValue("fields", out string fields))
+            {
+                args.Add("fields", fields + "message,from,created_time");
+            }
+            else
+            {
+                args.Add("fields", "message,from,created_time");
 
             }
-            throw new ArgumentNullException("QueryConfiguration was null");
-           
         }
 
-        internal void SetQueryFields(IDictionary<string,string> queryFields)
+
+
+        internal IList<IPublication> RequestFeedToGraph(string user, IDictionary<string, string> args)
         {
-
-        }
-
-        internal async Task<string> GetUserNameAsync(string accessToken)
-        {
-            var response = await RequestToGraphAsync<dynamic>(accessToken, null);
-            Task.WaitAll(response);
-            var name = response.result;
-            return name;
-        }
-
-        private async Task<T> RequestToGraphAsync<T>(string endpoint,IDictionary<string,string> args)
-        {
-
-            string request = $"{endpoint}?access_token={CREDENTIAL}";
-            if (args != null)
+            var jsonResponse = RequestToGraphAsync(user, "feed", args).Result;
+            IList<IPublication> publications = new List<IPublication>();
+            foreach (var item in jsonResponse.data)
             {
-               ICollection<string> keys= args.Keys;
-                foreach (var key in keys)
+                IPublication publication = new Publication()
                 {
-                    if (args.TryGetValue(key,out string value))
-                    {
-                        request += "&" + value;
+                    Id = item.id,
+                    CreateDate = item.created_time,
+                    Message = item.message,
+                    WroteBy = (item.from.name + item.from.id),
+                };
+                publications.Add(publication);
 
-                    }
-                }
             }
+
+            return publications;
+
+        }
+
+        private async Task<dynamic> RequestToGraphAsync(string user, string consult, IDictionary<string, string> fields)
+        {
+            string reqConsult = $"{consult}?access_token={CREDENTIAL}";
+            reqConsult += GetConsultWithFields(fields);
+
+
+            string request = user + "/" + reqConsult;
+
             var response = await client.GetAsync(request);
 
 
             if (!response.IsSuccessStatusCode)
-                return default(T);
+                return default(dynamic);
 
             var result = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<T>(result);
+            return JsonConvert.DeserializeObject<dynamic>(result);
+        }
+
+        private string GetConsultWithFields(IDictionary<string, string> fields)
+        {
+            string reqConsult = "";
+
+            if (fields != null)
+            {
+                ICollection<string> keys = fields.Keys;
+
+                foreach (var key in keys)
+                {
+                    if (fields.TryGetValue(key, out string value))
+                    {
+                        reqConsult += "&" + key + "=" + value;
+                    }
+                }
+            }
+            return reqConsult;
         }
     }
 }

@@ -17,6 +17,26 @@ namespace TwitterConnection
             ValidateAuthConnection();
         }
 
+        public override IList<IPublication> GetFoundPublications()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IList<IQueryConfiguration> GetQueriesConfiguration()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IList<IPublication> Search(IList<IQueryConfiguration> queriesConfigurations)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IList<IPublication> Search(IQueryConfiguration queryConfiguration)
+        {
+            throw new NotImplementedException();
+        }
+
         private void ValidateAuthConnection()
         {
             Auth.SetUserCredentials("","","","");

@@ -10,6 +10,7 @@ namespace SocialNetworkConnection
         Video,
         Image,
         New,
-        Hashtag
+        Hashtag,
+        None
     }
 }

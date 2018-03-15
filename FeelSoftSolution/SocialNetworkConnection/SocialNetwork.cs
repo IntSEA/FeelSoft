@@ -21,6 +21,7 @@ namespace SocialNetworkConnection
 
         public SocialNetwork()
         {
+            searchDataSet = new SearchDataSet();
         }
 
       
@@ -28,6 +29,21 @@ namespace SocialNetworkConnection
         protected void SetName(string name)
         {
            this.name = name;
+        }
+
+        public IList<IPublication> Search(IList<IQueryConfiguration> )
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GetFoundPublications()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GetQueriesConfiguration()
+        {
+            throw new NotImplementedException();
         }
 
         public string Name

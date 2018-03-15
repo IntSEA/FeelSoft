@@ -10,22 +10,33 @@ using SocialNetworkConnection;
 using System.IO;
 using Newtonsoft.Json;
 
+
+
 namespace FacebookConnection
 {
     public class Facebook : SocialNetwork
     {
-
+        public const string GRAPH_URI = "https://graph.facebook.com/v2.12/";
         public Facebook() : base()
         {
             HttpClient client = new HttpClient
             {
-                BaseAddress = new Uri("https://graph.facebook.com/v2.12/")
+                BaseAddress = new Uri(GRAPH_URI)
             };
 
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             Searcher = new FacebookSearcher(client);
             SetName("Facebook");
+        }
 
+        public override IList<IPublication> Search(IList<IQueryConfiguration> queriesConfigurations)
+        {
+            return Searcher.SearchPublications(queriesConfigurations);
+        }
+
+        public override IList<IPublication> Search(IQueryConfiguration queryConfiguration)
+        {
+            return Searcher.SearchPublications(queryConfiguration);
         }
 
         public override IList<IPublication> GetFoundPublications()
@@ -37,28 +48,6 @@ namespace FacebookConnection
         {
             throw new NotImplementedException();
         }
-
-        public override IList<IPublication> Search(IList<IQueryConfiguration> queriesConfigurations)
-        {
-            return Searcher.SearchPublications(queriesConfigurations);
-        }
-
-        
-        public override IList<IPublication> Search(IQueryConfiguration queryConfiguration)
-        {
-            return Searcher.SearchPublications(queryConfiguration);
-        }
-
-
-
-
-
-
-
-
-
-
-
     }
-
 }
+

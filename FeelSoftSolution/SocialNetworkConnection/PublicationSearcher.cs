@@ -21,8 +21,9 @@ namespace SocialNetworkConnection
             throw new System.NotImplementedException();
         }
 
-           
-
-
+        public IList<IPublication> SearchPublications(IQueryConfiguration queryConfiguration)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

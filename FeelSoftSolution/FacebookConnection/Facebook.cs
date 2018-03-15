@@ -10,37 +10,46 @@ using SocialNetworkConnection;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace FacebookConnection 
+namespace FacebookConnection
 {
-    public class Facebook:SocialNetwork
+    public class Facebook : SocialNetwork
     {
-        private readonly HttpClient client; 
 
         public Facebook() : base()
         {
-            client = new HttpClient
+            HttpClient client = new HttpClient
             {
-                BaseAddress = new Uri("https://graph.facebook.com/v2.12/")                                
+                BaseAddress = new Uri("https://graph.facebook.com/v2.12/")
             };
 
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             Searcher = new FacebookSearcher(client);
-            SetName("Facebook");     
-            
+            SetName("Facebook");
+
         }
 
-        public 
+        override
+        public IList<IPublication> Search(IList<IQueryConfiguration> queriesConfigurations)
+        {
+            return Searcher.SearchPublications(queriesConfigurations);
+        }
 
-        
-
-        
-        
-
-
-
+        override
+        public IList<IPublication> Search(IQueryConfiguration queryConfiguration)
+        {
+            return Searcher.SearchPublications(queryConfiguration);
+        }
 
 
-      
+
+
+
+
+
+
+
+
+
     }
-    
+
 }

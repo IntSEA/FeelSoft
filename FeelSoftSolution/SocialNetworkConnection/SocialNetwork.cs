@@ -31,7 +31,12 @@ namespace SocialNetworkConnection
            this.name = name;
         }
 
-        public IList<IPublication> Search(IList<IQueryConfiguration> )
+        public IList<IPublication> Search(IList<IQueryConfiguration> queriesConfigurations)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<IPublication> Search(IQueryConfiguration queryConfiguration)
         {
             throw new NotImplementedException();
         }
@@ -42,6 +47,11 @@ namespace SocialNetworkConnection
         }
 
         public void GetQueriesConfiguration()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Search()
         {
             throw new NotImplementedException();
         }

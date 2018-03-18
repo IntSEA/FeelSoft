@@ -11,7 +11,7 @@ namespace FacebookConnection
 {
     public class FacebookSearcher : PublicationSearcher
     {
-        private const string CREDENTIAL = "EAACEdEose0cBALWmF6qBGqmXm8ax5J7kdZBpxPQ8il4XlZARi6aFGv6OHwZAYycqnu1Tff7FT4AtmpBVGZCgIZBdIBIr6gyZCUBuVGPc4We2mXvnrWnk2iF4MSeSEFVpfZCMADpqvycPKPu5GNdejM5JW0dnBhSZBU2QZAi14GFag7LfIbrlZAN2YbYArtM6ZAsBue7kZA6vMxc2wVLcyGBdRmZCG";
+        private const string CREDENTIAL = "EAACEdEose0cBAGktZB13AccTyZAnta2ZC1DcZBU0mBWL4tiMtCAH1VxZCq20WOalQTrfm6OhCFUuhZCakdbNr47DVkNMgVhkWnzOIL1kWwffaZCDyEH9S6JZBlk6l4VKrFCOBhKOK9HGVs8ymRLeeZBGZCtZC70UqscrxA9ZCgkP2fm1dDlIfcE8ZBUigEhaPjB0co5OCxJbxm3AvAcCI1Si6VWO9";
         private readonly HttpClient client;
 
         public FacebookSearcher(HttpClient client) : base(CREDENTIAL)
@@ -127,6 +127,7 @@ namespace FacebookConnection
             IList<IPublication> publications = new List<IPublication>();
             if (jsonResponse == null)
             {
+                //----
                 throw new HttpRequestException("Refresh access token");
             }
 

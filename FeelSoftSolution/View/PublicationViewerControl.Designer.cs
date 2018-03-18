@@ -37,6 +37,7 @@
             this.lblTotalPublications = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.lblPublication = new System.Windows.Forms.Label();
+            this.btnAceptar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,10 +118,21 @@
             this.lblPublication.TabIndex = 8;
             this.lblPublication.Text = "Publicación";
             // 
+            // btnAceptar
+            // 
+            this.btnAceptar.Location = new System.Drawing.Point(37, 74);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(75, 25);
+            this.btnAceptar.TabIndex = 9;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            // 
             // PublicationViewerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.lblPublication);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.lblTotalPublications);
@@ -149,5 +161,6 @@
         private System.Windows.Forms.Label lblTotalPublications;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label lblPublication;
+        private System.Windows.Forms.Button btnAceptar;
     }
 }

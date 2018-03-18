@@ -20,6 +20,7 @@ namespace UnitTestProject
         //Stage created for Fajardo
         private void SetupStage1()
         {
+            
             facebook = new Facebook();
 
             IList<string> words = new List<String>()
@@ -120,6 +121,7 @@ namespace UnitTestProject
         {
             SetupStage3();
             String wroteBy = publication.WroteBy;
+           
             Assert.IsTrue(wroteBy.Contains("FeelSoft InteiProject116534032517988"));
         }
 

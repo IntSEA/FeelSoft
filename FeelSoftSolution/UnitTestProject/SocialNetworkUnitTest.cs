@@ -5,6 +5,7 @@ using FacebookConnection;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Microsoft.VisualBasic;
 
 namespace UnitTestProject
 {
@@ -16,11 +17,11 @@ namespace UnitTestProject
         private ISocialNetwork facebook;
         //Lo mismo aca, hay que cambiarlo por el analogo pero en twitter que debe heredar de queryconfiguration
         private IQueryConfiguration configuration;
-
+        private const string key = "EAACEdEose0cBADG1XPHxxx0EkPyLrjwYcTeBR9ZA2T81ZAPfRgDZBNE6jVaVTGqr1UvYlC6GO7bnaPdcEhX14Kn6B2jq0LGiYUmi1jnv5Pac7QGZAtcO4I7t75T5jh6IerNu1rZBskRx6SM7VEKgZBnnGZBM0Y7ZAKmzJrHEJK7ZB9VwTS3VjXXjeE77ofoNpOKGJQRNvx95ZC2QZDZD";
         //Stage created for Fajardo
         private void SetupStage1()
         {
-            facebook = new Facebook();
+            facebook = new Facebook(key);
 
             IList<string> words = new List<String>()
             {
@@ -48,7 +49,7 @@ namespace UnitTestProject
         //Stage created for Petro
         private void SetupStage2()
         {
-            facebook = new Facebook();
+            facebook = new Facebook(key);
 
             IList<string> words = new List<String>()
             {
@@ -75,7 +76,7 @@ namespace UnitTestProject
         //for project facebook's perfil
         public void SetupStage3()
         {
-            facebook = new Facebook();
+            facebook = new Facebook(key);
 
             IList<string> words = new List<String>()
             {

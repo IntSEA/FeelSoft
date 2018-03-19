@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using UnitTestProject;
 using System.IO;
 
 namespace View
@@ -17,11 +9,8 @@ namespace View
         public WebScrapperViewer()
         {
             InitializeComponent();
-<<<<<<< HEAD
             InitializeControls();
-=======
-          //  InitializeTests();
->>>>>>> c9ef4f1ebc7728c9a9caa97e8dcb13ad1c4ab9eb
+            //InitializeTests();
         }
 
         private void InitializeControls()
@@ -34,7 +23,6 @@ namespace View
             else
             {
                 MessageBox.Show("No se lograron cargar los credenciales, por favor integrelos e inicialice nuevamente la aplicación");
-                this.Close();
             }
         }
 

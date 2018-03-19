@@ -10,20 +10,17 @@ namespace TwitterConnection
 {
     public class Twitter : SocialNetwork
     {
-<<<<<<< HEAD
-        
+
         public Twitter(string credential) : base()
         {
             Credential = credential;
             Searcher = new TwitterSearcher(Credential);
-
-=======
+        }
 
         public Twitter(string consumerKey, string consumerSecret, string accessToken, string accessTokenSecret) : base()
         {
             Credential = null;
             Searcher = new TwitterSearcher(accessTokenSecret);
->>>>>>> c9ef4f1ebc7728c9a9caa97e8dcb13ad1c4ab9eb
         }
 
 
@@ -51,10 +48,6 @@ namespace TwitterConnection
             return Searcher.SearchPublications(queryConfiguration);
         }
 
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> c9ef4f1ebc7728c9a9caa97e8dcb13ad1c4ab9eb
     }
 }

@@ -72,9 +72,9 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer;
-        private PublicationViewerControl publicationViewerControl;
-        public const string TWITTER_CREDENTIALS_PATH = "..//Resources//TwitterCredentials.txt";
-        public const string FACEBOOK_CREDENTIALS_PATH = "..//Resources//FacebookCredentials.txt";
+        private View.PublicationViewerControl publicationViewerControl;
+        public const string TWITTER_CREDENTIALS_PATH = "..//..//Resources//TwitterCredentials.txt";
+        public const string FACEBOOK_CREDENTIALS_PATH = "..//..//Resources//FacebookCredentials.txt";
     }
 }
 

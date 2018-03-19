@@ -16,10 +16,7 @@ namespace FacebookConnection
         public FacebookSearcher(HttpClient client, string credential) : base(credential)
         {
             this.client = client;
-<<<<<<< HEAD
-=======
 
->>>>>>> c9ef4f1ebc7728c9a9caa97e8dcb13ad1c4ab9eb
         }
 
         public override IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations)

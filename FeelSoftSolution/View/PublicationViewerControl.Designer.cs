@@ -145,7 +145,7 @@ namespace View
             this.rdbFacebook.TabStop = true;
             this.rdbFacebook.Text = "Facebook";
             this.rdbFacebook.UseVisualStyleBackColor = true;
-            this.rdbFacebook.CheckedChanged += new System.EventHandler(this.RdbTwitter_CheckedChanged);
+            this.rdbFacebook.CheckedChanged += new System.EventHandler(this.RdCheckedChanged);
             // 
             // rdbTwitter
             // 
@@ -156,7 +156,7 @@ namespace View
             this.rdbTwitter.TabIndex = 10;
             this.rdbTwitter.Text = "Twitter";
             this.rdbTwitter.UseVisualStyleBackColor = true;
-            this.rdbTwitter.CheckedChanged += new System.EventHandler(this.RdbTwitter_CheckedChanged);
+            this.rdbTwitter.CheckedChanged += new System.EventHandler(this.RdCheckedChanged);
             // 
             // PublicationViewerControl
             // 

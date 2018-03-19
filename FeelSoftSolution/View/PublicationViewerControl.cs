@@ -21,7 +21,7 @@ namespace View
         {
             InitializeComponent();
             InitializeDataContainers();
-           
+
         }
 
         private void InitializeDataContainers()
@@ -38,15 +38,15 @@ namespace View
 
         private void InitializeTwitter(string twitterCredentials)
         {
-            ParseTwitterCredentials(twitterCredentials,out string consumerKey, out string consumerSecret, out string accessToken, out string secretToken);
-            Auth.SetUserCredentials(consumerKey,consumerSecret,accessToken,secretToken);
-            
+            ParseTwitterCredentials(twitterCredentials, out string consumerKey, out string consumerSecret, out string accessToken, out string secretToken);
+            Auth.SetUserCredentials(consumerKey, consumerSecret, accessToken, secretToken);
+
             twitter = new Twitter(twitterCredentials);
-            
+
 
         }
 
-        private void ParseTwitterCredentials(string twitterCredentials,out string consumerKey, out string consumerSecret, out string accessToken, out string secretToken)
+        private void ParseTwitterCredentials(string twitterCredentials, out string consumerKey, out string consumerSecret, out string accessToken, out string secretToken)
         {
             string[] keys = twitterCredentials.Split('|');
             consumerKey = keys[0];
@@ -62,28 +62,19 @@ namespace View
 
         private void BtnAcceptClick(object sender, EventArgs e)
         {
-            
+
             if (String.IsNullOrEmpty(facebook.Credential))
             {
-                facebook.Credential= Interaction.InputBox("Ingrese credenciales");
+                facebook.Credential = Interaction.InputBox("Ingrese credenciales");
             }
 
-            MakeQueryRequest();           
+            MakeQueryRequest();
 
         }
 
         private void MakeQueryRequest()
-        {
-<<<<<<< HEAD
-=======
+        {    
 
-        IPublication publication;
-        ISocialNetwork facebook;
-        IQueryConfiguration configuration;
-        const string key = "EAACEdEose0cBAPzjHb7jfahDP0ZB7TaPer2qOC4os4aflj9cjF72tuZBtuz81zIMLwUUYDAOscuZCw4V8LX4pNG5wMdfkRnSdRddvY7xx2iT2ZBIKEV6TeqPub8ZBjfsfYAGmPi4AVzm8V41rgLK4uBN6vupbOeWaPte7bItmCL5xwjFlerZBgFdB9RL3UBEfwSmHybquRk5ZA3b8LZCEQPJ";
-
-            facebook = new Facebook(key);
->>>>>>> c9ef4f1ebc7728c9a9caa97e8dcb13ad1c4ab9eb
 
             IList<string> words = new List<String>()
             {
@@ -104,22 +95,21 @@ namespace View
 
             };
 
-<<<<<<< HEAD
+
             configurations.Add(currentConfiguration);
 
 
             ((List<IPublication>)publications).AddRange(facebook.Search(configurations));
-=======
-            publication = facebook.Search(configuration)[0];
+
+            IPublication publication = publications[0];
             tbxPublication.Text = publication.Message;
->>>>>>> c9ef4f1ebc7728c9a9caa97e8dcb13ad1c4ab9eb
         }
 
-        private void RdbTwitter_CheckedChanged(object sender, EventArgs e)
+        private void RdCheckedChanged(object sender, EventArgs e)
         {
 
         }
 
-       
+
     }
 }

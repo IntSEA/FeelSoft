@@ -11,12 +11,12 @@ namespace FacebookConnection
 {
     public class FacebookSearcher : PublicationSearcher
     {
-        private const string CREDENTIAL = "EAACEdEose0cBALWmF6qBGqmXm8ax5J7kdZBpxPQ8il4XlZARi6aFGv6OHwZAYycqnu1Tff7FT4AtmpBVGZCgIZBdIBIr6gyZCUBuVGPc4We2mXvnrWnk2iF4MSeSEFVpfZCMADpqvycPKPu5GNdejM5JW0dnBhSZBU2QZAi14GFag7LfIbrlZAN2YbYArtM6ZAsBue7kZA6vMxc2wVLcyGBdRmZCG";
         private readonly HttpClient client;
 
-        public FacebookSearcher(HttpClient client) : base(CREDENTIAL)
+        public FacebookSearcher(HttpClient client, string accessToken) : base(accessToken)
         {
             this.client = client;
+
 
         }
 
@@ -156,7 +156,7 @@ namespace FacebookConnection
 
         private async Task<dynamic> RequestToGraphAsync(string user, string consult, IDictionary<string, string> fields)
         {
-            string reqConsult = $"{consult}?access_token={CREDENTIAL}";
+            string reqConsult = $"{consult}?access_token={Credential}";
             reqConsult += GetConsultWithFields(fields);
 
 

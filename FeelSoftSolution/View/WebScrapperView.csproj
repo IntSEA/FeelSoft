@@ -88,6 +88,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FacebookConnection\FacebookConnection.csproj">
+      <Project>{435bf8a2-aa2c-41de-b993-40aee4b11bca}</Project>
+      <Name>FacebookConnection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SocialNetworkConnection\SocialNetworkConnection.csproj">
+      <Project>{07de8bef-d893-4d9b-bbb1-c6e09b495c48}</Project>
+      <Name>SocialNetworkConnection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwitterConnection\TwitterConnection.csproj">
+      <Project>{4613748f-69fb-4bf1-84a8-ff88f3887a22}</Project>
+      <Name>TwitterConnection</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UnitTestProject\UnitTestProject.csproj">
       <Project>{649c8806-2f5c-446a-83b2-8cb8f2494dd0}</Project>
       <Name>UnitTestProject</Name>

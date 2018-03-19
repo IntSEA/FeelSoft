@@ -19,13 +19,11 @@ namespace FacebookConnection
 
         }
 
-
         public override IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations)
         {
             IList<IPublication> publications = InternalSearch(queriesConfigurations);
             return publications;
         }
-
 
         internal IList<IPublication> InternalSearch(IQueryConfiguration queryConfiguration)
         {
@@ -65,7 +63,7 @@ namespace FacebookConnection
                 for (int i = 0; i < publications.Count; i++)
                 {
                     var item = publications.ElementAt(i);
-                    if (item.CreateDate.CompareTo(Publication.NONE_DATE) != 0)
+                    if (item.CreateDate.CompareTo(QueryConfiguration.NONE_DATE) != 0)
                     {
                         if (!(item.CreateDate.CompareTo(sinceDate) >= 0 && item.CreateDate.CompareTo(untilDate) <= 0))
                         {

@@ -110,13 +110,12 @@
     </Compile>
     <Compile Include="Twitter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TwitterCredential.cs" />
     <Compile Include="TwitterSearcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="TwitterConnection.cd" />
+    <None Include="Resources\TwitterConnection.cd" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

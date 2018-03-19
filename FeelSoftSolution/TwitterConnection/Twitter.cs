@@ -11,11 +11,13 @@ namespace TwitterConnection
     public class Twitter : SocialNetwork
     {
 
-        public Twitter(string consumerKey, string consumerSecret, string accessToken, string accessTokenSecret) : base()
+        public Twitter(string credential) : base()
         {
-            Credential = null;
-            Searcher = new TwitterSearcher(accessTokenSecret);
+            Credential = credential;
+            Searcher = new TwitterSearcher(Credential);
         }
+
+        
 
 
 

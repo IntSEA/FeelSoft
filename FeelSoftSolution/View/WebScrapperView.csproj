@@ -32,23 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
-    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,13 +47,52 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tweetinvi, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.2.1.0\lib\net45\Tweetinvi.dll</HintPath>
+    </Reference>
+    <Reference Include="Tweetinvi.Controllers, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.2.1.0\lib\net45\Tweetinvi.Controllers.dll</HintPath>
+    </Reference>
+    <Reference Include="Tweetinvi.Core, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.2.1.0\lib\net45\Tweetinvi.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Tweetinvi.Credentials, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.2.1.0\lib\net45\Tweetinvi.Credentials.dll</HintPath>
+    </Reference>
+    <Reference Include="Tweetinvi.Factories, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.2.1.0\lib\net45\Tweetinvi.Factories.dll</HintPath>
+    </Reference>
+    <Reference Include="Tweetinvi.Logic, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.2.1.0\lib\net45\Tweetinvi.Logic.dll</HintPath>
+    </Reference>
+    <Reference Include="Tweetinvi.Security, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.2.1.0\lib\net45\Tweetinvi.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Tweetinvi.Streams, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.2.1.0\lib\net45\Tweetinvi.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="Tweetinvi.WebLogic, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.2.1.0\lib\net45\Tweetinvi.WebLogic.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateQueryConfigurationViewer.cs">
+    <Compile Include="PublicationViewerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PublicationViewerControl.Designer.cs">
+      <DependentUpon>PublicationViewerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QueryConfigurationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QueryConfigurationControl.Designer.cs">
+      <DependentUpon>QueryConfigurationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QueryConfigurationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateQueryConfigurationViewer.Designer.cs">
-      <DependentUpon>CreateQueryConfigurationViewer.cs</DependentUpon>
+    <Compile Include="QueryConfigurationForm.Designer.cs">
+      <DependentUpon>QueryConfigurationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WebScrapperViewer.cs">
       <SubType>Form</SubType>
@@ -73,14 +102,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PublicationViewerControl.cs">
+    <Compile Include="QueriesControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PublicationViewerControl.Designer.cs">
-      <DependentUpon>PublicationViewerControl.cs</DependentUpon>
+    <Compile Include="QueriesControl.Designer.cs">
+      <DependentUpon>QueriesControl.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CreateQueryConfigurationViewer.resx">
-      <DependentUpon>CreateQueryConfigurationViewer.cs</DependentUpon>
+    <EmbeddedResource Include="PublicationViewerControl.resx">
+      <DependentUpon>PublicationViewerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QueryConfigurationControl.resx">
+      <DependentUpon>QueryConfigurationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QueryConfigurationForm.resx">
+      <DependentUpon>QueryConfigurationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebScrapperViewer.resx">
       <DependentUpon>WebScrapperViewer.cs</DependentUpon>
@@ -93,9 +128,10 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="PublicationViewerControl.resx">
-      <DependentUpon>PublicationViewerControl.cs</DependentUpon>
+    <EmbeddedResource Include="QueriesControl.resx">
+      <DependentUpon>QueriesControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -125,9 +161,15 @@
       <Name>TwitterConnection</Name>
     </ProjectReference>
     <ProjectReference Include="..\UnitTestProject\UnitTestProject.csproj">
-      <Project>{649c8806-2f5c-446a-83b2-8cb8f2494dd0}</Project>
+      <Project>{649C8806-2F5C-446A-83B2-8CB8F2494DD0}</Project>
       <Name>UnitTestProject</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FacebookCredentials.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TwitterCredentials.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

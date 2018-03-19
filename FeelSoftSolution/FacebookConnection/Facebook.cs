@@ -25,9 +25,12 @@ namespace FacebookConnection
             };
 
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
             Searcher = new FacebookSearcher(client, accessToken);
             SetName("Facebook");
         }
+
+       
 
         public override IList<IPublication> Search(IList<IQueryConfiguration> queriesConfigurations)
         {

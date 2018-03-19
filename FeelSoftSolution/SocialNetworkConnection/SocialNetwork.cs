@@ -16,7 +16,10 @@ namespace SocialNetworkConnection
 
 
         public PublicationSearcher Searcher { get => searcher; set => searcher = value; }
-        public string Credential { get => credential; set => credential = value; }
+
+        public string Credential { get => credential; set { credential = value; }}
+
+       
 
 
         public SocialNetwork()
@@ -53,5 +56,6 @@ namespace SocialNetworkConnection
             get => searchDataSet;
            
         }
+       
     }
 }

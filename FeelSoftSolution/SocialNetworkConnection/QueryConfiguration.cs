@@ -7,6 +7,8 @@ namespace SocialNetworkConnection
 {
     public class QueryConfiguration : IQueryConfiguration
     {
+        public static DateTime NONE_DATE = new DateTime(1731, 1,1);
+
         private Filters filter;
         private string geo;
         private IList<string> keywords;
@@ -30,15 +32,35 @@ namespace SocialNetworkConnection
 
         public QueryConfiguration()
         {
+            InitializeQuery();           
+
+        }
+
+        private void InitializeQuery()
+        {
+            Keywords = new List<string>();
             Filter = Filters.None;
             Geo = "";
             Language = Languages.Spanish;
             Location = Locations.Colombia;
             MaxPublicationCount = 500;
             SearchType = SearchTypes.Mixed;
-
+            sinceDate = NONE_DATE;
+            untilDate = NONE_DATE;
         }
 
+        public QueryConfiguration(string[] keyWords)
+        {
+            InitializeQuery();
+            ((List<string>)Keywords).AddRange(keyWords);
+        }
+
+        
+        public override String ToString()
+        {
+            string parse = sinceDate.ToString()+" -- "+UntilDate.ToString()+" Max: "+maxPublicationCount;
+            return parse;
+        }
       
     }
 }

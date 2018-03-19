@@ -9,7 +9,7 @@ namespace SocialNetworkConnection
     {
         Video,
         Image,
-        New,
+        News,
         Hashtag,
         None
     }

@@ -17,7 +17,11 @@ namespace FacebookConnection
     public class Facebook : SocialNetwork
     {
         public const string GRAPH_URI = "https://graph.facebook.com/v2.12/";
+<<<<<<< HEAD
         public Facebook(string credential) : base()
+=======
+        public Facebook(string accessToken) : base()
+>>>>>>> c9ef4f1ebc7728c9a9caa97e8dcb13ad1c4ab9eb
         {
             HttpClient client = new HttpClient
             {
@@ -25,7 +29,11 @@ namespace FacebookConnection
             };
 
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+<<<<<<< HEAD
             Searcher = new FacebookSearcher(client,credential);
+=======
+            Searcher = new FacebookSearcher(client, accessToken);
+>>>>>>> c9ef4f1ebc7728c9a9caa97e8dcb13ad1c4ab9eb
             SetName("Facebook");
         }
 
@@ -52,4 +60,3 @@ namespace FacebookConnection
         }
     }
 }
-

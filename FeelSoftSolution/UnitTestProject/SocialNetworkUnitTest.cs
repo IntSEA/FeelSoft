@@ -5,6 +5,7 @@ using FacebookConnection;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Microsoft.VisualBasic;
 
 namespace UnitTestProject
 {
@@ -16,6 +17,7 @@ namespace UnitTestProject
         private ISocialNetwork facebook;
         //Lo mismo aca, hay que cambiarlo por el analogo pero en twitter que debe heredar de queryconfiguration
         private IQueryConfiguration configuration;
+<<<<<<< HEAD
 
         //CREDENTIAL
         public const string CREDENTIAL = "myCredential";
@@ -24,6 +26,13 @@ namespace UnitTestProject
         private void SetupStage1()
         {
             facebook = new Facebook(CREDENTIAL);
+=======
+        private const string key = "EAACEdEose0cBAPzjHb7jfahDP0ZB7TaPer2qOC4os4aflj9cjF72tuZBtuz81zIMLwUUYDAOscuZCw4V8LX4pNG5wMdfkRnSdRddvY7xx2iT2ZBIKEV6TeqPub8ZBjfsfYAGmPi4AVzm8V41rgLK4uBN6vupbOeWaPte7bItmCL5xwjFlerZBgFdB9RL3UBEfwSmHybquRk5ZA3b8LZCEQPJ";
+        //Stage created for Fajardo
+        private void SetupStage1()
+        {
+            facebook = new Facebook(key);
+>>>>>>> c9ef4f1ebc7728c9a9caa97e8dcb13ad1c4ab9eb
 
             IList<string> words = new List<String>()
             {
@@ -51,7 +60,11 @@ namespace UnitTestProject
         //Stage created for Petro
         private void SetupStage2()
         {
+<<<<<<< HEAD
             facebook = new Facebook(CREDENTIAL);
+=======
+            facebook = new Facebook(key);
+>>>>>>> c9ef4f1ebc7728c9a9caa97e8dcb13ad1c4ab9eb
 
             IList<string> words = new List<String>()
             {
@@ -78,7 +91,11 @@ namespace UnitTestProject
         //for project facebook's perfil
         public void SetupStage3()
         {
+<<<<<<< HEAD
             facebook = new Facebook(CREDENTIAL);
+=======
+            facebook = new Facebook(key);
+>>>>>>> c9ef4f1ebc7728c9a9caa97e8dcb13ad1c4ab9eb
 
             IList<string> words = new List<String>()
             {
@@ -156,7 +173,7 @@ namespace UnitTestProject
             }
         }
 
-       
+
 
         [TestMethod]
         public void TestLanguageFajardo()
@@ -188,7 +205,7 @@ namespace UnitTestProject
             }
         }
 
-       
+
         [TestMethod]
         public void TestSinceDateFajardo()
         {
@@ -275,9 +292,9 @@ namespace UnitTestProject
         {
             SetupStage3();
             Assert.IsTrue(publication.Message.Equals("Test graph FB"));
-            
-           
-            Assert.IsTrue(publication.CreateDate.CompareTo(new DateTime(2018, 03, 16))<= 0);
+
+
+            Assert.IsTrue(publication.CreateDate.CompareTo(new DateTime(2018, 03, 16)) <= 0);
 
             Assert.IsTrue(publication.WroteBy.Equals("FeelSoft InteiProject116534032517988"));
         }

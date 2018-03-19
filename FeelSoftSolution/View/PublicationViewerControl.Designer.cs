@@ -1,4 +1,8 @@
-﻿namespace View
+﻿using SocialNetworkConnection;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace View
 {
     partial class PublicationViewerControl
     {
@@ -35,23 +39,25 @@
             this.btnBefore = new System.Windows.Forms.Button();
             this.btnAfter = new System.Windows.Forms.Button();
             this.lblTotalPublications = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.lblPublication = new System.Windows.Forms.Label();
-            this.btnAceptar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.btnAcept = new System.Windows.Forms.Button();
+            this.rdbFacebook = new System.Windows.Forms.RadioButton();
+            this.rdbTwitter = new System.Windows.Forms.RadioButton();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // cbxQueries
             // 
             this.cbxQueries.FormattingEnabled = true;
-            this.cbxQueries.Location = new System.Drawing.Point(37, 47);
+            this.cbxQueries.Location = new System.Drawing.Point(38, 90);
             this.cbxQueries.Name = "cbxQueries";
             this.cbxQueries.Size = new System.Drawing.Size(191, 21);
             this.cbxQueries.TabIndex = 0;
             // 
             // btnCreateQuery
             // 
-            this.btnCreateQuery.Location = new System.Drawing.Point(260, 32);
+            this.btnCreateQuery.Location = new System.Drawing.Point(261, 75);
             this.btnCreateQuery.Name = "btnCreateQuery";
             this.btnCreateQuery.Size = new System.Drawing.Size(107, 48);
             this.btnCreateQuery.TabIndex = 1;
@@ -61,7 +67,7 @@
             // lblConfigurations
             // 
             this.lblConfigurations.AutoSize = true;
-            this.lblConfigurations.Location = new System.Drawing.Point(77, 31);
+            this.lblConfigurations.Location = new System.Drawing.Point(78, 74);
             this.lblConfigurations.Name = "lblConfigurations";
             this.lblConfigurations.Size = new System.Drawing.Size(83, 13);
             this.lblConfigurations.TabIndex = 2;
@@ -69,7 +75,7 @@
             // 
             // tbxPublication
             // 
-            this.tbxPublication.Location = new System.Drawing.Point(37, 122);
+            this.tbxPublication.Location = new System.Drawing.Point(38, 165);
             this.tbxPublication.Multiline = true;
             this.tbxPublication.Name = "tbxPublication";
             this.tbxPublication.Size = new System.Drawing.Size(330, 162);
@@ -77,7 +83,7 @@
             // 
             // btnBefore
             // 
-            this.btnBefore.Location = new System.Drawing.Point(37, 291);
+            this.btnBefore.Location = new System.Drawing.Point(38, 334);
             this.btnBefore.Name = "btnBefore";
             this.btnBefore.Size = new System.Drawing.Size(75, 23);
             this.btnBefore.TabIndex = 4;
@@ -86,7 +92,7 @@
             // 
             // btnAfter
             // 
-            this.btnAfter.Location = new System.Drawing.Point(127, 290);
+            this.btnAfter.Location = new System.Drawing.Point(128, 333);
             this.btnAfter.Name = "btnAfter";
             this.btnAfter.Size = new System.Drawing.Size(75, 23);
             this.btnAfter.TabIndex = 5;
@@ -96,45 +102,71 @@
             // lblTotalPublications
             // 
             this.lblTotalPublications.AutoSize = true;
-            this.lblTotalPublications.Location = new System.Drawing.Point(257, 331);
+            this.lblTotalPublications.Location = new System.Drawing.Point(258, 374);
             this.lblTotalPublications.Name = "lblTotalPublications";
             this.lblTotalPublications.Size = new System.Drawing.Size(100, 13);
             this.lblTotalPublications.TabIndex = 6;
             this.lblTotalPublications.Text = "Publicaciones : 100";
             // 
-            // numericUpDown1
+            // numericUpDown
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(335, 296);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(32, 20);
-            this.numericUpDown1.TabIndex = 7;
+            this.numericUpDown.Location = new System.Drawing.Point(336, 339);
+            this.numericUpDown.Name = "numericUpDown";
+            this.numericUpDown.Size = new System.Drawing.Size(32, 20);
+            this.numericUpDown.TabIndex = 7;
             // 
             // lblPublication
             // 
             this.lblPublication.AutoSize = true;
-            this.lblPublication.Location = new System.Drawing.Point(257, 301);
+            this.lblPublication.Location = new System.Drawing.Point(258, 344);
             this.lblPublication.Name = "lblPublication";
             this.lblPublication.Size = new System.Drawing.Size(62, 13);
             this.lblPublication.TabIndex = 8;
             this.lblPublication.Text = "Publicación";
             // 
-            // btnAceptar
+            // btnAcept
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(37, 75);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(85, 23);
-            this.btnAceptar.TabIndex = 9;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            this.btnAcept.Location = new System.Drawing.Point(38, 118);
+            this.btnAcept.Name = "btnAcept";
+            this.btnAcept.Size = new System.Drawing.Size(85, 23);
+            this.btnAcept.TabIndex = 9;
+            this.btnAcept.Text = "Aceptar";
+            this.btnAcept.UseVisualStyleBackColor = true;
+            this.btnAcept.Click += new System.EventHandler(this.BtnAcceptClick);
+            // 
+            // rdbFacebook
+            // 
+            this.rdbFacebook.AutoSize = true;
+            this.rdbFacebook.Checked = true;
+            this.rdbFacebook.Location = new System.Drawing.Point(81, 22);
+            this.rdbFacebook.Name = "rdbFacebook";
+            this.rdbFacebook.Size = new System.Drawing.Size(73, 17);
+            this.rdbFacebook.TabIndex = 10;
+            this.rdbFacebook.TabStop = true;
+            this.rdbFacebook.Text = "Facebook";
+            this.rdbFacebook.UseVisualStyleBackColor = true;
+            this.rdbFacebook.CheckedChanged += new System.EventHandler(this.RdbTwitter_CheckedChanged);
+            // 
+            // rdbTwitter
+            // 
+            this.rdbTwitter.AutoSize = true;
+            this.rdbTwitter.Location = new System.Drawing.Point(238, 22);
+            this.rdbTwitter.Name = "rdbTwitter";
+            this.rdbTwitter.Size = new System.Drawing.Size(57, 17);
+            this.rdbTwitter.TabIndex = 10;
+            this.rdbTwitter.Text = "Twitter";
+            this.rdbTwitter.UseVisualStyleBackColor = true;
+            this.rdbTwitter.CheckedChanged += new System.EventHandler(this.RdbTwitter_CheckedChanged);
             // 
             // PublicationViewerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnAceptar);
+            this.Controls.Add(this.rdbTwitter);
+            this.Controls.Add(this.rdbFacebook);
+            this.Controls.Add(this.btnAcept);
             this.Controls.Add(this.lblPublication);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numericUpDown);
             this.Controls.Add(this.lblTotalPublications);
             this.Controls.Add(this.btnAfter);
             this.Controls.Add(this.btnBefore);
@@ -143,8 +175,8 @@
             this.Controls.Add(this.btnCreateQuery);
             this.Controls.Add(this.cbxQueries);
             this.Name = "PublicationViewerControl";
-            this.Size = new System.Drawing.Size(399, 365);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.Size = new System.Drawing.Size(399, 415);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,8 +191,15 @@
         private System.Windows.Forms.Button btnBefore;
         private System.Windows.Forms.Button btnAfter;
         private System.Windows.Forms.Label lblTotalPublications;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDown;
         private System.Windows.Forms.Label lblPublication;
-        private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.Button btnAcept;
+        private ISocialNetwork facebook;
+        private IList<IQueryConfiguration> configurations;
+        private IList<IPublication> publications;
+        private ISocialNetwork twitter;
+        private IQueryConfiguration currentConfiguration;
+        private System.Windows.Forms.RadioButton rdbFacebook;
+        private System.Windows.Forms.RadioButton rdbTwitter;
     }
 }

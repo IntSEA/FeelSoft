@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FacebookConnection;
 using SocialNetworkConnection;
+using Microsoft.VisualBasic;
+using TwitterConnection;
+using Tweetinvi;
 
 namespace View
 {
@@ -17,18 +20,67 @@ namespace View
         public PublicationViewerControl()
         {
             InitializeComponent();
+            InitializeDataContainers();
+           
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private void InitializeDataContainers()
         {
-            facebook = new Facebook();
+            publications = new List<IPublication>();
+            configurations = new List<IQueryConfiguration>();
+        }
+
+        public void InitializeSocialNetworks(string facebookCredentials, string twitterCredentials)
+        {
+            InitializeFacebook(facebookCredentials);
+            InitializeTwitter(twitterCredentials);
+        }
+
+        private void InitializeTwitter(string twitterCredentials)
+        {
+            ParseTwitterCredentials(twitterCredentials,out string consumerKey, out string consumerSecret, out string accessToken, out string secretToken);
+            Auth.SetUserCredentials(consumerKey,consumerSecret,accessToken,secretToken);
+            
+            twitter = new Twitter(twitterCredentials);
+            
+
+        }
+
+        private void ParseTwitterCredentials(string twitterCredentials,out string consumerKey, out string consumerSecret, out string accessToken, out string secretToken)
+        {
+            string[] keys = twitterCredentials.Split('|');
+            consumerKey = keys[0];
+            consumerSecret = keys[1];
+            accessToken = keys[2];
+            secretToken = keys[3];
+        }
+
+        private void InitializeFacebook(string facebookCredentials)
+        {
+            facebook = new Facebook(facebookCredentials);
+        }
+
+        private void BtnAcceptClick(object sender, EventArgs e)
+        {
+            
+            if (String.IsNullOrEmpty(facebook.Credential))
+            {
+                facebook.Credential= Interaction.InputBox("Ingrese credenciales");
+            }
+
+            MakeQueryRequest();           
+
+        }
+
+        private void MakeQueryRequest()
+        {
 
             IList<string> words = new List<String>()
             {
                 "GustavoPetroUrrego",
             };
 
-            configuration = new QueryConfiguration()
+            currentConfiguration = new QueryConfiguration()
             {
                 Keywords = words,
                 Location = Locations.Colombia,
@@ -42,7 +94,17 @@ namespace View
 
             };
 
-            publication = facebook.Search(configuration)[0];
+            configurations.Add(currentConfiguration);
+
+
+            ((List<IPublication>)publications).AddRange(facebook.Search(configurations));
         }
+
+        private void RdbTwitter_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+       
     }
 }

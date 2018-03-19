@@ -17,10 +17,13 @@ namespace UnitTestProject
         //Lo mismo aca, hay que cambiarlo por el analogo pero en twitter que debe heredar de queryconfiguration
         private IQueryConfiguration configuration;
 
+        //CREDENTIAL
+        public const string CREDENTIAL = "myCredential";
+
         //Stage created for Fajardo
         private void SetupStage1()
         {
-            facebook = new Facebook();
+            facebook = new Facebook(CREDENTIAL);
 
             IList<string> words = new List<String>()
             {
@@ -48,7 +51,7 @@ namespace UnitTestProject
         //Stage created for Petro
         private void SetupStage2()
         {
-            facebook = new Facebook();
+            facebook = new Facebook(CREDENTIAL);
 
             IList<string> words = new List<String>()
             {
@@ -75,7 +78,7 @@ namespace UnitTestProject
         //for project facebook's perfil
         public void SetupStage3()
         {
-            facebook = new Facebook();
+            facebook = new Facebook(CREDENTIAL);
 
             IList<string> words = new List<String>()
             {

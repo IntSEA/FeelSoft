@@ -8,7 +8,7 @@ namespace SocialNetworkConnection
     public interface ISocialNetwork
     {
         string Name { get; }
-        string Credential { get; }
+        string Credential { get; set; }
         PublicationSearcher Searcher { get; set; }
 
         IList<IPublication> Search(IList<IQueryConfiguration> queriesConfiguration);

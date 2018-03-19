@@ -16,17 +16,13 @@ namespace FacebookConnection
         public FacebookSearcher(HttpClient client, string accessToken) : base(accessToken)
         {
             this.client = client;
-
-
         }
-
 
         public override IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations)
         {
             IList<IPublication> publications = InternalSearch(queriesConfigurations);
             return publications;
         }
-
 
         internal IList<IPublication> InternalSearch(IQueryConfiguration queryConfiguration)
         {

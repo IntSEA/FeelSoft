@@ -10,12 +10,15 @@ namespace TwitterConnection
 {
     public class Twitter : SocialNetwork
     {
-
-        public Twitter() : base()
+        
+        public Twitter(string credential) : base()
         {
-            Credential = null;
-            ValidateAuthConnection();
+            Credential = credential;
+            Searcher = new TwitterSearcher(Credential);
+
         }
+
+
 
         public override IList<IPublication> GetFoundPublications()
         {
@@ -37,9 +40,6 @@ namespace TwitterConnection
             throw new NotImplementedException();
         }
 
-        private void ValidateAuthConnection()
-        {
-            Auth.SetUserCredentials("","","","");
-        }
+        
     }
 }

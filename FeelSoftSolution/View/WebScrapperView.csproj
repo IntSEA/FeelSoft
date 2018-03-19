@@ -76,6 +76,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PublicationViewerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PublicationViewerControl.Designer.cs">
+      <DependentUpon>PublicationViewerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QueryConfigurationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QueryConfigurationControl.Designer.cs">
+      <DependentUpon>QueryConfigurationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QueryConfigurationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QueryConfigurationForm.Designer.cs">
+      <DependentUpon>QueryConfigurationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="WebScrapperViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,12 +102,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PublicationViewerControl.cs">
+    <Compile Include="QueriesControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PublicationViewerControl.Designer.cs">
-      <DependentUpon>PublicationViewerControl.cs</DependentUpon>
+    <Compile Include="QueriesControl.Designer.cs">
+      <DependentUpon>QueriesControl.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="PublicationViewerControl.resx">
+      <DependentUpon>PublicationViewerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QueryConfigurationControl.resx">
+      <DependentUpon>QueryConfigurationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QueryConfigurationForm.resx">
+      <DependentUpon>QueryConfigurationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WebScrapperViewer.resx">
       <DependentUpon>WebScrapperViewer.cs</DependentUpon>
     </EmbeddedResource>
@@ -103,8 +130,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="PublicationViewerControl.resx">
-      <DependentUpon>PublicationViewerControl.cs</DependentUpon>
+    <EmbeddedResource Include="QueriesControl.resx">
+      <DependentUpon>QueriesControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -17,11 +17,7 @@ namespace TwitterConnection
             Searcher = new TwitterSearcher(Credential);
         }
 
-        public Twitter(string consumerKey, string consumerSecret, string accessToken, string accessTokenSecret) : base()
-        {
-            Credential = null;
-            Searcher = new TwitterSearcher(accessTokenSecret);
-        }
+        
 
 
 

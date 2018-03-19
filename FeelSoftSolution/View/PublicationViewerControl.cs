@@ -21,7 +21,13 @@ namespace View
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            facebook = new Facebook();
+
+        IPublication publication;
+        ISocialNetwork facebook;
+        IQueryConfiguration configuration;
+        const string key = "EAACEdEose0cBAPzjHb7jfahDP0ZB7TaPer2qOC4os4aflj9cjF72tuZBtuz81zIMLwUUYDAOscuZCw4V8LX4pNG5wMdfkRnSdRddvY7xx2iT2ZBIKEV6TeqPub8ZBjfsfYAGmPi4AVzm8V41rgLK4uBN6vupbOeWaPte7bItmCL5xwjFlerZBgFdB9RL3UBEfwSmHybquRk5ZA3b8LZCEQPJ";
+
+            facebook = new Facebook(key);
 
             IList<string> words = new List<String>()
             {
@@ -43,6 +49,7 @@ namespace View
             };
 
             publication = facebook.Search(configuration)[0];
+            tbxPublication.Text = publication.Message;
         }
     }
 }

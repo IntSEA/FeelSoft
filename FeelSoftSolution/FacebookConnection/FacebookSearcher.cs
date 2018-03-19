@@ -13,10 +13,9 @@ namespace FacebookConnection
     {
         private readonly HttpClient client;
 
-        public FacebookSearcher(HttpClient client, string accessToken) : base(accessToken)
+        public FacebookSearcher(HttpClient client, string credential) : base(credential)
         {
             this.client = client;
-
 
         }
 
@@ -66,11 +65,15 @@ namespace FacebookConnection
                 for (int i = 0; i < publications.Count; i++)
                 {
                     var item = publications.ElementAt(i);
-                    if (!(item.CreateDate.CompareTo(sinceDate) >= 0 && item.CreateDate.CompareTo(untilDate) <= 0))
+                    if (item.CreateDate.CompareTo(Publication.NONE_DATE) != 0)
                     {
-                        publications.RemoveAt(i);
-                        i--;
+                        if (!(item.CreateDate.CompareTo(sinceDate) >= 0 && item.CreateDate.CompareTo(untilDate) <= 0))
+                        {
+                            publications.RemoveAt(i);
+                            i--;
+                        }
                     }
+
                 }
             }
 
@@ -144,7 +147,7 @@ namespace FacebookConnection
                     CreateDate = item.created_time,
                     Message = item.message,
                     WroteBy = (item.from.name + item.from.id),
-                    
+
                 };
                 publications.Add(publication);
 

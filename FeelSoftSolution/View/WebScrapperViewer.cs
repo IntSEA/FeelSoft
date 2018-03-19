@@ -16,7 +16,7 @@ namespace View
         public WebScrapperViewer()
         {
             InitializeComponent();
-            InitializeTests();
+          //  InitializeTests();
         }
 
         private void InitializeTests()

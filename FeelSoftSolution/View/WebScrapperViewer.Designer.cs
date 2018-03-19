@@ -54,13 +54,13 @@
             this.publicationViewerControl1.Size = new System.Drawing.Size(452, 365);
             this.publicationViewerControl1.TabIndex = 0;
             // 
-            // WebScrapperViewer
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(886, 410);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "WebScrapperViewer";
+            this.Name = "Main";
             this.Text = "Form1";
             this.splitContainer1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

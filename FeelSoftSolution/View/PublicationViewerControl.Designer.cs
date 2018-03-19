@@ -57,6 +57,7 @@
             this.btnCreateQuery.TabIndex = 1;
             this.btnCreateQuery.Text = "Crear configuración de busqueda";
             this.btnCreateQuery.UseVisualStyleBackColor = true;
+            this.btnCreateQuery.Click += new System.EventHandler(this.btnCreateQuery_Click);
             // 
             // lblConfigurations
             // 

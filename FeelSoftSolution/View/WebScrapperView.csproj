@@ -59,6 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateQueryConfigurationViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateQueryConfigurationViewer.Designer.cs">
+      <DependentUpon>CreateQueryConfigurationViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="WebScrapperViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,9 @@
     <Compile Include="PublicationViewerControl.Designer.cs">
       <DependentUpon>PublicationViewerControl.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CreateQueryConfigurationViewer.resx">
+      <DependentUpon>CreateQueryConfigurationViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WebScrapperViewer.resx">
       <DependentUpon>WebScrapperViewer.cs</DependentUpon>
     </EmbeddedResource>

@@ -63,7 +63,7 @@ namespace FacebookConnection
                 for (int i = 0; i < publications.Count; i++)
                 {
                     var item = publications.ElementAt(i);
-                    if (item.CreateDate.CompareTo(Publication.NONE_DATE) != 0)
+                    if (item.CreateDate.CompareTo(QueryConfiguration.NONE_DATE) != 0)
                     {
                         if (!(item.CreateDate.CompareTo(sinceDate) >= 0 && item.CreateDate.CompareTo(untilDate) <= 0))
                         {

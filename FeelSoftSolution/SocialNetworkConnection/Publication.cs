@@ -7,8 +7,6 @@ namespace SocialNetworkConnection
 {
     public class Publication : IPublication
     {
-        public static DateTime NONE_DATE = new DateTime(2006,01,01);
-
         private string id;
         private string message;
         private string wroteBy;
@@ -30,7 +28,6 @@ namespace SocialNetworkConnection
         {
             Language = Languages.Spanish;
             Location = Locations.Colombia;
-            createDate = NONE_DATE;
         }
         public int CompareBy(IPublication other, Comparison<IPublication> comparator)
         {

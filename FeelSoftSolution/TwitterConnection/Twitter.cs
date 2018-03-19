@@ -11,13 +11,11 @@ namespace TwitterConnection
     public class Twitter : SocialNetwork
     {
 
-        public Twitter(string consumerKey, string consumerSecret, string accessToken, string accessTokenSecret) : base()
+        public Twitter() : base()
         {
             Credential = null;
-            Searcher = new TwitterSearcher(accessTokenSecret);
+            ValidateAuthConnection();
         }
-
-       
 
         public override IList<IPublication> GetFoundPublications()
         {
@@ -31,17 +29,17 @@ namespace TwitterConnection
 
         public override IList<IPublication> Search(IList<IQueryConfiguration> queriesConfigurations)
         {
-
-            return Searcher.SearchPublications(queriesConfigurations);
-
-
+            throw new NotImplementedException();
         }
 
         public override IList<IPublication> Search(IQueryConfiguration queryConfiguration)
         {
-            return Searcher.SearchPublications(queryConfiguration);
+            throw new NotImplementedException();
         }
 
-        
+        private void ValidateAuthConnection()
+        {
+            Auth.SetUserCredentials("","","","");
+        }
     }
 }

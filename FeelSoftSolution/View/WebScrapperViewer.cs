@@ -35,7 +35,7 @@ namespace View
 
         internal void Search(IQueryConfiguration currentConfiguration)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); 
         }
 
         private void ParseTwitterCredentials(string[] twitterCredentials, out string twitterCredential)

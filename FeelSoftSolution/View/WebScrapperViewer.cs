@@ -68,7 +68,7 @@ namespace View
             ReadFacebookCredentials(out facebookCrendtials);
             ReadTwitterCredentials(out twitterCredentials);
 
-            return !(String.IsNullOrEmpty(facebookCrendtials) || twitterCredentials.Length > 0);
+            return (String.IsNullOrEmpty(facebookCrendtials) || twitterCredentials.Length > 0);
         }
 
         private void ReadTwitterCredentials(out string[] twitterCredentials)

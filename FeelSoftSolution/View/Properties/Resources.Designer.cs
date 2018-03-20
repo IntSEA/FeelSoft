@@ -59,23 +59,5 @@ namespace View.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a .
-        /// </summary>
-        internal static string FacebookCredentials {
-            get {
-                return ResourceManager.GetString("FacebookCredentials", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a .
-        /// </summary>
-        internal static string TwitterCredentials {
-            get {
-                return ResourceManager.GetString("TwitterCredentials", resourceCulture);
-            }
-        }
     }
 }

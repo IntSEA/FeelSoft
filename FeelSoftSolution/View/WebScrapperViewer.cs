@@ -17,26 +17,19 @@ namespace View
 
         private void InitializeSocialNetworks()
         {
-            if (ReadCredentials(out string facebookCrendtials, out string[] twitterCredentials))
-            {
-                InitializeFacebook(facebookCrendtials);
-                InitializeTwitter(twitterCredentials);
-            }
-            else
-            {
-                MessageBox.Show("No se lograron cargar los credenciales, por favor integrelos e inicialice nuevamente la aplicación");
-            }
+
+            InitializeFacebook();
+            InitializeTwitter();
+
 
         }
 
-        private void InitializeTwitter(string[] twitterCredentials)
+        private void InitializeTwitter()
         {
-            
-            ParseTwitterCredentials(twitterCredentials, out string twitterCredential);
 
-            twitter = new TwitterConnection.Twitter(twitterCredential);
-            Auth.SetUserCredentials(twitterCredentials[0], twitterCredentials[1],
-                twitterCredentials[2], twitterCredentials[3]);
+
+            twitter = new TwitterConnection.Twitter();
+            //FALTA AUTENTICAR CON TWITTER CREDENTIALS (el metodo AUTH:SETUSER())
 
         }
 
@@ -48,7 +41,7 @@ namespace View
         private void ParseTwitterCredentials(string[] twitterCredentials, out string twitterCredential)
         {
             twitterCredential = "";
-            for (int i = 0; i < twitterCredentials.Length-1; i++)
+            for (int i = 0; i < twitterCredentials.Length - 1; i++)
             {
                 twitterCredential += twitterCredentials[i] + "|";
 
@@ -56,12 +49,13 @@ namespace View
             twitterCredential += twitterCredentials[twitterCredentials.Length - 1];
         }
 
-        private void InitializeFacebook(string facebookCredentials)
+        private void InitializeFacebook()
         {
-            facebook = new FacebookConnection.Facebook(facebookCredentials);
+            facebook = new FacebookConnection.Facebook();
         }
 
 
+<<<<<<< HEAD
 
         private bool ReadCredentials(out string facebookCrendtials, out string[] twitterCredentials)
         {
@@ -91,11 +85,13 @@ namespace View
             stream.Close();
         }
 
+=======
+>>>>>>> 88f9f86edc99ac0df7603ae71d9cdc586dfde4c2
         private void RdbCheckedChanged(object sender, EventArgs e)
         {
 
         }
 
-        
+
     }
 }

@@ -67,7 +67,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SocialNetworkUnitTest.cs" />
+    <Compile Include="TwitterUnitTest.cs" />
+    <Compile Include="FacebookUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

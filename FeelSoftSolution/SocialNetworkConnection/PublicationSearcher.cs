@@ -18,6 +18,11 @@ namespace SocialNetworkConnection
             this.Credential = credential;
         }
 
+        public PublicationSearcher()
+        {
+
+        }
+
 
         public abstract IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations);
 

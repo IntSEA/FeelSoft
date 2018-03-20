@@ -12,11 +12,17 @@ namespace FacebookConnection
     public class FacebookSearcher : PublicationSearcher
     {
         private readonly HttpClient client;
+        private const int LIMIT_PUBLICATIONS = 100;
 
         public FacebookSearcher(HttpClient client, string credential) : base(credential)
         {
             this.client = client;
 
+        }
+
+        public FacebookSearcher(HttpClient client) : base()
+        {
+            this.client = client;
         }
 
         public override IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations)
@@ -31,13 +37,15 @@ namespace FacebookConnection
             {
                 List<IPublication> publications = new List<IPublication>();
                 IDictionary<string, string> fields = new Dictionary<string, string>();
+                int totalPublications = queryConfiguration.MaxPublicationCount;
+                queryConfiguration.MaxPublicationCount = 100;
                 SetQueryFields(queryConfiguration, fields);
 
                 if (queryConfiguration.Keywords != null)
                 {
                     foreach (var keyword in queryConfiguration.Keywords)
                     {
-                        IList<IPublication> partialPublication = Classify(RequestFeedToGraph(keyword, fields), queryConfiguration);
+                        IList<IPublication> partialPublication = Classify(RequestFeedToGraph(keyword, fields, totalPublications), queryConfiguration);
                         publications.AddRange(partialPublication);
                     }
                 }
@@ -122,10 +130,14 @@ namespace FacebookConnection
 
 
 
-        internal IList<IPublication> RequestFeedToGraph(string user, IDictionary<string, string> args)
+        internal IList<IPublication> RequestFeedToGraph(string user, IDictionary<string, string> args, int totalPublications)
         {
-            var jsonResponse = RequestToGraphAsync(user, "feed", args).Result;
+            var request = CreateFeedRequestToGraph(user, "feed", args);
             IList<IPublication> publications = new List<IPublication>();
+            var task = MakeRequestToGraphAsync(request);
+            var jsonResponse = task.Result;
+           
+
             if (jsonResponse == null)
             {
                 throw new HttpRequestException("Refresh access token");
@@ -137,32 +149,59 @@ namespace FacebookConnection
                 throw new HttpRequestException("Refresh access token");
 
             }
-            foreach (var item in jsonResponse.data)
-            {
-                IPublication publication = new Publication()
-                {
-                    Id = item.id,
-                    CreateDate = item.created_time,
-                    Message = item.message,
-                    WroteBy = (item.from.name + item.from.id),
-
-                };
-                publications.Add(publication);
-
-            }
+            bool underlimitFound = true;
+            //while (jsonResponse != null && underlimitFound)
+            //{
+                AddPublications(jsonResponse, publications, totalPublications);
+                underlimitFound = publications.Count <= totalPublications;
+                
+                jsonResponse = GetNextPublicationsRequest(underlimitFound, jsonResponse);
+            //}
 
             return publications;
 
         }
 
-        private async Task<dynamic> RequestToGraphAsync(string user, string consult, IDictionary<string, string> fields)
+        private dynamic GetNextPublicationsRequest(bool underlimitFound, dynamic jsonResponse)
         {
-            string reqConsult = $"{consult}?access_token={Credential}";
-            reqConsult += GetConsultWithFields(fields);
+            if (underlimitFound)
+            {
+                string next = (string)jsonResponse.paging.next;
+                return MakeRequestToGraphAsync(next);
+            }
+            return null;
+        }
 
+        private void AddPublications(dynamic jsonResponse, IList<IPublication> publications, int totalPublications)
+        {
+            foreach (var item in jsonResponse.data)
+            {
+                IPublication publication = ParsePublicationOfJsonResponse(item);
+                if (publications.Count <= totalPublications)
+                {
+                    publications.Add(publication);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
 
-            string request = user + "/" + reqConsult;
+        private IPublication ParsePublicationOfJsonResponse(dynamic item)
+        {
+            return new Publication()
+            {
+                Id = item.id,
+                CreateDate = item.created_time,
+                Message = item.message,
+                WroteBy = (item.from.name + item.from.id),
 
+            };
+        }
+
+        private async Task<dynamic> MakeRequestToGraphAsync(string request)
+        {
             var response = await client.GetAsync(request);
 
 
@@ -170,8 +209,26 @@ namespace FacebookConnection
                 return default(dynamic);
 
             var result = await response.Content.ReadAsStringAsync();
+            
+          
+            return JsonConvert.DeserializeObject(result);
+        }
 
-            return JsonConvert.DeserializeObject<dynamic>(result);
+        public string MakeTokenRequestToGraph(string request)
+        {
+            var jsonResponse = MakeRequestToGraphAsync(request).Result;
+
+            return (string)jsonResponse.access_token;
+        }
+        private string CreateFeedRequestToGraph(string user, string consult, IDictionary<string, string> fields)
+        {
+            string reqConsult = $"{consult}?access_token={Credential}";
+            reqConsult += GetConsultWithFields(fields);
+
+
+            string request = user + "/" + reqConsult;
+
+            return request;
         }
 
         private string GetConsultWithFields(IDictionary<string, string> fields)

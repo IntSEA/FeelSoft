@@ -18,7 +18,6 @@ namespace UnitTestProject
         //Lo mismo aca, hay que cambiarlo por el analogo pero en twitter que debe heredar de queryconfiguration
         private IQueryConfiguration configuration;
         //CREDENTIAL
-        public const string CREDENTIAL = "myCredential";
 
         //Stage created for Fajardo
         
@@ -26,7 +25,7 @@ namespace UnitTestProject
         //Stage created for Fajardo
         private void SetupStage1()
         {
-            facebook = new Facebook(CREDENTIAL);
+            facebook = new Facebook();
 
 
             IList<string> words = new List<String>()
@@ -43,8 +42,7 @@ namespace UnitTestProject
                 SearchType = SearchTypes.Mixed,
                 SinceDate = new DateTime(2018, 03, 12),
                 UntilDate = new DateTime(2018, 03, 15),
-                MaxPublicationCount = 10
-
+                MaxPublicationCount = 100
 
             };
 
@@ -55,7 +53,7 @@ namespace UnitTestProject
         //Stage created for Petro
         private void SetupStage2()
         {
-            facebook = new Facebook(CREDENTIAL);
+            facebook = new Facebook();
 
             IList<string> words = new List<String>()
             {
@@ -71,7 +69,7 @@ namespace UnitTestProject
                 SearchType = SearchTypes.Mixed,
                 SinceDate = new DateTime(2018, 03, 12),
                 UntilDate = new DateTime(2018, 03, 15),
-                MaxPublicationCount = 10
+                MaxPublicationCount = 200
 
 
             };
@@ -82,7 +80,7 @@ namespace UnitTestProject
         //for project facebook's perfil
         public void SetupStage3()
         {
-            facebook = new Facebook(CREDENTIAL);
+            facebook = new Facebook();
 
             IList<string> words = new List<String>()
             {
@@ -98,7 +96,7 @@ namespace UnitTestProject
                 SearchType = SearchTypes.Mixed,
                 SinceDate = new DateTime(2018, 03, 12),
                 UntilDate = new DateTime(2018, 03, 16),
-                MaxPublicationCount = 10
+                MaxPublicationCount = 200
 
 
             };

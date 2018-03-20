@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SocialNetworkConnection;
-using FacebookConnection;
+using TwitterConnection;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -10,27 +10,26 @@ using Microsoft.VisualBasic;
 namespace UnitTestProject
 {
     [TestClass]
-    public class SocialNetworkUnitTest
+    public class TwitterUnitTest
     {
         private IPublication publication;
-        //Esto se es una variable de tipo Twitter dado que no esta implementada aun la pongo como facebook para que no me lance error, cuando ya este implementada hay que cambiarla a tipo Twitter
-        private ISocialNetwork facebook;
-        //Lo mismo aca, hay que cambiarlo por el analogo pero en twitter que debe heredar de queryconfiguration
+        
+        private ISocialNetwork twitter;
+        
         private IQueryConfiguration configuration;
         //CREDENTIAL
+        public const string CREDENTIAL = "myCredential";
 
-        //Stage created for Fajardo
         
-
-        //Stage created for Fajardo
+        
         private void SetupStage1()
         {
-            facebook = new Facebook();
+            twitter = new Twitter(CREDENTIAL);
 
 
             IList<string> words = new List<String>()
             {
-                "SergioFajardoV",
+                "guerrillero",
             };
 
             configuration = new QueryConfiguration()
@@ -42,22 +41,23 @@ namespace UnitTestProject
                 SearchType = SearchTypes.Mixed,
                 SinceDate = new DateTime(2018, 03, 12),
                 UntilDate = new DateTime(2018, 03, 15),
-                MaxPublicationCount = 100
+                MaxPublicationCount = 10
+
 
             };
 
-            publication = facebook.Search(configuration)[0];
+            publication = twitter.Search(configuration)[0];
 
         }
 
         //Stage created for Petro
         private void SetupStage2()
         {
-            facebook = new Facebook();
+            twitter = new Twitter(CREDENTIAL);
 
             IList<string> words = new List<String>()
             {
-                "GustavoPetroUrrego",
+                "tibio",
             };
 
             configuration = new QueryConfiguration()
@@ -69,69 +69,79 @@ namespace UnitTestProject
                 SearchType = SearchTypes.Mixed,
                 SinceDate = new DateTime(2018, 03, 12),
                 UntilDate = new DateTime(2018, 03, 15),
-                MaxPublicationCount = 200
+                MaxPublicationCount = 10
 
 
             };
 
-            publication = facebook.Search(configuration)[0];
+            publication = twitter.Search(configuration)[0];
         }
 
-        //for project facebook's perfil
+        
         public void SetupStage3()
         {
-            facebook = new Facebook();
+            twitter = new Twitter(CREDENTIAL);
 
             IList<string> words = new List<String>()
             {
-                "me",
+                "Petro",
             };
 
             configuration = new QueryConfiguration()
             {
                 Keywords = words,
-                Location = Locations.Colombia,
-                Language = Languages.Spanish,
+                Location = Locations.USA,
+                Language = Languages.English,
                 Filter = Filters.None,
                 SearchType = SearchTypes.Mixed,
                 SinceDate = new DateTime(2018, 03, 12),
                 UntilDate = new DateTime(2018, 03, 16),
-                MaxPublicationCount = 200
+                MaxPublicationCount = 10
 
 
             };
 
-            publication = facebook.Search(configuration)[0];
+            publication = twitter.Search(configuration)[0];
         }
 
         [TestMethod]
-        public void TestKeywordFajardo()
+        public void TestKeyWordGuerrillero()
         {
             SetupStage1();
             String wroteBy = publication.WroteBy;
-            Assert.IsTrue(wroteBy.Contains("Fajardo12415375791"));
+            Assert.IsTrue(wroteBy != "");
+        }
+
+        [TestMethod]
+        public void TestKeywordTibio()
+        {
+            SetupStage2();
+            String wroteBy = publication.WroteBy;
+            Assert.IsTrue(wroteBy != "");
         }
 
         [TestMethod]
         public void TestKeywordPetro()
         {
-            SetupStage2();
-            String wroteBy = publication.WroteBy;
-            Assert.IsTrue(wroteBy.Contains("Gustavo Petro95972290770"));
-        }
-
-        [TestMethod]
-        public void TestKeywordFeelSoft()
-        {
             SetupStage3();
             String wroteBy = publication.WroteBy;
-            Assert.IsTrue(wroteBy.Contains("FeelSoft InteiProject116534032517988"));
+            Assert.IsTrue(wroteBy != "");
         }
 
         [TestMethod]
-        public void TestLocationFajardo()
+        public void TestLocationGuerrillero()
         {
             SetupStage1();
+            if (publication.Location != Locations.Colombia)
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void TestLocationTibio()
+        {
+            SetupStage2();
             if (publication.Location != Locations.Colombia)
             {
                 Assert.Fail();
@@ -141,18 +151,8 @@ namespace UnitTestProject
         [TestMethod]
         public void TestLocationPetro()
         {
-            SetupStage2();
-            if (publication.Location != Locations.Colombia)
-            {
-                Assert.Fail();
-            }
-        }
-
-        [TestMethod]
-        public void TestLocationFeelSoft()
-        {
             SetupStage3();
-            if (publication.Location != Locations.Colombia)
+            if (publication.Location != Locations.USA)
             {
                 Assert.Fail();
             }
@@ -161,7 +161,17 @@ namespace UnitTestProject
 
 
         [TestMethod]
-        public void TestLanguageFajardo()
+        public void TestLanguageGuerrillero()
+        {
+            SetupStage1();
+            if (publication.Language != Languages.Spanish)
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void TestLanguageTibio()
         {
             SetupStage1();
             if (publication.Language != Languages.Spanish)
@@ -174,17 +184,7 @@ namespace UnitTestProject
         public void TestLanguagePetro()
         {
             SetupStage1();
-            if (publication.Language != Languages.Spanish)
-            {
-                Assert.Fail();
-            }
-        }
-
-        [TestMethod]
-        public void TestLanguageFeelSoft()
-        {
-            SetupStage1();
-            if (publication.Language != Languages.Spanish)
+            if (publication.Language != Languages.English)
             {
                 Assert.Fail();
             }
@@ -192,9 +192,24 @@ namespace UnitTestProject
 
 
         [TestMethod]
-        public void TestSinceDateFajardo()
+        public void TestSinceDateGuerrillero()
         {
             SetupStage1();
+            DateTime sinceDate = new DateTime(2018, 03, 11);
+
+            int num = DateTime.Compare(publication.CreateDate, sinceDate);
+
+
+            if (num < 0)
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void TestSinceDateTibio()
+        {
+            SetupStage2();
             DateTime sinceDate = new DateTime(2018, 03, 11);
 
             int num = DateTime.Compare(publication.CreateDate, sinceDate);
@@ -209,21 +224,6 @@ namespace UnitTestProject
         [TestMethod]
         public void TestSinceDatePetro()
         {
-            SetupStage2();
-            DateTime sinceDate = new DateTime(2018, 03, 11);
-
-            int num = DateTime.Compare(publication.CreateDate, sinceDate);
-
-
-            if (num < 0)
-            {
-                Assert.Fail();
-            }
-        }
-
-        [TestMethod]
-        public void TestSinceDateFeelSoft()
-        {
             SetupStage3();
             DateTime sinceDate = new DateTime(2018, 03, 11);
 
@@ -237,7 +237,7 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void TestUntilDateFajardo()
+        public void TestUntilDateGuerrillero()
         {
             SetupStage1();
             DateTime untilDate = new DateTime(2018, 03, 15);
@@ -249,7 +249,7 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void TestUntilDatePetro()
+        public void TestUntilDateTibio()
         {
             SetupStage2();
             DateTime untilDate = new DateTime(2018, 03, 15);
@@ -261,7 +261,7 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void TestUntilDateFeelSoft()
+        public void TestUntilDatePetro()
         {
             SetupStage3();
             DateTime untilDate = new DateTime(2018, 03, 16);
@@ -272,17 +272,7 @@ namespace UnitTestProject
             }
         }
 
-        [TestMethod]
-        public void TestFoundPublicationsFeelSoft()
-        {
-            SetupStage3();
-            Assert.IsTrue(publication.Message.Equals("Test graph FB"));
-
-
-            Assert.IsTrue(publication.CreateDate.CompareTo(new DateTime(2018, 03, 16)) <= 0);
-
-            Assert.IsTrue(publication.WroteBy.Equals("FeelSoft InteiProject116534032517988"));
-        }
+     
     }
 }
 

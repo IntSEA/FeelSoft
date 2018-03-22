@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -11,7 +12,7 @@ namespace FacebookConnection
 {
     public class FacebookSearcher : PublicationSearcher
     {
-        private readonly HttpClient client;
+        private HttpClient client;
         private const int LIMIT_PUBLICATIONS = 100;
 
         public FacebookSearcher(HttpClient client, string credential) : base(credential)
@@ -235,6 +236,7 @@ namespace FacebookConnection
         private async Task<dynamic> MakeRequestToGraphAsync(string request)
         {
 
+            InitializeClient();
             dynamic response = await client.GetAsync(request);
             
             if (response.ReasonPhrase.Equals("Not Found"))
@@ -250,6 +252,16 @@ namespace FacebookConnection
 
 
             return JsonConvert.DeserializeObject(result);
+        }
+
+        private void InitializeClient()
+        {
+            HttpClient client = new HttpClient
+            {
+                BaseAddress = new Uri(Facebook.GRAPH_URI),
+            };
+
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public string MakeTokenRequestToGraphAsync(string request)

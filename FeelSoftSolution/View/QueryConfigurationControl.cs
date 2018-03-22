@@ -185,5 +185,10 @@ namespace View
             cbxKeywords.Text = "";
             cbxKeywords.SelectedItem =cbxKeywords.Items.Count>0 ?  cbxKeywords.Items[0] : "";
         }
+
+        private void CbxKeywordsSelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

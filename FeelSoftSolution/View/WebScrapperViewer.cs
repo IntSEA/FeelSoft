@@ -57,7 +57,7 @@ namespace View
 
             await Task.Run(()=>
             {
-                IList<IPublication> publications = GetSelectedSocialNetwork().Search(queryConfiguration);
+                    IList<IPublication> publications = GetSelectedSocialNetwork().Search(queryConfiguration);
 
                 ShowInPublicationViewer delegateMethod = new ShowInPublicationViewer(ShowPublicationsInPublicationViewer);
                 this.Invoke(delegateMethod, publications);

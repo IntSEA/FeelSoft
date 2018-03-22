@@ -71,6 +71,7 @@
             this.cbxKeywords.Name = "cbxKeywords";
             this.cbxKeywords.Size = new System.Drawing.Size(232, 21);
             this.cbxKeywords.TabIndex = 0;
+            this.cbxKeywords.SelectedIndexChanged += new System.EventHandler(this.CbxKeywordsSelectedIndexChanged);
             // 
             // btnAddKeyword
             // 

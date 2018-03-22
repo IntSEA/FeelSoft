@@ -11,14 +11,16 @@ namespace View
         public WebScrapperViewer()
         {
             InitializeComponent();
+           // Show();
             InitializeSocialNetworks();
+         
             //InitializeTests();
         }
 
         private void InitializeSocialNetworks()
         {
 
-            InitializeFacebook();
+            //InitializeFacebook();
             InitializeTwitter();
 
 
@@ -26,8 +28,6 @@ namespace View
 
         private void InitializeTwitter()
         {
-
-
             twitter = new TwitterConnection.Twitter();
             //FALTA AUTENTICAR CON TWITTER CREDENTIALS (el metodo AUTH:SETUSER())
 

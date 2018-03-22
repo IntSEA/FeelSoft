@@ -30,10 +30,10 @@
         {
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.rdbTwitter = new System.Windows.Forms.RadioButton();
-            this.queriesControl1 = new View.QueriesControl();
+            this.queriesControl = new View.QueriesControl();
             this.lblSelectSocialNetwork = new System.Windows.Forms.Label();
             this.rdbFacebook = new System.Windows.Forms.RadioButton();
-            this.publicationViewerControl1 = new View.PublicationViewerControl();
+            this.publicationViewerControl = new View.PublicationViewerControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.SuspendLayout();
@@ -47,10 +47,10 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.Controls.Add(this.rdbTwitter);
-            this.splitContainer.Panel1.Controls.Add(this.queriesControl1);
+            this.splitContainer.Panel1.Controls.Add(this.queriesControl);
             this.splitContainer.Panel1.Controls.Add(this.lblSelectSocialNetwork);
             this.splitContainer.Panel1.Controls.Add(this.rdbFacebook);
-            this.splitContainer.Panel1.Controls.Add(this.publicationViewerControl1);
+            this.splitContainer.Panel1.Controls.Add(this.publicationViewerControl);
             this.splitContainer.Size = new System.Drawing.Size(836, 544);
             this.splitContainer.SplitterDistance = 536;
             this.splitContainer.TabIndex = 0;
@@ -68,10 +68,10 @@
             // 
             // queriesControl1
             // 
-            this.queriesControl1.Location = new System.Drawing.Point(74, 28);
-            this.queriesControl1.Name = "queriesControl1";
-            this.queriesControl1.Size = new System.Drawing.Size(421, 208);
-            this.queriesControl1.TabIndex = 2;
+            this.queriesControl.Location = new System.Drawing.Point(74, 28);
+            this.queriesControl.Name = "queriesControl1";
+            this.queriesControl.Size = new System.Drawing.Size(421, 208);
+            this.queriesControl.TabIndex = 2;
             // 
             // lblSelectSocialNetwork
             // 
@@ -97,10 +97,10 @@
             // 
             // publicationViewerControl1
             // 
-            this.publicationViewerControl1.Location = new System.Drawing.Point(59, 225);
-            this.publicationViewerControl1.Name = "publicationViewerControl1";
-            this.publicationViewerControl1.Size = new System.Drawing.Size(436, 316);
-            this.publicationViewerControl1.TabIndex = 1;
+            this.publicationViewerControl.Location = new System.Drawing.Point(59, 225);
+            this.publicationViewerControl.Name = "publicationViewerControl1";
+            this.publicationViewerControl.Size = new System.Drawing.Size(436, 316);
+            this.publicationViewerControl.TabIndex = 1;
             // 
             // WebScrapperViewer
             // 
@@ -123,14 +123,15 @@
         private System.Windows.Forms.SplitContainer splitContainer;
         private SocialNetworkConnection.ISocialNetwork facebook;
         private SocialNetworkConnection.ISocialNetwork twitter;
-
-        public const string TWITTER_CREDENTIALS_PATH = "..//..//Resources//TwitterCredentials.txt";
-        public const string FACEBOOK_CREDENTIALS_PATH = "..//..//Resources//FacebookCredentials.txt";
-        private PublicationViewerControl publicationViewerControl1;
+        private int selectedSocialNetwork;
+        private PublicationViewerControl publicationViewerControl;
         private System.Windows.Forms.RadioButton rdbTwitter;
-        private QueriesControl queriesControl1;
+        private QueriesControl queriesControl;
         private System.Windows.Forms.Label lblSelectSocialNetwork;
         private System.Windows.Forms.RadioButton rdbFacebook;
+
+        public const int FACEBOOK = 0;
+        public const int TWITTER = 1;
     }
 }
 

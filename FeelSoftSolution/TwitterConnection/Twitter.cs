@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using SocialNetworkConnection;
 using Tweetinvi;
@@ -20,12 +21,22 @@ namespace TwitterConnection
 
         public Twitter() : base()
         {
-            InitializeWithDynamicCredentials(TWITTER_CREDENTIALS );
+            InitializeWithDynamicCredentials(TWITTER_CREDENTIALS, out string parseCredential);           
+            Credential = parseCredential;
+            Searcher = new TwitterSearcher(Credential);
         }
 
-        private void InitializeWithDynamicCredentials(string path)
+        
+        private void InitializeWithDynamicCredentials(string path, out string parseCredential)
         {
-            throw new NotImplementedException();
+            
+            string consumerKey = System.Configuration.ConfigurationManager.AppSettings["consumerKey"];
+            string consumerSecret = System.Configuration.ConfigurationManager.AppSettings["consumerSecret"]; ;
+            string accessToken = System.Configuration.ConfigurationManager.AppSettings["accessToken"]; ;
+            string secretToken = System.Configuration.ConfigurationManager.AppSettings["secretToken"]; ;
+
+            
+            parseCredential = consumerKey + "|" + consumerSecret + "|" + accessToken + "|" + secretToken;
         }
 
         public override IList<IPublication> GetFoundPublications()

@@ -38,7 +38,10 @@ namespace FacebookConnection
                 List<IPublication> publications = new List<IPublication>();
                 IDictionary<string, string> fields = new Dictionary<string, string>();
                 int totalPublications = queryConfiguration.MaxPublicationCount;
-                queryConfiguration.MaxPublicationCount = 100;
+                if (totalPublications > LIMIT_PUBLICATIONS)
+                {
+                    queryConfiguration.MaxPublicationCount = 100;
+                }
                 SetQueryFields(queryConfiguration, fields);
 
                 if (queryConfiguration.Keywords != null)
@@ -136,30 +139,45 @@ namespace FacebookConnection
             IList<IPublication> publications = new List<IPublication>();
             var task = MakeRequestToGraphAsync(request);
             var jsonResponse = task.Result;
-           
+
 
             if (jsonResponse == null)
             {
                 throw new HttpRequestException("Refresh access token");
+                
             }
 
             else if (jsonResponse.data == null)
             {
-
+                
                 throw new HttpRequestException("Refresh access token");
 
             }
-            bool underlimitFound = true;
-            //while (jsonResponse != null && underlimitFound)
-            //{
-                AddPublications(jsonResponse, publications, totalPublications);
-                underlimitFound = publications.Count <= totalPublications;
-                
-                jsonResponse = GetNextPublicationsRequest(underlimitFound, jsonResponse);
-            //}
+
+            AddPublications(jsonResponse, publications, totalPublications);
+
+            AddNextPagings(totalPublications, publications, jsonResponse);
+
+
 
             return publications;
 
+        }
+
+        private void AddNextPagings(int totalPublications, IList<IPublication> publications, dynamic jsonResponse)
+        {
+            bool underlimitFound = publications.Count < totalPublications;
+
+            List<dynamic> nextPaggings = new List<dynamic>();
+
+            while (underlimitFound)
+            {
+                var nextPagging = GetNextPublicationsRequest(underlimitFound, jsonResponse);
+                AddPublications(nextPagging, publications, totalPublications);
+
+            }
+
+            nextPaggings = null;
         }
 
         private dynamic GetNextPublicationsRequest(bool underlimitFound, dynamic jsonResponse)
@@ -174,47 +192,67 @@ namespace FacebookConnection
 
         private void AddPublications(dynamic jsonResponse, IList<IPublication> publications, int totalPublications)
         {
-            foreach (var item in jsonResponse.data)
+            lock (this)
             {
-                IPublication publication = ParsePublicationOfJsonResponse(item);
-                if (publications.Count <= totalPublications)
+                foreach (var item in jsonResponse.data)
                 {
-                    publications.Add(publication);
-                }
-                else
-                {
-                    break;
+                    IPublication publication = ParsePublicationOfJsonResponse(item);
+                    if (publications.Count <= totalPublications)
+                    {
+                        publications.Add(publication);
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
         }
 
         private IPublication ParsePublicationOfJsonResponse(dynamic item)
         {
+            string id = item.id != null ? item.id : "Not found";
+            DateTime createDate = item.created_time != null ? item.created_time : QueryConfiguration.NONE_DATE;
+            string message = item.message != null ? item.message : "Not message";
+            string wroteBy = "Not found";
+            if (item.from != null)
+            {
+                wroteBy = (item.from.name + item.from.id);
+            }
             return new Publication()
             {
-                Id = item.id,
-                CreateDate = item.created_time,
-                Message = item.message,
-                WroteBy = (item.from.name + item.from.id),
+
+                Id = id,
+                CreateDate = createDate,
+                Message = message,
+
+                WroteBy = wroteBy,     
+                
 
             };
         }
 
         private async Task<dynamic> MakeRequestToGraphAsync(string request)
         {
-            var response = await client.GetAsync(request);
 
-
+            dynamic response = await client.GetAsync(request);
+            
+            if (response.ReasonPhrase.Equals("Not Found"))
+            {
+                throw new ArgumentNullException("Not found user");
+            }
             if (!response.IsSuccessStatusCode)
+            {
                 return default(dynamic);
+            }
 
             var result = await response.Content.ReadAsStringAsync();
-            
-          
+
+
             return JsonConvert.DeserializeObject(result);
         }
 
-        public string MakeTokenRequestToGraph(string request)
+        public string MakeTokenRequestToGraphAsync(string request)
         {
             var jsonResponse = MakeRequestToGraphAsync(request).Result;
 

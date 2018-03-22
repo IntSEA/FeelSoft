@@ -39,11 +39,11 @@ namespace TwitterConnection
             return publications;
         }
 
-        private IPublication ParseTweet(ITweet tweet)
+        private IPublication ParseTweet(ITweetWithSearchMetadata tweet)
         {
             IPublication publication = new Publication()
             {
-                Message = tweet.FullText,
+                Message = tweet.Text,
                 WroteBy = tweet.CreatedBy.Name,
                 CreateDate = tweet.TweetLocalCreationDate,
 
@@ -78,7 +78,6 @@ namespace TwitterConnection
             ParseLocation(parameters, queryConfiguration);
             ParseSearchType(parameters, queryConfiguration);
             ParseSearchDates(parameters, queryConfiguration);
-
             //TODO ParseGeoCoordinates.
 
             return parameters;

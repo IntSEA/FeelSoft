@@ -210,6 +210,7 @@
             // rdbMixed
             // 
             this.rdbMixed.AutoSize = true;
+            this.rdbMixed.Checked = true;
             this.rdbMixed.Location = new System.Drawing.Point(6, 79);
             this.rdbMixed.Name = "rdbMixed";
             this.rdbMixed.Size = new System.Drawing.Size(57, 17);
@@ -225,7 +226,6 @@
             this.rdbRecent.Name = "rdbRecent";
             this.rdbRecent.Size = new System.Drawing.Size(68, 17);
             this.rdbRecent.TabIndex = 0;
-            this.rdbRecent.TabStop = true;
             this.rdbRecent.Text = "Reciente";
             this.rdbRecent.UseVisualStyleBackColor = true;
             // 
@@ -236,7 +236,6 @@
             this.rdbPopular.Name = "rdbPopular";
             this.rdbPopular.Size = new System.Drawing.Size(61, 17);
             this.rdbPopular.TabIndex = 0;
-            this.rdbPopular.TabStop = true;
             this.rdbPopular.Text = "Popular";
             this.rdbPopular.UseVisualStyleBackColor = true;
             // 
@@ -270,13 +269,13 @@
             this.rdbEnglish.Name = "rdbEnglish";
             this.rdbEnglish.Size = new System.Drawing.Size(59, 17);
             this.rdbEnglish.TabIndex = 1;
-            this.rdbEnglish.TabStop = true;
             this.rdbEnglish.Text = "English";
             this.rdbEnglish.UseVisualStyleBackColor = true;
             // 
             // rdbSpanish
             // 
             this.rdbSpanish.AutoSize = true;
+            this.rdbSpanish.Checked = true;
             this.rdbSpanish.Location = new System.Drawing.Point(6, 33);
             this.rdbSpanish.Name = "rdbSpanish";
             this.rdbSpanish.Size = new System.Drawing.Size(63, 17);

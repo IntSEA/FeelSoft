@@ -3,6 +3,8 @@ using System.Windows.Forms;
 using System.IO;
 using Tweetinvi;
 using SocialNetworkConnection;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace View
 {
@@ -12,7 +14,12 @@ namespace View
         {
             InitializeComponent();
             InitializeSocialNetworks();
-            //InitializeTests();
+            IntializeControls();
+        }
+
+        private void IntializeControls()
+        {
+            queriesControl.SetMain(this);
         }
 
         private void InitializeSocialNetworks()
@@ -26,69 +33,80 @@ namespace View
 
         private void InitializeTwitter()
         {
-
-
+            
             twitter = new TwitterConnection.Twitter();
-            //FALTA AUTENTICAR CON TWITTER CREDENTIALS (el metodo AUTH:SETUSER())
+            ParseTwitterCredentials(twitter.Credential, out string consumerKey, out string consumerSecret, out string accessToken, out string secretToken);
 
         }
 
-        internal void Search(IQueryConfiguration currentConfiguration)
+        private void ParseTwitterCredentials(string credential, out string consumerKey, out string consumerSecret, out string accessToken, out string secretToken)
         {
-            throw new NotImplementedException(); 
+            string[] info = credential.Split('|');
+            consumerKey = info[0].Trim();
+            consumerSecret = info[1].Trim();
+            accessToken = info[2].Trim();
+            secretToken = info[3].Trim();
+            
+
+            Auth.SetUserCredentials(consumerKey,consumerSecret,accessToken,secretToken);
+
         }
 
-        private void ParseTwitterCredentials(string[] twitterCredentials, out string twitterCredential)
+        internal async void Search(IQueryConfiguration queryConfiguration)
         {
-            twitterCredential = "";
-            for (int i = 0; i < twitterCredentials.Length - 1; i++)
+
+            await Task.Run(()=>
             {
-                twitterCredential += twitterCredentials[i] + "|";
+                IList<IPublication> publications = GetSelectedSocialNetwork().Search(queryConfiguration);
 
+                ShowInPublicationViewer delegateMethod = new ShowInPublicationViewer(ShowPublicationsInPublicationViewer);
+                this.Invoke(delegateMethod, publications);
+            });
+          
+            
+        }
+
+        public delegate void ShowInPublicationViewer(IList<IPublication> publications);
+
+
+        internal void ShowPublicationsInPublicationViewer(IList<IPublication> publications)
+        {
+            publicationViewerControl.ShowPublications(publications);
+
+        }
+
+        private ISocialNetwork GetSelectedSocialNetwork()
+        {
+            if (selectedSocialNetwork == FACEBOOK)
+            {
+                return facebook;
             }
-            twitterCredential += twitterCredentials[twitterCredentials.Length - 1];
+            else if (selectedSocialNetwork == TWITTER)
+            {
+                return twitter;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        private void InitializeFacebook()
+        private async Task InitializeFacebook()
         {
-            facebook = new FacebookConnection.Facebook();
-        }
+            await Task.Run(() => facebook = new FacebookConnection.Facebook());
+        }    
 
-
-
-
-        private bool ReadCredentials(out string facebookCrendtials, out string[] twitterCredentials)
-        {
-            ReadFacebookCredentials(out facebookCrendtials);
-            ReadTwitterCredentials(out twitterCredentials);
-
-            return (String.IsNullOrEmpty(facebookCrendtials) || twitterCredentials.Length > 0);
-        }
-
-        private void ReadTwitterCredentials(out string[] twitterCredentials)
-        {
-            StreamReader stream = new StreamReader(path: TWITTER_CREDENTIALS_PATH);
-            twitterCredentials = new string[4];
-            twitterCredentials[0] = stream.ReadLine();
-            twitterCredentials[1] = stream.ReadLine();
-            twitterCredentials[2] = stream.ReadLine();
-            twitterCredentials[3] = stream.ReadLine();
-
-            stream.Close();
-
-        }
-
-        private void ReadFacebookCredentials(out string facebookCrendtials)
-        {
-            StreamReader stream = new StreamReader(path: FACEBOOK_CREDENTIALS_PATH);
-            facebookCrendtials = stream.ReadLine();
-            stream.Close();
-        }
-
+      
 
         private void RdbCheckedChanged(object sender, EventArgs e)
         {
-
+            if(sender == rdbFacebook)
+            {
+                selectedSocialNetwork = FACEBOOK;
+            }else if(sender == rdbTwitter)
+            {
+                selectedSocialNetwork = TWITTER;
+            }
         }
 
 

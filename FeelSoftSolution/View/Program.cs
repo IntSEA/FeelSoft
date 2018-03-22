@@ -12,12 +12,20 @@ namespace View
         /// Punto de entrada principal para la aplicación.
         /// </summary>
         [STAThread]
+        static async Task Main2()
+        {
+           Application.EnableVisualStyles();
+           Application.SetCompatibleTextRenderingDefault(false);
+           Application.Run(new WebScrapperViewer());
+
+        }
+
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new WebScrapperViewer());
-            
+            Main2();
         }
+
+
+        
     }
 }

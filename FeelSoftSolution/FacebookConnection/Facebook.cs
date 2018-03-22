@@ -16,7 +16,7 @@ namespace FacebookConnection
     public class Facebook : SocialNetwork
     {
         public const string GRAPH_URI = "https://graph.facebook.com/v2.12/";
-        public const string FACEBOOK_CREDENTIAL_PATH = "..//..//..//FacebookConnection/Resources/FacebookCredentials.txt";
+
 
         //README: this credential is a test crredential, therefore, it'd can generate errors.
         public const string DEFAULT_CREDENTIAL = "EAACgYLKRHbUBALYBzCsopu3EK6a9HhWfpnJxKttIxMoYgDfB" +
@@ -39,22 +39,22 @@ namespace FacebookConnection
         public Facebook() : base()
         {
             HttpClient client = InitializeClient();
-            //InitializeWithDynamicToken(FACEBOOK_CREDENTIAL_PATH,client);
-            InitializeSearcherWithRequestToken(client);
-            
             revalidate = true;
+
+            InitializeSearcherWithRequestToken(client);
+
             SetName("Facebook");
         }
 
         private void InitializeWithDynamicToken(string path, HttpClient client)
         {
             string accessToken = ReadAccessToken(path);
-            Searcher = new FacebookSearcher(client,accessToken);
+            Searcher = new FacebookSearcher(client, accessToken);
         }
 
         private string ReadAccessToken(string path)
         {
-            StreamReader sr = new StreamReader(path:path);
+            StreamReader sr = new StreamReader(path: path);
             string accessToken = sr.ReadLine();
             sr.Close();
             return accessToken;
@@ -65,26 +65,26 @@ namespace FacebookConnection
             FacebookSearcher searcher = new FacebookSearcher(client);
             string accessToken = RequestAccessToken(searcher);
             Credential = accessToken;
-            searcher.Credential = Credential;            
+            searcher.Credential = Credential;
             Searcher = searcher;
         }
 
         public Facebook(bool revalidateToken) : base()
-        {            
+        {
             HttpClient client = InitializeClient();
-            InitializeWithDynamicToken(FACEBOOK_CREDENTIAL_PATH,client);
+            InitializeSearcherWithRequestToken(client);
             this.revalidate = revalidateToken;
             SetName("Facebook");
-            
+
 
         }
 
         private string RequestAccessToken(FacebookSearcher searcher)
         {
-            
-            string encryptTokenRequest =  GetTokentRequest(FACEBOOK_CREDENTIAL_PATH);           
+
+            string encryptTokenRequest = GetEncryptTokentRequest();
             string decryptTokenRequest = GetDecryptRequest(encryptTokenRequest);
-            string token=  searcher.MakeTokenRequestToGraph(decryptTokenRequest);
+            string token = searcher.MakeTokenRequestToGraphAsync(decryptTokenRequest);
             return token;
         }
 
@@ -130,11 +130,9 @@ namespace FacebookConnection
 
         }
 
-        private string GetTokentRequest(string path)
+        private string GetEncryptTokentRequest()
         {
-            StreamReader sr = new StreamReader(path: path);
-            string tokenRequest = sr.ReadLine();
-            sr.Close();
+            string tokenRequest = System.Configuration.ConfigurationManager.AppSettings["encryptRequestToken"];
 
             return tokenRequest;
 
@@ -154,12 +152,43 @@ namespace FacebookConnection
 
         public override IList<IPublication> Search(IList<IQueryConfiguration> queriesConfigurations)
         {
-            return Searcher.SearchPublications(queriesConfigurations);
+            try
+            {
+                return Searcher.SearchPublications(queriesConfigurations);
+            }
+            catch (HttpRequestException httpException)
+            {
+                if (revalidate)
+                {
+                    HttpClient client = InitializeClient();
+                    InitializeSearcherWithRequestToken(client);
+                    return Searcher.SearchPublications(queriesConfigurations);
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         public override IList<IPublication> Search(IQueryConfiguration queryConfiguration)
         {
-            return Searcher.SearchPublications(queryConfiguration);
+            try
+            {
+                return Searcher.SearchPublications(queryConfiguration);
+
+            }
+            catch (HttpRequestException httpException )
+            {
+                if (revalidate)
+                {
+                    HttpClient client = InitializeClient();
+                    InitializeSearcherWithRequestToken(client);
+                    return Searcher.SearchPublications(queryConfiguration);
+                }
+                else return null;
+            }
+           
         }
 
         public override IList<IPublication> GetFoundPublications()

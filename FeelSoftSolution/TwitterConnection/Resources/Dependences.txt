@@ -1,2 +1,4 @@
 This project depends of:
 1. TweetInvi API
+2. Newtonsoft JSON
+3. System.configuration (ensambled reference)

@@ -48,6 +48,7 @@ namespace View
 
         private IQueryConfiguration CreateQueryConfiguration()
         {
+            
             queryConfiguration = new QueryConfiguration();
             AddKeyWords(queryConfiguration);
             AddLocation(queryConfiguration);
@@ -56,9 +57,25 @@ namespace View
             AddFilter(queryConfiguration);
             AddSinceDate(queryConfiguration);
             AddUntilDate(queryConfiguration);
+            AddTotalSearches(queryConfiguration);
 
 
             return queryConfiguration;
+        }
+
+        private void AddTotalSearches(IQueryConfiguration queryConfiguration)
+        {
+            decimal value = nmudTotalPublications.Value;
+            if(value>0 && value < 5000)
+            {
+                queryConfiguration.MaxPublicationCount = (int)value;
+            }
+            else
+            {
+                queryConfiguration.MaxPublicationCount = 100;
+
+            }
+
         }
 
         private void AddSinceDate(IQueryConfiguration queryConfiguration)

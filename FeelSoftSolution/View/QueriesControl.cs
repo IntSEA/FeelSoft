@@ -31,13 +31,11 @@ namespace View
             configurations = new List<IQueryConfiguration>();
         }
 
-             
+
 
         private void BtnInitSearchClick(object sender, EventArgs e)
         {
-           
             MakeQueryRequest();
-
         }
 
         private void MakeQueryRequest()
@@ -45,19 +43,15 @@ namespace View
             main.Search(currentConfiguration);
         }
 
-        private void RdCheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void BtnCreateQuery_Click(object sender, EventArgs e)
         {
             queryForm = new QueryConfigurationForm();
             DialogResult result = queryForm.ShowDialog();
 
-            if(DialogResult.OK == result)
+            if (DialogResult.OK == result)
             {
-                currentConfiguration= queryForm.GetQueryConfiguration();
+                currentConfiguration = queryForm.GetQueryConfiguration();
                 configurations.Add(currentConfiguration);
                 cbxQueries.Items.Add(currentConfiguration);
                 cbxQueries.SelectedItem = currentConfiguration;
@@ -70,7 +64,7 @@ namespace View
             if (removedObject != null)
             {
                 cbxQueries.Items.Remove(removedObject);
-                MessageBox.Show(removedObject.ToString()+" was removed");
+                MessageBox.Show(removedObject.ToString() + " was removed");
             }
             else
             {
@@ -80,7 +74,10 @@ namespace View
 
         private void CbxQueries_SelectedIndexChanged(object sender, EventArgs e)
         {
-            currentConfiguration =(IQueryConfiguration) cbxQueries.SelectedItem;
+            if (cbxQueries.SelectedItem != null)
+            {
+                currentConfiguration = (IQueryConfiguration)cbxQueries.SelectedItem;
+            }
         }
     }
 }

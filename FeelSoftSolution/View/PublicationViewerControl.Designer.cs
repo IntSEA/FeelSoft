@@ -1,4 +1,7 @@
-﻿namespace View
+﻿using SocialNetworkConnection;
+using System.Collections.Generic;
+
+namespace View
 {
     partial class PublicationViewerControl
     {
@@ -32,7 +35,7 @@
             this.lblPublication = new System.Windows.Forms.Label();
             this.numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.lblTotalPublications = new System.Windows.Forms.Label();
-            this.btnAfter = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
             this.btnBefore = new System.Windows.Forms.Button();
             this.tbxPublication = new System.Windows.Forms.TextBox();
             this.gbxPublications.SuspendLayout();
@@ -44,7 +47,7 @@
             this.gbxPublications.Controls.Add(this.lblPublication);
             this.gbxPublications.Controls.Add(this.numericUpDown);
             this.gbxPublications.Controls.Add(this.lblTotalPublications);
-            this.gbxPublications.Controls.Add(this.btnAfter);
+            this.gbxPublications.Controls.Add(this.btnNext);
             this.gbxPublications.Controls.Add(this.btnBefore);
             this.gbxPublications.Controls.Add(this.tbxPublication);
             this.gbxPublications.Location = new System.Drawing.Point(27, 19);
@@ -65,28 +68,50 @@
             // 
             // numericUpDown
             // 
+            this.numericUpDown.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             this.numericUpDown.Location = new System.Drawing.Point(325, 216);
+            this.numericUpDown.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+            this.numericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown.Name = "numericUpDown";
             this.numericUpDown.Size = new System.Drawing.Size(32, 20);
             this.numericUpDown.TabIndex = 19;
+            this.numericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown.ValueChanged += new System.EventHandler(this.NumericUpDownValueChanged);
             // 
             // lblTotalPublications
             // 
             this.lblTotalPublications.AutoSize = true;
             this.lblTotalPublications.Location = new System.Drawing.Point(247, 251);
             this.lblTotalPublications.Name = "lblTotalPublications";
-            this.lblTotalPublications.Size = new System.Drawing.Size(100, 13);
+            this.lblTotalPublications.Size = new System.Drawing.Size(88, 13);
             this.lblTotalPublications.TabIndex = 18;
-            this.lblTotalPublications.Text = "Publicaciones : 100";
+            this.lblTotalPublications.Text = "Publicaciones : 0";
             // 
-            // btnAfter
+            // btnNext
             // 
-            this.btnAfter.Location = new System.Drawing.Point(117, 210);
-            this.btnAfter.Name = "btnAfter";
-            this.btnAfter.Size = new System.Drawing.Size(75, 23);
-            this.btnAfter.TabIndex = 17;
-            this.btnAfter.Text = "-->";
-            this.btnAfter.UseVisualStyleBackColor = true;
+            this.btnNext.Location = new System.Drawing.Point(117, 210);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(75, 23);
+            this.btnNext.TabIndex = 17;
+            this.btnNext.Text = "-->";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.BtnNextClick);
             // 
             // btnBefore
             // 
@@ -96,6 +121,7 @@
             this.btnBefore.TabIndex = 16;
             this.btnBefore.Text = "<--";
             this.btnBefore.UseVisualStyleBackColor = true;
+            this.btnBefore.Click += new System.EventHandler(this.BtnBeforeClick);
             // 
             // tbxPublication
             // 
@@ -125,8 +151,10 @@
         private System.Windows.Forms.Label lblPublication;
         private System.Windows.Forms.NumericUpDown numericUpDown;
         private System.Windows.Forms.Label lblTotalPublications;
-        private System.Windows.Forms.Button btnAfter;
+        private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnBefore;
         private System.Windows.Forms.TextBox tbxPublication;
+        private IPublication[] publications;
+        private int indexCurrentPublication;
     }
 }

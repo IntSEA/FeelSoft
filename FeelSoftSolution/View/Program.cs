@@ -22,7 +22,15 @@ namespace View
 
         static void Main()
         {
+<<<<<<< HEAD
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new WebScrapperViewer());
+            
+            
+=======
             Main2();
+>>>>>>> 35d31c7be8f8582776913dd8798c142593d9a75a
         }
 
 

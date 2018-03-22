@@ -13,19 +13,25 @@ namespace View
         public WebScrapperViewer()
         {
             InitializeComponent();
+           // Show();
             InitializeSocialNetworks();
+<<<<<<< HEAD
+         
+            //InitializeTests();
+=======
             IntializeControls();
         }
 
         private void IntializeControls()
         {
             queriesControl.SetMain(this);
+>>>>>>> 35d31c7be8f8582776913dd8798c142593d9a75a
         }
 
         private void InitializeSocialNetworks()
         {
 
-            InitializeFacebook();
+            //InitializeFacebook();
             InitializeTwitter();
 
 
@@ -33,7 +39,10 @@ namespace View
 
         private void InitializeTwitter()
         {
+<<<<<<< HEAD
+=======
             
+>>>>>>> 35d31c7be8f8582776913dd8798c142593d9a75a
             twitter = new TwitterConnection.Twitter();
             ParseTwitterCredentials(twitter.Credential, out string consumerKey, out string consumerSecret, out string accessToken, out string secretToken);
 

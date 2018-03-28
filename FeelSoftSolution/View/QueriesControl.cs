@@ -43,7 +43,7 @@ namespace View
             main.Search(currentConfiguration);
         }
 
-       
+
         private void BtnCreateQuery_Click(object sender, EventArgs e)
         {
             queryForm = new QueryConfigurationForm();
@@ -78,6 +78,47 @@ namespace View
             {
                 currentConfiguration = (IQueryConfiguration)cbxQueries.SelectedItem;
             }
+        }
+
+        private void BtnImportQueryConfigurationClick(object sender, EventArgs e)
+        {
+            main.ImportQueryConfiguration();
+
+        }
+
+        public void AddQueryConfigurations(IQueryConfiguration queryConfiguration)
+        {
+            if (queryConfiguration != null)
+            {
+                cbxQueries.Items.Add(queryConfiguration);
+            }
+            else
+            {
+                cbxQueries.Text = "";
+            }
+        }
+
+        private void BtnExportQueryConfigurationClick(object sender, EventArgs e)
+        {
+            if (currentConfiguration == null)
+            {
+                MessageBox.Show("Select a query configuration");
+            }
+            else
+            {
+                main.ExportQueryConfiguration(currentConfiguration);
+            }
+        }
+
+        internal IQueryConfiguration GetCurrentQueryConfiguration()
+        {
+            if (currentConfiguration == null)
+            {
+                BtnCreateQuery_Click(btnCreateQuery, null);
+
+            }
+            return currentConfiguration;
+
         }
     }
 }

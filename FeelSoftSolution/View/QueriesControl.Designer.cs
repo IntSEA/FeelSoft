@@ -37,6 +37,8 @@ namespace View
             this.lblConfigurations = new System.Windows.Forms.Label();
             this.btnInitSearch = new System.Windows.Forms.Button();
             this.gbxQueriesConfigurations = new System.Windows.Forms.GroupBox();
+            this.btnExportQueryConfiguration = new System.Windows.Forms.Button();
+            this.btnImportQueryConfiguration = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.gbxQueries = new System.Windows.Forms.GroupBox();
             this.gbxQueriesConfigurations.SuspendLayout();
@@ -83,17 +85,39 @@ namespace View
             // 
             // gbxQueriesConfigurations
             // 
+            this.gbxQueriesConfigurations.Controls.Add(this.btnExportQueryConfiguration);
+            this.gbxQueriesConfigurations.Controls.Add(this.btnImportQueryConfiguration);
             this.gbxQueriesConfigurations.Controls.Add(this.btnRemove);
             this.gbxQueriesConfigurations.Controls.Add(this.cbxQueries);
             this.gbxQueriesConfigurations.Controls.Add(this.lblConfigurations);
             this.gbxQueriesConfigurations.Controls.Add(this.btnCreateQuery);
             this.gbxQueriesConfigurations.Controls.Add(this.btnInitSearch);
-            this.gbxQueriesConfigurations.Location = new System.Drawing.Point(31, 45);
+            this.gbxQueriesConfigurations.Location = new System.Drawing.Point(31, 19);
             this.gbxQueriesConfigurations.Name = "gbxQueriesConfigurations";
-            this.gbxQueriesConfigurations.Size = new System.Drawing.Size(330, 107);
+            this.gbxQueriesConfigurations.Size = new System.Drawing.Size(330, 161);
             this.gbxQueriesConfigurations.TabIndex = 11;
             this.gbxQueriesConfigurations.TabStop = false;
             this.gbxQueriesConfigurations.Text = "Configuraciones de busqueda";
+            // 
+            // btnExportQueryConfiguration
+            // 
+            this.btnExportQueryConfiguration.Location = new System.Drawing.Point(179, 104);
+            this.btnExportQueryConfiguration.Name = "btnExportQueryConfiguration";
+            this.btnExportQueryConfiguration.Size = new System.Drawing.Size(141, 33);
+            this.btnExportQueryConfiguration.TabIndex = 12;
+            this.btnExportQueryConfiguration.Text = "Exportar configuraciones";
+            this.btnExportQueryConfiguration.UseVisualStyleBackColor = true;
+            this.btnExportQueryConfiguration.Click += new System.EventHandler(this.BtnExportQueryConfigurationClick);
+            // 
+            // btnImportQueryConfiguration
+            // 
+            this.btnImportQueryConfiguration.Location = new System.Drawing.Point(9, 104);
+            this.btnImportQueryConfiguration.Name = "btnImportQueryConfiguration";
+            this.btnImportQueryConfiguration.Size = new System.Drawing.Size(147, 33);
+            this.btnImportQueryConfiguration.TabIndex = 11;
+            this.btnImportQueryConfiguration.Text = "Importar configuraciónes";
+            this.btnImportQueryConfiguration.UseVisualStyleBackColor = true;
+            this.btnImportQueryConfiguration.Click += new System.EventHandler(this.BtnImportQueryConfigurationClick);
             // 
             // btnRemove
             // 
@@ -110,7 +134,7 @@ namespace View
             this.gbxQueries.Controls.Add(this.gbxQueriesConfigurations);
             this.gbxQueries.Location = new System.Drawing.Point(16, 12);
             this.gbxQueries.Name = "gbxQueries";
-            this.gbxQueries.Size = new System.Drawing.Size(386, 186);
+            this.gbxQueries.Size = new System.Drawing.Size(386, 190);
             this.gbxQueries.TabIndex = 13;
             this.gbxQueries.TabStop = false;
             this.gbxQueries.Text = "Control de configuraciones";
@@ -142,5 +166,7 @@ namespace View
         private System.Windows.Forms.GroupBox gbxQueriesConfigurations;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.GroupBox gbxQueries;
+        private System.Windows.Forms.Button btnImportQueryConfiguration;
+        private System.Windows.Forms.Button btnExportQueryConfiguration;
     }
 }

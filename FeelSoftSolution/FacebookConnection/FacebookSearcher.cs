@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SocialNetworkConnection;
@@ -14,16 +17,39 @@ namespace FacebookConnection
     {
         private HttpClient client;
         private const int LIMIT_PUBLICATIONS = 100;
+        private IList<string> pages;
+
 
         public FacebookSearcher(HttpClient client, string credential) : base(credential)
         {
             this.client = client;
+            InitializeDefaultPages();
 
+        }
+
+        private void InitializeDefaultPages()
+        {
+            pages = new List<string>();
+            ReadPages();
+
+        }
+
+
+        private void ReadPages()
+        {
+            StreamReader sr = new StreamReader("..//..//..//FacebookConnection/Resources/DefaultPages.txt");
+            string line = null;
+            while ((line = sr.ReadLine()) != null)
+            {
+                pages.Add(line);
+            }
+            sr.Close();
         }
 
         public FacebookSearcher(HttpClient client) : base()
         {
             this.client = client;
+            InitializeDefaultPages();
         }
 
         public override IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations)
@@ -36,24 +62,46 @@ namespace FacebookConnection
         {
             if (queryConfiguration != null)
             {
-                List<IPublication> publications = new List<IPublication>();
+
+                IList<IPublication> publications = new List<IPublication>();
                 IDictionary<string, string> fields = new Dictionary<string, string>();
-                int totalPublications = queryConfiguration.MaxPublicationCount;
-                if (totalPublications > LIMIT_PUBLICATIONS)
-                {
-                    queryConfiguration.MaxPublicationCount = 100;
-                }
+                int limitPublications = queryConfiguration.MaxPublicationCount;
+                int limitComments = queryConfiguration.MaxResponsesCount;
+
+                queryConfiguration.MaxPublicationCount = 100;            
+
                 SetQueryFields(queryConfiguration, fields);
 
                 if (queryConfiguration.Keywords != null)
                 {
-                    foreach (var keyword in queryConfiguration.Keywords)
+                    for (int i = 0; i < queryConfiguration.Keywords.Count; i++)
                     {
-                        IList<IPublication> partialPublication = Classify(RequestFeedToGraph(keyword, fields, totalPublications), queryConfiguration);
-                        publications.AddRange(partialPublication);
+                        string keyword = queryConfiguration.Keywords.ElementAt(i);
+                        IList<IPublication> partialPublication = TestRequestFeedToGraph(keyword, fields, limitPublications, queryConfiguration);
+                        ((List<IPublication>)publications).AddRange(partialPublication);
+
                     }
+                  
                 }
 
+
+                //int totalPublications = queryConfiguration.MaxPublicationCount;
+                //if (totalPublications > LIMIT_PUBLICATIONS)
+                //{
+                //    queryConfiguration.MaxPublicationCount = 100;
+                //}
+                //SetQueryFields(queryConfiguration, fields);
+
+                //if (queryConfiguration.Keywords != null)
+                //{
+                //    foreach (var keyword in queryConfiguration.Keywords)
+                //    {
+                //        IList<IPublication> partialPublication = RequestFeedToGraph(keyword, fields, totalPublications, queryConfiguration);
+                //       ((List<IPublication>) publications).AddRange(partialPublication);
+                //    }
+                //}
+
+                publications = ReorganizeSearches(publications, limitPublications);
 
 
                 return publications;
@@ -62,30 +110,47 @@ namespace FacebookConnection
             throw new ArgumentNullException("QueryConfiguration: " + queryConfiguration + "was null");
         }
 
-        private IList<IPublication> Classify(IList<IPublication> publications, IQueryConfiguration queryConfiguration)
-        {
-            ClassifyByDate(publications, queryConfiguration.SinceDate, queryConfiguration.UntilDate);
-            return publications;
-        }
 
-        private void ClassifyByDate(IList<IPublication> publications, DateTime sinceDate, DateTime untilDate)
+
+        private IList<IPublication> ReorganizeSearches(IList<IPublication> publications, int maxPublicationCount)
         {
-            if (publications != null)
+            IList<IPublication> responsePublications = new List<IPublication>();
+            if (publications.Count > maxPublicationCount)
             {
-                for (int i = 0; i < publications.Count; i++)
-                {
-                    var item = publications.ElementAt(i);
-                    if (item.CreateDate.CompareTo(QueryConfiguration.NONE_DATE) != 0)
-                    {
-                        if (!(item.CreateDate.CompareTo(sinceDate) >= 0 && item.CreateDate.CompareTo(untilDate) <= 0))
-                        {
-                            publications.RemoveAt(i);
-                            i--;
-                        }
-                    }
+                Random random = new Random();
 
+                for (int i = 0; i < maxPublicationCount; i++)
+                {
+                    int toAdd = random.Next(0, publications.Count);
+                    responsePublications.Add(publications[toAdd]);
+                    publications.RemoveAt(toAdd);
                 }
             }
+
+            return responsePublications;
+        }
+
+        private bool Classify(IPublication publication, IQueryConfiguration queryConfiguration)
+        {
+            bool clasified = ClassifyByDate(publication, queryConfiguration.SinceDate, queryConfiguration.UntilDate);
+            return clasified;
+        }
+
+        private bool ClassifyByDate(IPublication publication, DateTime sinceDate, DateTime untilDate)
+        {
+            bool clasified = true;
+            if (publication != null)
+            {
+                if (publication.CreateDate.CompareTo(QueryConfiguration.NONE_DATE) != 0)
+                {
+                    if (!(publication.CreateDate.CompareTo(sinceDate) >= 0 && publication.CreateDate.CompareTo(untilDate) <= 0))
+                    {
+                        clasified = false;
+                    }
+                }
+            }
+
+            return clasified;
 
         }
 
@@ -127,80 +192,204 @@ namespace FacebookConnection
             }
             else
             {
-                args.Add("fields", "message,from,created_time");
+                string commentsFields = "";
+                if (queryConfiguration.MaxResponsesCount > 0)
+                {
+                    commentsFields = ",comments.limit(" + queryConfiguration.MaxResponsesCount + "){message,created_time,from,id}";
+                }
+                args.Add("fields", "message,from,created_time" + commentsFields);
 
             }
         }
 
+        private IList<IPublication> TestRequestFeedToGraph(string keyword, IDictionary<string, string> args, int totalPublications, IQueryConfiguration queryConfiguration)
+        {
+            IList<IPublication> publications = null;
+
+            int roundSearchCount = totalPublications / pages.Count;
+            int totalPagings = roundSearchCount / 50;
+
+            foreach (var page in pages)
+            {
+                var request = CreateFeedRequestToGraph(page, "feed", args);
+                var task = MakeRequestToGraphAsync(request);
+                if (task != null)
+                {
+                    publications = new List<IPublication>();
+                    var jsonResponse = task.Result;
+
+                    if (jsonResponse != null)
+                    {
+                        bool joinedTotalPublicationsForPage = false;
+                        int pages = 0;
+                        do
+                        {
+                            joinedTotalPublicationsForPage = AddPublications(keyword, jsonResponse, publications, roundSearchCount, queryConfiguration);
+                            GetNextPublicationsRequest(!joinedTotalPublicationsForPage, jsonResponse);
+                            pages++;
+                        } while (!joinedTotalPublicationsForPage && pages<totalPagings);
+                    }
+
+                }
 
 
-        internal IList<IPublication> RequestFeedToGraph(string user, IDictionary<string, string> args, int totalPublications)
+            }
+
+            return publications;
+        }
+
+      
+
+        private bool AddPublications(string keyword, dynamic jsonResponse, IList<IPublication> publications, int totalPublications, IQueryConfiguration queryConfiguration)
+        {
+           return AddPublications(keyword, jsonResponse, publications, totalPublications, queryConfiguration, null);
+        }
+
+        private bool AddPublications(string keyword, dynamic jsonResponse, IList<IPublication> publications, int totalPublications, IQueryConfiguration queryConfiguration, IPublication parentPublication)
+        {
+            bool totalSearched = true;
+            lock (this)
+            {
+                if (jsonResponse.data == null)
+                {
+                    throw new ArgumentException("No json data");
+                }
+                foreach (var item in jsonResponse.data)
+                {
+                    IPublication publication = ParsePublicationOfJsonResponse(item, queryConfiguration, parentPublication);
+                    if (publications.Count <= totalPublications && AuxClassify(keyword, publication, queryConfiguration))
+                    {
+                        publications.Add(publication);
+                        if (publication.Responses != null && publication.Responses.Count > 0)
+                        {
+                            ((List<IPublication>)publications).AddRange(publication.Responses);
+                        }
+
+                    }
+                    else if (publication.Responses != null)
+                    {
+                        foreach (var pu in publication.Responses)
+                        {
+                            if (publications.Count > totalPublications)
+                            {
+                                break;
+                            }
+                           else if (AuxClassify(keyword, pu, queryConfiguration))
+                            {
+                                publications.Add(pu);
+                            }
+                        }
+                    }else if (publications.Count > totalPublications)
+                    {
+                        break;
+                    }
+                   
+                   
+                }
+            }
+
+            totalSearched = publications.Count>= totalPublications;
+            return totalSearched;
+        }
+
+        private bool AuxClassify(string keyword, IPublication publication, IQueryConfiguration queryConfiguration)
+        {
+            bool classify = Classify(publication,queryConfiguration);
+            bool containWord = ContainKeyword(keyword, publication);
+            classify = classify && containWord;
+            return classify;
+
+        }
+
+        private bool ContainKeyword(string keyword, IPublication publication)
+        {
+           
+            string message = publication.Message;
+            bool contains = message.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0;
+            return contains;
+        }
+
+        internal IList<IPublication> RequestFeedToGraph(string user, IDictionary<string, string> args, int totalPublications, IQueryConfiguration queryConfiguration)
         {
             var request = CreateFeedRequestToGraph(user, "feed", args);
-            IList<IPublication> publications = new List<IPublication>();
+            IList<IPublication> publications = null;
             var task = MakeRequestToGraphAsync(request);
-            var jsonResponse = task.Result;
-
-
-            if (jsonResponse == null)
+            if (task != null)
             {
-                throw new HttpRequestException("Refresh access token");
-                
+                publications = new List<IPublication>();
+                var jsonResponse = task.Result;
+
+                if (jsonResponse != null)
+                {
+
+
+                    AddPublications(jsonResponse, publications, totalPublications, queryConfiguration);
+
+                    AddNextPagings(totalPublications, publications, jsonResponse, queryConfiguration);
+                }
+
             }
-
-            else if (jsonResponse.data == null)
-            {
-                
-                throw new HttpRequestException("Refresh access token");
-
-            }
-
-            AddPublications(jsonResponse, publications, totalPublications);
-
-            AddNextPagings(totalPublications, publications, jsonResponse);
-
-
-
             return publications;
 
         }
 
-        private void AddNextPagings(int totalPublications, IList<IPublication> publications, dynamic jsonResponse)
+        private void AddNextPagings(int totalPublications, IList<IPublication> publications, dynamic jsonResponse, IQueryConfiguration queryConfiguration)
         {
             bool underlimitFound = publications.Count < totalPublications;
 
-            List<dynamic> nextPaggings = new List<dynamic>();
 
             while (underlimitFound)
             {
-                var nextPagging = GetNextPublicationsRequest(underlimitFound, jsonResponse);
-                AddPublications(nextPagging, publications, totalPublications);
+                var nextPaging = GetNextPublicationsRequest(underlimitFound, jsonResponse);
+
+                AddPublications(nextPaging, publications, totalPublications, queryConfiguration);
 
             }
 
-            nextPaggings = null;
         }
 
         private dynamic GetNextPublicationsRequest(bool underlimitFound, dynamic jsonResponse)
         {
+            dynamic response = default(dynamic);
             if (underlimitFound)
             {
-                string next = (string)jsonResponse.paging.next;
-                return MakeRequestToGraphAsync(next);
+                if (jsonResponse.paging != null)
+                {
+                    if (jsonResponse.paging.next != null)
+                    {
+                        string next = (string)jsonResponse.paging.next;
+                        response = MakeRequestToGraphAsync(next).Result;
+                    }
+                }
+               
             }
-            return null;
+            return response;
         }
 
-        private void AddPublications(dynamic jsonResponse, IList<IPublication> publications, int totalPublications)
+
+        private void AddPublications(dynamic jsonResponse, IList<IPublication> publications, int totalPublications, IQueryConfiguration queryConfiguration)
         {
+            AddPublications(jsonResponse, publications, totalPublications, queryConfiguration, null);
+        }
+        private void AddPublications(dynamic jsonResponse, IList<IPublication> publications, int totalPublications, IQueryConfiguration queryConfiguration, IPublication parentPublication)
+        {
+
             lock (this)
             {
+                if (jsonResponse.data == null)
+                {
+                    throw new ArgumentException("No json data");
+                }
                 foreach (var item in jsonResponse.data)
                 {
-                    IPublication publication = ParsePublicationOfJsonResponse(item);
-                    if (publications.Count <= totalPublications)
+                    IPublication publication = ParsePublicationOfJsonResponse(item, queryConfiguration, parentPublication);
+                    if (publications.Count <= totalPublications && Classify(publication, queryConfiguration))
                     {
                         publications.Add(publication);
+                        if (publication.Responses != null && publication.Responses.Count > 0)
+                        {
+                            ((List<IPublication>)publications).AddRange(publication.Responses);
+                        }
                     }
                     else
                     {
@@ -210,38 +399,56 @@ namespace FacebookConnection
             }
         }
 
-        private IPublication ParsePublicationOfJsonResponse(dynamic item)
+        private IPublication ParsePublicationOfJsonResponse(dynamic item, IQueryConfiguration queryConfiguration, IPublication parentPublication)
         {
-            string id = item.id != null ? item.id : "Not found";
-            DateTime createDate = item.created_time != null ? item.created_time : QueryConfiguration.NONE_DATE;
-            string message = item.message != null ? item.message : "Not message";
+
+            string id = item.id ?? "Not found";
+            DateTime createDate = item.created_time ?? QueryConfiguration.NONE_DATE;
+            string message = item.message ?? "Not message";
             string wroteBy = "Not found";
             if (item.from != null)
             {
                 wroteBy = (item.from.name + item.from.id);
             }
-            return new Publication()
+            IPublication publication = new Publication()
             {
-
-                Id = id,
+                Id = "Facebook:" + id,
                 CreateDate = createDate,
                 Message = message,
-
-                WroteBy = wroteBy,     
-                
+                WroteBy = wroteBy,
+                Parent = parentPublication,
 
             };
+
+            publication.Responses = GetResponesPublications(item, queryConfiguration, publication);
+
+            return publication;
+        }
+
+        private IList<IPublication> GetResponesPublications(dynamic item, IQueryConfiguration queryConfiguration, IPublication publication)
+        {
+            List<IPublication> responses = null;
+            if (item.comments != null)
+            {
+                int totalComments = queryConfiguration.MaxResponsesCount;
+                if (totalComments > 0)
+                {
+                    responses = new List<IPublication>();
+                    AddPublications(item.comments, responses, totalComments, queryConfiguration, publication);
+                }
+            }
+
+            return responses;
         }
 
         private async Task<dynamic> MakeRequestToGraphAsync(string request)
         {
 
-            InitializeClient();
             dynamic response = await client.GetAsync(request);
-            
+
             if (response.ReasonPhrase.Equals("Not Found"))
             {
-                throw new ArgumentNullException("Not found user");
+                return default(dynamic);
             }
             if (!response.IsSuccessStatusCode)
             {
@@ -254,21 +461,19 @@ namespace FacebookConnection
             return JsonConvert.DeserializeObject(result);
         }
 
-        private void InitializeClient()
-        {
-            HttpClient client = new HttpClient
-            {
-                BaseAddress = new Uri(Facebook.GRAPH_URI),
-            };
 
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        }
 
         public string MakeTokenRequestToGraphAsync(string request)
         {
-            var jsonResponse = MakeRequestToGraphAsync(request).Result;
+            try
+            {
+                var jsonResponse = MakeRequestToGraphAsync(request).Result;
 
-            return (string)jsonResponse.access_token;
+                return (string)jsonResponse.access_token;
+            }catch(Exception e)
+            {
+                return null;
+            }
         }
         private string CreateFeedRequestToGraph(string user, string consult, IDictionary<string, string> fields)
         {

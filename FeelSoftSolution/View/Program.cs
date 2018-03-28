@@ -12,7 +12,10 @@ namespace View
         /// Punto de entrada principal para la aplicación.
         /// </summary>
         [STAThread]
-        static async Task Main2()
+        
+#pragma warning disable CS1998 // El método asincrónico carece de operadores "await" y se ejecutará de forma sincrónica
+        private static async Task Main2()
+#pragma warning restore CS1998 // El método asincrónico carece de operadores "await" y se ejecutará de forma sincrónica
         {
            Application.EnableVisualStyles();
            Application.SetCompatibleTextRenderingDefault(false);
@@ -22,18 +25,9 @@ namespace View
 
         static void Main()
         {
-<<<<<<< HEAD
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new WebScrapperViewer());
-            
-            
-=======
+#pragma warning disable CS4014 // Ya que no se esperaba esta llamada, la ejecución del método actual continúa antes de que se complete la llamada
             Main2();
->>>>>>> 35d31c7be8f8582776913dd8798c142593d9a75a
+#pragma warning restore CS4014 // Ya que no se esperaba esta llamada, la ejecución del método actual continúa antes de que se complete la llamada
         }
-
-
-        
     }
 }

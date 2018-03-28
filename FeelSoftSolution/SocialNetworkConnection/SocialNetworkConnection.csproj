@@ -33,6 +33,9 @@
     <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.7.2.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.7.2\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -136,6 +139,10 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Resources\SocialNetworkConnection.cd" />
+    <None Include="Resources\SocialNetworks\Petro\Publications\DataSet1.dst" />
+    <None Include="Resources\SocialNetworks\Petro\Publications\DataSet2.dst" />
+    <None Include="Resources\SocialNetworks\Petro\Publications\DataSet3.dst" />
+    <None Include="Resources\SocialNetworks\Petro\Publications\DataSet4.dst" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -148,6 +155,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\SocialNetworkConnection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\SocialNetworks\Fajardo\Publications\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\SocialNetworks\Fajardo\Configurations\DefaultConfiguration.txt" />
+    <Content Include="Resources\SocialNetworks\Petro\Configurations\DefaultConfiguration.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -31,6 +31,7 @@
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.rdbTwitter = new System.Windows.Forms.RadioButton();
             this.queriesControl = new View.QueriesControl();
+            this.lblLoad = new System.Windows.Forms.Label();
             this.lblSelectSocialNetwork = new System.Windows.Forms.Label();
             this.rdbFacebook = new System.Windows.Forms.RadioButton();
             this.publicationViewerControl = new View.PublicationViewerControl();
@@ -48,10 +49,11 @@
             // 
             this.splitContainer.Panel1.Controls.Add(this.rdbTwitter);
             this.splitContainer.Panel1.Controls.Add(this.queriesControl);
+            this.splitContainer.Panel1.Controls.Add(this.lblLoad);
             this.splitContainer.Panel1.Controls.Add(this.lblSelectSocialNetwork);
             this.splitContainer.Panel1.Controls.Add(this.rdbFacebook);
             this.splitContainer.Panel1.Controls.Add(this.publicationViewerControl);
-            this.splitContainer.Size = new System.Drawing.Size(836, 544);
+            this.splitContainer.Size = new System.Drawing.Size(836, 706);
             this.splitContainer.SplitterDistance = 536;
             this.splitContainer.TabIndex = 0;
             // 
@@ -66,12 +68,20 @@
             this.rdbTwitter.UseVisualStyleBackColor = true;
             this.rdbTwitter.CheckedChanged += new System.EventHandler(this.RdbCheckedChanged);
             // 
-            // queriesControl1
+            // queriesControl
             // 
-            this.queriesControl.Location = new System.Drawing.Point(74, 28);
-            this.queriesControl.Name = "queriesControl1";
-            this.queriesControl.Size = new System.Drawing.Size(421, 208);
+            this.queriesControl.Location = new System.Drawing.Point(27, 28);
+            this.queriesControl.Name = "queriesControl";
+            this.queriesControl.Size = new System.Drawing.Size(421, 204);
             this.queriesControl.TabIndex = 2;
+            // 
+            // lblLoad
+            // 
+            this.lblLoad.AutoSize = true;
+            this.lblLoad.Location = new System.Drawing.Point(44, 241);
+            this.lblLoad.Name = "lblLoad";
+            this.lblLoad.Size = new System.Drawing.Size(0, 13);
+            this.lblLoad.TabIndex = 0;
             // 
             // lblSelectSocialNetwork
             // 
@@ -95,18 +105,18 @@
             this.rdbFacebook.UseVisualStyleBackColor = true;
             this.rdbFacebook.CheckedChanged += new System.EventHandler(this.RdbCheckedChanged);
             // 
-            // publicationViewerControl1
+            // publicationViewerControl
             // 
-            this.publicationViewerControl.Location = new System.Drawing.Point(59, 225);
-            this.publicationViewerControl.Name = "publicationViewerControl1";
-            this.publicationViewerControl.Size = new System.Drawing.Size(436, 316);
+            this.publicationViewerControl.Location = new System.Drawing.Point(12, 241);
+            this.publicationViewerControl.Name = "publicationViewerControl";
+            this.publicationViewerControl.Size = new System.Drawing.Size(436, 437);
             this.publicationViewerControl.TabIndex = 1;
             // 
             // WebScrapperViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 568);
+            this.ClientSize = new System.Drawing.Size(886, 730);
             this.Controls.Add(this.splitContainer);
             this.Name = "WebScrapperViewer";
             this.Text = "Form1";
@@ -132,6 +142,7 @@
 
         public const int FACEBOOK = 0;
         public const int TWITTER = 1;
+        private System.Windows.Forms.Label lblLoad;
     }
 }
 

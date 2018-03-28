@@ -26,7 +26,7 @@ namespace TwitterConnection
             Searcher = new TwitterSearcher(Credential);
         }
 
-        
+
         private void InitializeWithDynamicCredentials(string path, out string parseCredential)
         {
             
@@ -39,15 +39,7 @@ namespace TwitterConnection
             parseCredential = consumerKey + "|" + consumerSecret + "|" + accessToken + "|" + secretToken;
         }
 
-        public override IList<IPublication> GetFoundPublications()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override IList<IQueryConfiguration> GetQueriesConfiguration()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public override IList<IPublication> Search(IList<IQueryConfiguration> queriesConfigurations)
         {

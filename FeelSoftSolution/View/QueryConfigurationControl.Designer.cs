@@ -53,7 +53,10 @@
             this.gbxUntilDate = new System.Windows.Forms.GroupBox();
             this.dtpUntilDate = new System.Windows.Forms.DateTimePicker();
             this.lblTotalPublications = new System.Windows.Forms.Label();
-            this.nmudTotalPublications = new System.Windows.Forms.NumericUpDown();
+            this.nudTotalPublications = new System.Windows.Forms.NumericUpDown();
+            this.lblTotalResponses = new System.Windows.Forms.Label();
+            this.nudTotalResponses = new System.Windows.Forms.NumericUpDown();
+            this.btnImport = new System.Windows.Forms.Button();
             this.gbxKeywords.SuspendLayout();
             this.gbxLocation.SuspendLayout();
             this.gbxFilter.SuspendLayout();
@@ -61,7 +64,8 @@
             this.gbxLanguages.SuspendLayout();
             this.gbxSinceDate.SuspendLayout();
             this.gbxUntilDate.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmudTotalPublications)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTotalPublications)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTotalResponses)).BeginInit();
             this.SuspendLayout();
             // 
             // cbxKeywords
@@ -71,13 +75,12 @@
             this.cbxKeywords.Name = "cbxKeywords";
             this.cbxKeywords.Size = new System.Drawing.Size(232, 21);
             this.cbxKeywords.TabIndex = 0;
-            this.cbxKeywords.SelectedIndexChanged += new System.EventHandler(this.CbxKeywordsSelectedIndexChanged);
             // 
             // btnAddKeyword
             // 
-            this.btnAddKeyword.Location = new System.Drawing.Point(18, 46);
+            this.btnAddKeyword.Location = new System.Drawing.Point(12, 46);
             this.btnAddKeyword.Name = "btnAddKeyword";
-            this.btnAddKeyword.Size = new System.Drawing.Size(130, 23);
+            this.btnAddKeyword.Size = new System.Drawing.Size(119, 23);
             this.btnAddKeyword.TabIndex = 1;
             this.btnAddKeyword.Text = "Añadir palabra clave";
             this.btnAddKeyword.UseVisualStyleBackColor = true;
@@ -85,9 +88,9 @@
             // 
             // btnRemoveKeyword
             // 
-            this.btnRemoveKeyword.Location = new System.Drawing.Point(199, 46);
+            this.btnRemoveKeyword.Location = new System.Drawing.Point(248, 46);
             this.btnRemoveKeyword.Name = "btnRemoveKeyword";
-            this.btnRemoveKeyword.Size = new System.Drawing.Size(157, 23);
+            this.btnRemoveKeyword.Size = new System.Drawing.Size(123, 23);
             this.btnRemoveKeyword.TabIndex = 2;
             this.btnRemoveKeyword.Text = "Eliminar palabra clave";
             this.btnRemoveKeyword.UseVisualStyleBackColor = true;
@@ -95,6 +98,7 @@
             // 
             // gbxKeywords
             // 
+            this.gbxKeywords.Controls.Add(this.btnImport);
             this.gbxKeywords.Controls.Add(this.cbxKeywords);
             this.gbxKeywords.Controls.Add(this.btnAddKeyword);
             this.gbxKeywords.Controls.Add(this.btnRemoveKeyword);
@@ -331,40 +335,80 @@
             this.lblTotalPublications.Text = "Total de publicaciones  a buscar";
             this.lblTotalPublications.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // nmudTotalPublications
+            // nudTotalPublications
             // 
-            this.nmudTotalPublications.Increment = new decimal(new int[] {
+            this.nudTotalPublications.Increment = new decimal(new int[] {
             5,
             0,
             0,
             0});
-            this.nmudTotalPublications.Location = new System.Drawing.Point(272, 462);
-            this.nmudTotalPublications.Maximum = new decimal(new int[] {
+            this.nudTotalPublications.Location = new System.Drawing.Point(272, 462);
+            this.nudTotalPublications.Maximum = new decimal(new int[] {
             5000,
             0,
             0,
             0});
-            this.nmudTotalPublications.Minimum = new decimal(new int[] {
+            this.nudTotalPublications.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.nmudTotalPublications.Name = "nmudTotalPublications";
-            this.nmudTotalPublications.Size = new System.Drawing.Size(120, 20);
-            this.nmudTotalPublications.TabIndex = 11;
-            this.nmudTotalPublications.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nmudTotalPublications.ThousandsSeparator = true;
-            this.nmudTotalPublications.Value = new decimal(new int[] {
+            this.nudTotalPublications.Name = "nudTotalPublications";
+            this.nudTotalPublications.Size = new System.Drawing.Size(120, 20);
+            this.nudTotalPublications.TabIndex = 11;
+            this.nudTotalPublications.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudTotalPublications.ThousandsSeparator = true;
+            this.nudTotalPublications.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            // 
+            // lblTotalResponses
+            // 
+            this.lblTotalResponses.AutoSize = true;
+            this.lblTotalResponses.Location = new System.Drawing.Point(87, 505);
+            this.lblTotalResponses.Name = "lblTotalResponses";
+            this.lblTotalResponses.Size = new System.Drawing.Size(100, 13);
+            this.lblTotalResponses.TabIndex = 10;
+            this.lblTotalResponses.Text = "Total de respuestas";
+            this.lblTotalResponses.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudTotalResponses
+            // 
+            this.nudTotalResponses.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nudTotalResponses.Location = new System.Drawing.Point(272, 505);
+            this.nudTotalResponses.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.nudTotalResponses.Name = "nudTotalResponses";
+            this.nudTotalResponses.Size = new System.Drawing.Size(120, 20);
+            this.nudTotalResponses.TabIndex = 12;
+            this.nudTotalResponses.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btnImport
+            // 
+            this.btnImport.Location = new System.Drawing.Point(137, 46);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(105, 23);
+            this.btnImport.TabIndex = 3;
+            this.btnImport.Text = "Importar palabras";
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.BtnImportClick);
             // 
             // QueryConfigurationControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.nmudTotalPublications);
+            this.Controls.Add(this.nudTotalResponses);
+            this.Controls.Add(this.nudTotalPublications);
+            this.Controls.Add(this.lblTotalResponses);
             this.Controls.Add(this.lblTotalPublications);
             this.Controls.Add(this.gbxUntilDate);
             this.Controls.Add(this.gbxSinceDate);
@@ -374,7 +418,7 @@
             this.Controls.Add(this.gbxLocation);
             this.Controls.Add(this.gbxKeywords);
             this.Name = "QueryConfigurationControl";
-            this.Size = new System.Drawing.Size(462, 507);
+            this.Size = new System.Drawing.Size(462, 543);
             this.gbxKeywords.ResumeLayout(false);
             this.gbxLocation.ResumeLayout(false);
             this.gbxLocation.PerformLayout();
@@ -386,7 +430,8 @@
             this.gbxLanguages.PerformLayout();
             this.gbxSinceDate.ResumeLayout(false);
             this.gbxUntilDate.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nmudTotalPublications)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTotalPublications)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTotalResponses)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -419,7 +464,10 @@
         private System.Windows.Forms.GroupBox gbxUntilDate;
         private System.Windows.Forms.DateTimePicker dtpUntilDate;
         private System.Windows.Forms.Label lblTotalPublications;
-        private System.Windows.Forms.NumericUpDown nmudTotalPublications;
+        private System.Windows.Forms.NumericUpDown nudTotalPublications;
         private SocialNetworkConnection.IQueryConfiguration queryConfiguration;
+        private System.Windows.Forms.Label lblTotalResponses;
+        private System.Windows.Forms.NumericUpDown nudTotalResponses;
+        private System.Windows.Forms.Button btnImport;
     }
 }

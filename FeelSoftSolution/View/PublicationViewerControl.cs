@@ -20,19 +20,49 @@ namespace View
             InitializeComponent();
         }
 
+        public void SetMain(WebScrapperViewer main)
+        {
+            this.main = main;
+        }
+
         internal void ShowPublications(IList<IPublication> publications)
         {
+            if (publications == null)
+            {
+                MessageBox.Show("Not found publications");
+            }
+            else if (publications.Count == 0)
+            {
+                MessageBox.Show("NOt found publications");
+            }
+            else if (publications.Count > 0)
+            {
+                MessageBox.Show("Founded publications");
+            }
             this.publications = publications.ToArray();
-            indexCurrentPublication = 0;
-            ShowPublication(indexCurrentPublication);
-            lblTotalPublications.Text = "Publicaciones : " + publications.Count;
+            this.views = publications.ToArray();
+            SetDefaultViewConfigToPublications();
+        }
+
+        private void SetDefaultViewConfigToPublications()
+        {
+            indexCurrentViews = indexCurrentPublications;
+            ShowPublication(indexCurrentViews);
+            lblTotalPublications.Text = "Publicaciones : " + this.views.Length;
+        }
+
+        private void SetDefaultViewConfigToResponses()
+        {
+            indexCurrentViews = 0;
+            ShowPublication(indexCurrentViews);
+            lblTotalPublications.Text = "Publicaciones : " + this.views.Length;
         }
 
         private void ShowPublication(int indexCurrentPublication)
         {
-            if (publications.Length > 0)
+            if (views.Length > 0)
             {
-                IPublication publication = publications.ElementAt(indexCurrentPublication);
+                IPublication publication = views.ElementAt(indexCurrentPublication);
                 string id = publication.Id;
                 string wroteBy = publication.WroteBy;
                 string createDate = publication.CreateDate.ToShortDateString();
@@ -55,12 +85,12 @@ namespace View
 
         private void SetNextPublication()
         {
-            if (publications != null)
+            if (views != null)
             {
-                if (indexCurrentPublication + 1 < publications.Length)
+                if (indexCurrentViews + 1 < views.Length)
                 {
-                    ++indexCurrentPublication;
-                    ShowPublication(indexCurrentPublication);
+                    ++indexCurrentViews;
+                    ShowPublication(indexCurrentViews);
                 }
             }
         }
@@ -73,12 +103,12 @@ namespace View
 
         private void SetBeforePublication()
         {
-            if (publications != null)
+            if (views != null)
             {
-                if (indexCurrentPublication - 1 >= 0)
+                if (indexCurrentViews - 1 >= 0)
                 {
-                    --indexCurrentPublication;
-                    ShowPublication(indexCurrentPublication);
+                    --indexCurrentViews;
+                    ShowPublication(indexCurrentViews);
                 }
             }
         }
@@ -88,25 +118,63 @@ namespace View
             decimal indexValue = numericUpDown.Value;
             if (!TryShowPublicationInIndex(indexValue))
             {
-                numericUpDown.Value = indexCurrentPublication;
+                numericUpDown.Value = indexCurrentViews;
             }
         }
 
         private bool TryShowPublicationInIndex(decimal indexValue)
         {
-            bool showed = indexValue <= publications.Length && indexValue>=0;
-            
+            bool showed = indexValue <= views.Length && indexValue >= 0;
+
             if (showed)
             {
-                indexCurrentPublication = (int)indexValue-1;
-                ShowPublication(indexCurrentPublication);
+                indexCurrentViews = (int)indexValue - 1;
+                ShowPublication(indexCurrentViews);
             }
             else
             {
                 MessageBox.Show("Ingrese un dato valido, mayor a 1 y menor al total de publicaciones");
             }
             return showed;
-            
+
+        }
+
+        private void BtnViewResponsesClick(object sender, EventArgs e)
+        {
+            if (views != responses)
+            {
+                views = responses;
+                SetDefaultViewConfigToResponses();
+                btnViewResponses.Text = "Publicaciones";
+
+            }
+            else
+            {
+                views = publications;
+                SetDefaultViewConfigToPublications();
+                btnViewResponses.Text = "Resuestas";
+
+            }
+        }
+
+        internal IPublication[] GetPublications()
+        {
+            return publications;
+        }
+
+        private void BtnSavePublications_Click(object sender, EventArgs e)
+        {
+            main.SavePublications(this.views);
+        }
+
+        private void BtnImportPublications_Click(object sender, EventArgs e)
+        {
+            main.ImportPublications();
+        }
+
+        private void BtnExportPublications_Click(object sender, EventArgs e)
+        {
+            main.ExportPublications();
         }
     }
 }

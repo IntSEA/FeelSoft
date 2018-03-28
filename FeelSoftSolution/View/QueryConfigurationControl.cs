@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using SocialNetworkConnection;
+using System.IO;
+using System.Threading;
 
 namespace View
 {
@@ -22,18 +24,26 @@ namespace View
         private void BtnAddKeyword_Click(object sender, EventArgs e)
         {
             string keyword = Interaction.InputBox("Ingrese la palabra clave");
-            
+
             if (String.IsNullOrEmpty(keyword) || String.IsNullOrWhiteSpace(keyword))
             {
                 MessageBox.Show("Ingrese una clave no vacia");
             }
             else
             {
-                cbxKeywords.Items.Add(keyword);
-                cbxKeywords.SelectedItem = cbxKeywords.Items.Count > 0 ? cbxKeywords.Items[0] : "";
+                AddKeywordToCBX(keyword);
+               
 
             }
 
+        }
+
+        private delegate void AddKeywordToCBXDelegate(string keyword);
+
+        private void AddKeywordToCBX(string keyword)
+        {
+            cbxKeywords.Items.Add(keyword);
+            cbxKeywords.SelectedItem = cbxKeywords.Items.Count > 0 ? cbxKeywords.Items[0] : "";
         }
 
         internal IQueryConfiguration GetQueryConfiguration()
@@ -48,9 +58,9 @@ namespace View
 
         private IQueryConfiguration CreateQueryConfiguration()
         {
-            
+
             queryConfiguration = new QueryConfiguration();
-            AddKeyWords(queryConfiguration);
+            AddKeywords(queryConfiguration);
             AddLocation(queryConfiguration);
             AddSearchTypes(queryConfiguration);
             AddLanguajes(queryConfiguration);
@@ -58,15 +68,20 @@ namespace View
             AddSinceDate(queryConfiguration);
             AddUntilDate(queryConfiguration);
             AddTotalSearches(queryConfiguration);
-
+            AddTotalResponses(queryConfiguration);
 
             return queryConfiguration;
         }
 
+        private void AddTotalResponses(IQueryConfiguration queryConfiguration)
+        {
+            queryConfiguration.MaxResponsesCount = (int)nudTotalResponses.Value;
+        }
+
         private void AddTotalSearches(IQueryConfiguration queryConfiguration)
         {
-            decimal value = nmudTotalPublications.Value;
-            if(value>0 && value < 5000)
+            decimal value = nudTotalPublications.Value;
+            if (value > 0 && value <= 5000)
             {
                 queryConfiguration.MaxPublicationCount = (int)value;
             }
@@ -149,7 +164,7 @@ namespace View
             }
         }
 
-        private void AddKeyWords(IQueryConfiguration queryConfiguration)
+        private void AddKeywords(IQueryConfiguration queryConfiguration)
         {
             IList<string> keywords = new List<string>();
             foreach (var item in cbxKeywords.Items)
@@ -164,6 +179,7 @@ namespace View
 
         private void BtnRemoveKeyword_Click(object sender, EventArgs e)
         {
+
             object removedObject = cbxKeywords.SelectedItem;
             if (removedObject == null)
             {
@@ -183,12 +199,49 @@ namespace View
                 }
             }
             cbxKeywords.Text = "";
-            cbxKeywords.SelectedItem =cbxKeywords.Items.Count>0 ?  cbxKeywords.Items[0] : "";
+            cbxKeywords.SelectedItem = cbxKeywords.Items.Count > 0 ? cbxKeywords.Items[0] : "";
         }
 
-        private void CbxKeywordsSelectedIndexChanged(object sender, EventArgs e)
+        private void BtnImportQueryConfiguration_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void BtnExportQueryConfiguration_Click(object sender, EventArgs e)
+        {
+            GetQueryConfiguration();
+
+        }
+
+        private void BtnImportClick(object sender, EventArgs e)
+        {
+            Thread thread = new Thread(OpenDialogInThread());
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+            
+        }
+
+        private ThreadStart OpenDialogInThread()
+        {
+            return () => { ShowOpenDialog(); };
+        }
+        private async void ShowOpenDialog()
+        {
+            OpenFileDialog openDialog = new OpenFileDialog();
+            if (DialogResult.OK == openDialog.ShowDialog())
+            {
+                StreamReader sr = new StreamReader(openDialog.OpenFile());
+                string keyword = "";
+                AddKeywordToCBXDelegate delegateMethod = new AddKeywordToCBXDelegate(AddKeywordToCBX);
+                while ((keyword = sr.ReadLine()) != null)
+                {
+                    this.Invoke(delegateMethod,keyword);
+                }
+
+                sr.Close();
+            }
+        }
+
+        
     }
 }

@@ -17,8 +17,8 @@ namespace SocialNetworkConnection
         void AddQueriesConfigurations(IQueryConfiguration queryConfiguration);
         void AddPublications(IPublication publication);
         void ExportDataSet();
-        void ImportDataSet(string path);
-        void ImportDataSet();
+        IPublication[] ImportDataSet(string path);
+        IPublication[] ImportDataset();
         IPublication[] GetPublications();
     }
 }

@@ -7,7 +7,6 @@ namespace SocialNetworkConnection
 {
     public interface IPublication : IComparable<IPublication>
     {
-        IPublication Parent { get; set; }
         string Id { get; set; }
         string Message { get; set; }
         string WroteBy { get; set; }
@@ -15,7 +14,7 @@ namespace SocialNetworkConnection
         int Favorability { get; set; }
         DateTime CreateDate { get; set; }
         Locations Location { get; set; }
-        IList<IPublication> Responses { get; set; }
+        
 
         int CompareBy(IPublication other, Comparison<IPublication> comparator);
         string ToExportFormat();

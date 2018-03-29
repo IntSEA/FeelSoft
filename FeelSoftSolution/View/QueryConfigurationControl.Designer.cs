@@ -1,4 +1,6 @@
-﻿namespace View
+﻿using System;
+
+namespace View
 {
     partial class QueryConfigurationControl
     {
@@ -32,6 +34,7 @@
             this.btnAddKeyword = new System.Windows.Forms.Button();
             this.btnRemoveKeyword = new System.Windows.Forms.Button();
             this.gbxKeywords = new System.Windows.Forms.GroupBox();
+            this.btnImport = new System.Windows.Forms.Button();
             this.gbxLocation = new System.Windows.Forms.GroupBox();
             this.rdbUsa = new System.Windows.Forms.RadioButton();
             this.rdbColombia = new System.Windows.Forms.RadioButton();
@@ -56,7 +59,8 @@
             this.nudTotalPublications = new System.Windows.Forms.NumericUpDown();
             this.lblTotalResponses = new System.Windows.Forms.Label();
             this.nudTotalResponses = new System.Windows.Forms.NumericUpDown();
-            this.btnImport = new System.Windows.Forms.Button();
+            this.lblName = new System.Windows.Forms.Label();
+            this.tbxName = new System.Windows.Forms.TextBox();
             this.gbxKeywords.SuspendLayout();
             this.gbxLocation.SuspendLayout();
             this.gbxFilter.SuspendLayout();
@@ -102,18 +106,28 @@
             this.gbxKeywords.Controls.Add(this.cbxKeywords);
             this.gbxKeywords.Controls.Add(this.btnAddKeyword);
             this.gbxKeywords.Controls.Add(this.btnRemoveKeyword);
-            this.gbxKeywords.Location = new System.Drawing.Point(48, 21);
+            this.gbxKeywords.Location = new System.Drawing.Point(47, 66);
             this.gbxKeywords.Name = "gbxKeywords";
             this.gbxKeywords.Size = new System.Drawing.Size(377, 85);
             this.gbxKeywords.TabIndex = 4;
             this.gbxKeywords.TabStop = false;
             this.gbxKeywords.Text = "Palabras clave";
             // 
+            // btnImport
+            // 
+            this.btnImport.Location = new System.Drawing.Point(137, 46);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(105, 23);
+            this.btnImport.TabIndex = 3;
+            this.btnImport.Text = "Importar palabras";
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.BtnImportClick);
+            // 
             // gbxLocation
             // 
             this.gbxLocation.Controls.Add(this.rdbUsa);
             this.gbxLocation.Controls.Add(this.rdbColombia);
-            this.gbxLocation.Location = new System.Drawing.Point(48, 112);
+            this.gbxLocation.Location = new System.Drawing.Point(47, 157);
             this.gbxLocation.Name = "gbxLocation";
             this.gbxLocation.Size = new System.Drawing.Size(377, 53);
             this.gbxLocation.TabIndex = 5;
@@ -149,7 +163,7 @@
             this.gbxFilter.Controls.Add(this.rdbImage);
             this.gbxFilter.Controls.Add(this.rdbVideo);
             this.gbxFilter.Controls.Add(this.rdbNone);
-            this.gbxFilter.Location = new System.Drawing.Point(48, 289);
+            this.gbxFilter.Location = new System.Drawing.Point(47, 334);
             this.gbxFilter.Name = "gbxFilter";
             this.gbxFilter.Size = new System.Drawing.Size(377, 48);
             this.gbxFilter.TabIndex = 6;
@@ -249,7 +263,7 @@
             this.gbxSearchTypes.Controls.Add(this.rdbMixed);
             this.gbxSearchTypes.Controls.Add(this.rdbRecent);
             this.gbxSearchTypes.Controls.Add(this.rdbPopular);
-            this.gbxSearchTypes.Location = new System.Drawing.Point(54, 172);
+            this.gbxSearchTypes.Location = new System.Drawing.Point(53, 217);
             this.gbxSearchTypes.Name = "gbxSearchTypes";
             this.gbxSearchTypes.Size = new System.Drawing.Size(149, 111);
             this.gbxSearchTypes.TabIndex = 7;
@@ -260,7 +274,7 @@
             // 
             this.gbxLanguages.Controls.Add(this.rdbEnglish);
             this.gbxLanguages.Controls.Add(this.rdbSpanish);
-            this.gbxLanguages.Location = new System.Drawing.Point(255, 172);
+            this.gbxLanguages.Location = new System.Drawing.Point(254, 217);
             this.gbxLanguages.Name = "gbxLanguages";
             this.gbxLanguages.Size = new System.Drawing.Size(170, 111);
             this.gbxLanguages.TabIndex = 8;
@@ -292,7 +306,7 @@
             // gbxSinceDate
             // 
             this.gbxSinceDate.Controls.Add(this.dtpSinceDate);
-            this.gbxSinceDate.Location = new System.Drawing.Point(48, 344);
+            this.gbxSinceDate.Location = new System.Drawing.Point(47, 389);
             this.gbxSinceDate.Name = "gbxSinceDate";
             this.gbxSinceDate.Size = new System.Drawing.Size(377, 53);
             this.gbxSinceDate.TabIndex = 9;
@@ -310,7 +324,7 @@
             // gbxUntilDate
             // 
             this.gbxUntilDate.Controls.Add(this.dtpUntilDate);
-            this.gbxUntilDate.Location = new System.Drawing.Point(48, 403);
+            this.gbxUntilDate.Location = new System.Drawing.Point(47, 448);
             this.gbxUntilDate.Name = "gbxUntilDate";
             this.gbxUntilDate.Size = new System.Drawing.Size(377, 44);
             this.gbxUntilDate.TabIndex = 9;
@@ -323,12 +337,12 @@
             this.dtpUntilDate.Name = "dtpUntilDate";
             this.dtpUntilDate.Size = new System.Drawing.Size(365, 20);
             this.dtpUntilDate.TabIndex = 0;
-            this.dtpUntilDate.Value = new System.DateTime(2018, 3, 19, 0, 0, 0, 0);
+            this.dtpUntilDate.Value = new System.DateTime(2018, 3, 30, 3, 35, 8, 742);
             // 
             // lblTotalPublications
             // 
             this.lblTotalPublications.AutoSize = true;
-            this.lblTotalPublications.Location = new System.Drawing.Point(87, 464);
+            this.lblTotalPublications.Location = new System.Drawing.Point(86, 509);
             this.lblTotalPublications.Name = "lblTotalPublications";
             this.lblTotalPublications.Size = new System.Drawing.Size(161, 13);
             this.lblTotalPublications.TabIndex = 10;
@@ -342,9 +356,9 @@
             0,
             0,
             0});
-            this.nudTotalPublications.Location = new System.Drawing.Point(272, 462);
+            this.nudTotalPublications.Location = new System.Drawing.Point(271, 507);
             this.nudTotalPublications.Maximum = new decimal(new int[] {
-            5000,
+            10000,
             0,
             0,
             0});
@@ -367,7 +381,7 @@
             // lblTotalResponses
             // 
             this.lblTotalResponses.AutoSize = true;
-            this.lblTotalResponses.Location = new System.Drawing.Point(87, 505);
+            this.lblTotalResponses.Location = new System.Drawing.Point(86, 550);
             this.lblTotalResponses.Name = "lblTotalResponses";
             this.lblTotalResponses.Size = new System.Drawing.Size(100, 13);
             this.lblTotalResponses.TabIndex = 10;
@@ -381,31 +395,34 @@
             0,
             0,
             0});
-            this.nudTotalResponses.Location = new System.Drawing.Point(272, 505);
-            this.nudTotalResponses.Maximum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
+            this.nudTotalResponses.Location = new System.Drawing.Point(271, 550);
             this.nudTotalResponses.Name = "nudTotalResponses";
             this.nudTotalResponses.Size = new System.Drawing.Size(120, 20);
             this.nudTotalResponses.TabIndex = 12;
             this.nudTotalResponses.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // btnImport
+            // lblName
             // 
-            this.btnImport.Location = new System.Drawing.Point(137, 46);
-            this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(105, 23);
-            this.btnImport.TabIndex = 3;
-            this.btnImport.Text = "Importar palabras";
-            this.btnImport.UseVisualStyleBackColor = true;
-            this.btnImport.Click += new System.EventHandler(this.BtnImportClick);
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(50, 25);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(44, 13);
+            this.lblName.TabIndex = 13;
+            this.lblName.Text = "Nombre";
+            // 
+            // tbxName
+            // 
+            this.tbxName.Location = new System.Drawing.Point(113, 25);
+            this.tbxName.Name = "tbxName";
+            this.tbxName.Size = new System.Drawing.Size(232, 20);
+            this.tbxName.TabIndex = 14;
             // 
             // QueryConfigurationControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tbxName);
+            this.Controls.Add(this.lblName);
             this.Controls.Add(this.nudTotalResponses);
             this.Controls.Add(this.nudTotalPublications);
             this.Controls.Add(this.lblTotalResponses);
@@ -418,7 +435,7 @@
             this.Controls.Add(this.gbxLocation);
             this.Controls.Add(this.gbxKeywords);
             this.Name = "QueryConfigurationControl";
-            this.Size = new System.Drawing.Size(462, 543);
+            this.Size = new System.Drawing.Size(462, 606);
             this.gbxKeywords.ResumeLayout(false);
             this.gbxLocation.ResumeLayout(false);
             this.gbxLocation.PerformLayout();
@@ -436,6 +453,8 @@
             this.PerformLayout();
 
         }
+
+       
 
         #endregion
 
@@ -469,5 +488,7 @@
         private System.Windows.Forms.Label lblTotalResponses;
         private System.Windows.Forms.NumericUpDown nudTotalResponses;
         private System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.TextBox tbxName;
     }
 }

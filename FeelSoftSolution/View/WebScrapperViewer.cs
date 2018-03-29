@@ -14,12 +14,14 @@ namespace View
         public WebScrapperViewer()
         {
             InitializeComponent();
-            // Show();
             InitializeSocialNetworks();
-
-            //InitializeTests();
-
+            InitializeDataset();
             IntializeControls();
+        }
+
+        private void InitializeDataset()
+        {
+            dataset = new SearchDataSet();
         }
 
         private void IntializeControls()
@@ -61,7 +63,9 @@ namespace View
 
         }
 
+#pragma warning disable CS1998 // El método asincrónico carece de operadores "await" y se ejecutará de forma sincrónica
         internal async void Search(IQueryConfiguration queryConfiguration)
+#pragma warning restore CS1998 // El método asincrónico carece de operadores "await" y se ejecutará de forma sincrónica
         {
             Task task = Task.Run(() =>
             {
@@ -104,7 +108,9 @@ namespace View
 
         private delegate void Loading(int load);
 
+#pragma warning disable CS0108 // El miembro oculta el miembro heredado. Falta una contraseña nueva
         public void Load(int load)
+#pragma warning restore CS0108 // El miembro oculta el miembro heredado. Falta una contraseña nueva
         {
             if (load == 1)
             {
@@ -245,7 +251,7 @@ namespace View
             {
                 Task task = Task.Run(() =>
                 {
-                    GetSelectedSocialNetwork().DataSet.AddPublications(publications);
+                    dataset.AddPublications(publications);
                 });
 
                 Thread thread = new Thread(SearchProccess(task));
@@ -260,10 +266,9 @@ namespace View
 
         public void ExportPublications()
         {
-            ISocialNetwork net = GetSelectedSocialNetwork();
-            if (net.DataSet.TotalPublications > 0)
+            if (dataset.TotalPublications > 0)
             {
-                Thread thread = new Thread(ExportTS(net));
+                Thread thread = new Thread(ExportTS(dataset));
                 thread.SetApartmentState(ApartmentState.STA);
                 Thread threadProcess = new Thread(ThreadProcessTS(thread));
                 threadProcess.SetApartmentState(ApartmentState.STA);
@@ -275,7 +280,7 @@ namespace View
             }
         }
 
-        private void Export(ISocialNetwork net)
+        private void Export(ISearchDataSet dataset)
         {
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
             DialogResult result = folderDialog.ShowDialog();
@@ -283,21 +288,20 @@ namespace View
             {
                 string folderName = folderDialog.SelectedPath;
 
-                net.DataSet.BasePath = folderName + "/";
-                net.DataSet.ExportDataSet();
+                dataset.BasePath = folderName + "/";
+                dataset.ExportDataSet();
             }
 
         }
 
-        private ThreadStart ExportTS(ISocialNetwork net)
+        private ThreadStart ExportTS(ISearchDataSet dataset)
         {
-            return () => { Export(net); };
+            return () => { Export(dataset); };
         }
 
         public void ImportPublications()
         {
-            ISocialNetwork net = GetSelectedSocialNetwork();
-            Thread thread = new Thread(ImportTS(net));
+            Thread thread = new Thread(ImportTS(dataset));
             thread.SetApartmentState(ApartmentState.STA);
             Thread threadProcess = new Thread(ThreadProcessTS(thread));
             threadProcess.SetApartmentState(ApartmentState.STA);
@@ -307,25 +311,26 @@ namespace View
 
 
 
-        private ThreadStart ImportTS(ISocialNetwork network)
+        private ThreadStart ImportTS(ISearchDataSet dataset)
         {
-            return () => { Import(network); };
+            return () => { Import(dataset); };
         }
 
-        private void Import(ISocialNetwork network)
+        private void Import(ISearchDataSet dataset)
         {
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
             DialogResult result = folderDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
                 string folderName = folderDialog.SelectedPath;
-                network.DataSet.BasePath = folderName + "/";
-                network.DataSet.ImportDataSet();
+                dataset.BasePath = folderName + "/";
+                IList<IPublication> publications = dataset.ImportDataset();
+
+                ShowInPublicationViewer delegateMethod = new ShowInPublicationViewer(ShowPublicationsInPublicationViewer);
+                this.Invoke(delegateMethod, publications);
             }
 
-            IList<IPublication> publications = network.DataSet.GetPublications();
-            ShowInPublicationViewer delegateMethod = new ShowInPublicationViewer(ShowPublicationsInPublicationViewer);
-            this.Invoke(delegateMethod, publications);
+
         }
 
         private ThreadStart ThreadProcessTS(Thread thread)

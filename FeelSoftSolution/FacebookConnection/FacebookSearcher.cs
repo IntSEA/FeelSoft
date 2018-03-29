@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -34,7 +35,6 @@ namespace FacebookConnection
 
         }
 
-
         private void ReadPages()
         {
             StreamReader sr = new StreamReader("..//..//..//FacebookConnection/Resources/DefaultPages.txt");
@@ -65,55 +65,55 @@ namespace FacebookConnection
 
                 IList<IPublication> publications = new List<IPublication>();
                 IDictionary<string, string> fields = new Dictionary<string, string>();
-                int limitPublications = queryConfiguration.MaxPublicationCount;
-                int limitComments = queryConfiguration.MaxResponsesCount;
 
-                queryConfiguration.MaxPublicationCount = 100;            
+                int totalPublications = queryConfiguration.MaxPublicationCount;
+
+                if (totalPublications > 100)
+                {
+                    queryConfiguration.MaxPublicationCount = 100;
+                }
 
                 SetQueryFields(queryConfiguration, fields);
 
-                if (queryConfiguration.Keywords != null)
-                {
-                    for (int i = 0; i < queryConfiguration.Keywords.Count; i++)
-                    {
-                        string keyword = queryConfiguration.Keywords.ElementAt(i);
-                        IList<IPublication> partialPublication = TestRequestFeedToGraph(keyword, fields, limitPublications, queryConfiguration);
-                        ((List<IPublication>)publications).AddRange(partialPublication);
+                int roundSearchesByPage = totalPublications / pages.Count;
 
-                    }
-                  
+                foreach (string page in pages)
+                {
+                    IList<IPublication> partialPublication = RequestFeedToGraph(page, fields, roundSearchesByPage, queryConfiguration);
+                    ((List<IPublication>)publications).AddRange(partialPublication);
                 }
 
 
-                //int totalPublications = queryConfiguration.MaxPublicationCount;
-                //if (totalPublications > LIMIT_PUBLICATIONS)
-                //{
-                //    queryConfiguration.MaxPublicationCount = 100;
-                //}
-                //SetQueryFields(queryConfiguration, fields);
 
-                //if (queryConfiguration.Keywords != null)
-                //{
-                //    foreach (var keyword in queryConfiguration.Keywords)
-                //    {
-                //        IList<IPublication> partialPublication = RequestFeedToGraph(keyword, fields, totalPublications, queryConfiguration);
-                //       ((List<IPublication>) publications).AddRange(partialPublication);
-                //    }
-                //}
-
-                publications = ReorganizeSearches(publications, limitPublications);
+                publications = FilterPublications(publications, queryConfiguration.Keywords);
+                publications = ReorganizeSearches(publications, totalPublications);
 
 
                 return publications;
 
             }
-            throw new ArgumentNullException("QueryConfiguration: " + queryConfiguration + "was null");
+            return null;
         }
 
+        private IList<IPublication> FilterPublications(IList<IPublication> publications, IList<string> keywords)
+        {
+            IList<IPublication> pubs = new List<IPublication>();
+            foreach (string word in keywords)
+            {
+                ((List<IPublication>)pubs).AddRange(FilterPublicationsByWord(publications, word));
+            }
 
+            return pubs;
+        }
+
+        private IList<IPublication> FilterPublicationsByWord(IList<IPublication> publications, string word)
+        {
+            return ((List<IPublication>)publications).FindAll(x => x.Message.IndexOf(word, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
 
         private IList<IPublication> ReorganizeSearches(IList<IPublication> publications, int maxPublicationCount)
         {
+            IDictionary<string, string> selectedPublications = new Dictionary<string, string>();
             IList<IPublication> responsePublications = new List<IPublication>();
             if (publications.Count > maxPublicationCount)
             {
@@ -122,8 +122,23 @@ namespace FacebookConnection
                 for (int i = 0; i < maxPublicationCount; i++)
                 {
                     int toAdd = random.Next(0, publications.Count);
-                    responsePublications.Add(publications[toAdd]);
-                    publications.RemoveAt(toAdd);
+                    IPublication publication = publications[toAdd];
+
+                    if (!selectedPublications.ContainsKey(publication.Id))
+                    {
+                        responsePublications.Add(publication);
+                        publications.RemoveAt(toAdd);
+                        
+                    }
+                    else
+                    {
+                        publications.RemoveAt(toAdd);
+                        i--;
+                    }
+                  
+
+                   
+
                 }
             }
 
@@ -132,7 +147,11 @@ namespace FacebookConnection
 
         private bool Classify(IPublication publication, IQueryConfiguration queryConfiguration)
         {
-            bool clasified = ClassifyByDate(publication, queryConfiguration.SinceDate, queryConfiguration.UntilDate);
+            bool clasified = false;
+            if (publication != null)
+            {
+                clasified = ClassifyByDate(publication, queryConfiguration.SinceDate, queryConfiguration.UntilDate);
+            }
             return clasified;
         }
 
@@ -171,7 +190,6 @@ namespace FacebookConnection
 
         }
 
-
         public override IList<IPublication> SearchPublications(IQueryConfiguration queryConfiguration)
         {
             return InternalSearch(queryConfiguration);
@@ -202,118 +220,12 @@ namespace FacebookConnection
             }
         }
 
-        private IList<IPublication> TestRequestFeedToGraph(string keyword, IDictionary<string, string> args, int totalPublications, IQueryConfiguration queryConfiguration)
-        {
-            IList<IPublication> publications = null;
-
-            int roundSearchCount = totalPublications / pages.Count;
-            int totalPagings = roundSearchCount / 50;
-
-            foreach (var page in pages)
-            {
-                var request = CreateFeedRequestToGraph(page, "feed", args);
-                var task = MakeRequestToGraphAsync(request);
-                if (task != null)
-                {
-                    publications = new List<IPublication>();
-                    var jsonResponse = task.Result;
-
-                    if (jsonResponse != null)
-                    {
-                        bool joinedTotalPublicationsForPage = false;
-                        int pages = 0;
-                        do
-                        {
-                            joinedTotalPublicationsForPage = AddPublications(keyword, jsonResponse, publications, roundSearchCount, queryConfiguration);
-                            GetNextPublicationsRequest(!joinedTotalPublicationsForPage, jsonResponse);
-                            pages++;
-                        } while (!joinedTotalPublicationsForPage && pages<totalPagings);
-                    }
-
-                }
-
-
-            }
-
-            return publications;
-        }
-
-      
-
-        private bool AddPublications(string keyword, dynamic jsonResponse, IList<IPublication> publications, int totalPublications, IQueryConfiguration queryConfiguration)
-        {
-           return AddPublications(keyword, jsonResponse, publications, totalPublications, queryConfiguration, null);
-        }
-
-        private bool AddPublications(string keyword, dynamic jsonResponse, IList<IPublication> publications, int totalPublications, IQueryConfiguration queryConfiguration, IPublication parentPublication)
-        {
-            bool totalSearched = true;
-            lock (this)
-            {
-                if (jsonResponse.data == null)
-                {
-                    throw new ArgumentException("No json data");
-                }
-                foreach (var item in jsonResponse.data)
-                {
-                    IPublication publication = ParsePublicationOfJsonResponse(item, queryConfiguration, parentPublication);
-                    if (publications.Count <= totalPublications && AuxClassify(keyword, publication, queryConfiguration))
-                    {
-                        publications.Add(publication);
-                        if (publication.Responses != null && publication.Responses.Count > 0)
-                        {
-                            ((List<IPublication>)publications).AddRange(publication.Responses);
-                        }
-
-                    }
-                    else if (publication.Responses != null)
-                    {
-                        foreach (var pu in publication.Responses)
-                        {
-                            if (publications.Count > totalPublications)
-                            {
-                                break;
-                            }
-                           else if (AuxClassify(keyword, pu, queryConfiguration))
-                            {
-                                publications.Add(pu);
-                            }
-                        }
-                    }else if (publications.Count > totalPublications)
-                    {
-                        break;
-                    }
-                   
-                   
-                }
-            }
-
-            totalSearched = publications.Count>= totalPublications;
-            return totalSearched;
-        }
-
-        private bool AuxClassify(string keyword, IPublication publication, IQueryConfiguration queryConfiguration)
-        {
-            bool classify = Classify(publication,queryConfiguration);
-            bool containWord = ContainKeyword(keyword, publication);
-            classify = classify && containWord;
-            return classify;
-
-        }
-
-        private bool ContainKeyword(string keyword, IPublication publication)
-        {
-           
-            string message = publication.Message;
-            bool contains = message.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0;
-            return contains;
-        }
-
         internal IList<IPublication> RequestFeedToGraph(string user, IDictionary<string, string> args, int totalPublications, IQueryConfiguration queryConfiguration)
         {
             var request = CreateFeedRequestToGraph(user, "feed", args);
             IList<IPublication> publications = null;
             var task = MakeRequestToGraphAsync(request);
+            int totalPagings = (totalPublications / 30); // I Expected found at most 30 publications for page
             if (task != null)
             {
                 publications = new List<IPublication>();
@@ -321,11 +233,28 @@ namespace FacebookConnection
 
                 if (jsonResponse != null)
                 {
+                    var before = GetBeforePublicationsRequest(jsonResponse);
+                    var next = GetNextPublicationsRequest(jsonResponse);
+
+                    List<dynamic> responsesPages = new List<dynamic>
+                    {
+                        jsonResponse,
+                        before,
+                        next,
+
+                     };
+                    totalPagings -= 3; //remove paging of jsonResponse, next and before
+
+                    int pagings = (totalPagings / 2);
+
+                    SetPublicationsRequests(responsesPages, pagings, next, before);
 
 
-                    AddPublications(jsonResponse, publications, totalPublications, queryConfiguration);
+                    foreach (var response in responsesPages)
+                    {
+                        AddPublications(response, publications, queryConfiguration);
+                    }
 
-                    AddNextPagings(totalPublications, publications, jsonResponse, queryConfiguration);
                 }
 
             }
@@ -333,25 +262,40 @@ namespace FacebookConnection
 
         }
 
-        private void AddNextPagings(int totalPublications, IList<IPublication> publications, dynamic jsonResponse, IQueryConfiguration queryConfiguration)
+        private void SetPublicationsRequests(List<dynamic> responsesPages, int pagings, dynamic next, dynamic before)
         {
-            bool underlimitFound = publications.Count < totalPublications;
+            int beforePagings = 0;
+            int nextPagings = 0;
+            before = GetBeforePublicationsRequest(before);
+            next = GetNextPublicationsRequest(next);
 
-
-            while (underlimitFound)
+            while (beforePagings < pagings && before != null)
             {
-                var nextPaging = GetNextPublicationsRequest(underlimitFound, jsonResponse);
-
-                AddPublications(nextPaging, publications, totalPublications, queryConfiguration);
-
+                responsesPages.Add(before);
+                before = GetBeforePublicationsRequest(before);
+                ++beforePagings;
             }
+            int restPagings = pagings - beforePagings;
+            if (restPagings > 0)
+            {
+                pagings = pagings + restPagings;
+            }
+
+            while (nextPagings < pagings && next!=null)
+            {
+                responsesPages.Add(next);
+                next = GetNextPublicationsRequest(next);
+                ++nextPagings;
+            }
+
+          
 
         }
 
-        private dynamic GetNextPublicationsRequest(bool underlimitFound, dynamic jsonResponse)
+        private dynamic GetNextPublicationsRequest(dynamic jsonResponse)
         {
             dynamic response = default(dynamic);
-            if (underlimitFound)
+            if (jsonResponse != null)
             {
                 if (jsonResponse.paging != null)
                 {
@@ -361,17 +305,31 @@ namespace FacebookConnection
                         response = MakeRequestToGraphAsync(next).Result;
                     }
                 }
-               
             }
+
+
             return response;
         }
 
-
-        private void AddPublications(dynamic jsonResponse, IList<IPublication> publications, int totalPublications, IQueryConfiguration queryConfiguration)
+        private dynamic GetBeforePublicationsRequest(dynamic jsonResponse)
         {
-            AddPublications(jsonResponse, publications, totalPublications, queryConfiguration, null);
+            dynamic response = default(dynamic);
+            if (jsonResponse != null)
+            {
+                if (jsonResponse.paging != null)
+                {
+                    if (jsonResponse.paging.next != null)
+                    {
+                        string next = (string)jsonResponse.paging.next;
+                        response = MakeRequestToGraphAsync(next).Result;
+                    }
+                }
+            }
+
+            return response;
         }
-        private void AddPublications(dynamic jsonResponse, IList<IPublication> publications, int totalPublications, IQueryConfiguration queryConfiguration, IPublication parentPublication)
+
+        private void AddPublications(dynamic jsonResponse, IList<IPublication> publications, IQueryConfiguration queryConfiguration)
         {
 
             lock (this)
@@ -382,14 +340,46 @@ namespace FacebookConnection
                 }
                 foreach (var item in jsonResponse.data)
                 {
-                    IPublication publication = ParsePublicationOfJsonResponse(item, queryConfiguration, parentPublication);
-                    if (publications.Count <= totalPublications && Classify(publication, queryConfiguration))
+                    if (item != null)
                     {
-                        publications.Add(publication);
-                        if (publication.Responses != null && publication.Responses.Count > 0)
+                        IPublication publication = ParsePublicationOfJsonResponse(item, queryConfiguration);
+                        IList<IPublication> responses = GetResponesPublications(item, queryConfiguration);
+
+                        if (Classify(publication, queryConfiguration))
                         {
-                            ((List<IPublication>)publications).AddRange(publication.Responses);
+                            publications.Add(publication);
+                            if (responses != null)
+                            {
+                                for (int i = 0; i < responses.Count; i++)
+                                {
+
+                                    var response = responses.ElementAt(i);
+                                    if (Classify(response, queryConfiguration))
+                                    {
+                                        response.Id = "Response " + i + " with id: " + response.Id + " of: " + publication.Id;
+                                        publications.Add(response);
+                                    }
+                                }
+
+                            }
+
                         }
+                        else if (responses != null)
+                        {
+                            for (int i = 0; i < responses.Count; i++)
+                            {
+
+                                var response = responses.ElementAt(i);
+                                if (Classify(response, queryConfiguration))
+                                {
+                                    response.Id = "Response " + i + " with id: " + response.Id + " of: " + publication.Id;
+                                    publications.Add(response);
+                                }
+                            }
+
+                        }
+
+
                     }
                     else
                     {
@@ -399,12 +389,17 @@ namespace FacebookConnection
             }
         }
 
-        private IPublication ParsePublicationOfJsonResponse(dynamic item, IQueryConfiguration queryConfiguration, IPublication parentPublication)
+        private IPublication ParsePublicationOfJsonResponse(dynamic item, IQueryConfiguration queryConfiguration)
         {
 
             string id = item.id ?? "Not found";
             DateTime createDate = item.created_time ?? QueryConfiguration.NONE_DATE;
             string message = item.message ?? "Not message";
+            string decodeMessage = DecodeHtmlText(message);
+            if (decodeMessage != null)
+            {
+                message = decodeMessage;
+            }
             string wroteBy = "Not found";
             if (item.from != null)
             {
@@ -416,16 +411,18 @@ namespace FacebookConnection
                 CreateDate = createDate,
                 Message = message,
                 WroteBy = wroteBy,
-                Parent = parentPublication,
 
             };
-
-            publication.Responses = GetResponesPublications(item, queryConfiguration, publication);
 
             return publication;
         }
 
-        private IList<IPublication> GetResponesPublications(dynamic item, IQueryConfiguration queryConfiguration, IPublication publication)
+        private string DecodeHtmlText(string text)
+        {
+            return WebUtility.HtmlDecode(text);
+        }
+
+        private IList<IPublication> GetResponesPublications(dynamic item, IQueryConfiguration queryConfiguration)
         {
             List<IPublication> responses = null;
             if (item.comments != null)
@@ -434,7 +431,7 @@ namespace FacebookConnection
                 if (totalComments > 0)
                 {
                     responses = new List<IPublication>();
-                    AddPublications(item.comments, responses, totalComments, queryConfiguration, publication);
+                    AddPublications(item.comments, responses, queryConfiguration);
                 }
             }
 
@@ -461,8 +458,6 @@ namespace FacebookConnection
             return JsonConvert.DeserializeObject(result);
         }
 
-
-
         public string MakeTokenRequestToGraphAsync(string request)
         {
             try
@@ -470,11 +465,13 @@ namespace FacebookConnection
                 var jsonResponse = MakeRequestToGraphAsync(request).Result;
 
                 return (string)jsonResponse.access_token;
-            }catch(Exception e)
+            }
+            catch (Exception)
             {
                 return null;
             }
         }
+
         private string CreateFeedRequestToGraph(string user, string consult, IDictionary<string, string> fields)
         {
             string reqConsult = $"{consult}?access_token={Credential}";

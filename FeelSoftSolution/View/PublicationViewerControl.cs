@@ -37,32 +37,25 @@ namespace View
             }
             else if (publications.Count > 0)
             {
-                MessageBox.Show("Founded publications");
+                MessageBox.Show("Found publications");
+                this.publications = publications.ToArray();
+                SetDefaultViewConfigToPublications();
             }
-            this.publications = publications.ToArray();
-            this.views = publications.ToArray();
-            SetDefaultViewConfigToPublications();
+
         }
 
         private void SetDefaultViewConfigToPublications()
         {
-            indexCurrentViews = indexCurrentPublications;
-            ShowPublication(indexCurrentViews);
-            lblTotalPublications.Text = "Publicaciones : " + this.views.Length;
+            ShowPublication(indexCurrentPublications);
+            lblTotalPublications.Text = "Publicaciones : " + this.publications.Length;
         }
-
-        private void SetDefaultViewConfigToResponses()
-        {
-            indexCurrentViews = 0;
-            ShowPublication(indexCurrentViews);
-            lblTotalPublications.Text = "Publicaciones : " + this.views.Length;
-        }
+       
 
         private void ShowPublication(int indexCurrentPublication)
         {
-            if (views.Length > 0)
+            if (publications.Length > 0)
             {
-                IPublication publication = views.ElementAt(indexCurrentPublication);
+                IPublication publication = publications.ElementAt(indexCurrentPublication);
                 string id = publication.Id;
                 string wroteBy = publication.WroteBy;
                 string createDate = publication.CreateDate.ToShortDateString();
@@ -85,12 +78,12 @@ namespace View
 
         private void SetNextPublication()
         {
-            if (views != null)
+            if (publications != null)
             {
-                if (indexCurrentViews + 1 < views.Length)
+                if (indexCurrentPublications + 1 < publications.Length)
                 {
-                    ++indexCurrentViews;
-                    ShowPublication(indexCurrentViews);
+                    ++indexCurrentPublications;
+                    ShowPublication(indexCurrentPublications);
                 }
             }
         }
@@ -103,12 +96,12 @@ namespace View
 
         private void SetBeforePublication()
         {
-            if (views != null)
+            if (publications != null)
             {
-                if (indexCurrentViews - 1 >= 0)
+                if (indexCurrentPublications - 1 >= 0)
                 {
-                    --indexCurrentViews;
-                    ShowPublication(indexCurrentViews);
+                    --indexCurrentPublications;
+                    ShowPublication(indexCurrentPublications);
                 }
             }
         }
@@ -118,18 +111,18 @@ namespace View
             decimal indexValue = numericUpDown.Value;
             if (!TryShowPublicationInIndex(indexValue))
             {
-                numericUpDown.Value = indexCurrentViews;
+                numericUpDown.Value = indexCurrentPublications;
             }
         }
 
         private bool TryShowPublicationInIndex(decimal indexValue)
         {
-            bool showed = indexValue <= views.Length && indexValue >= 0;
+            bool showed = indexValue <= publications.Length && indexValue >= 0;
 
             if (showed)
             {
-                indexCurrentViews = (int)indexValue - 1;
-                ShowPublication(indexCurrentViews);
+                indexCurrentPublications = (int)indexValue - 1;
+                ShowPublication(indexCurrentPublications);
             }
             else
             {
@@ -139,23 +132,7 @@ namespace View
 
         }
 
-        private void BtnViewResponsesClick(object sender, EventArgs e)
-        {
-            if (views != responses)
-            {
-                views = responses;
-                SetDefaultViewConfigToResponses();
-                btnViewResponses.Text = "Publicaciones";
-
-            }
-            else
-            {
-                views = publications;
-                SetDefaultViewConfigToPublications();
-                btnViewResponses.Text = "Resuestas";
-
-            }
-        }
+       
 
         internal IPublication[] GetPublications()
         {
@@ -164,7 +141,7 @@ namespace View
 
         private void BtnSavePublications_Click(object sender, EventArgs e)
         {
-            main.SavePublications(this.views);
+            main.SavePublications(this.publications);
         }
 
         private void BtnImportPublications_Click(object sender, EventArgs e)

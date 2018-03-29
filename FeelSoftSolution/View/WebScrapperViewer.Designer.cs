@@ -1,4 +1,6 @@
-﻿namespace View
+﻿using SocialNetworkConnection;
+
+namespace View
 {
     partial class WebScrapperViewer
     {
@@ -30,10 +32,10 @@
         {
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.rdbTwitter = new System.Windows.Forms.RadioButton();
-            this.queriesControl = new View.QueriesControl();
             this.lblLoad = new System.Windows.Forms.Label();
             this.lblSelectSocialNetwork = new System.Windows.Forms.Label();
             this.rdbFacebook = new System.Windows.Forms.RadioButton();
+            this.queriesControl = new View.QueriesControl();
             this.publicationViewerControl = new View.PublicationViewerControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -60,20 +62,13 @@
             // rdbTwitter
             // 
             this.rdbTwitter.AutoSize = true;
-            this.rdbTwitter.Location = new System.Drawing.Point(374, 5);
+            this.rdbTwitter.Location = new System.Drawing.Point(345, 5);
             this.rdbTwitter.Name = "rdbTwitter";
             this.rdbTwitter.Size = new System.Drawing.Size(57, 17);
             this.rdbTwitter.TabIndex = 13;
             this.rdbTwitter.Text = "Twitter";
             this.rdbTwitter.UseVisualStyleBackColor = true;
             this.rdbTwitter.CheckedChanged += new System.EventHandler(this.RdbCheckedChanged);
-            // 
-            // queriesControl
-            // 
-            this.queriesControl.Location = new System.Drawing.Point(27, 28);
-            this.queriesControl.Name = "queriesControl";
-            this.queriesControl.Size = new System.Drawing.Size(421, 204);
-            this.queriesControl.TabIndex = 2;
             // 
             // lblLoad
             // 
@@ -86,7 +81,7 @@
             // lblSelectSocialNetwork
             // 
             this.lblSelectSocialNetwork.AutoSize = true;
-            this.lblSelectSocialNetwork.Location = new System.Drawing.Point(110, 5);
+            this.lblSelectSocialNetwork.Location = new System.Drawing.Point(81, 5);
             this.lblSelectSocialNetwork.Name = "lblSelectSocialNetwork";
             this.lblSelectSocialNetwork.Size = new System.Drawing.Size(129, 13);
             this.lblSelectSocialNetwork.TabIndex = 15;
@@ -96,7 +91,7 @@
             // 
             this.rdbFacebook.AutoSize = true;
             this.rdbFacebook.Checked = true;
-            this.rdbFacebook.Location = new System.Drawing.Point(279, 5);
+            this.rdbFacebook.Location = new System.Drawing.Point(250, 5);
             this.rdbFacebook.Name = "rdbFacebook";
             this.rdbFacebook.Size = new System.Drawing.Size(73, 17);
             this.rdbFacebook.TabIndex = 14;
@@ -104,6 +99,13 @@
             this.rdbFacebook.Text = "Facebook";
             this.rdbFacebook.UseVisualStyleBackColor = true;
             this.rdbFacebook.CheckedChanged += new System.EventHandler(this.RdbCheckedChanged);
+            // 
+            // queriesControl
+            // 
+            this.queriesControl.Location = new System.Drawing.Point(27, 28);
+            this.queriesControl.Name = "queriesControl";
+            this.queriesControl.Size = new System.Drawing.Size(421, 204);
+            this.queriesControl.TabIndex = 2;
             // 
             // publicationViewerControl
             // 
@@ -139,6 +141,7 @@
         private QueriesControl queriesControl;
         private System.Windows.Forms.Label lblSelectSocialNetwork;
         private System.Windows.Forms.RadioButton rdbFacebook;
+        private ISearchDataSet dataset;
 
         public const int FACEBOOK = 0;
         public const int TWITTER = 1;

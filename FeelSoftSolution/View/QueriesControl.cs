@@ -46,6 +46,7 @@ namespace View
 
         private void BtnCreateQuery_Click(object sender, EventArgs e)
         {
+
             queryForm = new QueryConfigurationForm();
             DialogResult result = queryForm.ShowDialog();
 
@@ -56,9 +57,16 @@ namespace View
                 cbxQueries.Items.Add(currentConfiguration);
                 cbxQueries.SelectedItem = currentConfiguration;
             }
+
         }
 
         private void BtnRemove_Click(object sender, EventArgs e)
+        {
+            RemoveQueryConfiguration();
+
+        }
+
+        private void RemoveQueryConfiguration()
         {
             object removedObject = cbxQueries.SelectedItem;
             if (removedObject != null)
@@ -91,6 +99,7 @@ namespace View
             if (queryConfiguration != null)
             {
                 cbxQueries.Items.Add(queryConfiguration);
+                cbxQueries.Text = queryConfiguration.Name;
             }
             else
             {
@@ -119,6 +128,44 @@ namespace View
             }
             return currentConfiguration;
 
+        }
+
+        private void ModifyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (currentConfiguration != null)
+            {
+
+                queryForm = new QueryConfigurationForm();
+                queryForm.SetQueryConfiguration(currentConfiguration);
+                DialogResult result = queryForm.ShowDialog();
+
+
+                if (DialogResult.OK == result)
+                {
+                    currentConfiguration = queryForm.GetQueryConfiguration();
+
+                    cbxQueries.Items.Add(currentConfiguration);
+                    cbxQueries.SelectedItem = currentConfiguration;
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Primero seleccione una configuración valida");
+            }
+        }
+
+        private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (currentConfiguration != null)
+            {
+                cbxQueries.Items.Remove(currentConfiguration);
+                cbxQueries.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("Primero seleccione una configuración valida");
+            }
         }
     }
 }

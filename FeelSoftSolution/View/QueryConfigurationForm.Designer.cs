@@ -69,7 +69,7 @@
             // 
             this.queryConfigurationControl.Location = new System.Drawing.Point(4, 4);
             this.queryConfigurationControl.Name = "queryConfigurationControl";
-            this.queryConfigurationControl.Size = new System.Drawing.Size(462, 544);
+            this.queryConfigurationControl.Size = new System.Drawing.Size(462, 592);
             this.queryConfigurationControl.TabIndex = 0;
             // 
             // QueryConfigurationForm

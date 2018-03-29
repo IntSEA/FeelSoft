@@ -12,6 +12,7 @@ using Tweetinvi;
 using Tweetinvi.Models;
 using Tweetinvi.Parameters;
 using HtmlAgilityPack;
+using System.IO;
 
 namespace TwitterConnection
 {
@@ -41,7 +42,7 @@ namespace TwitterConnection
         }
 
         private IList<IPublication> ReorganizeSearches(IList<IPublication> publications, int maxPublicationCount)
-        {
+         {
             IList<IPublication> responsePublications = new List<IPublication>();
             if (publications.Count > maxPublicationCount)
             {
@@ -54,6 +55,10 @@ namespace TwitterConnection
                     publications.RemoveAt(toAdd);
                 }
             }
+            else
+            {
+                responsePublications = publications;
+            }
 
             return responsePublications;
         }
@@ -65,7 +70,7 @@ namespace TwitterConnection
                 ITweet[] arrayTweets = tweets.ToArray();
                 for (int i = 0; i < arrayTweets.Length; i++)
                 {
-                    IPublication parsedPublication = ParseTweet(arrayTweets[i]);
+                    IPublication parsedPublication = ParseTweetToPublication(arrayTweets[i]);
                     if (arrayTweets[i] == null)
                     {
                         throw new ArgumentException("No deberia suceder.");
@@ -80,30 +85,10 @@ namespace TwitterConnection
             }
 
 
-        }
-
-        private IList<IPublication> ParseTweets(IEnumerable<ITweet> tweets, IPublication parent)
-        {
-            List<IPublication> publications = new List<IPublication>();
-            foreach (var item in tweets)
-            {
-                IPublication parsedPublication = ParseTweet(item);
-                parsedPublication.Parent = parent;
-
-                if (parsedPublication != null)
-                {
-                    publications.Add(parsedPublication);
-                }
-
-            }
+        }      
 
 
-            return publications;
-
-        }
-
-
-        private IPublication ParseTweet(ITweet tweet)
+        private IPublication ParseTweetToPublication(ITweet tweet)
         {
             string message = ReadHtmlContent(tweet);
             IPublication publication = null;
@@ -159,10 +144,11 @@ namespace TwitterConnection
                 {
                     string html = webClient.DownloadString(url);
                     htmlDocument.LoadHtml(html);
-                    string mes = htmlDocument.DocumentNode.Descendants("title").FirstOrDefault().InnerText;
-                    return mes;
+                    string htmlContent = htmlDocument.DocumentNode.Descendants("title").FirstOrDefault().InnerText;
+                  
+                    return htmlContent;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return null;
                 }
@@ -173,9 +159,11 @@ namespace TwitterConnection
 
         }
 
+       
+
         private string ReadHtmlContentFromIOembededTweet(ITweet tweet)
         {
-            string text = null;
+            string htmlContent = null;
             IOEmbedTweet aux = Tweet.GetOEmbedTweet(tweet.Id);
             if (aux != null)
             {
@@ -183,18 +171,20 @@ namespace TwitterConnection
                 if (htmlCode != null)
                 {
                     htmlDocument.LoadHtml(htmlCode);
-                    text = htmlDocument.DocumentNode.InnerText;
-
+                    htmlContent = htmlDocument.DocumentNode.InnerText;
+                   
                 }
             }
 
-            return text;
+            return htmlContent;
         }
 
         public override IList<IPublication> SearchPublications(IQueryConfiguration queryConfiguration)
         {
             IList<IPublication> publications = new List<IPublication>();
-
+            int totalPublications = queryConfiguration.MaxPublicationCount;
+            int totalSeracheByKeyword = queryConfiguration.MaxPublicationCount / queryConfiguration.Keywords.Count;
+            queryConfiguration.MaxPublicationCount = totalSeracheByKeyword+500;
             foreach (var key in queryConfiguration.Keywords)
             {
                 ISearchTweetsParameters parameters = ParseSearchTweetsParameters(queryConfiguration, key);
@@ -205,8 +195,16 @@ namespace TwitterConnection
 
                 ParseTweets(tweets, publications);
 
+                if (publications.Count > totalPublications)
+                {
+                    break;
+                }
+
 
             }
+
+            queryConfiguration.MaxPublicationCount = totalPublications;
+
 
             publications = ReorganizeSearches(publications, queryConfiguration.MaxPublicationCount);
 
@@ -216,8 +214,10 @@ namespace TwitterConnection
 
         private ISearchTweetsParameters ParseSearchTweetsParameters(IQueryConfiguration queryConfiguration, string key)
         {
-            ISearchTweetsParameters parameters = new SearchTweetsParameters(key);
-            parameters.MaximumNumberOfResults = queryConfiguration.MaxPublicationCount;
+            ISearchTweetsParameters parameters = new SearchTweetsParameters(key)
+            {
+                MaximumNumberOfResults = queryConfiguration.MaxPublicationCount
+            };
             ParseFilter(parameters, queryConfiguration);
             ParseLanguage(parameters, queryConfiguration);
             ParseLocation(parameters, queryConfiguration);

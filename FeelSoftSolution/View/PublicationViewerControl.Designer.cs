@@ -32,25 +32,23 @@ namespace View
         private void InitializeComponent()
         {
             this.gbxPublications = new System.Windows.Forms.GroupBox();
-            this.btnViewResponses = new System.Windows.Forms.Button();
             this.lblPublication = new System.Windows.Forms.Label();
             this.numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.lblTotalPublications = new System.Windows.Forms.Label();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnBefore = new System.Windows.Forms.Button();
             this.tbxPublication = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnSavePublications = new System.Windows.Forms.Button();
-            this.btnExportPublications = new System.Windows.Forms.Button();
+            this.gbxFunctions = new System.Windows.Forms.GroupBox();
             this.btnImportPublications = new System.Windows.Forms.Button();
+            this.btnExportPublications = new System.Windows.Forms.Button();
+            this.btnSavePublications = new System.Windows.Forms.Button();
             this.gbxPublications.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.gbxFunctions.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbxPublications
             // 
-            this.gbxPublications.Controls.Add(this.btnViewResponses);
             this.gbxPublications.Controls.Add(this.lblPublication);
             this.gbxPublications.Controls.Add(this.numericUpDown);
             this.gbxPublications.Controls.Add(this.lblTotalPublications);
@@ -63,16 +61,6 @@ namespace View
             this.gbxPublications.TabIndex = 0;
             this.gbxPublications.TabStop = false;
             this.gbxPublications.Text = "Publicaciones";
-            // 
-            // btnViewResponses
-            // 
-            this.btnViewResponses.Location = new System.Drawing.Point(27, 251);
-            this.btnViewResponses.Name = "btnViewResponses";
-            this.btnViewResponses.Size = new System.Drawing.Size(165, 23);
-            this.btnViewResponses.TabIndex = 21;
-            this.btnViewResponses.Text = "Respuestas";
-            this.btnViewResponses.UseVisualStyleBackColor = true;
-            this.btnViewResponses.Click += new System.EventHandler(this.BtnViewResponsesClick);
             // 
             // lblPublication
             // 
@@ -150,35 +138,15 @@ namespace View
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnImportPublications);
-            this.groupBox1.Controls.Add(this.btnExportPublications);
-            this.groupBox1.Controls.Add(this.btnSavePublications);
-            this.groupBox1.Location = new System.Drawing.Point(27, 323);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(386, 113);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Funciones";
-            // 
-            // btnSavePublications
-            // 
-            this.btnSavePublications.Location = new System.Drawing.Point(27, 19);
-            this.btnSavePublications.Name = "btnSavePublications";
-            this.btnSavePublications.Size = new System.Drawing.Size(165, 23);
-            this.btnSavePublications.TabIndex = 0;
-            this.btnSavePublications.Text = "Guardar publicaciones";
-            this.btnSavePublications.UseVisualStyleBackColor = true;
-            this.btnSavePublications.Click += new System.EventHandler(this.BtnSavePublications_Click);
-            // 
-            // btnExportPublications
-            // 
-            this.btnExportPublications.Location = new System.Drawing.Point(117, 71);
-            this.btnExportPublications.Name = "btnExportPublications";
-            this.btnExportPublications.Size = new System.Drawing.Size(165, 23);
-            this.btnExportPublications.TabIndex = 1;
-            this.btnExportPublications.Text = "Exportar publicaciónes";
-            this.btnExportPublications.UseVisualStyleBackColor = true;
-            this.btnExportPublications.Click += new System.EventHandler(this.BtnExportPublications_Click);
+            this.gbxFunctions.Controls.Add(this.btnImportPublications);
+            this.gbxFunctions.Controls.Add(this.btnExportPublications);
+            this.gbxFunctions.Controls.Add(this.btnSavePublications);
+            this.gbxFunctions.Location = new System.Drawing.Point(27, 323);
+            this.gbxFunctions.Name = "groupBox1";
+            this.gbxFunctions.Size = new System.Drawing.Size(386, 113);
+            this.gbxFunctions.TabIndex = 1;
+            this.gbxFunctions.TabStop = false;
+            this.gbxFunctions.Text = "Funciones";
             // 
             // btnImportPublications
             // 
@@ -190,18 +158,38 @@ namespace View
             this.btnImportPublications.UseVisualStyleBackColor = true;
             this.btnImportPublications.Click += new System.EventHandler(this.BtnImportPublications_Click);
             // 
+            // btnExportPublications
+            // 
+            this.btnExportPublications.Location = new System.Drawing.Point(117, 71);
+            this.btnExportPublications.Name = "btnExportPublications";
+            this.btnExportPublications.Size = new System.Drawing.Size(165, 23);
+            this.btnExportPublications.TabIndex = 1;
+            this.btnExportPublications.Text = "Exportar publicaciónes";
+            this.btnExportPublications.UseVisualStyleBackColor = true;
+            this.btnExportPublications.Click += new System.EventHandler(this.BtnExportPublications_Click);
+            // 
+            // btnSavePublications
+            // 
+            this.btnSavePublications.Location = new System.Drawing.Point(27, 19);
+            this.btnSavePublications.Name = "btnSavePublications";
+            this.btnSavePublications.Size = new System.Drawing.Size(165, 23);
+            this.btnSavePublications.TabIndex = 0;
+            this.btnSavePublications.Text = "Guardar publicaciones";
+            this.btnSavePublications.UseVisualStyleBackColor = true;
+            this.btnSavePublications.Click += new System.EventHandler(this.BtnSavePublications_Click);
+            // 
             // PublicationViewerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbxFunctions);
             this.Controls.Add(this.gbxPublications);
             this.Name = "PublicationViewerControl";
             this.Size = new System.Drawing.Size(455, 473);
             this.gbxPublications.ResumeLayout(false);
             this.gbxPublications.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).EndInit();
-            this.groupBox1.ResumeLayout(false);
+            this.gbxFunctions.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -216,12 +204,8 @@ namespace View
         private System.Windows.Forms.Button btnBefore;
         private System.Windows.Forms.TextBox tbxPublication;
         private IPublication[] publications;
-        private int indexCurrentViews;
-        private System.Windows.Forms.Button btnViewResponses;
-        private IPublication[] responses;
-        private IPublication[] views;
         private int indexCurrentPublications;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbxFunctions;
         private System.Windows.Forms.Button btnSavePublications;
         private System.Windows.Forms.Button btnImportPublications;
         private System.Windows.Forms.Button btnExportPublications;

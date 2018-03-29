@@ -49,8 +49,6 @@ namespace SocialNetworkConnection
                 Thread.Sleep(500);
             }
 
-
-
         }
 
         private ThreadStart Wait(Thread thread)
@@ -113,10 +111,11 @@ namespace SocialNetworkConnection
 
         }
 
-        public void ImportDataSet(string directoryPath)
+        public IPublication[] ImportDataSet(string directoryPath)
         {
 
             string[] paths = Directory.GetFiles(directoryPath);
+            List<IPublication> publications = new List<IPublication>();
             IList<Thread> threads = new List<Thread>();
 
             //Thread thread = new Thread(ImportFileAsync(paths[0]));
@@ -124,19 +123,19 @@ namespace SocialNetworkConnection
             //threads.Add(thread);
             foreach (var path in paths)
             {
-                if (Directory.Exists(path))
+                if (File.Exists(path))
                 {
-                    ImportDataSet(path);
-                }
-                else
-                {
-                    Thread thread = new Thread(ImportFileAsync(path));
+
+                    Thread thread = new Thread(ImportFileAsync(path, publications));
                     thread.Start();
                     threads.Add(thread);
                 }
+
             }
 
             WaitThreads(threads);
+
+            return publications.ToArray();
         }
 
 
@@ -155,58 +154,38 @@ namespace SocialNetworkConnection
             }
         }
 
-        private ThreadStart ImportFileAsync(string path)
+        private ThreadStart ImportFileAsync(string path, List<IPublication> publications)
         {
-            return () => { ImportFile(path); };
+            return () => { ImportFile(path, publications); };
         }
-        private void ImportFile(string path)
+        private void ImportFile(string path, List<IPublication> publications)
         {
-            StreamReader sr = new StreamReader(path: path);
-            //IList<string> wrongsId = new List<string>();
+            StreamReader sr = new StreamReader(path);
 
             string line = "";
             while ((line = sr.ReadLine()) != null)
             {
-                //while (!line.Contains("|NONE|NONE"))
-                //{
-                //    line += sr.ReadLine();
-                //}
-                IPublication parsedPublication = Publication.ParsePublication(line, out string parent, out IList<string> responses);
-               
+                while (!line.Contains(Publication.END_LINE))
+                {
+                    line += sr.ReadLine();
+                }
+                IPublication parsedPublication = Publication.ParsePublication(line);
+                lock (this)
+                {
+                    publications.Add(parsedPublication);
+                }
 
-                AddPublications(parsedPublication);
-                if (parent != null)
-                {
-                    parsedPublication.Parent = GetPublication(parent, line, parsedPublication);
-                    //if (parsedPublication.Parent == null)
-                    //{
-                    //    wrongsId.Add(parsedPublication.Id);
-                    //}
-                }
-                if (responses != null)
-                {
-                    IList<IPublication> publicRespones = new List<IPublication>();
-                    foreach (var res in responses)
-                    {
-                        publicRespones.Add(GetPublication(res, line, parsedPublication));
-                    }
-                    parsedPublication.Responses = publicRespones;
-                }
+
             }
-
-            //if (wrongsId.Count > 0)
-            //{
-            //    throw new ArgumentException();
-            //}
             sr.Close();
 
         }
 
-       
 
-        public void ImportDataSet()
+
+        public IPublication[] ImportDataset()
         {
-            ImportDataSet(basePath);
+            return ImportDataSet(basePath);
         }
 
         private IPublication GetPublicationInIndex(int i)

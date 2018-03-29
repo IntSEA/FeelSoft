@@ -178,7 +178,7 @@ namespace SocialNetworkConnection
         
         public override String ToString()
         {
-            string parse = sinceDate.ToString()+" -- "+UntilDate.ToString()+" Max: "+maxPublicationCount;
+            string parse = Name;
             return parse;
         }
 

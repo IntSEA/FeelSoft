@@ -139,10 +139,16 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Resources\SocialNetworkConnection.cd" />
+    <None Include="Resources\SocialNetworks\Fajardo\Publications\DataSet1.dst" />
+    <None Include="Resources\SocialNetworks\Fajardo\Publications\DataSet2.dst" />
+    <None Include="Resources\SocialNetworks\Fajardo\Publications\DataSet3.dst" />
+    <None Include="Resources\SocialNetworks\Fajardo\Publications\DataSet4.dst" />
+    <None Include="Resources\SocialNetworks\Fajardo\Publications\DataSet5.dst" />
     <None Include="Resources\SocialNetworks\Petro\Publications\DataSet1.dst" />
     <None Include="Resources\SocialNetworks\Petro\Publications\DataSet2.dst" />
     <None Include="Resources\SocialNetworks\Petro\Publications\DataSet3.dst" />
     <None Include="Resources\SocialNetworks\Petro\Publications\DataSet4.dst" />
+    <None Include="Resources\SocialNetworks\Petro\Publications\DataSet5.dst" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -157,10 +163,9 @@
     <None Include="Resources\SocialNetworkConnection.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\SocialNetworks\Fajardo\Publications\" />
+    <Folder Include="Resources\SocialNetworks\Fajardo\Configurations\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\SocialNetworks\Fajardo\Configurations\DefaultConfiguration.txt" />
     <Content Include="Resources\SocialNetworks\Petro\Configurations\DefaultConfiguration.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -163,8 +163,10 @@ namespace View
             {
                 SaveFileDialog saveDialog = new SaveFileDialog
                 {
-                    Filter = "qcn files(*.qnc) | *.qnc ",
-                    InitialDirectory = "..//..//..//SocialNetworkConnection/Resources/"
+                    Filter = "qcn files(.qnc)|*.qnc",
+                    InitialDirectory = "..//..//..//SocialNetworkConnection/Resources/",
+                    DefaultExt = "qnc",
+                    ValidateNames = true,
                 };
 
                 if (DialogResult.OK == saveDialog.ShowDialog())
@@ -179,10 +181,14 @@ namespace View
         {
             OpenFileDialog openDialog = new OpenFileDialog
             {
-                Filter = "qcn files(*.qnc) | *.qnc ",
-                InitialDirectory = "..//..//..//SocialNetworkConnection/Resources/"
+                Filter = "qcn files (.qnc)|*.qnc",
+                InitialDirectory = "..//..//..//SocialNetworkConnection/Resources/",
+                DefaultExt = "qnc",
+                ValidateNames = true,
+                
             };
 
+            
 
             if (DialogResult.OK == openDialog.ShowDialog())
             {

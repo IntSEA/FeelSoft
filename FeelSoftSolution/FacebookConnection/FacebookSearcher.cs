@@ -81,6 +81,10 @@ namespace FacebookConnection
                 {
                     IList<IPublication> partialPublication = RequestFeedToGraph(page, fields, roundSearchesByPage, queryConfiguration);
                     ((List<IPublication>)publications).AddRange(partialPublication);
+                    if(publications.Count>  (totalPublications*2))
+                    {
+                        break;
+                    }
                 }
 
 

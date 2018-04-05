@@ -42,6 +42,7 @@ namespace View
             this.btnImportPublications = new System.Windows.Forms.Button();
             this.btnExportPublications = new System.Windows.Forms.Button();
             this.btnSavePublications = new System.Windows.Forms.Button();
+            this.btnViewFullText = new System.Windows.Forms.Button();
             this.gbxPublications.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
             this.gbxFunctions.SuspendLayout();
@@ -49,6 +50,7 @@ namespace View
             // 
             // gbxPublications
             // 
+            this.gbxPublications.Controls.Add(this.btnViewFullText);
             this.gbxPublications.Controls.Add(this.lblPublication);
             this.gbxPublications.Controls.Add(this.numericUpDown);
             this.gbxPublications.Controls.Add(this.lblTotalPublications);
@@ -136,13 +138,13 @@ namespace View
             this.tbxPublication.Size = new System.Drawing.Size(330, 162);
             this.tbxPublication.TabIndex = 15;
             // 
-            // groupBox1
+            // gbxFunctions
             // 
             this.gbxFunctions.Controls.Add(this.btnImportPublications);
             this.gbxFunctions.Controls.Add(this.btnExportPublications);
             this.gbxFunctions.Controls.Add(this.btnSavePublications);
             this.gbxFunctions.Location = new System.Drawing.Point(27, 323);
-            this.gbxFunctions.Name = "groupBox1";
+            this.gbxFunctions.Name = "gbxFunctions";
             this.gbxFunctions.Size = new System.Drawing.Size(386, 113);
             this.gbxFunctions.TabIndex = 1;
             this.gbxFunctions.TabStop = false;
@@ -178,6 +180,17 @@ namespace View
             this.btnSavePublications.UseVisualStyleBackColor = true;
             this.btnSavePublications.Click += new System.EventHandler(this.BtnSavePublications_Click);
             // 
+            // btnViewFullText
+            // 
+            this.btnViewFullText.Location = new System.Drawing.Point(27, 240);
+            this.btnViewFullText.Name = "btnViewFullText";
+            this.btnViewFullText.Size = new System.Drawing.Size(165, 23);
+            this.btnViewFullText.TabIndex = 21;
+            this.btnViewFullText.Text = "Ver texto completo";
+            this.btnViewFullText.UseVisualStyleBackColor = true;
+            this.btnViewFullText.Visible = false;
+            this.btnViewFullText.Click += new System.EventHandler(this.BtnViewFullText_Click);
+            // 
             // PublicationViewerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -210,5 +223,6 @@ namespace View
         private System.Windows.Forms.Button btnImportPublications;
         private System.Windows.Forms.Button btnExportPublications;
         private WebScrapperViewer main;
+        private System.Windows.Forms.Button btnViewFullText;
     }
 }

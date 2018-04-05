@@ -145,6 +145,10 @@ namespace FacebookConnection
 
                 }
             }
+            else
+            {
+                responsePublications = publications;
+            }
 
             return responsePublications;
         }
@@ -257,6 +261,10 @@ namespace FacebookConnection
                     foreach (var response in responsesPages)
                     {
                         AddPublications(response, publications, queryConfiguration);
+                        if (publications.Count > totalPublications * 2)
+                        {
+                            break;
+                        }
                     }
 
                 }

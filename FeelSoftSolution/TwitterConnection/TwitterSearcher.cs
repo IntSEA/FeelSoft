@@ -18,14 +18,12 @@ namespace TwitterConnection
 {
     public class TwitterSearcher : PublicationSearcher
     {
-        private WebClient webClient;
-        private HtmlDocument htmlDocument;
+        public static WebClient webClient = new WebClient();
+        public static HtmlDocument htmlDocument = new HtmlDocument();
 
         public TwitterSearcher(string credential) : base(credential)
         {
-            webClient = new WebClient();
-            webClient = new WebClient();
-            htmlDocument = new HtmlDocument();
+
         }
 
         public override IList<IPublication> SearchPublications(IList<IQueryConfiguration> queriesConfigurations)
@@ -33,16 +31,13 @@ namespace TwitterConnection
             List<IPublication> publications = new List<IPublication>();
             foreach (var item in queriesConfigurations)
             {
-
                 publications.AddRange(SearchPublications(item));
             }
-
-
             return publications;
         }
 
         private IList<IPublication> ReorganizeSearches(IList<IPublication> publications, int maxPublicationCount)
-         {
+        {
             IList<IPublication> responsePublications = new List<IPublication>();
             if (publications.Count > maxPublicationCount)
             {
@@ -81,16 +76,14 @@ namespace TwitterConnection
                         publications.Add(parsedPublication);
                     }
                 }
-
             }
-
-
-        }      
+        }
 
 
         private IPublication ParseTweetToPublication(ITweet tweet)
         {
-            string message = ReadHtmlContent(tweet);
+            string message = "";
+            message = tweet.FullText ?? (tweet.Text + tweet.Suffix);
             IPublication publication = null;
             long id = tweet.Id;
 
@@ -117,66 +110,6 @@ namespace TwitterConnection
             };
 
             return publication;
-
-
-        }
-
-        private string ReadHtmlContent(ITweet tweet)
-        {
-            string response = null;
-            response = ReadHtmlContentFromIOembededTweet(tweet);
-            if (response == null)
-            {
-                response = ReadHtmlContentFromURL(tweet);
-            }
-
-
-            return response;
-        }
-
-        private string ReadHtmlContentFromURL(ITweet tweet)
-        {
-            if (tweet != null)
-            {
-                string url = tweet.Url;
-
-                try
-                {
-                    string html = webClient.DownloadString(url);
-                    htmlDocument.LoadHtml(html);
-                    string htmlContent = htmlDocument.DocumentNode.Descendants("title").FirstOrDefault().InnerText;
-                  
-                    return htmlContent;
-                }
-                catch (Exception)
-                {
-                    return null;
-                }
-            }
-
-            return null;
-
-
-        }
-
-       
-
-        private string ReadHtmlContentFromIOembededTweet(ITweet tweet)
-        {
-            string htmlContent = null;
-            IOEmbedTweet aux = Tweet.GetOEmbedTweet(tweet.Id);
-            if (aux != null)
-            {
-                string htmlCode = aux.HTML;
-                if (htmlCode != null)
-                {
-                    htmlDocument.LoadHtml(htmlCode);
-                    htmlContent = htmlDocument.DocumentNode.InnerText;
-                   
-                }
-            }
-
-            return htmlContent;
         }
 
         public override IList<IPublication> SearchPublications(IQueryConfiguration queryConfiguration)
@@ -184,17 +117,12 @@ namespace TwitterConnection
             IList<IPublication> publications = new List<IPublication>();
             int totalPublications = queryConfiguration.MaxPublicationCount;
             int totalSeracheByKeyword = queryConfiguration.MaxPublicationCount / queryConfiguration.Keywords.Count;
-            queryConfiguration.MaxPublicationCount = totalSeracheByKeyword+500;
+            queryConfiguration.MaxPublicationCount = totalSeracheByKeyword + 500;
             foreach (var key in queryConfiguration.Keywords)
             {
                 ISearchTweetsParameters parameters = ParseSearchTweetsParameters(queryConfiguration, key);
-
-
                 IEnumerable<ITweet> tweets = Search.SearchTweets(parameters);
-
-
                 ParseTweets(tweets, publications);
-
                 if (publications.Count > totalPublications)
                 {
                     break;
@@ -202,13 +130,8 @@ namespace TwitterConnection
 
 
             }
-
             queryConfiguration.MaxPublicationCount = totalPublications;
-
-
             publications = ReorganizeSearches(publications, queryConfiguration.MaxPublicationCount);
-
-
             return publications;
         }
 

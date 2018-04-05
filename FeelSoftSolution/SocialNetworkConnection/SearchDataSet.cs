@@ -78,19 +78,32 @@ namespace SocialNetworkConnection
             }
         }
 
-        public void ExportDataSet()
+        public void ExportDataSet(int quantity)
         {
-            int totalThreads = publications.Values.Count / 1000;
-            int init = 0;
-            for (int i = 0; i < totalThreads; i++)
+            if (quantity > 0) {
+                int totalThreads = publications.Values.Count / quantity ;
+                int init = 0;
+                for (int i = 0; i < totalThreads; i++)
+                {
+                    Thread thread = new Thread(ThreadStartExport(init, BasePath + baseName + suffixName + ".dst"));
+                    thread.Start();
+                    suffixName++;
+                    init += 1000;
+                }
+            }
+            else
             {
-                Thread thread = new Thread(ThreadStartExport(init, BasePath + baseName + suffixName + ".dst"));
-                thread.Start();
-                suffixName++;
-                init += 1000;
+                ExportDataSet();
             }
 
 
+        }
+
+        public void ExportDataSet()
+        {
+            Thread thread = new Thread(ThreadStartExport(-1, BasePath + baseName + suffixName + ".dst"));
+            thread.Start();
+            suffixName++;
         }
 
         private ThreadStart ThreadStartExport(int init, string path)
@@ -101,10 +114,21 @@ namespace SocialNetworkConnection
         private void Export(int init, string path)
         {
             StreamWriter sw = new StreamWriter(path);
-            for (int i = init; i < init + 1000 && i < TotalPublications; i++)
+            if (init == -1)
             {
-                IPublication publication = GetPublicationInIndex(i);
-                sw.WriteLine(publication.ToExportFormat());
+                for (int i = 0; i < TotalPublications; i++)
+                {
+                    IPublication publication = GetPublicationInIndex(i);
+                    sw.WriteLine(publication.ToExportFormat());
+                }
+            }
+            else
+            {
+                for (int i = init; i < init + 1000 && i < TotalPublications; i++)
+                {
+                    IPublication publication = GetPublicationInIndex(i);
+                    sw.WriteLine(publication.ToExportFormat());
+                }
             }
 
             sw.Close();

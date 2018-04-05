@@ -24,8 +24,7 @@ namespace SocialNetworkConnection
         public Languages Language { get => language; set => language = value; }
         public int Favorability { get => favorability; set => favorability = value; }
         public DateTime CreateDate { get => createDate; set => createDate = value; }
-        public Locations Location { get => location; set => location = value; }
-      
+        public Locations Location { get => location; set => location = value; }      
 
         public Publication()
         {
@@ -33,6 +32,7 @@ namespace SocialNetworkConnection
             Location = Locations.Colombia;
             createDate = QueryConfiguration.NONE_DATE;
         }
+
         public int CompareBy(IPublication other, Comparison<IPublication> comparator)
         {
             return comparator.Invoke(this, other);
@@ -40,8 +40,7 @@ namespace SocialNetworkConnection
 
         private string SetCorrectInfo(string value)
         {
-            string decodeMessage = DecodeMessage(value);
-            string withoutSplit = decodeMessage.Replace('|', ':');
+            string withoutSplit = value.Replace('|', ':');
             string withoutLines = withoutSplit.Replace('\n', '\t');
             string withoutQuotes = withoutLines.Replace("&quot","");
             string withSpecialCharacter = withoutQuotes.Replace("&#10","");
@@ -49,7 +48,7 @@ namespace SocialNetworkConnection
             return withSpecialCharacter;
         }
 
-        private string DecodeMessage(string value)
+        public static string DecodeMessage(string value)
         {
             byte[] bytes = Encoding.Default.GetBytes(value);
             string decodeString = Encoding.UTF8.GetString(bytes);
@@ -76,8 +75,7 @@ namespace SocialNetworkConnection
 
             return format;
         }
-
-      
+        
         string LocationToExportFormat()
         {
             string format = QueryConfiguration.LocationToExportFormat(Location);
@@ -92,7 +90,6 @@ namespace SocialNetworkConnection
 
         internal static IPublication ParsePublication(string line)
         {
-
             string[] info = line.Split('|');
             string id = info[0];
 
@@ -106,9 +103,7 @@ namespace SocialNetworkConnection
             string message = info[3];
 
             Languages language = QueryConfiguration.ParseLanguage(info[4]);
-            Locations location = QueryConfiguration.ParseLocation(info[5]);
-
-           
+            Locations location = QueryConfiguration.ParseLocation(info[5]);           
 
             IPublication publication = new Publication
             {
@@ -121,9 +116,7 @@ namespace SocialNetworkConnection
             };
 
             return publication;
-        }
-
-       
+        }       
     }
 }
 

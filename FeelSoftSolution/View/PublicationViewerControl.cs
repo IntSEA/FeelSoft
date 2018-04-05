@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using FacebookConnection;
 using SocialNetworkConnection;
 using TwitterConnection;
+using Microsoft.VisualBasic;
+using System.Threading;
 
 namespace View
 {
@@ -49,7 +51,7 @@ namespace View
             ShowPublication(indexCurrentPublications);
             lblTotalPublications.Text = "Publicaciones : " + this.publications.Length;
         }
-       
+
 
         private void ShowPublication(int indexCurrentPublication)
         {
@@ -67,6 +69,10 @@ namespace View
 
                 tbxPublication.Text = info;
                 numericUpDown.Value = indexCurrentPublication + 1;
+
+                bool isTwitter = IsTwitterPublication(publications[indexCurrentPublications]);
+                ToEnableFullText(isTwitter);
+
             }
         }
 
@@ -128,11 +134,25 @@ namespace View
             {
                 MessageBox.Show("Ingrese un dato valido, mayor a 1 y menor al total de publicaciones");
             }
+
+            bool isTwitter = IsTwitterPublication(publications[indexCurrentPublications]);
+            ToEnableFullText(showed && isTwitter);
+
             return showed;
 
         }
 
-       
+        private bool IsTwitterPublication(IPublication publication)
+        {
+            string twitter = publication.Id.Split(':')[0];
+
+            return twitter.Equals("Twitter");
+        }
+
+        private void ToEnableFullText(bool showed)
+        {
+            btnViewFullText.Visible = showed;
+        }
 
         internal IPublication[] GetPublications()
         {
@@ -151,7 +171,49 @@ namespace View
 
         private void BtnExportPublications_Click(object sender, EventArgs e)
         {
-            main.ExportPublications();
+            DialogResult result = MessageBox.Show("¿Desea guardar las publicaciones por paquetes");
+            if (result == DialogResult.OK)
+            {
+                string quantity = Interaction.InputBox("Ingrese cantidad");
+                int.TryParse(quantity, out int q);
+
+                main.ExportPublications(q);
+            }
+            else
+            {
+                main.ExportPublications(-1);
+            }
         }
+
+        private void BtnViewFullText_Click(object sender, EventArgs e)
+        {
+
+            Thread thread = new Thread(InitHtmlProcess(indexCurrentPublications));
+            thread.Start();
+            
+        }
+
+        private ThreadStart InitHtmlProcess(int indexCurrentPublications)
+        {
+            return () => { ReadHtmlInfo(indexCurrentPublications); };
+        }
+
+        private void ReadHtmlInfo(int i)
+        {
+            string strIdPublication = publications[i].Id.Split(':')[1];
+            long idTweet = long.Parse(strIdPublication);
+            publications[i].Message = Twitter.ReadHtmlContent(idTweet);
+            Refresh del = new Refresh(RefreshTextBox);
+            this.Invoke(del);
+        }
+
+        delegate void Refresh();
+
+        public void RefreshTextBox()
+        {
+            ShowPublication(indexCurrentPublications);
+        }
+
+                
     }
 }

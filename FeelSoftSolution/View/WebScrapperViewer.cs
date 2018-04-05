@@ -270,11 +270,12 @@ namespace View
         }
 
 
-        public void ExportPublications()
+        public void ExportPublications(int quantity)
         {
-            if (dataset.TotalPublications > 0)
+            
+            if (dataset.TotalPublications > 0 && quantity !=0)
             {
-                Thread thread = new Thread(ExportTS(dataset));
+                Thread thread = new Thread(ExportTS(dataset,quantity));
                 thread.SetApartmentState(ApartmentState.STA);
                 Thread threadProcess = new Thread(ThreadProcessTS(thread));
                 threadProcess.SetApartmentState(ApartmentState.STA);
@@ -286,7 +287,7 @@ namespace View
             }
         }
 
-        private void Export(ISearchDataSet dataset)
+        private void Export(ISearchDataSet dataset, int quantity)
         {
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
             DialogResult result = folderDialog.ShowDialog();
@@ -295,14 +296,14 @@ namespace View
                 string folderName = folderDialog.SelectedPath;
 
                 dataset.BasePath = folderName + "/";
-                dataset.ExportDataSet();
+                dataset.ExportDataSet(quantity);
             }
 
         }
 
-        private ThreadStart ExportTS(ISearchDataSet dataset)
+        private ThreadStart ExportTS(ISearchDataSet dataset, int quantity)
         {
-            return () => { Export(dataset); };
+            return () => { Export(dataset, quantity); };
         }
 
         public void ImportPublications()

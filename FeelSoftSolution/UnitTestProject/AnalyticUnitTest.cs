@@ -5,10 +5,13 @@ using System;
 
 namespace UnitTestProject
 {
+
+   
     [TestClass]
     public class AnalyticUnitTest
     {
        private NaiveAnalytic analytic;
+        public string directory = "..//..//..//";
         public void setUpStage1()
         {
             int[][] input =
@@ -32,7 +35,7 @@ namespace UnitTestProject
         }
         public void setUpStage2()
         {
-            analytic = new NaiveAnalytic("C:/Users/Administrador/Documents/GitHub/FeelSoft/FeelSoftSolution/Analytics/PruebaNaiveBayes.txt", Analytic.TYPE_INT, 1);
+            analytic = new NaiveAnalytic(directory+"Analytics/PruebaNaiveBayes.txt", Analytic.TYPE_INT, 1);
         }
         public void setUpStage3()
         {
@@ -85,7 +88,7 @@ namespace UnitTestProject
         {
             setUpStage2();
             int[] outp = { 1, 1, 1, 1, 0, 0, 0, 0 };
-            int[] res = analytic.Decided("C:/Users/Administrador/Documents/GitHub/FeelSoft/FeelSoftSolution/Analytics/PruebaNaiveBayesInputs.txt", Analytic.TYPE_INT);
+            int[] res = analytic.Decided(directory+"Analytics/PruebaNaiveBayesInputs.txt", Analytic.TYPE_INT);
             for (int i = 0; i < res.Length; i++)
             {
                 Assert.IsTrue(outp[i] == res[i],"el valor: "+res[i] );
@@ -99,7 +102,7 @@ namespace UnitTestProject
             setUpStage1();
 
             int[] outp = { 1, 1, 1, 1, 0, 0, 0, 0 };
-            int[] res = analytic.Decided("C:/Users/Administrador/Documents/GitHub/FeelSoft/FeelSoftSolution/Analytics/PruebaNaiveBayesInputs.txt", Analytic.TYPE_INT);
+            int[] res = analytic.Decided(directory+"Analytics/PruebaNaiveBayesInputs.txt", Analytic.TYPE_INT);
             for (int i = 0; i < res.Length; i++)
             {
                 Assert.IsTrue(outp[i] == res[i]);

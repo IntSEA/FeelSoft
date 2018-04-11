@@ -7,6 +7,7 @@ namespace SocialNetworkConnection
 {
     public interface IQueryConfiguration
     {
+        string Name { get; set; }
         IList<string> Keywords { get; set; }
         Locations Location { get; set; }
         DateTime SinceDate { get; set; }
@@ -16,6 +17,9 @@ namespace SocialNetworkConnection
         SearchTypes SearchType { get; set; }
         string Geo { get; set; }
         int MaxPublicationCount { get; set; }
+        int MaxResponsesCount { get; set; }
+        string ToExportFormat();
+
 
        
     }

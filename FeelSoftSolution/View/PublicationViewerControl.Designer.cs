@@ -38,12 +38,19 @@ namespace View
             this.btnNext = new System.Windows.Forms.Button();
             this.btnBefore = new System.Windows.Forms.Button();
             this.tbxPublication = new System.Windows.Forms.TextBox();
+            this.gbxFunctions = new System.Windows.Forms.GroupBox();
+            this.btnImportPublications = new System.Windows.Forms.Button();
+            this.btnExportPublications = new System.Windows.Forms.Button();
+            this.btnSavePublications = new System.Windows.Forms.Button();
+            this.btnViewFullText = new System.Windows.Forms.Button();
             this.gbxPublications.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
+            this.gbxFunctions.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbxPublications
             // 
+            this.gbxPublications.Controls.Add(this.btnViewFullText);
             this.gbxPublications.Controls.Add(this.lblPublication);
             this.gbxPublications.Controls.Add(this.numericUpDown);
             this.gbxPublications.Controls.Add(this.lblTotalPublications);
@@ -85,7 +92,7 @@ namespace View
             0,
             0});
             this.numericUpDown.Name = "numericUpDown";
-            this.numericUpDown.Size = new System.Drawing.Size(32, 20);
+            this.numericUpDown.Size = new System.Drawing.Size(41, 20);
             this.numericUpDown.TabIndex = 19;
             this.numericUpDown.Value = new decimal(new int[] {
             1,
@@ -131,16 +138,71 @@ namespace View
             this.tbxPublication.Size = new System.Drawing.Size(330, 162);
             this.tbxPublication.TabIndex = 15;
             // 
+            // gbxFunctions
+            // 
+            this.gbxFunctions.Controls.Add(this.btnImportPublications);
+            this.gbxFunctions.Controls.Add(this.btnExportPublications);
+            this.gbxFunctions.Controls.Add(this.btnSavePublications);
+            this.gbxFunctions.Location = new System.Drawing.Point(27, 323);
+            this.gbxFunctions.Name = "gbxFunctions";
+            this.gbxFunctions.Size = new System.Drawing.Size(386, 113);
+            this.gbxFunctions.TabIndex = 1;
+            this.gbxFunctions.TabStop = false;
+            this.gbxFunctions.Text = "Funciones";
+            // 
+            // btnImportPublications
+            // 
+            this.btnImportPublications.Location = new System.Drawing.Point(207, 19);
+            this.btnImportPublications.Name = "btnImportPublications";
+            this.btnImportPublications.Size = new System.Drawing.Size(159, 23);
+            this.btnImportPublications.TabIndex = 2;
+            this.btnImportPublications.Text = "Importar publicaciones";
+            this.btnImportPublications.UseVisualStyleBackColor = true;
+            this.btnImportPublications.Click += new System.EventHandler(this.BtnImportPublications_Click);
+            // 
+            // btnExportPublications
+            // 
+            this.btnExportPublications.Location = new System.Drawing.Point(117, 71);
+            this.btnExportPublications.Name = "btnExportPublications";
+            this.btnExportPublications.Size = new System.Drawing.Size(165, 23);
+            this.btnExportPublications.TabIndex = 1;
+            this.btnExportPublications.Text = "Exportar publicaciónes";
+            this.btnExportPublications.UseVisualStyleBackColor = true;
+            this.btnExportPublications.Click += new System.EventHandler(this.BtnExportPublications_Click);
+            // 
+            // btnSavePublications
+            // 
+            this.btnSavePublications.Location = new System.Drawing.Point(27, 19);
+            this.btnSavePublications.Name = "btnSavePublications";
+            this.btnSavePublications.Size = new System.Drawing.Size(165, 23);
+            this.btnSavePublications.TabIndex = 0;
+            this.btnSavePublications.Text = "Guardar publicaciones";
+            this.btnSavePublications.UseVisualStyleBackColor = true;
+            this.btnSavePublications.Click += new System.EventHandler(this.BtnSavePublications_Click);
+            // 
+            // btnViewFullText
+            // 
+            this.btnViewFullText.Location = new System.Drawing.Point(27, 240);
+            this.btnViewFullText.Name = "btnViewFullText";
+            this.btnViewFullText.Size = new System.Drawing.Size(165, 23);
+            this.btnViewFullText.TabIndex = 21;
+            this.btnViewFullText.Text = "Ver texto completo";
+            this.btnViewFullText.UseVisualStyleBackColor = true;
+            this.btnViewFullText.Visible = false;
+            this.btnViewFullText.Click += new System.EventHandler(this.BtnViewFullText_Click);
+            // 
             // PublicationViewerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.gbxFunctions);
             this.Controls.Add(this.gbxPublications);
             this.Name = "PublicationViewerControl";
-            this.Size = new System.Drawing.Size(436, 331);
+            this.Size = new System.Drawing.Size(455, 473);
             this.gbxPublications.ResumeLayout(false);
             this.gbxPublications.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).EndInit();
+            this.gbxFunctions.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -155,6 +217,12 @@ namespace View
         private System.Windows.Forms.Button btnBefore;
         private System.Windows.Forms.TextBox tbxPublication;
         private IPublication[] publications;
-        private int indexCurrentPublication;
+        private int indexCurrentPublications;
+        private System.Windows.Forms.GroupBox gbxFunctions;
+        private System.Windows.Forms.Button btnSavePublications;
+        private System.Windows.Forms.Button btnImportPublications;
+        private System.Windows.Forms.Button btnExportPublications;
+        private WebScrapperViewer main;
+        private System.Windows.Forms.Button btnViewFullText;
     }
 }

@@ -3,7 +3,7 @@
   <Class Name="SocialNetworkConnection.PublicationSearcher">
     <Position X="10.5" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAIAAAA=</HashCode>
       <FileName>PublicationSearcher.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -22,7 +22,7 @@
   <Class Name="SocialNetworkConnection.Publication">
     <Position X="1.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAAAAACAAAAAwAAAIBAAACAACEAAAAhAABIAAAACA=</HashCode>
+      <HashCode>AQACAAAACAAAAAwAAAIBAAACAACEAAAAhAABIAAAAiA=</HashCode>
       <FileName>Publication.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -30,7 +30,7 @@
   <Class Name="SocialNetworkConnection.QueryConfiguration">
     <Position X="9" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IACAACAQCAAAAAhAAAIAUAACABAAAAAAAAAAAAAAkAA=</HashCode>
+      <HashCode>IACAACAQCAAAAAhEEAIAUAACABAAAAAAABAAAAAAkAA=</HashCode>
       <FileName>QueryConfiguration.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -46,7 +46,7 @@
   <Interface Name="SocialNetworkConnection.IPublication">
     <Position X="1.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAAAAACAAAAAAAAAIAAAAAAACAAAAABAABIAAAAAA=</HashCode>
+      <HashCode>AQACAAAACAAAAAAAAAIAAAAAAACAAAAABAABIAAAAAA=</HashCode>
       <FileName>IPublication.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -65,7 +65,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="SocialNetworkConnection.ISearchDataSet">
-    <Position X="4" Y="3.75" Width="1.5" />
+    <Position X="4.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACBIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
       <FileName>ISearchDataSet.cs</FileName>
@@ -78,7 +78,7 @@
   <Enum Name="SocialNetworkConnection.Filters">
     <Position X="6.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAEAAEAAAg=</HashCode>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAEAAEAAAg=</HashCode>
       <FileName>Filters.cs</FileName>
     </TypeIdentifier>
   </Enum>

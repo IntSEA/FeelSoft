@@ -1,16 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 using SocialNetworkConnection;
 using Tweetinvi;
 using Tweetinvi.Models;
 using Tweetinvi.Parameters;
+using HtmlAgilityPack;
+using System.IO;
 
 namespace TwitterConnection
 {
     public class TwitterSearcher : PublicationSearcher
     {
+        public static WebClient webClient = new WebClient();
+        public static HtmlDocument htmlDocument = new HtmlDocument();
+
         public TwitterSearcher(string credential) : base(credential)
         {
 
@@ -21,58 +31,116 @@ namespace TwitterConnection
             List<IPublication> publications = new List<IPublication>();
             foreach (var item in queriesConfigurations)
             {
-
                 publications.AddRange(SearchPublications(item));
-
             }
             return publications;
         }
 
-        private IList<IPublication> ParseTweets(IEnumerable<ITweetWithSearchMetadata> tweets)
+        private IList<IPublication> ReorganizeSearches(IList<IPublication> publications, int maxPublicationCount)
         {
-            IList<IPublication> publications = new List<IPublication>();
-            foreach (var item in tweets)
+            IList<IPublication> responsePublications = new List<IPublication>();
+            if (publications.Count > maxPublicationCount)
             {
-                publications.Add(ParseTweet(item));
+                Random random = new Random();
+
+                for (int i = 0; i < maxPublicationCount; i++)
+                {
+                    int toAdd = random.Next(0, publications.Count);
+                    responsePublications.Add(publications[toAdd]);
+                    publications.RemoveAt(toAdd);
+                }
+            }
+            else
+            {
+                responsePublications = publications;
             }
 
-            return publications;
+            return responsePublications;
         }
 
-        private IPublication ParseTweet(ITweetWithSearchMetadata tweet)
+        private void ParseTweets(IEnumerable<ITweet> tweets, IList<IPublication> publications)
         {
-            IPublication publication = new Publication()
+            if (tweets != null)
             {
-                Message = tweet.Text,
+                ITweet[] arrayTweets = tweets.ToArray();
+                for (int i = 0; i < arrayTweets.Length; i++)
+                {
+                    IPublication parsedPublication = ParseTweetToPublication(arrayTweets[i]);
+                    if (arrayTweets[i] == null)
+                    {
+                        throw new ArgumentException("No deberia suceder.");
+                    }
+
+                    if (parsedPublication != null)
+                    {
+                        publications.Add(parsedPublication);
+                    }
+                }
+            }
+        }
+
+
+        private IPublication ParseTweetToPublication(ITweet tweet)
+        {
+            string message = "";
+            message = tweet.FullText ?? (tweet.Text + tweet.Suffix);
+            IPublication publication = null;
+            long id = tweet.Id;
+
+            if (String.IsNullOrEmpty(message))
+            {
+                if (String.IsNullOrEmpty(tweet.FullText))
+                {
+
+                    message = tweet.Prefix + tweet.Text + tweet.Suffix;
+                }
+                else
+                {
+                    message = tweet.FullText;
+                }
+            }
+
+            publication = new Publication()
+            {
+                Id = "Twitter:" + id,
+                Message = message,
                 WroteBy = tweet.CreatedBy.Name,
                 CreateDate = tweet.TweetLocalCreationDate,
 
             };
 
             return publication;
-
-
         }
 
         public override IList<IPublication> SearchPublications(IQueryConfiguration queryConfiguration)
         {
-            List<IPublication> publications = new List<IPublication>();
+            IList<IPublication> publications = new List<IPublication>();
+            int totalPublications = queryConfiguration.MaxPublicationCount;
+            int totalSeracheByKeyword = queryConfiguration.MaxPublicationCount / queryConfiguration.Keywords.Count;
+            queryConfiguration.MaxPublicationCount = totalSeracheByKeyword + 500;
             foreach (var key in queryConfiguration.Keywords)
             {
-
-
                 ISearchTweetsParameters parameters = ParseSearchTweetsParameters(queryConfiguration, key);
+                IEnumerable<ITweet> tweets = Search.SearchTweets(parameters);
+                ParseTweets(tweets, publications);
+                if (publications.Count > totalPublications)
+                {
+                    break;
+                }
 
-                publications.AddRange(ParseTweets(Search.SearchTweetsWithMetadata(parameters).Tweets));
 
             }
-
+            queryConfiguration.MaxPublicationCount = totalPublications;
+            publications = ReorganizeSearches(publications, queryConfiguration.MaxPublicationCount);
             return publications;
         }
 
         private ISearchTweetsParameters ParseSearchTweetsParameters(IQueryConfiguration queryConfiguration, string key)
         {
-            ISearchTweetsParameters parameters = new SearchTweetsParameters(key);
+            ISearchTweetsParameters parameters = new SearchTweetsParameters(key)
+            {
+                MaximumNumberOfResults = queryConfiguration.MaxPublicationCount
+            };
             ParseFilter(parameters, queryConfiguration);
             ParseLanguage(parameters, queryConfiguration);
             ParseLocation(parameters, queryConfiguration);
@@ -86,11 +154,11 @@ namespace TwitterConnection
 
         private void ParseSearchDates(ISearchTweetsParameters parameters, IQueryConfiguration queryConfiguration)
         {
-            if (queryConfiguration.SinceDate.CompareTo(QueryConfiguration.NONE_DATE)!=0)
+            if (queryConfiguration.SinceDate.CompareTo(QueryConfiguration.NONE_DATE) != 0)
             {
                 parameters.Since = queryConfiguration.SinceDate;
             }
-            if (queryConfiguration.UntilDate.CompareTo(QueryConfiguration.NONE_DATE)!=0)
+            if (queryConfiguration.UntilDate.CompareTo(QueryConfiguration.NONE_DATE) != 0)
             {
                 parameters.Until = queryConfiguration.UntilDate;
             }

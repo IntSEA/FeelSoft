@@ -35,5 +35,10 @@ namespace View
             DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
+        internal void SetQueryConfiguration(IQueryConfiguration queryConfiguration)
+        {
+            queryConfigurationControl.SetQueryConfiguration(queryConfiguration);
+        }
     }
 }

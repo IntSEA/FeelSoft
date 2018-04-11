@@ -259,3 +259,8 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+*.csproj
+*.cs
+FeelSoftSolution/ReportViewer/Properties/Resources.resx
+FeelSoftSolution/ReportViewer/Properties/Settings.settings
+FeelSoftSolution/ReportViewer/App.config

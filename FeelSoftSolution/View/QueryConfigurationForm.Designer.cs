@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.contentPane = new System.Windows.Forms.Panel();
-            this.queryConfigurationControl = new View.QueryConfigurationControl();
             this.btnCreateQueryConfiguration = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.queryConfigurationControl = new View.QueryConfigurationControl();
             this.contentPane.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,13 +43,6 @@
             this.contentPane.Name = "contentPane";
             this.contentPane.Size = new System.Drawing.Size(474, 354);
             this.contentPane.TabIndex = 0;
-            // 
-            // queryConfigurationControl
-            // 
-            this.queryConfigurationControl.Location = new System.Drawing.Point(4, 4);
-            this.queryConfigurationControl.Name = "queryConfigurationControl";
-            this.queryConfigurationControl.Size = new System.Drawing.Size(462, 507);
-            this.queryConfigurationControl.TabIndex = 0;
             // 
             // btnCreateQueryConfiguration
             // 
@@ -71,6 +64,13 @@
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
+            // queryConfigurationControl
+            // 
+            this.queryConfigurationControl.Location = new System.Drawing.Point(4, 4);
+            this.queryConfigurationControl.Name = "queryConfigurationControl";
+            this.queryConfigurationControl.Size = new System.Drawing.Size(462, 592);
+            this.queryConfigurationControl.TabIndex = 0;
             // 
             // QueryConfigurationForm
             // 

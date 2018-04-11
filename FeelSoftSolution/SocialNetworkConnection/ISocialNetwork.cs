@@ -15,5 +15,6 @@ namespace SocialNetworkConnection
         IList<IPublication> Search(IQueryConfiguration queryConfiguration);
         IList<IPublication> GetFoundPublications();
         IList<IQueryConfiguration> GetQueriesConfiguration();
+       
     }
 }

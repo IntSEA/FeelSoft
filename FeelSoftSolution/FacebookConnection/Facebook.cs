@@ -16,21 +16,17 @@ namespace FacebookConnection
     public class Facebook : SocialNetwork
     {
         public const string GRAPH_URI = "https://graph.facebook.com/v2.12/";
-
-
-        //README: this credential is a test crredential, therefore, it'd can generate errors.
-        public const string DEFAULT_CREDENTIAL = "EAACgYLKRHbUBALYBzCsopu3EK6a9HhWfpnJxKttIxMoYgDfB" +
-            "YAiLeVuL3yHVgvKZB01cvkk2EQOHOf8p8eRHp2madZBS2xL4njGbympNepRlPQ6tfjpG5gwdTAvZCZAMhwanfLjr" +
-            "qU7CBJ0fpDa7pYd1XTrLZC41zKDT90xXNELnwtZB4KLEhe";
+        private IDictionary<string,string> pages;      
 
 
         bool revalidate;
 
+        public IDictionary<string,string> Pages { get => pages; set => pages = value; }
 
         public Facebook(string accessToken) : base()
         {
             HttpClient client = InitializeClient();
-
+            InitializePages();
             Searcher = new FacebookSearcher(client, accessToken);
             SetName("Facebook");
         }
@@ -42,8 +38,15 @@ namespace FacebookConnection
             revalidate = true;
 
             InitializeSearcherWithRequestToken(client);
+            InitializePages();
 
             SetName("Facebook");
+        }
+
+        private void InitializePages()
+        {
+            pages = new Dictionary<string, string>();
+
         }
 
         private void InitializeWithDynamicToken(string path, HttpClient client)
@@ -156,7 +159,9 @@ namespace FacebookConnection
             {
                 return Searcher.SearchPublications(queriesConfigurations);
             }
+#pragma warning disable CS0168 // La variable está declarada pero nunca se usa
             catch (HttpRequestException httpException)
+#pragma warning restore CS0168 // La variable está declarada pero nunca se usa
             {
                 if (revalidate)
                 {
@@ -169,6 +174,12 @@ namespace FacebookConnection
                     return null;
                 }
             }
+#pragma warning disable CS0168 // La variable está declarada pero nunca se usa
+            catch (ArgumentException argumentExeption)
+#pragma warning restore CS0168 // La variable está declarada pero nunca se usa
+            {
+                return null;
+            }
         }
 
         public override IList<IPublication> Search(IQueryConfiguration queryConfiguration)
@@ -178,7 +189,9 @@ namespace FacebookConnection
                 return Searcher.SearchPublications(queryConfiguration);
 
             }
-            catch (HttpRequestException httpException )
+#pragma warning disable CS0168 // La variable está declarada pero nunca se usa
+            catch (HttpRequestException httpException)
+#pragma warning restore CS0168 // La variable está declarada pero nunca se usa
             {
                 if (revalidate)
                 {
@@ -190,15 +203,6 @@ namespace FacebookConnection
             }
            
         }
-
-        public override IList<IPublication> GetFoundPublications()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override IList<IQueryConfiguration> GetQueriesConfiguration()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

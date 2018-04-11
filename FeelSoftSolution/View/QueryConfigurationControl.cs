@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using SocialNetworkConnection;
+using System.IO;
+using System.Threading;
+using static System.Windows.Forms.ComboBox;
 
 namespace View
 {
@@ -22,17 +25,161 @@ namespace View
         private void BtnAddKeyword_Click(object sender, EventArgs e)
         {
             string keyword = Interaction.InputBox("Ingrese la palabra clave");
-            
+
             if (String.IsNullOrEmpty(keyword) || String.IsNullOrWhiteSpace(keyword))
             {
                 MessageBox.Show("Ingrese una clave no vacia");
             }
             else
             {
-                cbxKeywords.Items.Add(keyword);
-                cbxKeywords.SelectedItem = cbxKeywords.Items.Count > 0 ? cbxKeywords.Items[0] : "";
+                AddKeywordToCBX(keyword);
+               
 
             }
+
+        }
+
+        private delegate void AddKeywordToCBXDelegate(string keyword);
+
+        private void AddKeywordToCBX(string keyword)
+        {
+            cbxKeywords.Items.Add(keyword);
+            cbxKeywords.SelectedItem = cbxKeywords.Items.Count > 0 ? cbxKeywords.Items[0] : "";
+        }
+
+        internal void SetQueryConfiguration(IQueryConfiguration queryConfiguration)
+        {
+            SetName(queryConfiguration.Name);
+            SetKeywords(queryConfiguration.Keywords.ToArray());
+            SetLocation(queryConfiguration.Location);
+            SetSearchType(queryConfiguration.SearchType);
+            SetLanguage(queryConfiguration.Language);
+            SetFilter(queryConfiguration.Filter);
+            SetSinceDate(queryConfiguration.SinceDate);
+            SetUntilDate(queryConfiguration.UntilDate);
+            SetTotalPublicationsToSearch(queryConfiguration.MaxPublicationCount);
+            SetTotalResponsesInPublication(queryConfiguration.MaxResponsesCount);
+      
+        }
+
+        private void SetName(string name)
+        {
+            tbxName.Text = name;
+        }
+
+        private void SetTotalResponsesInPublication(int maxResponsesCount)
+        {
+            nudTotalResponses.Value = maxResponsesCount;
+        }
+
+        private void SetTotalPublicationsToSearch(int maxPublicationCount)
+        {
+            nudTotalPublications.Value = maxPublicationCount;
+        }
+
+        private void SetUntilDate(DateTime untilDate)
+        {
+            dtpUntilDate.Value = untilDate;
+        }
+
+        private void SetSinceDate(DateTime sinceDate)
+        {
+            dtpSinceDate.Value = sinceDate;
+        }
+
+        private void SetFilter(Filters filter)
+        {
+            switch (filter)
+            {
+                case Filters.None:
+                    {
+                        rdbNone.Checked = true;
+                        break;
+                    }
+                case Filters.Video:
+                    {
+                        rdbVideo.Checked = true;
+                        break;
+                    }
+                case Filters.Image:
+                    {
+                        rdbImage.Checked=true;
+                        break;
+                    }
+                case Filters.News:
+                    {
+                        rdbNews.Checked = true;
+                        break;
+                    }
+                case Filters.Hashtag:
+                    {
+                        rdbHashtag.Checked = true;
+                        break;
+                    }
+            }
+        }
+
+        private void SetLanguage(Languages language)
+        {
+            switch (language)
+            {
+                case Languages.Spanish:
+                    {
+                        rdbSpanish.Checked = true;
+                        break;
+                    }
+                case Languages.English:
+                    {
+                        rdbEnglish.Checked = true;
+                        break;
+                    }
+            }
+        }
+
+        private void SetSearchType(SearchTypes searchType)
+        {
+            switch (searchType)
+            {
+                case SearchTypes.Mixed:
+                    {
+                        rdbMixed.Checked = true;
+                        break;
+                    }
+                case SearchTypes.Popular:
+                    {
+                        rdbPopular.Checked = true;
+                        break;
+                    }
+                case SearchTypes.Recent:
+                    {
+                        rdbRecent.Checked = true;
+                        break;
+                    }
+            }
+        }
+
+        private void SetLocation(Locations location)
+        {
+            switch (location)
+            {
+                case Locations.Colombia:
+                    {
+                        rdbColombia.Checked = true;
+                        break;
+                    }
+                case Locations.USA:
+                    {
+                        rdbUsa.Checked = true;
+                        break;
+                    }
+
+            }
+        }
+
+        private void SetKeywords(string[] keywords)
+        {
+            cbxKeywords.Items.Clear();
+            cbxKeywords.Items.AddRange(keywords);
 
         }
 
@@ -48,9 +195,10 @@ namespace View
 
         private IQueryConfiguration CreateQueryConfiguration()
         {
-            
+
             queryConfiguration = new QueryConfiguration();
-            AddKeyWords(queryConfiguration);
+            AddName(queryConfiguration);
+            AddKeywords(queryConfiguration);
             AddLocation(queryConfiguration);
             AddSearchTypes(queryConfiguration);
             AddLanguajes(queryConfiguration);
@@ -58,21 +206,31 @@ namespace View
             AddSinceDate(queryConfiguration);
             AddUntilDate(queryConfiguration);
             AddTotalSearches(queryConfiguration);
-
+            AddTotalResponses(queryConfiguration);
 
             return queryConfiguration;
         }
 
+        private void AddName(IQueryConfiguration queryConfiguration)
+        {
+            queryConfiguration.Name = tbxName.Text;
+        }
+
+        private void AddTotalResponses(IQueryConfiguration queryConfiguration)
+        {
+            queryConfiguration.MaxResponsesCount = (int)nudTotalResponses.Value;
+        }
+
         private void AddTotalSearches(IQueryConfiguration queryConfiguration)
         {
-            decimal value = nmudTotalPublications.Value;
-            if(value>0 && value < 5000)
+            decimal value = nudTotalPublications.Value;
+            if (value > 0 && value <= 10000)
             {
                 queryConfiguration.MaxPublicationCount = (int)value;
             }
             else
             {
-                queryConfiguration.MaxPublicationCount = 100;
+                queryConfiguration.MaxPublicationCount = 2000;
 
             }
 
@@ -137,6 +295,7 @@ namespace View
             queryConfiguration.UntilDate = dtpUntilDate.Value;
         }
 
+       
         private void AddLocation(IQueryConfiguration queryConfiguration)
         {
             if (rdbColombia.Checked)
@@ -149,7 +308,7 @@ namespace View
             }
         }
 
-        private void AddKeyWords(IQueryConfiguration queryConfiguration)
+        private void AddKeywords(IQueryConfiguration queryConfiguration)
         {
             IList<string> keywords = new List<string>();
             foreach (var item in cbxKeywords.Items)
@@ -164,6 +323,7 @@ namespace View
 
         private void BtnRemoveKeyword_Click(object sender, EventArgs e)
         {
+
             object removedObject = cbxKeywords.SelectedItem;
             if (removedObject == null)
             {
@@ -183,7 +343,49 @@ namespace View
                 }
             }
             cbxKeywords.Text = "";
-            cbxKeywords.SelectedItem =cbxKeywords.Items.Count>0 ?  cbxKeywords.Items[0] : "";
+            cbxKeywords.SelectedItem = cbxKeywords.Items.Count > 0 ? cbxKeywords.Items[0] : "";
         }
+
+      
+
+        private void BtnExportQueryConfiguration_Click(object sender, EventArgs e)
+        {
+            GetQueryConfiguration();
+
+        }
+
+        private void BtnImportClick(object sender, EventArgs e)
+        {
+            Thread thread = new Thread(OpenDialogInThread());
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+            
+        }
+
+        private ThreadStart OpenDialogInThread()
+        {
+            return () => { ShowOpenDialog(); };
+        }
+
+#pragma warning disable CS1998 // El método asincrónico carece de operadores "await" y se ejecutará de forma sincrónica
+        private async void ShowOpenDialog()
+#pragma warning restore CS1998 // El método asincrónico carece de operadores "await" y se ejecutará de forma sincrónica
+        {
+            OpenFileDialog openDialog = new OpenFileDialog();
+            if (DialogResult.OK == openDialog.ShowDialog())
+            {
+                StreamReader sr = new StreamReader(openDialog.OpenFile());
+                string keyword = "";
+                AddKeywordToCBXDelegate delegateMethod = new AddKeywordToCBXDelegate(AddKeywordToCBX);
+                while ((keyword = sr.ReadLine()) != null)
+                {
+                    this.Invoke(delegateMethod,keyword);
+                }
+
+                sr.Close();
+            }
+        }
+
+       
     }
 }

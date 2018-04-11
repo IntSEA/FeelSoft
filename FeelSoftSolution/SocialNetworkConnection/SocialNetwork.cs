@@ -12,19 +12,16 @@ namespace SocialNetworkConnection
         private string name;
         private PublicationSearcher searcher;
         private string credential;
-        private ISearchDataSet searchDataSet;
 
 
         public PublicationSearcher Searcher { get => searcher; set => searcher = value; }
-
         public string Credential { get => credential; set { credential = value; }}
 
-       
+
 
 
         public SocialNetwork()
         {
-            searchDataSet = new SearchDataSet();
         }
 
       
@@ -39,23 +36,22 @@ namespace SocialNetworkConnection
 
         public abstract IList<IPublication> Search(IQueryConfiguration queryConfiguration);
 
-        public abstract IList<IPublication> GetFoundPublications();
+        public IList<IPublication> GetFoundPublications()
+        {
+            return null;
+        }
 
-        public abstract IList<IQueryConfiguration> GetQueriesConfiguration();
+        public IList<IQueryConfiguration> GetQueriesConfiguration()
+        {
+            return null;
+        }
 
-        
+      
         public string Name
         {
             get => name;
         }
 
-
-
-        public ISearchDataSet SearchDataSet
-        {
-            get => searchDataSet;
-           
-        }
-       
+        
     }
 }

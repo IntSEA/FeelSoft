@@ -25,9 +25,16 @@ namespace View
 
         static void Main()
         {
+
+                  
+            
+
+            Main2();
+
 #pragma warning disable CS4014 // Ya que no se esperaba esta llamada, la ejecución del método actual continúa antes de que se complete la llamada
             Main2();
 #pragma warning restore CS4014 // Ya que no se esperaba esta llamada, la ejecución del método actual continúa antes de que se complete la llamada
+
         }
     }
 }

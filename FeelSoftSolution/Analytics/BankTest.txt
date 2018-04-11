@@ -1,0 +1,3 @@
+malo 2
+corrupto 3
+paraco -1

@@ -118,18 +118,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnalyticUnitTest.cs" />
     <Compile Include="TwitterUnitTest.cs" />
     <Compile Include="FacebookUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AnalyticDictionary\AnalyticDictionary.csproj">
+      <Project>{ebbfd0cb-c589-47fa-b954-4432f1a86d63}</Project>
+      <Name>AnalyticDictionary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Analytics\Analytics.csproj">
+      <Project>{ac298fa5-126e-444d-989f-56a84831ede9}</Project>
+      <Name>Analytics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FacebookConnection\FacebookConnection.csproj">
       <Project>{435bf8a2-aa2c-41de-b993-40aee4b11bca}</Project>
       <Name>FacebookConnection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NaiveBayes\NaiveBayes.csproj">
+      <Project>{a0a89a20-0800-4385-bbec-ad7aa0fb842a}</Project>
+      <Name>NaiveBayes</Name>
     </ProjectReference>
     <ProjectReference Include="..\SocialNetworkConnection\SocialNetworkConnection.csproj">
       <Project>{07de8bef-d893-4d9b-bbb1-c6e09b495c48}</Project>

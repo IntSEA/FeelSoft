@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AnalyticDictionary\AnalyticDictionary.csproj" />
+    <ProjectReference Include="..\Analytics\Analytics.csproj" />
+    <ProjectReference Include="..\NaiveBayes\NaiveBayes.csproj" />
+  </ItemGroup>
+
+</Project>

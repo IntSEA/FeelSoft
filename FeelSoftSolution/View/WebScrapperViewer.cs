@@ -15,7 +15,10 @@ namespace View
         {
             InitializeComponent();
             InitializeSocialNetworks();
-            InitializeDataset();
+
+         
+            //InitializeTests();
+
             IntializeControls();
         }
 
@@ -27,7 +30,7 @@ namespace View
         private void IntializeControls()
         {
             queriesControl.SetMain(this);
-            publicationViewerControl.SetMain(this);
+
         }
 
         private void InitializeSocialNetworks()
@@ -43,7 +46,6 @@ namespace View
 
         private void InitializeTwitter()
         {
-
             twitter = new TwitterConnection.Twitter();
             ParseTwitterCredentials(twitter.Credential, out string consumerKey, out string consumerSecret, out string accessToken, out string secretToken);
             TweetinviConfig.CurrentThreadSettings.TweetMode = TweetMode.Extended;

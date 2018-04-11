@@ -10,19 +10,18 @@
   <Class Name="SocialNetworkConnection.SocialNetwork">
     <Position X="6.25" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AgQAAAAEAAAQBAAAAAQAAAQAAAAEAAAAAAAAQAogAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAQBAAAAAQAAAQAAAAEAAAAAAAAQAogAAA=</HashCode>
       <FileName>SocialNetwork.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Searcher" />
-      <Property Name="SearchDataSet" />
     </ShowAsAssociation>
     <Lollipop Orientation="Left" Position="0.1" />
   </Class>
   <Class Name="SocialNetworkConnection.Publication">
     <Position X="1.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQACAAAACAAAAAwAAAIBAAACAACEAAAAhAABIAAAAiA=</HashCode>
+      <HashCode>AQACAAAICAAgAAwAAAIBAAAiAACEgAAAhCABIAIAAiA=</HashCode>
       <FileName>Publication.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -30,15 +29,15 @@
   <Class Name="SocialNetworkConnection.QueryConfiguration">
     <Position X="9" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IACAACAQCAAAAAhEEAIAUAACABAAAAAAABAAAAAAkAA=</HashCode>
+      <HashCode>YCCQECgQCIAAAApkEAIEUBQiABAEBAAAABAACCIgkiA=</HashCode>
       <FileName>QueryConfiguration.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SocialNetworkConnection.SearchDataSet">
-    <Position X="9.25" Y="3.25" Width="1.5" />
+    <Position X="11.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAACBIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAgA=</HashCode>
+      <HashCode>REACBIBAFAAAIEACAgAIBgAAAAyAAAAAAIAABEQAAgQ=</HashCode>
       <FileName>SearchDataSet.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -46,14 +45,14 @@
   <Interface Name="SocialNetworkConnection.IPublication">
     <Position X="1.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQACAAAACAAAAAAAAAIAAAAAAACAAAAABAABIAAAAAA=</HashCode>
+      <HashCode>AQACAAAACAAAAAAAAAIAAAAAAACAAAAABAABIAAAACA=</HashCode>
       <FileName>IPublication.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="SocialNetworkConnection.IQueryConfiguration">
-    <Position X="4" Y="5.75" Width="1.5" />
+    <Position X="3.5" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAACAQCAAAAABAAAIAAAAAABAAAAAAAAAAAAAAgAA=</HashCode>
+      <HashCode>AAAAECAQCAAAAABAAAIAAAQAABAAAAAAAAAAAAAAgCA=</HashCode>
       <FileName>IQueryConfiguration.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -65,9 +64,9 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="SocialNetworkConnection.ISearchDataSet">
-    <Position X="4.25" Y="3.75" Width="1.5" />
+    <Position X="4.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACBIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <HashCode>RAACBIBAAAAAAAAAAAAAAgAAAAQAAAAAAIAAAEAAAAA=</HashCode>
       <FileName>ISearchDataSet.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -97,7 +96,7 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="SocialNetworkConnection.SearchTypes">
-    <Position X="4" Y="8.75" Width="1.5" />
+    <Position X="4.25" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAQAAAAABAAAAAAA=</HashCode>
       <FileName>SearchTypes.cs</FileName>

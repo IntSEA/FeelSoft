@@ -203,11 +203,11 @@ namespace View
             string strIdPublication = publications[i].Id.Split(':')[1];
             long idTweet = long.Parse(strIdPublication);
             publications[i].Message = Twitter.ReadHtmlContent(idTweet);
-            Refresh del = new Refresh(RefreshTextBox);
+            RefreshViewer del = new RefreshViewer(RefreshTextBox);
             this.Invoke(del);
         }
 
-        delegate void Refresh();
+        public delegate void RefreshViewer();
 
         public void RefreshTextBox()
         {

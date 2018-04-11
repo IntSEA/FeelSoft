@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Analytics.Analytic">
+    <Position X="6.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgYBAAACIIAAQCCAAgAAAQFACACAgARQAAAIQAAA=</HashCode>
+      <FileName>Analytic.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="wordBank" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Analytics.WordBank">
+    <Position X="2" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAgAAACAAAAAAAAAAAAAAAAAAAAAACAAAAgAABA=</HashCode>
+      <FileName>WordBank.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Analytics.IAnalityc">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgABAAAAAAAAQAAAAAAAAQAACACAgAQQAAAIAAAA=</HashCode>
+      <FileName>IAnalityc.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

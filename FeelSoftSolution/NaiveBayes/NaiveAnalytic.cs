@@ -189,27 +189,15 @@ namespace NaiveBayes
         }
 
 
-        public override int[] Decided(int[][] input)
-        {
-            int[] ret = new int[input.Length];
-            for (int i = 0; i < ret.Length; i++)
-            {
-                ret[i] = Decided(input[i]);
-            }
-            return ret;
-        }
+        
         public override int Decided(int[] input)
         {
             machingLearn.Decide(input, out int ret);
             return ret;
         }
 
-        public override int[] Decided(string path, int type)
-        {
-            Classify(path, type);
-            int[][] input = ToProcesNumber.ToArray();
-            return Decided(input);
+       
 
-         }
+        
     }
 }

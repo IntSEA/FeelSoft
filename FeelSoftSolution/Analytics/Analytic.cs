@@ -47,6 +47,7 @@ namespace Analytics
         }
         public int[] ConvertTextInNumber(string[] msm)
         {
+          
             int[] retor = null;
             if (wordBank != null)
             {
@@ -183,10 +184,23 @@ namespace Analytics
             ImportWordBank(path);
         }
 
-        public abstract int[] Decided(int[][] input);
+        public  int[] Decided(int[][] input)
+        {
+            int[] ret = new int[input.Length];
+            for (int i = 0; i < ret.Length; i++)
+            {
+                ret[i] = Decided(input[i]);
+            }
+            return ret;
+        }
         public abstract int Decided(int[] input);
 
-        public abstract int[] Decided(string path,int type);
+        public  int[] Decided(string path,int type)
+        {
+            Classify(path, type);
+            int[][] input = ToProcesNumber.ToArray();
+            return Decided(input);
+        }
         public void saveToProcesNumber(string path)
         {
             StreamWriter es = new StreamWriter(path);
@@ -205,5 +219,12 @@ namespace Analytics
             es.Close();
         }
 
-     }
+        public int Decided(string[] input)
+        {
+            int[] inp = ConvertTextInNumber(input);
+            return Decided(inp);
+        }
+        
+        
+    }
 }

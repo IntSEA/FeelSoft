@@ -138,7 +138,7 @@ namespace NaiveBayes
                     good++;
                 }
             }
-            failDecided = (res.Length - good) / (double)res.Length;
+            failDecided = (double)((res.Length - good) / (double)res.Length);
         }
 
         private void CalculateFailTrainig()
@@ -152,7 +152,7 @@ namespace NaiveBayes
                     good++;
                 }
             }
-            failTrainig = (res.Length - good)/(double)res.Length;
+            failTrainig = (double)((res.Length - good)/(double)res.Length);
         }
 
         private void loadDataNumber(string path)

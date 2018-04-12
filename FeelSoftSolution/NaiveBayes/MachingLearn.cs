@@ -55,8 +55,8 @@ namespace NaiveBayes
                     }
                     ret = sum > pro ? a : ret;
                     pro = sum > pro ? sum : pro;
-                    Console.Write("" + sum + " " + pro);
-                    Console.WriteLine();
+                    //Console.Write("" + sum + " " + pro);
+                    //Console.WriteLine();
 
                 }
             }

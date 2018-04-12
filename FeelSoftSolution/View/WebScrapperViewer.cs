@@ -365,5 +365,9 @@ namespace View
             this.Invoke(del, -1);
         }
 
+        private void splitContainer_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

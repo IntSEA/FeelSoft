@@ -45,6 +45,7 @@
       <HintPath>..\packages\System.Reflection.TypeExtensions.4.4.0\lib\net461\System.Reflection.TypeExtensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -79,6 +80,9 @@
     </Reference>
     <Reference Include="Tweetinvi.WebLogic, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\TweetinviAPI.2.1.0\lib\net45\Tweetinvi.WebLogic.dll</HintPath>
+    </Reference>
+    <Reference Include="View">
+      <HintPath>obj\Debug\View.exe</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

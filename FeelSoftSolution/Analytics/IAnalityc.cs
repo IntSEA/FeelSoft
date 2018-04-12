@@ -7,6 +7,7 @@ namespace Analytics
        
         int[] Decided(int[][] input);
         int Decided(int[] input);
+        int Decided(string[] input);
         int[] Decided(string path,int type);
         void ImportWordBank(string path);
         int[] ConvertTextInNumber(string[] msm);

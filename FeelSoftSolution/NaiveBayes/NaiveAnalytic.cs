@@ -138,7 +138,7 @@ namespace NaiveBayes
                     good++;
                 }
             }
-            failDecided = (res.Length - good) / (double)res.Length;
+            failDecided = (double)((res.Length - good) / (double)res.Length);
         }
 
         private void CalculateFailTrainig()
@@ -152,7 +152,7 @@ namespace NaiveBayes
                     good++;
                 }
             }
-            failTrainig = (res.Length - good)/(double)res.Length;
+            failTrainig = (double)((res.Length - good)/(double)res.Length);
         }
 
         private void loadDataNumber(string path)
@@ -189,27 +189,15 @@ namespace NaiveBayes
         }
 
 
-        public override int[] Decided(int[][] input)
-        {
-            int[] ret = new int[input.Length];
-            for (int i = 0; i < ret.Length; i++)
-            {
-                ret[i] = Decided(input[i]);
-            }
-            return ret;
-        }
+        
         public override int Decided(int[] input)
         {
             machingLearn.Decide(input, out int ret);
             return ret;
         }
 
-        public override int[] Decided(string path, int type)
-        {
-            Classify(path, type);
-            int[][] input = ToProcesNumber.ToArray();
-            return Decided(input);
+       
 
-         }
+        
     }
 }

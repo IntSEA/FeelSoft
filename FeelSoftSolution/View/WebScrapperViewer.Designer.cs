@@ -55,6 +55,10 @@ namespace View
             this.splitContainer.Panel1.Controls.Add(this.lblSelectSocialNetwork);
             this.splitContainer.Panel1.Controls.Add(this.rdbFacebook);
             this.splitContainer.Panel1.Controls.Add(this.publicationViewerControl);
+            // 
+            // splitContainer.Panel2
+            // 
+            this.splitContainer.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer_Panel2_Paint);
             this.splitContainer.Size = new System.Drawing.Size(836, 706);
             this.splitContainer.SplitterDistance = 536;
             this.splitContainer.TabIndex = 0;
@@ -121,7 +125,7 @@ namespace View
             this.ClientSize = new System.Drawing.Size(886, 730);
             this.Controls.Add(this.splitContainer);
             this.Name = "WebScrapperViewer";
-            this.Text = "Form1";
+            this.Text = "FeelSoft";
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();

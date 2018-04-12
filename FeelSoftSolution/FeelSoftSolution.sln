@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qualification", "Qualificat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextualProcessor", "TextualProcessor\TextualProcessor.csproj", "{C8B42555-E593-4C62-8216-7DBE8FEFF67B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reporte", "Reporte\Reporte.csproj", "{D49F067C-B1CD-404B-AC17-E82623FFA659}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +86,10 @@ Global
 		{C8B42555-E593-4C62-8216-7DBE8FEFF67B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8B42555-E593-4C62-8216-7DBE8FEFF67B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8B42555-E593-4C62-8216-7DBE8FEFF67B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D49F067C-B1CD-404B-AC17-E82623FFA659}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D49F067C-B1CD-404B-AC17-E82623FFA659}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D49F067C-B1CD-404B-AC17-E82623FFA659}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D49F067C-B1CD-404B-AC17-E82623FFA659}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

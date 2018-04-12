@@ -32,10 +32,10 @@ namespace View
         {
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.rdbTwitter = new System.Windows.Forms.RadioButton();
+            this.queriesControl = new View.QueriesControl();
             this.lblLoad = new System.Windows.Forms.Label();
             this.lblSelectSocialNetwork = new System.Windows.Forms.Label();
             this.rdbFacebook = new System.Windows.Forms.RadioButton();
-            this.queriesControl = new View.QueriesControl();
             this.publicationViewerControl = new View.PublicationViewerControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -55,6 +55,10 @@ namespace View
             this.splitContainer.Panel1.Controls.Add(this.lblSelectSocialNetwork);
             this.splitContainer.Panel1.Controls.Add(this.rdbFacebook);
             this.splitContainer.Panel1.Controls.Add(this.publicationViewerControl);
+            // 
+            // splitContainer.Panel2
+            // 
+            this.splitContainer.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer_Panel2_Paint);
             this.splitContainer.Size = new System.Drawing.Size(836, 706);
             this.splitContainer.SplitterDistance = 536;
             this.splitContainer.TabIndex = 0;
@@ -69,6 +73,13 @@ namespace View
             this.rdbTwitter.Text = "Twitter";
             this.rdbTwitter.UseVisualStyleBackColor = true;
             this.rdbTwitter.CheckedChanged += new System.EventHandler(this.RdbCheckedChanged);
+            // 
+            // queriesControl
+            // 
+            this.queriesControl.Location = new System.Drawing.Point(27, 28);
+            this.queriesControl.Name = "queriesControl";
+            this.queriesControl.Size = new System.Drawing.Size(421, 204);
+            this.queriesControl.TabIndex = 2;
             // 
             // lblLoad
             // 
@@ -100,13 +111,6 @@ namespace View
             this.rdbFacebook.UseVisualStyleBackColor = true;
             this.rdbFacebook.CheckedChanged += new System.EventHandler(this.RdbCheckedChanged);
             // 
-            // queriesControl
-            // 
-            this.queriesControl.Location = new System.Drawing.Point(27, 28);
-            this.queriesControl.Name = "queriesControl";
-            this.queriesControl.Size = new System.Drawing.Size(421, 204);
-            this.queriesControl.TabIndex = 2;
-            // 
             // publicationViewerControl
             // 
             this.publicationViewerControl.Location = new System.Drawing.Point(12, 241);
@@ -121,7 +125,7 @@ namespace View
             this.ClientSize = new System.Drawing.Size(886, 730);
             this.Controls.Add(this.splitContainer);
             this.Name = "WebScrapperViewer";
-            this.Text = "Form1";
+            this.Text = "FeelSoft";
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();

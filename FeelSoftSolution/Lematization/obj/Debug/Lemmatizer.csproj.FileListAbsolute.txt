@@ -15,3 +15,9 @@ C:\Users\bayro\Downloads\LastFeelSoft\UltimeFeelSoft\FeelSoft-master\FeelSoftSol
 C:\Users\bayro\Downloads\LastFeelSoft\UltimeFeelSoft\FeelSoft-master\FeelSoftSolution\Lematization\obj\Debug\Lemmatizer.csproj.CoreCompileInputs.cache
 C:\Users\bayro\Downloads\LastFeelSoft\UltimeFeelSoft\FeelSoft-master\FeelSoftSolution\Lematization\obj\Debug\Lematization.dll
 C:\Users\bayro\Downloads\LastFeelSoft\UltimeFeelSoft\FeelSoft-master\FeelSoftSolution\Lematization\obj\Debug\Lematization.pdb
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\Lematization\bin\Debug\Lematization.dll
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\Lematization\bin\Debug\Lematization.pdb
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\Lematization\obj\Debug\Lemmatizer.csprojResolveAssemblyReference.cache
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\Lematization\obj\Debug\Lemmatizer.csproj.CoreCompileInputs.cache
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\Lematization\obj\Debug\Lematization.dll
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\Lematization\obj\Debug\Lematization.pdb

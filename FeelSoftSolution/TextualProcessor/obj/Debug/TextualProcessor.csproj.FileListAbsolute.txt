@@ -18,3 +18,9 @@ C:\Users\bayro\Downloads\LastFeelSoft\UltimeFeelSoft\FeelSoft-master\FeelSoftSol
 C:\Users\bayro\Downloads\LastFeelSoft\UltimeFeelSoft\FeelSoft-master\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.csproj.CoreCompileInputs.cache
 C:\Users\bayro\Downloads\LastFeelSoft\UltimeFeelSoft\FeelSoft-master\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.dll
 C:\Users\bayro\Downloads\LastFeelSoft\UltimeFeelSoft\FeelSoft-master\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.pdb
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.csprojResolveAssemblyReference.cache
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.Properties.Resources.resources
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.csproj.GenerateResource.cache
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.csproj.CoreCompileInputs.cache
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.dll
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.pdb

@@ -24,11 +24,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console1", "Console1\Consol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analytics", "Analytics\Analytics.csproj", "{AC298FA5-126E-444D-989F-56A84831EDE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextualProcessor", "..\..\..\Downloads\LastFeelSoft\UltimeFeelSoft\FeelSoft-master - copia\FeelSoftSolution\TextualProcessor\TextualProcessor.csproj", "{C8B42555-E593-4C62-8216-7DBE8FEFF67B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lemmatizer", "Lematization\Lemmatizer.csproj", "{0D587104-16B1-4647-AFCE-FF9CD6F1718D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lemmatizer", "..\..\..\Downloads\LastFeelSoft\UltimeFeelSoft\FeelSoft-master - copia\FeelSoftSolution\Lematization\Lemmatizer.csproj", "{0D587104-16B1-4647-AFCE-FF9CD6F1718D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qualification", "Qualification\Qualification.csproj", "{CF872B16-F506-4C78-8E10-69EECEFBBD7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qualification", "..\..\..\Downloads\LastFeelSoft\UltimeFeelSoft\FeelSoft-master - copia\FeelSoftSolution\Qualification\Qualification.csproj", "{CF872B16-F506-4C78-8E10-69EECEFBBD7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextualProcessor", "TextualProcessor\TextualProcessor.csproj", "{C8B42555-E593-4C62-8216-7DBE8FEFF67B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,10 +72,6 @@ Global
 		{AC298FA5-126E-444D-989F-56A84831EDE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC298FA5-126E-444D-989F-56A84831EDE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC298FA5-126E-444D-989F-56A84831EDE9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C8B42555-E593-4C62-8216-7DBE8FEFF67B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8B42555-E593-4C62-8216-7DBE8FEFF67B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8B42555-E593-4C62-8216-7DBE8FEFF67B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C8B42555-E593-4C62-8216-7DBE8FEFF67B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0D587104-16B1-4647-AFCE-FF9CD6F1718D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0D587104-16B1-4647-AFCE-FF9CD6F1718D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D587104-16B1-4647-AFCE-FF9CD6F1718D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -84,6 +80,10 @@ Global
 		{CF872B16-F506-4C78-8E10-69EECEFBBD7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF872B16-F506-4C78-8E10-69EECEFBBD7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF872B16-F506-4C78-8E10-69EECEFBBD7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8B42555-E593-4C62-8216-7DBE8FEFF67B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8B42555-E593-4C62-8216-7DBE8FEFF67B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8B42555-E593-4C62-8216-7DBE8FEFF67B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8B42555-E593-4C62-8216-7DBE8FEFF67B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

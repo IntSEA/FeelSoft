@@ -24,7 +24,8 @@ namespace SocialNetworkConnection
         public Languages Language { get => language; set => language = value; }
         public int Favorability { get => favorability; set => favorability = value; }
         public DateTime CreateDate { get => createDate; set => createDate = value; }
-        public Locations Location { get => location; set => location = value; }      
+        public Locations Location { get => location; set => location = value; }  
+        
 
         public Publication()
         {
@@ -69,8 +70,7 @@ namespace SocialNetworkConnection
             format += message + splitSeparator;
             format += LanguageToExportFormat() + splitSeparator;
             format += LocationToExportFormat() + splitSeparator;
-            //format += ParentToExportFormat() + splitSeparator;
-            //format += ResponsesToExportFormat() + splitSeparator;
+          
             format += END_LINE;
 
             return format;
@@ -88,7 +88,7 @@ namespace SocialNetworkConnection
             return format;
         }
 
-        internal static IPublication ParsePublication(string line)
+        public static IPublication ParsePublication(string line)
         {
             string[] info = line.Split('|');
             string id = info[0];

@@ -32,10 +32,10 @@ namespace View
         {
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.rdbTwitter = new System.Windows.Forms.RadioButton();
+            this.queriesControl = new View.QueriesControl();
             this.lblLoad = new System.Windows.Forms.Label();
             this.lblSelectSocialNetwork = new System.Windows.Forms.Label();
             this.rdbFacebook = new System.Windows.Forms.RadioButton();
-            this.queriesControl = new View.QueriesControl();
             this.publicationViewerControl = new View.PublicationViewerControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -70,6 +70,13 @@ namespace View
             this.rdbTwitter.UseVisualStyleBackColor = true;
             this.rdbTwitter.CheckedChanged += new System.EventHandler(this.RdbCheckedChanged);
             // 
+            // queriesControl
+            // 
+            this.queriesControl.Location = new System.Drawing.Point(27, 28);
+            this.queriesControl.Name = "queriesControl";
+            this.queriesControl.Size = new System.Drawing.Size(421, 204);
+            this.queriesControl.TabIndex = 2;
+            // 
             // lblLoad
             // 
             this.lblLoad.AutoSize = true;
@@ -99,13 +106,6 @@ namespace View
             this.rdbFacebook.Text = "Facebook";
             this.rdbFacebook.UseVisualStyleBackColor = true;
             this.rdbFacebook.CheckedChanged += new System.EventHandler(this.RdbCheckedChanged);
-            // 
-            // queriesControl
-            // 
-            this.queriesControl.Location = new System.Drawing.Point(27, 28);
-            this.queriesControl.Name = "queriesControl";
-            this.queriesControl.Size = new System.Drawing.Size(421, 204);
-            this.queriesControl.TabIndex = 2;
             // 
             // publicationViewerControl
             // 

@@ -20,8 +20,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NaiveBayes", "NaiveBayes\Na
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyticDictionary", "AnalyticDictionary\AnalyticDictionary.csproj", "{EBBFD0CB-C589-47FA-B954-4432F1A86D63}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console1", "Console1\Console1.csproj", "{A0817F22-2A7B-48B3-85DC-90430350DA69}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analytics", "Analytics\Analytics.csproj", "{AC298FA5-126E-444D-989F-56A84831EDE9}"
 EndProject
 Global
@@ -58,10 +56,6 @@ Global
 		{EBBFD0CB-C589-47FA-B954-4432F1A86D63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBBFD0CB-C589-47FA-B954-4432F1A86D63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBBFD0CB-C589-47FA-B954-4432F1A86D63}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A0817F22-2A7B-48B3-85DC-90430350DA69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A0817F22-2A7B-48B3-85DC-90430350DA69}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A0817F22-2A7B-48B3-85DC-90430350DA69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A0817F22-2A7B-48B3-85DC-90430350DA69}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AC298FA5-126E-444D-989F-56A84831EDE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AC298FA5-126E-444D-989F-56A84831EDE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC298FA5-126E-444D-989F-56A84831EDE9}.Release|Any CPU.ActiveCfg = Release|Any CPU

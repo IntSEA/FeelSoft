@@ -166,11 +166,20 @@ namespace View
 
         private void BtnImportPublications_Click(object sender, EventArgs e)
         {
-            main.ImportPublications();
+            Thread thread = new Thread(()=> {
+                main.ImportPublications();
+
+            });
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+
         }
 
+       
+        
         private void BtnExportPublications_Click(object sender, EventArgs e)
-        {
+        {           
+              
             DialogResult result = MessageBox.Show("¿Desea guardar las publicaciones por paquetes");
             if (result == DialogResult.OK)
             {
@@ -214,6 +223,42 @@ namespace View
             ShowPublication(indexCurrentPublications);
         }
 
-                
+        private void BtnAddToGraph_Click(object sender, EventArgs e)
+        {
+            if (this.publications != null)
+            {
+                if (publications1 == null)
+                {
+                    publications1 = new List<IPublication>();
+                    publications1.AddRange(this.publications);
+                }
+                else if (publications2 == null)
+                {
+                    publications2 = new List<IPublication>();
+                    publications2.AddRange(this.publications);
+                }
+                else
+                {
+                    publications1 = new List<IPublication>();
+                    publications1.AddRange(this.publications);
+                    publications2 = null;
+                }
+            }
+        }
+
+        private void BtnViewGraph_Click(object sender, EventArgs e)
+        {
+            if(publications1 ==null || publications2 == null)
+            {
+                MessageBox.Show("Primero debe agregar 2 listas al grafico");
+            }
+            else
+            {
+                if(publications1!=null && publications2 != null)
+                {
+                    
+                }
+            }
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace SocialNetworkConnection
         int Favorability { get; set; }
         DateTime CreateDate { get; set; }
         Locations Location { get; set; }
-        string configurationName { get; set; }
+        string ConfigurationName { get; set; }
         
 
         int CompareBy(IPublication other, Comparison<IPublication> comparator);

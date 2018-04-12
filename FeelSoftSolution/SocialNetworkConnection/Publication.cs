@@ -16,7 +16,8 @@ namespace SocialNetworkConnection
         private Languages language;
         private int favorability;
         private DateTime createDate;
-        private Locations location; 
+        private Locations location;
+        private string configurationName;
 
         public string Id { get => id; set => id = value; }
         public string Message { get => message; set => message = SetCorrectInfo(value); }
@@ -24,8 +25,8 @@ namespace SocialNetworkConnection
         public Languages Language { get => language; set => language = value; }
         public int Favorability { get => favorability; set => favorability = value; }
         public DateTime CreateDate { get => createDate; set => createDate = value; }
-        public Locations Location { get => location; set => location = value; }  
-        
+        public Locations Location { get => location; set => location = value; }
+        public string ConfigurationName { get => configurationName; set => configurationName = value; }
 
         public Publication()
         {

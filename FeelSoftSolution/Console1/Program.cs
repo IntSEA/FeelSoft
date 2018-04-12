@@ -40,7 +40,7 @@ namespace Console1
         {
             setUpStage1();
             int[][] input = {
-              new int[] {6,180,12},//1
+              new int[] {6,180,12},//
                new int[] {4,190,11},//1
                new int[] {6,170,12},//1
                new int[] {7,165,10},//1

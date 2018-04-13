@@ -24,3 +24,14 @@ C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcess
 C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.csproj.CoreCompileInputs.cache
 C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.dll
 C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.pdb
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\TextualProcessor.dll
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\TextualProcessor.pdb
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\Lematization.dll
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\SocialNetworkConnection.dll
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\Lematization.pdb
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\SocialNetworkConnection.pdb
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\SocialNetworkConnection.dll.config
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.csproj.CopyComplete

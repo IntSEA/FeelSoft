@@ -11,7 +11,7 @@ namespace View
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
-        [STAThread]
+       
         
 #pragma warning disable CS1998 // El método asincrónico carece de operadores "await" y se ejecutará de forma sincrónica
         private static async Task Main2()
@@ -22,14 +22,11 @@ namespace View
            Application.Run(new WebScrapperViewer());
 
         }
-
+        [STAThread]
         static void Main()
-        {
-
-                  
+        {             
             
 
-            Main2();
 
 #pragma warning disable CS4014 // Ya que no se esperaba esta llamada, la ejecución del método actual continúa antes de que se complete la llamada
             Main2();

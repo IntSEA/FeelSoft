@@ -15,9 +15,7 @@ namespace View
         {
             InitializeComponent();
             InitializeSocialNetworks();
-
-         
-            //InitializeTests();
+            InitializeDataset();                     
 
             IntializeControls();
         }
@@ -30,6 +28,7 @@ namespace View
         private void IntializeControls()
         {
             queriesControl.SetMain(this);
+            publicationViewerControl.SetMain(this);
 
         }
 

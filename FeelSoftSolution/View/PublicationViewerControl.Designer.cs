@@ -32,6 +32,7 @@ namespace View
         private void InitializeComponent()
         {
             this.gbxPublications = new System.Windows.Forms.GroupBox();
+            this.btnViewFullText = new System.Windows.Forms.Button();
             this.lblPublication = new System.Windows.Forms.Label();
             this.numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.lblTotalPublications = new System.Windows.Forms.Label();
@@ -39,10 +40,11 @@ namespace View
             this.btnBefore = new System.Windows.Forms.Button();
             this.tbxPublication = new System.Windows.Forms.TextBox();
             this.gbxFunctions = new System.Windows.Forms.GroupBox();
+            this.btnViewGraph = new System.Windows.Forms.Button();
+            this.btnAddToGraph = new System.Windows.Forms.Button();
             this.btnImportPublications = new System.Windows.Forms.Button();
             this.btnExportPublications = new System.Windows.Forms.Button();
             this.btnSavePublications = new System.Windows.Forms.Button();
-            this.btnViewFullText = new System.Windows.Forms.Button();
             this.gbxPublications.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
             this.gbxFunctions.SuspendLayout();
@@ -63,6 +65,17 @@ namespace View
             this.gbxPublications.TabIndex = 0;
             this.gbxPublications.TabStop = false;
             this.gbxPublications.Text = "Publicaciones";
+            // 
+            // btnViewFullText
+            // 
+            this.btnViewFullText.Location = new System.Drawing.Point(27, 240);
+            this.btnViewFullText.Name = "btnViewFullText";
+            this.btnViewFullText.Size = new System.Drawing.Size(165, 23);
+            this.btnViewFullText.TabIndex = 21;
+            this.btnViewFullText.Text = "Ver texto completo";
+            this.btnViewFullText.UseVisualStyleBackColor = true;
+            this.btnViewFullText.Visible = false;
+            this.btnViewFullText.Click += new System.EventHandler(this.BtnViewFullText_Click);
             // 
             // lblPublication
             // 
@@ -140,6 +153,8 @@ namespace View
             // 
             // gbxFunctions
             // 
+            this.gbxFunctions.Controls.Add(this.btnViewGraph);
+            this.gbxFunctions.Controls.Add(this.btnAddToGraph);
             this.gbxFunctions.Controls.Add(this.btnImportPublications);
             this.gbxFunctions.Controls.Add(this.btnExportPublications);
             this.gbxFunctions.Controls.Add(this.btnSavePublications);
@@ -150,11 +165,31 @@ namespace View
             this.gbxFunctions.TabStop = false;
             this.gbxFunctions.Text = "Funciones";
             // 
+            // btnViewGraph
+            // 
+            this.btnViewGraph.Location = new System.Drawing.Point(131, 77);
+            this.btnViewGraph.Name = "btnViewGraph";
+            this.btnViewGraph.Size = new System.Drawing.Size(135, 23);
+            this.btnViewGraph.TabIndex = 4;
+            this.btnViewGraph.Text = "Ver grafica";
+            this.btnViewGraph.UseVisualStyleBackColor = true;
+            this.btnViewGraph.Click += new System.EventHandler(this.BtnViewGraph_Click);
+            // 
+            // btnAddToGraph
+            // 
+            this.btnAddToGraph.Location = new System.Drawing.Point(207, 19);
+            this.btnAddToGraph.Name = "btnAddToGraph";
+            this.btnAddToGraph.Size = new System.Drawing.Size(165, 23);
+            this.btnAddToGraph.TabIndex = 3;
+            this.btnAddToGraph.Text = "Añadir a la grafica";
+            this.btnAddToGraph.UseVisualStyleBackColor = true;
+            this.btnAddToGraph.Click += new System.EventHandler(this.BtnAddToGraph_Click);
+            // 
             // btnImportPublications
             // 
-            this.btnImportPublications.Location = new System.Drawing.Point(207, 19);
+            this.btnImportPublications.Location = new System.Drawing.Point(27, 48);
             this.btnImportPublications.Name = "btnImportPublications";
-            this.btnImportPublications.Size = new System.Drawing.Size(159, 23);
+            this.btnImportPublications.Size = new System.Drawing.Size(165, 23);
             this.btnImportPublications.TabIndex = 2;
             this.btnImportPublications.Text = "Importar publicaciones";
             this.btnImportPublications.UseVisualStyleBackColor = true;
@@ -162,7 +197,7 @@ namespace View
             // 
             // btnExportPublications
             // 
-            this.btnExportPublications.Location = new System.Drawing.Point(117, 71);
+            this.btnExportPublications.Location = new System.Drawing.Point(207, 48);
             this.btnExportPublications.Name = "btnExportPublications";
             this.btnExportPublications.Size = new System.Drawing.Size(165, 23);
             this.btnExportPublications.TabIndex = 1;
@@ -179,17 +214,6 @@ namespace View
             this.btnSavePublications.Text = "Guardar publicaciones";
             this.btnSavePublications.UseVisualStyleBackColor = true;
             this.btnSavePublications.Click += new System.EventHandler(this.BtnSavePublications_Click);
-            // 
-            // btnViewFullText
-            // 
-            this.btnViewFullText.Location = new System.Drawing.Point(27, 240);
-            this.btnViewFullText.Name = "btnViewFullText";
-            this.btnViewFullText.Size = new System.Drawing.Size(165, 23);
-            this.btnViewFullText.TabIndex = 21;
-            this.btnViewFullText.Text = "Ver texto completo";
-            this.btnViewFullText.UseVisualStyleBackColor = true;
-            this.btnViewFullText.Visible = false;
-            this.btnViewFullText.Click += new System.EventHandler(this.BtnViewFullText_Click);
             // 
             // PublicationViewerControl
             // 
@@ -224,5 +248,10 @@ namespace View
         private System.Windows.Forms.Button btnExportPublications;
         private WebScrapperViewer main;
         private System.Windows.Forms.Button btnViewFullText;
+        private System.Windows.Forms.Button btnViewGraph;
+        private System.Windows.Forms.Button btnAddToGraph;
+
+        private List<IPublication> publications1;
+        private List<IPublication> publications2;
     }
 }

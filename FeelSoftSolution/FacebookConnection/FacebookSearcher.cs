@@ -1,16 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using SocialNetworkConnection;
+using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using SocialNetworkConnection;
 
 namespace FacebookConnection
 {
@@ -75,23 +72,20 @@ namespace FacebookConnection
 
                 SetQueryFields(queryConfiguration, fields);
 
-                int roundSearchesByPage = totalPublications / pages.Count;
+                int roundSearchesByPage = totalPublications;
 
                 foreach (string page in pages)
                 {
                     IList<IPublication> partialPublication = RequestFeedToGraph(page, fields, roundSearchesByPage, queryConfiguration);
                     ((List<IPublication>)publications).AddRange(partialPublication);
-                    if(publications.Count>  (totalPublications*2))
+                    if (publications.Count > (totalPublications * 2))
                     {
                         break;
                     }
                 }
-
-
-
                 publications = FilterPublications(publications, queryConfiguration.Keywords);
                 publications = ReorganizeSearches(publications, totalPublications);
-
+                queryConfiguration.MaxPublicationCount = totalPublications; // Restore default settings in queryConfiguration
 
                 return publications;
 
@@ -112,7 +106,17 @@ namespace FacebookConnection
 
         private IList<IPublication> FilterPublicationsByWord(IList<IPublication> publications, string word)
         {
-            return ((List<IPublication>)publications).FindAll(x => x.Message.IndexOf(word, StringComparison.OrdinalIgnoreCase) >= 0);
+            Regex expresion = CreateRegularExpresion(word);
+
+            return ((List<IPublication>)publications).FindAll(x => expresion.IsMatch(x.Message));
+        }
+
+        private Regex CreateRegularExpresion(string word)
+        {
+            string upperCasePattern = @"[\s|\W|]" + word.ToUpper() + @"+\w?\b";
+            string lowerCasePattern = @"[\s|\W|]" + word.ToLower() + @"+\w?\b";
+            string normalCasePattern = @"[\s|\W|]" + word + @"+\w?\b";
+            return new Regex(normalCasePattern + "|" + lowerCasePattern + "|" + upperCasePattern);
         }
 
         private IList<IPublication> ReorganizeSearches(IList<IPublication> publications, int maxPublicationCount)
@@ -132,16 +136,16 @@ namespace FacebookConnection
                     {
                         responsePublications.Add(publication);
                         publications.RemoveAt(toAdd);
-                        
+
                     }
                     else
                     {
                         publications.RemoveAt(toAdd);
                         i--;
                     }
-                  
 
-                   
+
+
 
                 }
             }
@@ -233,7 +237,7 @@ namespace FacebookConnection
             var request = CreateFeedRequestToGraph(user, "feed", args);
             IList<IPublication> publications = null;
             var task = MakeRequestToGraphAsync(request);
-            int totalPagings = (totalPublications / 30); // I Expected found at most 30 publications for page
+            int totalPagings = (totalPublications / 5); // I Expected found at most 30 publications for page
             if (task != null)
             {
                 publications = new List<IPublication>();
@@ -293,14 +297,14 @@ namespace FacebookConnection
                 pagings = pagings + restPagings;
             }
 
-            while (nextPagings < pagings && next!=null)
+            while (nextPagings < pagings && next != null)
             {
                 responsesPages.Add(next);
                 next = GetNextPublicationsRequest(next);
                 ++nextPagings;
             }
 
-          
+
 
         }
 
@@ -408,6 +412,7 @@ namespace FacebookConnection
             DateTime createDate = item.created_time ?? QueryConfiguration.NONE_DATE;
             string message = item.message ?? "Not message";
             string decodeMessage = DecodeHtmlText(message);
+
             if (decodeMessage != null)
             {
                 message = decodeMessage;
@@ -423,7 +428,7 @@ namespace FacebookConnection
                 CreateDate = createDate,
                 Message = message,
                 WroteBy = wroteBy,
-
+                ConfigurationName = queryConfiguration.Name
             };
 
             return publication;

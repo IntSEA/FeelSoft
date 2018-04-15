@@ -4,10 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
-using Tweetinvi;
-using Tweetinvi.Models;
 
 namespace SocialNetworkConnection
 {
@@ -26,6 +23,7 @@ namespace SocialNetworkConnection
         public IDictionary<string, IQueryConfiguration> QueriesConfigurations { get => queriesConfigurations; set => queriesConfigurations = value; }
         public string BasePath { get => basePath; set => basePath = value; }
         public int TotalPublications { get => totalPublications; set => totalPublications = value; }
+        public string BaseName { get => baseName; set => baseName = value; }
 
         public SearchDataSet()
         {
@@ -80,15 +78,16 @@ namespace SocialNetworkConnection
 
         public void ExportDataSet(int quantity)
         {
-            if (quantity > 0) {
-                int totalThreads = publications.Values.Count / quantity ;
+            if (quantity > 0)
+            {
+                int totalThreads = publications.Values.Count / quantity;
                 int init = 0;
                 for (int i = 0; i < totalThreads; i++)
                 {
-                    Thread thread = new Thread(ThreadStartExport(init, BasePath + baseName + suffixName + ".dst"));
+                    Thread thread = new Thread(ThreadStartExport(init, quantity, BasePath + baseName + suffixName + ".dst"));
                     thread.Start();
                     suffixName++;
-                    init += 1000;
+                    init += quantity;
                 }
             }
             else
@@ -101,35 +100,27 @@ namespace SocialNetworkConnection
 
         public void ExportDataSet()
         {
-            Thread thread = new Thread(ThreadStartExport(-1, BasePath + baseName + suffixName + ".dst"));
+            Thread thread = new Thread(ThreadStartExport(0, totalPublications, BasePath + baseName + ".dst"));
             thread.Start();
-            suffixName++;
+
         }
 
-        private ThreadStart ThreadStartExport(int init, string path)
+        private ThreadStart ThreadStartExport(int init, int quantity, string path)
         {
-            return () => { Export(init, path); };
+            return () => { Export(init, quantity, path); };
         }
 
-        private void Export(int init, string path)
+        private void Export(int init, int quantity, string path)
         {
             StreamWriter sw = new StreamWriter(path);
-            if (init == -1)
+
+            for (int i = init; i < init + quantity && i < TotalPublications; i++)
             {
-                for (int i = 0; i < TotalPublications; i++)
-                {
-                    IPublication publication = GetPublicationInIndex(i);
-                    sw.WriteLine(publication.ToExportFormat());
-                }
+                IPublication publication = GetPublicationInIndex(i);
+
+                sw.WriteLine(publication.ToExportFormat());
             }
-            else
-            {
-                for (int i = init; i < init + 1000 && i < TotalPublications; i++)
-                {
-                    IPublication publication = GetPublicationInIndex(i);
-                    sw.WriteLine(publication.ToExportFormat());
-                }
-            }
+
 
             sw.Close();
 
@@ -275,9 +266,25 @@ namespace SocialNetworkConnection
             }
         }
 
-        public IPublication[] GetPublications()
+        public IList<IPublication> GetPublications()
         {
-            return publications.Values.ToArray();
+            IList<IPublication> publications = this.publications.Values.ToList();
+            return publications;
+        }
+
+        public void AddOrReplacePublications(IList<IPublication> publications)
+        {
+            for (int i = 0; i < Publications.Count; i++)
+            {
+                if (this.publications.TryGetValue(publications[i].Id, out IPublication value))
+                {
+                    this.publications[publications[i].Id] = publications[i];
+                }
+                else
+                {
+                    this.publications.Add(publications[i].Id, publications[i]);
+                }
+            }
         }
     }
 }

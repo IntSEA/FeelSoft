@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using FacebookConnection;
+﻿using Microsoft.VisualBasic;
 using SocialNetworkConnection;
-using TwitterConnection;
-using Microsoft.VisualBasic;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
+using System.Windows.Forms;
+using TwitterConnection;
 
 namespace View
 {
@@ -64,8 +58,7 @@ namespace View
                 string message = publication.Message;
                 string location = publication.Location.ToString();
                 string language = publication.Language.ToString();
-                string favorability = publication.Favorability.ToString();
-                string info = id + "\r\n" + wroteBy + "\r\n" + createDate + "\r\n" + message + "\r\n" + location + "\r\n" + language + "\r\n" + favorability;
+                string info = id + "\r\n" + wroteBy + "\r\n" + createDate + "\r\n" + message + "\r\n" + location + "\r\n" + language + "\r\n";
 
                 tbxPublication.Text = info;
                 numericUpDown.Value = indexCurrentPublication + 1;
@@ -144,9 +137,12 @@ namespace View
 
         private bool IsTwitterPublication(IPublication publication)
         {
-            string twitter = publication.Id.Split(':')[0];
+            if (publication != null)
+            {
+                return Publication.IsTweet(publication);
+            }
+            return false;
 
-            return twitter.Equals("Twitter");
         }
 
         private void ToEnableFullText(bool showed)
@@ -166,7 +162,8 @@ namespace View
 
         private void BtnImportPublications_Click(object sender, EventArgs e)
         {
-            Thread thread = new Thread(()=> {
+            Thread thread = new Thread(() =>
+            {
                 main.ImportPublications();
 
             });
@@ -175,20 +172,21 @@ namespace View
 
         }
 
-       
-        
+
+
         private void BtnExportPublications_Click(object sender, EventArgs e)
-        {           
-              
-            DialogResult result = MessageBox.Show("¿Desea guardar las publicaciones por paquetes");
-            if (result == DialogResult.OK)
+        {
+            DialogResult result = MessageBox.Show("¿Desea guardar las publicaciones por paquetes?", "Exportar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+
+            if (result == DialogResult.Yes)
             {
                 string quantity = Interaction.InputBox("Ingrese cantidad");
                 int.TryParse(quantity, out int q);
 
                 main.ExportPublications(q);
             }
-            else
+            else if (result == DialogResult.No)
             {
                 main.ExportPublications(-1);
             }
@@ -199,7 +197,7 @@ namespace View
 
             Thread thread = new Thread(InitHtmlProcess(indexCurrentPublications));
             thread.Start();
-            
+
         }
 
         private ThreadStart InitHtmlProcess(int indexCurrentPublications)
@@ -248,15 +246,15 @@ namespace View
 
         private void BtnViewGraph_Click(object sender, EventArgs e)
         {
-            if(publications1 ==null || publications2 == null)
+            if (publications1 == null || publications2 == null)
             {
                 MessageBox.Show("Primero debe agregar 2 listas al grafico");
             }
             else
             {
-                if(publications1!=null && publications2 != null)
+                if (publications1 != null && publications2 != null)
                 {
-                    
+
                 }
             }
         }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SocialNetworkConnection;
 using Lematization;
+using System.Text.RegularExpressions;
 
 namespace TextualProcessor
 {
@@ -37,6 +38,27 @@ namespace TextualProcessor
            rawPublications =  dataSet.ImportDataSet(path);
         }
 
+        public string LemmatizedMessage(string message)
+        {
+            string normalizeText = DeleteSymbols(message);
+            string analyzedText = CompoundWordsAnalysis(normalizeText);
+            string analyzedText2 = "";
+            if (analyzedText.Contains("Twitter"))
+            {
+                analyzedText2 = StopWordsAnalysisTwitter(analyzedText);
+            }
+            else
+            {
+                analyzedText2 = StopWordsAnalysis(analyzedText);
+            }
+            analyzedText2 = DeleteSymbols2(analyzedText2);
+            analyzedText2 = StopWordsAnalysis(analyzedText2);
+
+
+            string textLematized = Lemmatize(analyzedText2);
+
+            return textLematized;
+        }
 
         private IList<IPublication> completedAnalysis()
         {
@@ -44,15 +66,8 @@ namespace TextualProcessor
 
             foreach (IPublication publication in RawPublications)
             {
-                string rawText = publication.Message;
-                string normalizeText = DeleteSymbols(rawText);
-                string analyzedText = CompoundWordsAnalysis(normalizeText);
-                string analyzedText2 = StopWordsAnalysis(analyzedText);
-                analyzedText2 = DeleteSymbols2(analyzedText2);
-                analyzedText2 = StopWordsAnalysis(analyzedText2);
 
-
-                string textLematized = Lemmatize(analyzedText2);
+                string textLematized = LemmatizedMessage(publication.Message);
 
                 Publication lemmatizedPublication = new Publication()
                 {
@@ -79,6 +94,17 @@ namespace TextualProcessor
             return completedAnalysis();   
         }
 
+        public IList<IPublication> LemmatizedPublications(IList<IPublication> publications)
+        {
+            rawPublications = publications;
+            return completedAnalysis();
+        }
+
+        public IList<IPublication> LemmatizedPublications(ISearchDataSet dataSet)
+        {
+            rawPublications = dataSet.GetPublications();
+            return completedAnalysis();
+        }
 
         public IList<IPublication> LemmatizedPublicationsWithResources(string resource)
 
@@ -116,7 +142,7 @@ namespace TextualProcessor
             return newMessage;
         }
 
-       /* private string StopWordsAnalysisTwitter(string message)
+        private string StopWordsAnalysisTwitter(string message)
         {
             String[] words = message.Split(' ');
             String newText = "";
@@ -138,7 +164,7 @@ namespace TextualProcessor
                 }
             }
             return newText;
-        }*/
+        }
 
 
         private string StopWordsAnalysis(string message)
@@ -150,6 +176,7 @@ namespace TextualProcessor
             {
                 if (!dataLoader.StopWords.Contains(word) && !word.StartsWith("https:") && !word.StartsWith("co/") && !word.Contains("?"))
                 {
+                    
                     newText += word + " ";
                 }
             }
@@ -171,7 +198,9 @@ namespace TextualProcessor
                 {
                     try
                     {
-                        newMessage += lemmatizer.Execute(word) + " ";
+                        if (word != "" && word != " ") {
+                            newMessage += lemmatizer.Execute(word) + " ";
+                        }
                     }
                     catch
                     {
@@ -196,16 +225,15 @@ namespace TextualProcessor
             message = message.Replace(';', ' ');
             message = message.Replace(',', ' ');
             message = message.Replace('&', ' ');
-            message = message.Replace(':', ' ');
             message = message.Replace('¿', ' ');
             message = message.Replace('!', ' ');
             message = message.Replace('¡', ' ');
             message = message.Replace('…', ' ');
             message = message.Replace('(', ' ');
             message = message.Replace(')', ' ');
-            message = message.Replace('	', ' ');
-
+            //message = message.ToLower();
             newMessage = message;
+            
             return newMessage;
 
         }
@@ -217,8 +245,9 @@ namespace TextualProcessor
             message = message.Replace('.', ' ');
             message = message.Replace('/', ' ');
             message = message.Replace('\\', ' ');
-
+            message = message.Replace(':', ' ');
             newMessage = message;
+         
             return newMessage;
 
         }

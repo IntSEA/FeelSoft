@@ -38,6 +38,27 @@ namespace TextualProcessor
            rawPublications =  dataSet.ImportDataSet(path);
         }
 
+        public string LemmatizedMessage(string message)
+        {
+            string normalizeText = DeleteSymbols(message);
+            string analyzedText = CompoundWordsAnalysis(normalizeText);
+            string analyzedText2 = "";
+            if (analyzedText.Contains("Twitter"))
+            {
+                analyzedText2 = StopWordsAnalysisTwitter(analyzedText);
+            }
+            else
+            {
+                analyzedText2 = StopWordsAnalysis(analyzedText);
+            }
+            analyzedText2 = DeleteSymbols2(analyzedText2);
+            analyzedText2 = StopWordsAnalysis(analyzedText2);
+
+
+            string textLematized = Lemmatize(analyzedText2);
+
+            return textLematized;
+        }
 
         private IList<IPublication> completedAnalysis()
         {
@@ -45,23 +66,8 @@ namespace TextualProcessor
 
             foreach (IPublication publication in RawPublications)
             {
-                string rawText = publication.Message;
-                string normalizeText = DeleteSymbols(rawText);
-                string analyzedText = CompoundWordsAnalysis(normalizeText);
-                string analyzedText2 = "";
-                if (analyzedText.Contains("Twitter"))
-                {
-                    analyzedText2 = StopWordsAnalysisTwitter(analyzedText);
-                }
-                else
-                {
-                    analyzedText2 = StopWordsAnalysis(analyzedText);
-                }
-                analyzedText2 = DeleteSymbols2(analyzedText2);
-                analyzedText2 = StopWordsAnalysis(analyzedText2);
 
-
-                string textLematized = Lemmatize(analyzedText2);
+                string textLematized = LemmatizedMessage(publication.Message);
 
                 Publication lemmatizedPublication = new Publication()
                 {

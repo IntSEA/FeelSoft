@@ -100,7 +100,8 @@ namespace SocialNetworkConnection
             }
 
             string wroteBy = info[1];
-            DateTime createdDate = DateTime.Parse(info[2]);
+            DateTime createdDate = DateTime.Today;
+            //DateTime.Parse(info[2]);
             string message = info[3];
 
             Languages language = QueryConfiguration.ParseLanguage(info[4]);

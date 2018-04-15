@@ -35,7 +35,7 @@ namespace View
             }
             else if (publications.Count == 0)
             {
-                MessageBox.Show("NOt found publications");
+                MessageBox.Show("Not found publications");
             }
             else if (publications.Count > 0)
             {

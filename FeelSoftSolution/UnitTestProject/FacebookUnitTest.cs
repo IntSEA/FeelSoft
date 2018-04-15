@@ -20,7 +20,6 @@ namespace UnitTestProject
         //CREDENTIAL
 
         //Stage created for Fajardo
-
         //Stage created for Fajardo
         private void SetupStage1()
         {
@@ -60,7 +59,7 @@ namespace UnitTestProject
 
             IList<string> words = new List<String>()
             {
-                //"Petro",
+                
                  "GustavoPetro"
             };
 

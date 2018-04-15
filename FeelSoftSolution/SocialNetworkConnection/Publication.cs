@@ -88,7 +88,7 @@ namespace SocialNetworkConnection
             return format;
         }
 
-        internal static IPublication ParsePublication(string line)
+        public static IPublication ParsePublication(string line)
         {
             string[] info = line.Split('|');
             string id = info[0];

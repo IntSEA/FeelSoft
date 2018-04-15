@@ -162,6 +162,10 @@
       <Project>{07de8bef-d893-4d9b-bbb1-c6e09b495c48}</Project>
       <Name>SocialNetworkConnection</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TextualProcessor\TextualProcessor.csproj">
+      <Project>{c8b42555-e593-4c62-8216-7dbe8feff67b}</Project>
+      <Name>TextualProcessor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TwitterConnection\TwitterConnection.csproj">
       <Project>{4613748f-69fb-4bf1-84a8-ff88f3887a22}</Project>
       <Name>TwitterConnection</Name>

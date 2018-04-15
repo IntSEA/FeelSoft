@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SocialNetworkConnection;
 using Lematization;
+using System.Text.RegularExpressions;
 
 namespace TextualProcessor
 {
@@ -14,6 +15,7 @@ namespace TextualProcessor
         private IList<IPublication> rawPublications;
         private IDataLoader dataLoader;
         private ISearchDataSet dataSet;
+        private ISearchDataSet dataSetLemmatized;
         private Stemmer lemmatizer;
 
         
@@ -21,12 +23,26 @@ namespace TextualProcessor
         public Stemmer Lemmatizer { get => lemmatizer; set => lemmatizer = value; }
         public IDataLoader DataLoader { get => dataLoader; set => dataLoader = value; }
         public IList<IPublication> RawPublications { get => rawPublications; }
+        public ISearchDataSet DataSetLemmatized { get => dataSetLemmatized; set => dataSetLemmatized = value; }
 
         public Processor()
         {
             
             dataLoader = new DataLoader();
             dataSet = new SearchDataSet();
+            dataSetLemmatized = new SearchDataSet();
+            lemmatizer = new Stemmer();
+
+
+        }
+
+        public Processor(ISearchDataSet dataSet)
+        {
+
+            dataLoader = new DataLoader();
+            this.dataSet = dataSet;
+            rawPublications = dataSet.GetPublications();
+            dataSetLemmatized = new SearchDataSet();
             lemmatizer = new Stemmer();
 
 
@@ -67,7 +83,10 @@ namespace TextualProcessor
                 };
 
                 lemmatizedPublications.Add(lemmatizedPublication);
+                
             }
+
+            dataSetLemmatized.AddPublications(lemmatizedPublications);
 
             return lemmatizedPublications;
         }
@@ -79,6 +98,11 @@ namespace TextualProcessor
             return completedAnalysis();   
         }
 
+        public IList<IPublication> LemmatizedPublications()
+
+        {
+            return completedAnalysis();
+        }
 
         public IList<IPublication> LemmatizedPublicationsWithResources(string resource)
 
@@ -116,29 +140,6 @@ namespace TextualProcessor
             return newMessage;
         }
 
-       /* private string StopWordsAnalysisTwitter(string message)
-        {
-            String[] words = message.Split(' ');
-            String newText = "";
-            Boolean foundInTwitter = false;
-
-            foreach (String word in words)
-            {
-                if (!dataLoader.StopWords.Contains(word) && !word.StartsWith("https:") && !word.StartsWith("co/") && !word.Contains("?") && foundInTwitter)
-                {
-
-                    newText += word + " ";
-                }
-                else
-                {
-                    if (word.Equals("Twitter:"))
-                    {
-                        foundInTwitter = true;
-                    }
-                }
-            }
-            return newText;
-        }*/
 
 
         private string StopWordsAnalysis(string message)
@@ -167,20 +168,17 @@ namespace TextualProcessor
 
             foreach (string word in words)
             {
-                if (!word.StartsWith("_"))
+                if (word != "" && word != " ")
                 {
-                    try
+                    if (!word.StartsWith("_"))
                     {
                         newMessage += lemmatizer.Execute(word) + " ";
                     }
-                    catch
+                    else
                     {
                         newMessage += word + " ";
                     }
-                }
-                else
-                {
-                    newMessage += word + " ";
+
                 }
             }
 
@@ -204,6 +202,8 @@ namespace TextualProcessor
             message = message.Replace('(', ' ');
             message = message.Replace(')', ' ');
             message = message.Replace('	', ' ');
+            Regex.Replace(message, @"[^a-zA-z0-9 ]+", "");
+
 
             newMessage = message;
             return newMessage;
@@ -217,13 +217,14 @@ namespace TextualProcessor
             message = message.Replace('.', ' ');
             message = message.Replace('/', ' ');
             message = message.Replace('\\', ' ');
+            
 
             newMessage = message;
             return newMessage;
 
         }
 
-
+     
 
     }
 }

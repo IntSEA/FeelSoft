@@ -104,7 +104,7 @@ namespace View
         {
             if (currentConfiguration == null)
             {
-                MessageBox.Show("Select a query configuration");
+                MessageBox.Show("Selecione una configuración de busqueda");
             }
             else
             {

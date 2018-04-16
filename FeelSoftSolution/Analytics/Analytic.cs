@@ -22,6 +22,8 @@ namespace Analytics
         {
             ToProces = new List<string[]>();
             toProcesNumber = new List<int[]>();
+            ImportWordBank("..//..//..//Analytics/Dicccionario.txt");
+
 
         }
         public Analytic(string path)

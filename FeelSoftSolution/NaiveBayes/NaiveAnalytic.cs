@@ -24,7 +24,15 @@ namespace NaiveBayes
         public int[][] DataTestinputTraining { get => dataTestinputTrainig; set => dataTestinputTrainig = value; }
         public int[][] DataTestinput { get => dataTestinput; set => dataTestinput = value; }
         public int[] DataTestOutput { get => dataTestOutput; set => dataTestOutput = value; }
+        public NaiveAnalytic()
+        {
+            machingLearn = new MachingLearn();
+            porcentTrining = 1;
 
+            loadDataTraining("..//..//..//Analytics/DataTrainingText.txt", Analytic.TYPE_STRING);
+
+
+        }
         public NaiveAnalytic(string pathTraining, int type, double porcent) 
         {
             this.pathTraining = pathTraining;

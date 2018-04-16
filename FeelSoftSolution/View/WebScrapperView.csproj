@@ -81,9 +81,6 @@
     <Reference Include="Tweetinvi.WebLogic, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\TweetinviAPI.2.1.0\lib\net45\Tweetinvi.WebLogic.dll</HintPath>
     </Reference>
-    <Reference Include="View">
-      <HintPath>obj\Debug\View.exe</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\Resources.Designer.cs">

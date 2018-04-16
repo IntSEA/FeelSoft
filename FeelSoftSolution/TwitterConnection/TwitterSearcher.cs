@@ -1,18 +1,12 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using SocialNetworkConnection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using SocialNetworkConnection;
 using Tweetinvi;
 using Tweetinvi.Models;
 using Tweetinvi.Parameters;
-using HtmlAgilityPack;
-using System.IO;
 
 namespace TwitterConnection
 {
@@ -58,14 +52,14 @@ namespace TwitterConnection
             return responsePublications;
         }
 
-        private void ParseTweets(IEnumerable<ITweet> tweets, IList<IPublication> publications)
+        private void ParseTweets(IEnumerable<ITweet> tweets, IList<IPublication> publications, IQueryConfiguration queryConfiguration)
         {
             if (tweets != null)
             {
                 ITweet[] arrayTweets = tweets.ToArray();
                 for (int i = 0; i < arrayTweets.Length; i++)
                 {
-                    IPublication parsedPublication = ParseTweetToPublication(arrayTweets[i]);
+                    IPublication parsedPublication = ParseTweetToPublication(arrayTweets[i], queryConfiguration);
                     if (arrayTweets[i] == null)
                     {
                         throw new ArgumentException("No deberia suceder.");
@@ -80,7 +74,7 @@ namespace TwitterConnection
         }
 
 
-        private IPublication ParseTweetToPublication(ITweet tweet)
+        private IPublication ParseTweetToPublication(ITweet tweet, IQueryConfiguration queryConfiguration)
         {
             string message = "";
             message = tweet.FullText ?? (tweet.Text + tweet.Suffix);
@@ -106,6 +100,7 @@ namespace TwitterConnection
                 Message = message,
                 WroteBy = tweet.CreatedBy.Name,
                 CreateDate = tweet.TweetLocalCreationDate,
+                ConfigurationName = queryConfiguration.Name
 
             };
 
@@ -116,13 +111,13 @@ namespace TwitterConnection
         {
             IList<IPublication> publications = new List<IPublication>();
             int totalPublications = queryConfiguration.MaxPublicationCount;
-            int totalSeracheByKeyword = queryConfiguration.MaxPublicationCount / queryConfiguration.Keywords.Count;
-            queryConfiguration.MaxPublicationCount = totalSeracheByKeyword + 500;
+            int totalSearchesByKeyword = queryConfiguration.MaxPublicationCount / queryConfiguration.Keywords.Count;
+            queryConfiguration.MaxPublicationCount = totalSearchesByKeyword + 1000;
             foreach (var key in queryConfiguration.Keywords)
             {
                 ISearchTweetsParameters parameters = ParseSearchTweetsParameters(queryConfiguration, key);
                 IEnumerable<ITweet> tweets = Search.SearchTweets(parameters);
-                ParseTweets(tweets, publications);
+                ParseTweets(tweets, publications, queryConfiguration);
                 if (publications.Count > totalPublications)
                 {
                     break;

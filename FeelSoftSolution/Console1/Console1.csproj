@@ -9,6 +9,7 @@
     <ProjectReference Include="..\AnalyticDictionary\AnalyticDictionary.csproj" />
     <ProjectReference Include="..\Analytics\Analytics.csproj" />
     <ProjectReference Include="..\NaiveBayes\NaiveBayes.csproj" />
+    <ProjectReference Include="..\Reporte\Reporte.csproj" />
   </ItemGroup>
 
 </Project>

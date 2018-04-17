@@ -36,7 +36,7 @@ namespace View
             this.lblLoad = new System.Windows.Forms.Label();
             this.lblSelectSocialNetwork = new System.Windows.Forms.Label();
             this.rdbFacebook = new System.Windows.Forms.RadioButton();
-            this.publicationViewerControl = new View.PublicationViewerControl();
+            this.publicationViewerControl = new PublicationViewerControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.SuspendLayout();
@@ -58,7 +58,6 @@ namespace View
             // 
             // splitContainer.Panel2
             // 
-            this.splitContainer.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer_Panel2_Paint);
             this.splitContainer.Size = new System.Drawing.Size(836, 706);
             this.splitContainer.SplitterDistance = 536;
             this.splitContainer.TabIndex = 0;

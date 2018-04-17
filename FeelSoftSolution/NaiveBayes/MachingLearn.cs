@@ -18,6 +18,10 @@ namespace NaiveBayes
         }
         public double rule(double aver,double var,int par)
         {
+            if (var==0)
+            {
+                return 0;
+            }
             double arg = -1*(Math.Pow(par - aver,2))/(2*var);
             double div = Math.Sqrt(2 * Math.PI*var);
             double exp = Math.Exp(arg)/div;

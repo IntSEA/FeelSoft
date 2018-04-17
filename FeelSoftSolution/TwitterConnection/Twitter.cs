@@ -1,10 +1,7 @@
-﻿using System;
+﻿using SocialNetworkConnection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using SocialNetworkConnection;
 using Tweetinvi;
 using Tweetinvi.Models;
 
@@ -51,10 +48,13 @@ namespace TwitterConnection
         public static string ReadHtmlContent(ITweet tweet)
         {
             string response = null;
-            response = ReadHtmlContentFromIOembededTweet(tweet);
-            if (response == null)
+            if (tweet != null)
             {
-                response = ReadHtmlContentFromURL(tweet);
+                response = ReadHtmlContentFromIOembededTweet(tweet);
+                if (response == null)
+                {
+                    response = ReadHtmlContentFromURL(tweet);
+                }
             }
             return response;
         }

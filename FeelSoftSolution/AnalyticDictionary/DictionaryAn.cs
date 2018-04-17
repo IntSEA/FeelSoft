@@ -12,6 +12,10 @@ namespace AnalyticDictionary
         {
         
         }
+        public DictionaryAn()
+        {
+
+        }
 
        
 

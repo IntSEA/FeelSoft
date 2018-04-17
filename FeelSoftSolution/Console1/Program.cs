@@ -3,6 +3,7 @@ using Analytics;
 using AnalyticDictionary;
 using NaiveBayes;
 using System.IO;
+using Reporte;
 
 namespace Console1
 {
@@ -32,8 +33,12 @@ namespace Console1
         }
         static void Main(string[] args)
         {
-            Test();
-            Console.ReadKey();
+            //Test();
+            //Console.ReadKey();
+            DateTime before = new DateTime(2018,3,29);
+            DateTime now = DateTime.Now;
+            ManagerData manager =new ManagerData();
+            string[] tmp=manager.setDominio(before, now);
 
         }
         public static void Test()

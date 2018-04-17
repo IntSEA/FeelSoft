@@ -95,23 +95,13 @@ namespace View
             0});
             this.numericUpDown.Location = new System.Drawing.Point(325, 216);
             this.numericUpDown.Maximum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
-            this.numericUpDown.Minimum = new decimal(new int[] {
-            1,
+            1000000,
             0,
             0,
             0});
             this.numericUpDown.Name = "numericUpDown";
             this.numericUpDown.Size = new System.Drawing.Size(41, 20);
             this.numericUpDown.TabIndex = 19;
-            this.numericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.numericUpDown.ValueChanged += new System.EventHandler(this.NumericUpDownValueChanged);
             // 
             // lblTotalPublications

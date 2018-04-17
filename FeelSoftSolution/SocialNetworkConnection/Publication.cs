@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 
@@ -14,19 +12,19 @@ namespace SocialNetworkConnection
         private string message;
         private string wroteBy;
         private Languages language;
-        private int favorability;
         private DateTime createDate;
         private Locations location;
         private string configurationName;
+        private string lemmatizedMessage;
 
         public string Id { get => id; set => id = value; }
         public string Message { get => message; set => message = SetCorrectInfo(value); }
         public string WroteBy { get => wroteBy; set => wroteBy = SetCorrectInfo(value); }
         public Languages Language { get => language; set => language = value; }
-        public int Favorability { get => favorability; set => favorability = value; }
         public DateTime CreateDate { get => createDate; set => createDate = value; }
         public Locations Location { get => location; set => location = value; }
         public string ConfigurationName { get => configurationName; set => configurationName = value; }
+        public string LemmatizedMessage { get => lemmatizedMessage; set => lemmatizedMessage = value; }
 
         public Publication()
         {
@@ -44,9 +42,9 @@ namespace SocialNetworkConnection
         {
             string withoutSplit = value.Replace('|', ':');
             string withoutLines = withoutSplit.Replace('\n', '\t');
-            string withoutQuotes = withoutLines.Replace("&quot","");
-            string withSpecialCharacter = withoutQuotes.Replace("&#10","");
-            
+            string withoutQuotes = withoutLines.Replace("&quot", "");
+            string withSpecialCharacter = withoutQuotes.Replace("&#10", "");
+
             return withSpecialCharacter;
         }
 
@@ -71,12 +69,14 @@ namespace SocialNetworkConnection
             format += message + splitSeparator;
             format += LanguageToExportFormat() + splitSeparator;
             format += LocationToExportFormat() + splitSeparator;
-          
+            format += configurationName + splitSeparator;
+            format += lemmatizedMessage ?? "not yet lemmatized" + splitSeparator;
+
             format += END_LINE;
 
             return format;
         }
-        
+
         string LocationToExportFormat()
         {
             string format = QueryConfiguration.LocationToExportFormat(Location);
@@ -105,7 +105,9 @@ namespace SocialNetworkConnection
             string message = info[3];
 
             Languages language = QueryConfiguration.ParseLanguage(info[4]);
-            Locations location = QueryConfiguration.ParseLocation(info[5]);           
+            Locations location = QueryConfiguration.ParseLocation(info[5]);
+            string configurationName = info[6];
+            string lemmatizedMessage = info[7];
 
             IPublication publication = new Publication
             {
@@ -114,11 +116,22 @@ namespace SocialNetworkConnection
                 CreateDate = createdDate,
                 Message = message,
                 Language = language,
-                Location = location
+                Location = location,
+                ConfigurationName = configurationName,
+                LemmatizedMessage = lemmatizedMessage
             };
 
             return publication;
-        }       
+        }
+
+
+
+        public static bool IsTweet(IPublication publication)
+        {
+            string twitter = publication.Id.Split(':')[0];
+
+            return twitter.Equals("Twitter");
+        }
     }
 }
 

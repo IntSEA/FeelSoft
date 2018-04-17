@@ -1,14 +1,7 @@
-﻿using System;
+﻿using SocialNetworkConnection;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
-using SocialNetworkConnection;
 
 namespace View
 {
@@ -111,7 +104,7 @@ namespace View
         {
             if (currentConfiguration == null)
             {
-                MessageBox.Show("Select a query configuration");
+                MessageBox.Show("Selecione una configuración de busqueda");
             }
             else
             {
@@ -144,7 +137,7 @@ namespace View
                 {
                     currentConfiguration = queryForm.GetQueryConfiguration();
 
-                    cbxQueries.Items.Add(currentConfiguration);
+                    //cbxQueries.Items.Add(currentConfiguration);
                     cbxQueries.SelectedItem = currentConfiguration;
                 }
 

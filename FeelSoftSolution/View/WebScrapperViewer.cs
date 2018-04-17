@@ -1,23 +1,25 @@
-﻿using System;
-using System.Windows.Forms;
-using System.IO;
-using Tweetinvi;
-using SocialNetworkConnection;
+﻿using SocialNetworkConnection;
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Tweetinvi;
+using TwitterConnection;
 
 namespace View
 {
     public partial class WebScrapperViewer : Form
     {
+
         public WebScrapperViewer()
         {
             InitializeComponent();
             InitializeSocialNetworks();
-            InitializeDataset();                     
-
+            InitializeDataset();
             IntializeControls();
+
         }
 
         private void InitializeDataset()
@@ -71,7 +73,13 @@ namespace View
             Task task = Task.Run(() =>
             {
                 IList<IPublication> publications = GetSelectedSocialNetwork().Search(queryConfiguration);
-
+                DialogResult result = MessageBox.Show("¿Desea guardar las publicaciones  de twitter con el contenido completo? Puede demorar un poco mas...", "Export content", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    ReadHtmlContents(publications);
+                }
+                this.dataset.AddPublications(publications);
+                publications = this.dataset.GetPublications();
                 ShowInPublicationViewer delegateMethod = new ShowInPublicationViewer(ShowPublicationsInPublicationViewer);
                 this.Invoke(delegateMethod, publications);
             });
@@ -186,10 +194,10 @@ namespace View
                 InitialDirectory = "..//..//..//SocialNetworkConnection/Resources/",
                 DefaultExt = "qnc",
                 ValidateNames = true,
-                
+
             };
 
-            
+
 
             if (DialogResult.OK == openDialog.ShowDialog())
             {
@@ -273,10 +281,11 @@ namespace View
 
         public void ExportPublications(int quantity)
         {
-            
-            if (dataset.TotalPublications > 0 && quantity !=0)
+
+            if (dataset.TotalPublications > 0 && quantity != 0)
             {
-                Thread thread = new Thread(ExportTS(dataset,quantity));
+
+                Thread thread = new Thread(ExportTS(dataset, quantity));
                 thread.SetApartmentState(ApartmentState.STA);
                 Thread threadProcess = new Thread(ThreadProcessTS(thread));
                 threadProcess.SetApartmentState(ApartmentState.STA);
@@ -290,16 +299,47 @@ namespace View
 
         private void Export(ISearchDataSet dataset, int quantity)
         {
+            DialogResult result = MessageBox.Show("¿Desea exportar las publicaciones (publicaciones de twitter) con el contenido completo?", "Export content", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                IList<IPublication> publications = dataset.GetPublications();
+                ReadHtmlContents(publications);
+                dataset.AddOrReplacePublications(publications);
+
+            }
+
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
-            DialogResult result = folderDialog.ShowDialog();
-            if (result == DialogResult.OK)
+            DialogResult resultFolderDialog = folderDialog.ShowDialog();
+            if (resultFolderDialog == DialogResult.OK)
             {
                 string folderName = folderDialog.SelectedPath;
 
                 dataset.BasePath = folderName + "/";
+                dataset.BaseName = queriesControl.GetCurrentQueryConfiguration().SinceDate.ToShortDateString().Replace("/", "-") + "_" + queriesControl.GetCurrentQueryConfiguration().UntilDate.AddDays(-1).ToShortDateString().Replace("/", "-");
                 dataset.ExportDataSet(quantity);
             }
 
+        }
+
+        private void ReadHtmlContents(IList<IPublication> publications)
+        {
+            for (int i = 0; i < publications.Count; i++)
+            {
+
+                if (Publication.IsTweet(publications[i]))
+                {
+                    string strIdPublication = publications[i].Id.Split(':')[1];
+                    long idTweet = long.Parse(strIdPublication);
+                    string message = Twitter.ReadHtmlContent(idTweet);
+                    if (message != null)
+                    {
+                        publications[i].Message = message;
+                    }
+                }
+
+
+
+            }
         }
 
         private ThreadStart ExportTS(ISearchDataSet dataset, int quantity)
@@ -365,9 +405,6 @@ namespace View
             this.Invoke(del, -1);
         }
 
-        private void splitContainer_Panel2_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
     }
 }

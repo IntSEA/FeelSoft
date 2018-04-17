@@ -231,6 +231,7 @@ namespace TextualProcessor
             message = message.Replace('…', ' ');
             message = message.Replace('(', ' ');
             message = message.Replace(')', ' ');
+            message = message.Replace('\t', ' ');
             //message = message.ToLower();
             newMessage = message;
             

@@ -113,7 +113,7 @@ namespace SocialNetworkConnection
         private void Export(int init, int quantity, string path)
         {
             StreamWriter sw = new StreamWriter(path);
-
+            sw.Write("ID|WroteBy|CreateDate|Message|Language|Language|Location|ConfigurationName|LemmatizedMessage|" + Publication.END_LINE);
             for (int i = init; i < init + quantity && i < TotalPublications; i++)
             {
                 IPublication publication = GetPublicationInIndex(i);
@@ -178,6 +178,11 @@ namespace SocialNetworkConnection
             StreamReader sr = new StreamReader(path);
 
             string line = "";
+            while (!line.Contains(Publication.END_LINE))
+            {
+                line += sr.ReadLine();
+            }
+
             while ((line = sr.ReadLine()) != null)
             {
                 while (!line.Contains(Publication.END_LINE))

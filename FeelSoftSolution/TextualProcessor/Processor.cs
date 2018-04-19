@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SocialNetworkConnection;
 using Lematization;
-using System.Text.RegularExpressions;
 
 namespace TextualProcessor
 {
@@ -73,11 +70,12 @@ namespace TextualProcessor
                 {
                     Id = publication.Id,
                     WroteBy = publication.WroteBy,
-                    Message = textLematized,
+                    Message = publication.Message,
                     CreateDate = publication.CreateDate,
                     Favorability = publication.Favorability,
                     Language = publication.Language,
-                    Location = publication.Location
+                    Location = publication.Location,
+                    LemmatizedMessage = textLematized
 
                 };
 
@@ -231,6 +229,7 @@ namespace TextualProcessor
             message = message.Replace('…', ' ');
             message = message.Replace('(', ' ');
             message = message.Replace(')', ' ');
+            message = message.Replace('\t', ' ');
             //message = message.ToLower();
             newMessage = message;
             

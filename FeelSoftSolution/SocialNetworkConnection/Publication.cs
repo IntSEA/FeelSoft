@@ -94,20 +94,21 @@ namespace SocialNetworkConnection
             string[] info = line.Split('|');
             string id = info[0];
 
-            if (info.Length < 6)
+            if (info.Length < 8)
             {
                 throw new Exception("wrong format in line: " + line + " with id: " + id);
             }
 
             string wroteBy = info[1];
-            DateTime createdDate = DateTime.Today;
-            //DateTime.Parse(info[2]);
+            DateTime createdDate = DateTime.Parse(info[2]);
             string message = info[3];
 
             Languages language = QueryConfiguration.ParseLanguage(info[4]);
             Locations location = QueryConfiguration.ParseLocation(info[5]);
             string configurationName = info[6];
-            string lemmatizedMessage = info[7];
+            string lemmatizedMessage = "not yet lemmatized";
+
+            lemmatizedMessage = info[7];
 
             IPublication publication = new Publication
             {

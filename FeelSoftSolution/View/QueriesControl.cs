@@ -172,7 +172,6 @@ namespace View
                     {
                         configurations.RemoveAt(index);
                         configurations.Insert(index, currentConfiguration);
-
                     }
                     else
                     {

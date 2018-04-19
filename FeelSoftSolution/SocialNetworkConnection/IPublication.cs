@@ -15,6 +15,7 @@ namespace SocialNetworkConnection
         Locations Location { get; set; }
         string ConfigurationName { get; set; }
         string LemmatizedMessage { get; set; }
+        object Favorability { get; }
 
         int CompareBy(IPublication other, Comparison<IPublication> comparator);
         string ToExportFormat();

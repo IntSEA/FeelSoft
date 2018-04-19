@@ -70,11 +70,12 @@ namespace TextualProcessor
                 {
                     Id = publication.Id,
                     WroteBy = publication.WroteBy,
-                    Message = textLematized,
+                    Message = publication.Message,
                     CreateDate = publication.CreateDate,
                     Favorability = publication.Favorability,
                     Language = publication.Language,
-                    Location = publication.Location
+                    Location = publication.Location,
+                    LemmatizedMessage = textLematized
 
                 };
 

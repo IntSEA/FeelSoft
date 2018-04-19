@@ -67,12 +67,12 @@ namespace View
         }
 
 #pragma warning disable CS1998 // El método asincrónico carece de operadores "await" y se ejecutará de forma sincrónica
-        internal async void Search(IQueryConfiguration queryConfiguration)
+        internal async void Search(IList<IQueryConfiguration> queryConfigurations)
 #pragma warning restore CS1998 // El método asincrónico carece de operadores "await" y se ejecutará de forma sincrónica
         {
             Task task = Task.Run(() =>
             {
-                IList<IPublication> publications = GetSelectedSocialNetwork().Search(queryConfiguration);
+                IList<IPublication> publications = GetSelectedSocialNetwork().Search(queryConfigurations);
                 DialogResult result = MessageBox.Show("¿Desea guardar las publicaciones  de twitter con el contenido completo? Puede demorar un poco mas...", "Export content", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {

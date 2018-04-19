@@ -1,5 +1,4 @@
 ﻿using SocialNetworkConnection;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace View
@@ -176,7 +175,7 @@ namespace View
         private System.Windows.Forms.Button btnCreateQuery;
         private System.Windows.Forms.Label lblConfigurations;
         private System.Windows.Forms.Button btnInitSearch;
-        private IList<IQueryConfiguration> configurations;
+        private List<IQueryConfiguration> configurations;
         private IQueryConfiguration currentConfiguration;
         private QueryConfigurationForm queryForm;
         private WebScrapperViewer main;

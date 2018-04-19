@@ -51,6 +51,10 @@ namespace View
         {
             if (publications.Length > 0)
             {
+                if (indexCurrentPublication < 0 || indexCurrentPublication > publications.Length)
+                {
+                    indexCurrentPublication = 0;
+                }
                 IPublication publication = publications.ElementAt(indexCurrentPublication);
                 string id = publication.Id;
                 string wroteBy = publication.WroteBy;

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SocialNetworkConnection
 {
@@ -37,7 +36,7 @@ namespace SocialNetworkConnection
 
         public QueryConfiguration()
         {
-            InitializeQuery();           
+            InitializeQuery();
 
         }
 
@@ -53,12 +52,12 @@ namespace SocialNetworkConnection
                StringSplitOptions.None);
             Name = info[0];
             ParseKeywords(info[1]);
-            Location=ParseLocation(info[2]);
-            Language=ParseLanguage(info[3]);
-            SearchType=ParseSearchType(info[4]);
-            Filter= ParseFilter(info[5]);
+            Location = ParseLocation(info[2]);
+            Language = ParseLanguage(info[3]);
+            SearchType = ParseSearchType(info[4]);
+            Filter = ParseFilter(info[5]);
             SinceDate = DateTime.Parse(info[6]);
-            UntilDate= DateTime.Parse(info[7]);
+            UntilDate = DateTime.Parse(info[7]);
             MaxPublicationCount = int.Parse(info[8]);
             MaxResponsesCount = int.Parse(info[9]);
             Geo = info[10];
@@ -69,7 +68,7 @@ namespace SocialNetworkConnection
             Filters fil = Filters.Hashtag;
             switch (format)
             {
-               
+
                 case "News":
                     {
                         fil = Filters.News;
@@ -105,7 +104,7 @@ namespace SocialNetworkConnection
                         st = SearchTypes.Popular;
                         break;
                     }
-              
+
                 case "Recent":
                     {
                         st = SearchTypes.Recent;
@@ -121,7 +120,7 @@ namespace SocialNetworkConnection
             Languages lang = Languages.English;
             switch (format)
             {
-                
+
                 case "Spanish":
                     {
                         lang = Languages.Spanish;
@@ -137,7 +136,7 @@ namespace SocialNetworkConnection
             Locations loc = Locations.Colombia;
             switch (format)
             {
-                
+
                 case "United States":
                     {
                         loc = Locations.USA;
@@ -175,7 +174,7 @@ namespace SocialNetworkConnection
             ((List<string>)Keywords).AddRange(keyWords);
         }
 
-        
+
         public override String ToString()
         {
             string parse = Name;
@@ -184,8 +183,8 @@ namespace SocialNetworkConnection
 
         public string ToExportFormat()
         {
-            string format = Name+Environment.NewLine;
-            format+=KeywordsToExportFormat()+Environment.NewLine;
+            string format = Name + Environment.NewLine;
+            format += KeywordsToExportFormat() + Environment.NewLine;
             format += LocationToExportFormat(Location) + Environment.NewLine;
             format += LanguageToExportFormat(Language) + Environment.NewLine;
             format += SearchTypeToExportFormat(SearchType) + Environment.NewLine;
@@ -194,7 +193,7 @@ namespace SocialNetworkConnection
             format += UntilDateToExportFormat() + Environment.NewLine;
             format += MaxPublicationCountToExportFormat() + Environment.NewLine;
             format += MaxResponsesCountToExportFormat() + Environment.NewLine;
-            format += GeoToExportFormat() + Environment.NewLine;            
+            format += GeoToExportFormat() + Environment.NewLine;
 
             return format;
         }
@@ -258,13 +257,14 @@ namespace SocialNetworkConnection
             }
 
             return filter;
-           
+
         }
 
         public static string SearchTypeToExportFormat(SearchTypes st)
         {
             string format = "";
-            switch (st){
+            switch (st)
+            {
                 case SearchTypes.Mixed:
                     {
                         format = "mixed";
@@ -330,13 +330,19 @@ namespace SocialNetworkConnection
         private string KeywordsToExportFormat()
         {
             string format = "";
-            for (int i = 0; i < Keywords.Count-1; i++)
+            for (int i = 0; i < Keywords.Count - 1; i++)
             {
-                format += Keywords.ElementAt(i)+"|";
+                format += Keywords.ElementAt(i) + "|";
             }
             format += Keywords.ElementAt(Keywords.Count - 1);
 
             return format;
+        }
+
+        public object Clone()
+        {
+
+            return this.MemberwiseClone();
         }
     }
 }

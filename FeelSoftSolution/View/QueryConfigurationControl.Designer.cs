@@ -337,7 +337,7 @@ namespace View
             this.dtpUntilDate.Name = "dtpUntilDate";
             this.dtpUntilDate.Size = new System.Drawing.Size(365, 20);
             this.dtpUntilDate.TabIndex = 0;
-            this.dtpUntilDate.Value = new System.DateTime(2018, 3, 30, 3, 35, 8, 742);
+            this.dtpUntilDate.Value = DateTime.Now.AddDays(1);
             // 
             // lblTotalPublications
             // 
@@ -454,7 +454,7 @@ namespace View
 
         }
 
-       
+
 
         #endregion
 

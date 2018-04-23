@@ -72,22 +72,28 @@ namespace View
         {
             Task task = Task.Run(() =>
             {
-                IList<IPublication> publications = GetSelectedSocialNetwork().Search(queryConfigurations);
-                DialogResult result = MessageBox.Show("¿Desea guardar las publicaciones  de twitter con el contenido completo? Puede demorar un poco mas...", "Export content", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
-                {
-                    ReadHtmlContents(publications);
-                }
-                this.dataset.AddPublications(publications);
-                publications = this.dataset.GetPublications();
-                ShowInPublicationViewer delegateMethod = new ShowInPublicationViewer(ShowPublicationsInPublicationViewer);
-                this.Invoke(delegateMethod, publications);
+                RealizeSearch(queryConfigurations);
+
             });
 
             ThreadStart tStart = SearchProccess(task);
             Thread thread = new Thread(tStart);
             thread.Start();
 
+        }
+
+        private void RealizeSearch(IList<IQueryConfiguration> queryConfigurations)
+        {
+            IList<IPublication> publications = GetSelectedSocialNetwork().Search(queryConfigurations);
+            DialogResult result = MessageBox.Show("¿Desea guardar las publicaciones  de twitter con el contenido completo? Puede demorar un poco mas...", "Export content", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                ReadHtmlContents(publications);
+            }
+            this.dataset.AddPublications(publications);
+            publications = this.dataset.GetPublications();
+            ShowInPublicationViewer delegateMethod = new ShowInPublicationViewer(ShowPublicationsInPublicationViewer);
+            this.Invoke(delegateMethod, publications);
         }
 
         private ThreadStart SearchProccess(Task task)

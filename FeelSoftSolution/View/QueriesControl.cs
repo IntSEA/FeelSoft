@@ -48,19 +48,14 @@ namespace View
             {
                 currentConfiguration = queryForm.GetQueryConfiguration();
                 int index = configurations.FindLastIndex(x => x.Name.Equals(currentConfiguration));
-                if (index != -1)
-                {
-                    configurations.RemoveAt(index);
-                    configurations.Insert(index, currentConfiguration);
+                IQueryConfiguration cloneConfiguration = (IQueryConfiguration)currentConfiguration.Clone();
 
-                }
-                else
-                {
-                    configurations.Add(currentConfiguration);
-                }
+                configurations.Add(cloneConfiguration);
 
-                cbxQueries.Items.Add(currentConfiguration);
-                cbxQueries.SelectedItem = currentConfiguration;
+
+                cbxQueries.Items.Add(cloneConfiguration);
+
+                cbxQueries.SelectedItem = cloneConfiguration;
             }
 
         }
@@ -105,18 +100,10 @@ namespace View
         {
             if (queryConfiguration != null)
             {
-                cbxQueries.Items.Add(queryConfiguration);
-                int index = configurations.FindLastIndex(x => x.Name.Equals(currentConfiguration));
-                if (index != -1)
-                {
-                    configurations.RemoveAt(index);
-                    configurations.Insert(index, currentConfiguration);
+                IQueryConfiguration cloneQueryConfiguration = (IQueryConfiguration)queryConfiguration.Clone();
+                cbxQueries.Items.Add(cloneQueryConfiguration);
 
-                }
-                else
-                {
-                    configurations.Add(currentConfiguration);
-                }
+                configurations.Add(cloneQueryConfiguration);
 
                 cbxQueries.Text = queryConfiguration.Name;
             }
@@ -167,7 +154,8 @@ namespace View
                         cbxQueries.Items.RemoveAt(cbxQueries.SelectedIndex);
                         cbxQueries.Items.Add(currentConfiguration);
                     }
-                    int index = configurations.FindLastIndex(x => x.Name.Equals(currentConfiguration));
+
+                    int index = configurations.FindLastIndex(x => x != null && x.Name.Equals(currentConfiguration));
                     if (index != -1)
                     {
                         configurations.RemoveAt(index);
@@ -193,6 +181,12 @@ namespace View
             {
                 cbxQueries.Items.Remove(currentConfiguration);
                 cbxQueries.Text = "";
+                int index = configurations.FindLastIndex(x => x != null && x.Name.Equals(currentConfiguration));
+                if (index != -1)
+                {
+                    configurations.RemoveAt(index);
+                    configurations.Insert(index, currentConfiguration);
+                }
             }
             else
             {

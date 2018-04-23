@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SocialNetworkConnection
 {
-    public interface IQueryConfiguration
+    public interface IQueryConfiguration : ICloneable
     {
         string Name { get; set; }
         IList<string> Keywords { get; set; }
@@ -21,6 +19,6 @@ namespace SocialNetworkConnection
         string ToExportFormat();
 
 
-       
+
     }
 }

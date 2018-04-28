@@ -23,7 +23,6 @@ namespace Analytics
             ToProces = new List<string[]>();
             toProcesNumber = new List<int[]>();
             wordBank = new WordBank();
-            wordBank = new WordBank();
             ImportWordBank("..//..//..//Analytics/Dicccionario.txt");
 
 
@@ -55,7 +54,7 @@ namespace Analytics
             int[] retor = null;
             if (wordBank != null)
             {
-                 retor = new int[WordBank.GetWords().Count];
+                retor = new int[WordBank.GetWords().Count];
                 List<string> words = WordBank.GetWords().Keys.ToList();
                 Dictionary<string, int> mens = new Dictionary<string, int>();
 
@@ -66,8 +65,6 @@ namespace Analytics
                     if (!a)
                     {
                         mens.Add(tmp, rep);
-
-
                     }
                     else
                     {

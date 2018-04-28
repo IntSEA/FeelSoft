@@ -72,7 +72,7 @@ namespace Qualification
             {
                 string message = publication.Message;
                 int favorability = Qualify(message);
-                publication.Favorability = favorability;
+                //publication.Favorability = favorability;
 
             }
 

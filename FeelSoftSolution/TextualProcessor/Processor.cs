@@ -148,9 +148,8 @@ namespace TextualProcessor
 
             foreach (String word in words)
             {
-                if (!dataLoader.StopWords.Contains(word) && !word.StartsWith("https:") && !word.StartsWith("co/") && !word.Contains("?") && foundInTwitter)
+                if (!dataLoader.StopWords.Contains(word) && !word.StartsWith("https:") && !word.StartsWith("co/") && !word.Contains("?") && !word.StartsWith("@") && foundInTwitter)
                 {
-
                     newText += word + " ";
                 }
                 else

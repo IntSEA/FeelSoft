@@ -33,7 +33,8 @@ namespace View
 
         private void MakeQueryRequest()
         {
-            main.Search(currentConfiguration);
+
+            main.Search(configurations);
         }
 
 
@@ -46,9 +47,15 @@ namespace View
             if (DialogResult.OK == result)
             {
                 currentConfiguration = queryForm.GetQueryConfiguration();
-                configurations.Add(currentConfiguration);
-                cbxQueries.Items.Add(currentConfiguration);
-                cbxQueries.SelectedItem = currentConfiguration;
+                int index = configurations.FindLastIndex(x => x.Name.Equals(currentConfiguration));
+                IQueryConfiguration cloneConfiguration = (IQueryConfiguration)currentConfiguration.Clone();
+
+                configurations.Add(cloneConfiguration);
+
+
+                cbxQueries.Items.Add(cloneConfiguration);
+
+                cbxQueries.SelectedItem = cloneConfiguration;
             }
 
         }
@@ -61,10 +68,12 @@ namespace View
 
         private void RemoveQueryConfiguration()
         {
-            object removedObject = cbxQueries.SelectedItem;
+            IQueryConfiguration removedObject = (IQueryConfiguration)cbxQueries.SelectedItem;
             if (removedObject != null)
             {
                 cbxQueries.Items.Remove(removedObject);
+                int index = configurations.FindLastIndex(x => x.Name.Equals(removedObject.Name));
+                configurations.RemoveAt(index);
                 MessageBox.Show(removedObject.ToString() + " was removed");
             }
             else
@@ -91,7 +100,11 @@ namespace View
         {
             if (queryConfiguration != null)
             {
-                cbxQueries.Items.Add(queryConfiguration);
+                IQueryConfiguration cloneQueryConfiguration = (IQueryConfiguration)queryConfiguration.Clone();
+                cbxQueries.Items.Add(cloneQueryConfiguration);
+
+                configurations.Add(cloneQueryConfiguration);
+
                 cbxQueries.Text = queryConfiguration.Name;
             }
             else
@@ -136,9 +149,23 @@ namespace View
                 if (DialogResult.OK == result)
                 {
                     currentConfiguration = queryForm.GetQueryConfiguration();
+                    if (currentConfiguration.Name.Equals(((IQueryConfiguration)cbxQueries.SelectedItem).Name))
+                    {
+                        cbxQueries.Items.RemoveAt(cbxQueries.SelectedIndex);
+                        cbxQueries.Items.Add(currentConfiguration);
+                    }
 
-                    //cbxQueries.Items.Add(currentConfiguration);
-                    cbxQueries.SelectedItem = currentConfiguration;
+                    int index = configurations.FindLastIndex(x => x != null && x.Name.Equals(currentConfiguration));
+                    if (index != -1)
+                    {
+                        configurations.RemoveAt(index);
+                        configurations.Insert(index, currentConfiguration);
+                    }
+                    else
+                    {
+                        configurations.Add(currentConfiguration);
+                    }
+
                 }
 
             }
@@ -154,6 +181,12 @@ namespace View
             {
                 cbxQueries.Items.Remove(currentConfiguration);
                 cbxQueries.Text = "";
+                int index = configurations.FindLastIndex(x => x != null && x.Name.Equals(currentConfiguration));
+                if (index != -1)
+                {
+                    configurations.RemoveAt(index);
+                    configurations.Insert(index, currentConfiguration);
+                }
             }
             else
             {

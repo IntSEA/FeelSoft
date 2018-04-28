@@ -49,5 +49,8 @@
       <Name>Analytics</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Dictionary.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

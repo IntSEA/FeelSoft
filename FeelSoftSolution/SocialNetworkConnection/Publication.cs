@@ -16,7 +16,6 @@ namespace SocialNetworkConnection
         private Locations location;
         private string configurationName;
         private string lemmatizedMessage;
-        private object favorability;
 
         public string Id { get => id; set => id = value; }
         public string Message { get => message; set => message = SetCorrectInfo(value); }
@@ -26,7 +25,6 @@ namespace SocialNetworkConnection
         public Locations Location { get => location; set => location = value; }
         public string ConfigurationName { get => configurationName; set => configurationName = value; }
         public string LemmatizedMessage { get => lemmatizedMessage; set => lemmatizedMessage = value; }
-        public object Favorability { get => favorability; set => favorability = value; }
 
         public Publication()
         {
@@ -96,30 +94,22 @@ namespace SocialNetworkConnection
             string[] info = line.Split('|');
             string id = info[0];
 
-            if (info.Length < 6)
+            if (info.Length < 8)
             {
                 throw new Exception("wrong format in line: " + line + " with id: " + id);
             }
 
             string wroteBy = info[1];
-            DateTime createdDate = DateTime.Today;
-            //DateTime.Parse(info[2]);
+            DateTime createdDate = DateTime.Parse(info[2]);
             string message = info[3];
 
             Languages language = QueryConfiguration.ParseLanguage(info[4]);
             Locations location = QueryConfiguration.ParseLocation(info[5]);
             string configurationName = info[6];
             string lemmatizedMessage = "not yet lemmatized";
-            try
-            {
-                lemmatizedMessage = info[7];
-            }
-            catch
-            {
 
-            }
-                 
-            
+            lemmatizedMessage = info[7];
+
             IPublication publication = new Publication
             {
                 Id = id,

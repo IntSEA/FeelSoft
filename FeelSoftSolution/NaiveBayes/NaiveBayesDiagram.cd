@@ -19,6 +19,9 @@
   </Class>
   <Class Name="NaiveBayes.NaiveAnalytic">
     <Position X="6" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>JCSAAgAkQAIQAACBAAgAIIAAACCQAAAQAQAAAAAAAAA=</HashCode>
       <FileName>NaiveAnalytic.cs</FileName>

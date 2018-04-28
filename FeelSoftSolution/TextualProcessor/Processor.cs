@@ -72,7 +72,6 @@ namespace TextualProcessor
                     WroteBy = publication.WroteBy,
                     Message = publication.Message,
                     CreateDate = publication.CreateDate,
-                    Favorability = publication.Favorability,
                     Language = publication.Language,
                     Location = publication.Location,
                     LemmatizedMessage = textLematized

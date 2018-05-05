@@ -60,6 +60,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Resources\compoundWords.txt" />
   </ItemGroup>
   <ItemGroup>

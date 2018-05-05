@@ -56,6 +56,7 @@
             this.chartData.Size = new System.Drawing.Size(687, 543);
             this.chartData.TabIndex = 0;
             this.chartData.Text = "chart1";
+            this.chartData.Click += new System.EventHandler(this.chartData_Click);
             // 
             // DataVisualizationPanel
             // 

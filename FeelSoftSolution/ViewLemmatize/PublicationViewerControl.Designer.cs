@@ -145,18 +145,19 @@ namespace View
             this.gbxFunctions.Controls.Add(this.btnImportPublications);
             this.gbxFunctions.Controls.Add(this.btnExportPublications);
             this.gbxFunctions.Controls.Add(this.btnSavePublications);
+            this.gbxFunctions.ForeColor = System.Drawing.Color.Black;
             this.gbxFunctions.Location = new System.Drawing.Point(27, 323);
             this.gbxFunctions.Name = "gbxFunctions";
-            this.gbxFunctions.Size = new System.Drawing.Size(386, 113);
+            this.gbxFunctions.Size = new System.Drawing.Size(386, 124);
             this.gbxFunctions.TabIndex = 1;
             this.gbxFunctions.TabStop = false;
             this.gbxFunctions.Text = "Funciones";
             // 
             // btnImportPublications
             // 
-            this.btnImportPublications.Location = new System.Drawing.Point(27, 30);
+            this.btnImportPublications.Location = new System.Drawing.Point(27, 37);
             this.btnImportPublications.Name = "btnImportPublications";
-            this.btnImportPublications.Size = new System.Drawing.Size(165, 23);
+            this.btnImportPublications.Size = new System.Drawing.Size(132, 25);
             this.btnImportPublications.TabIndex = 2;
             this.btnImportPublications.Text = "Importar publicaciones";
             this.btnImportPublications.UseVisualStyleBackColor = true;
@@ -164,9 +165,9 @@ namespace View
             // 
             // btnExportPublications
             // 
-            this.btnExportPublications.Location = new System.Drawing.Point(215, 30);
+            this.btnExportPublications.Location = new System.Drawing.Point(236, 37);
             this.btnExportPublications.Name = "btnExportPublications";
-            this.btnExportPublications.Size = new System.Drawing.Size(165, 23);
+            this.btnExportPublications.Size = new System.Drawing.Size(130, 25);
             this.btnExportPublications.TabIndex = 1;
             this.btnExportPublications.Text = "Exportar publicaciónes";
             this.btnExportPublications.UseVisualStyleBackColor = true;
@@ -174,9 +175,9 @@ namespace View
             // 
             // btnSavePublications
             // 
-            this.btnSavePublications.Location = new System.Drawing.Point(117, 71);
+            this.btnSavePublications.Location = new System.Drawing.Point(117, 78);
             this.btnSavePublications.Name = "btnSavePublications";
-            this.btnSavePublications.Size = new System.Drawing.Size(165, 23);
+            this.btnSavePublications.Size = new System.Drawing.Size(165, 26);
             this.btnSavePublications.TabIndex = 0;
             this.btnSavePublications.Text = "Guardar publicaciones";
             this.btnSavePublications.UseVisualStyleBackColor = true;
@@ -189,7 +190,7 @@ namespace View
             this.Controls.Add(this.gbxFunctions);
             this.Controls.Add(this.gbxPublications);
             this.Name = "PublicationViewerControl";
-            this.Size = new System.Drawing.Size(455, 473);
+            this.Size = new System.Drawing.Size(440, 516);
             this.gbxPublications.ResumeLayout(false);
             this.gbxPublications.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).EndInit();

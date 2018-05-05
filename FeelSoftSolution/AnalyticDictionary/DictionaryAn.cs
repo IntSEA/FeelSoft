@@ -18,6 +18,49 @@ namespace AnalyticDictionary
         }
 
        
+        public int DecidedSentence(string[] sentence)
+        {
+            int qualification = 0;
+
+            foreach (string word in sentence)
+            {
+              qualification += WordBank.getValue(word);
+            }
+
+            return qualification; 
+        }
+
+        public double[] DecidedSentences(IList<string[]> sentences)
+        {
+            double[] favorAndDesfavor = new double[2];
+
+            double favorability = 0.0;
+            double desfavorability = 0.0;
+
+            double countPositive = 0.0;
+            double countNegative = 0.0;                
+
+            foreach (string[] words in sentences)
+            {
+                int qualification =  DecidedSentence(words);
+
+                if (qualification > 5 )
+                {
+                    countPositive++;  
+                }
+                else if(qualification < -5)
+                {
+                    countNegative++;
+                }
+            }
+
+            favorability = (countPositive / sentences.Count);
+            desfavorability = (countNegative / sentences.Count);
+            favorAndDesfavor[0] = favorability;
+            favorAndDesfavor[1] = desfavorability;
+
+            return favorAndDesfavor;
+        }
 
         public override int Decided(int[] input)
         {

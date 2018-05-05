@@ -19,7 +19,6 @@ namespace SocialNetworkConnection
 
 
 
-
         public SocialNetwork()
         {
         }

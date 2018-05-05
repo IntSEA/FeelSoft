@@ -16,5 +16,10 @@ namespace MainFrame
         {
             InitializeComponent();
         }
+
+        private void chartData_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

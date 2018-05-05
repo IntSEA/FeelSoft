@@ -194,6 +194,7 @@ namespace Analytics
             }
             return ret;
         }
+        
         public abstract int Decided(int[] input);
 
         public  int[] Decided(string path,int type)

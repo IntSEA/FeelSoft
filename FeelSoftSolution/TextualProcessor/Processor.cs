@@ -74,6 +74,7 @@ namespace TextualProcessor
                     CreateDate = publication.CreateDate,
                     Language = publication.Language,
                     Location = publication.Location,
+                    ConfigurationName = publication.ConfigurationName,
                     LemmatizedMessage = textLematized
 
                 };

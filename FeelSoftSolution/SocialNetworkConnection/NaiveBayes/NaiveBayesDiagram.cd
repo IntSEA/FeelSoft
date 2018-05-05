@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NaiveBayes.Category">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAACAIQAAgCRAAAAEQCAAAAAAAEAQAAA=</HashCode>
+      <FileName>Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NaiveBayes.MachingLearn">
+    <Position X="3.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAEAAAAAAAAQBAAAAAAAAAAAgBAAAAA=</HashCode>
+      <FileName>MachingLearn.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="categories" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="NaiveBayes.NaiveAnalytic">
+    <Position X="6" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>JCSAAgAkQAIQAACBAAgAIIAAACCQAAAQAQAAAAAAAAA=</HashCode>
+      <FileName>NaiveAnalytic.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="machingLearn" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Analytics.Analytic">
+    <Position X="8.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="WordBank" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Analytics.WordBank">
+    <Position X="12" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

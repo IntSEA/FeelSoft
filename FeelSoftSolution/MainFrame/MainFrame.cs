@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Controller;
-
+using ViewQualifier;
 
 namespace MainFrame
 {
@@ -18,27 +18,31 @@ namespace MainFrame
         {
             InitializeComponent();
             InitializeControls();
-            controller = new Controller.Controller("..//..//..//Database//LemmatizedPublications//Petro");
+            ControllerPetro = new Controller.Controller("..//..//..//Database//LemmatizedPublications//Petro");
+            ControllerFajardo = new Controller.Controller("..//..//..//Database//LemmatizedPublications//Fajardo");
             ShowFormHome();
 
         }
 
         private void ShowFormHome()
         {
-
+            
             containerPanel.Tag = home;
             home.Show();
         }
 
+        public void ShowFormVisualization()
+        {
+            visualization = new Visualization(this);
+            containerPanel.Controls.Clear();
+            containerPanel.Controls.Add(visualization);
+            containerPanel.Tag = visualization;
+            visualization.Show();
+        }
+
         private void btnReports_Click(object sender, EventArgs e)
         {
-            DateTime time = new DateTime(2018, 3, 10);
-            DateTime time2 = new DateTime(2018, 3, 28);
-            DateTime time3 = new DateTime(2018, 3, 27);
-
-            Dictionary<DateTime, double[]> dateAndCalification = controller.DailyAnalysis(time, time2);
-
-            MessageBox.Show(time3.ToShortDateString() + "\n" + dateAndCalification[time3][0] + "\n" + dateAndCalification[time3][1]);
+            MessageBox.Show("Muy pronto");
             
         }
 
@@ -50,16 +54,40 @@ namespace MainFrame
 
         private void btnHome_Click(object sender, EventArgs e)
         {
+            
+            containerPanel.Controls.Clear();
+            InitializeControls();
             ShowFormHome();
         }
 
 
         private void InitializeControls()
         {
-            home = new HomePanel();
+            home = new HomePanel(this);
             home.Dock = DockStyle.Fill;
             home.TopLevel = false;
             containerPanel.Controls.Add(home);
+        }
+
+        private void btnQualification_Click(object sender, EventArgs e)
+        {
+            viewQualifier = new Calificador();
+            viewQualifier.Show();
+        }
+
+        private void MainFrame_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAdvances_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Muy pronto");
+        }
+
+        private void btnViewPublications_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Muy pronto");
         }
     }
 }

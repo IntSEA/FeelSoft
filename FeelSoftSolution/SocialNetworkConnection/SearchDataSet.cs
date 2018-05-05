@@ -189,10 +189,12 @@ namespace SocialNetworkConnection
                 {
                     line += sr.ReadLine();
                 }
+
                 IPublication parsedPublication = Publication.ParsePublication(line);
                 lock (this)
                 {
-                    publications.Add(parsedPublication);
+                        publications.Add(parsedPublication);
+                
                 }
 
 

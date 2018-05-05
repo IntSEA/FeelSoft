@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{41E364E3-69E3-4CF0-8229-E2F06021611C}</ProjectGuid>
+    <ProjectGuid>{FF5321B3-E28C-4D41-AD2A-D9695A00828F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>MainFrame</RootNamespace>
     <AssemblyName>MainFrame</AssemblyName>
@@ -81,6 +81,12 @@
     <Compile Include="DataVisualizationPanel.Designer.cs">
       <DependentUpon>DataVisualizationPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="DateWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DateWindow.Designer.cs">
+      <DependentUpon>DateWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="HomePanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,8 +101,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Visualization.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Visualization.Designer.cs">
+      <DependentUpon>Visualization.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DataVisualizationPanel.resx">
       <DependentUpon>DataVisualizationPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DateWindow.resx">
+      <DependentUpon>DateWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomePanel.resx">
       <DependentUpon>HomePanel.cs</DependentUpon>
@@ -108,6 +123,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Visualization.resx">
+      <DependentUpon>Visualization.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -136,13 +154,17 @@
       <Project>{ebbfd0cb-c589-47fa-b954-4432f1a86d63}</Project>
       <Name>AnalyticDictionary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Controller\Controller.csproj">
+    <ProjectReference Include="..\Controller\Manager.csproj">
       <Project>{3ce89732-5cd6-49a9-825a-558b5294c651}</Project>
-      <Name>Controller</Name>
+      <Name>Manager</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lematization\Lemmatizer.csproj">
       <Project>{0d587104-16b1-4647-afce-ff9cd6f1718d}</Project>
       <Name>Lemmatizer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Qualifier\Qualifier.csproj">
+      <Project>{07d2abb6-543f-4a0e-be83-7b3160d49802}</Project>
+      <Name>Qualifier</Name>
     </ProjectReference>
     <ProjectReference Include="..\SocialNetworkConnection\SocialNetworkConnection.csproj">
       <Project>{07de8bef-d893-4d9b-bbb1-c6e09b495c48}</Project>
@@ -151,6 +173,10 @@
     <ProjectReference Include="..\ViewLemmatize\ViewLemmatized.csproj">
       <Project>{179b2cec-c0de-4f7e-86a9-6f24bcda815a}</Project>
       <Name>ViewLemmatized</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewQualifier\ViewQualifier.csproj">
+      <Project>{a075df00-6bea-427f-94d2-79085c121e61}</Project>
+      <Name>ViewQualifier</Name>
     </ProjectReference>
     <ProjectReference Include="..\View\WebScrapperView.csproj">
       <Project>{037694bd-f56d-4a38-a980-0ae4c9816b01}</Project>

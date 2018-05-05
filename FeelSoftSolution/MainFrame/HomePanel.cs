@@ -12,9 +12,21 @@ namespace MainFrame
 {
     public partial class HomePanel : Form
     {
-        public HomePanel()
+        public MainFrame main;
+        public HomePanel( MainFrame frame)
         {
+            main = frame;
             InitializeComponent();
+        }
+
+        private void pbBanner_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btDailyAnalysis_Click(object sender, EventArgs e)
+        {
+            main.ShowFormVisualization();
         }
     }
 }

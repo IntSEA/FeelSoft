@@ -32,11 +32,11 @@ namespace View
         {
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.rdbTwitter = new System.Windows.Forms.RadioButton();
-            this.queriesControl = new QueriesControl();
+            this.queriesControl = new View.QueriesControl();
             this.lblLoad = new System.Windows.Forms.Label();
             this.lblSelectSocialNetwork = new System.Windows.Forms.Label();
             this.rdbFacebook = new System.Windows.Forms.RadioButton();
-            this.publicationViewerControl = new PublicationViewerControl();
+            this.publicationViewerControl = new View.PublicationViewerControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.SuspendLayout();
@@ -55,9 +55,6 @@ namespace View
             this.splitContainer.Panel1.Controls.Add(this.lblSelectSocialNetwork);
             this.splitContainer.Panel1.Controls.Add(this.rdbFacebook);
             this.splitContainer.Panel1.Controls.Add(this.publicationViewerControl);
-            // 
-            // splitContainer.Panel2
-            // 
             this.splitContainer.Size = new System.Drawing.Size(836, 706);
             this.splitContainer.SplitterDistance = 536;
             this.splitContainer.TabIndex = 0;
@@ -121,7 +118,7 @@ namespace View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 730);
+            this.ClientSize = new System.Drawing.Size(505, 730);
             this.Controls.Add(this.splitContainer);
             this.Name = "WebScrapperViewer";
             this.Text = "FeelSoft";

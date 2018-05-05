@@ -38,6 +38,19 @@ namespace Analytics
             words.Add(word, pon);
         }
 
+        public int getValue(string keyWord)
+        {
+            if (words.ContainsKey(keyWord))
+            {
+                return words[keyWord];
+            }
+            else
+            {
+                return 0;
+            }
+            
+        }
+
         public bool consult(string word,out int ponder)
         {
             return words.TryGetValue(word,out ponder);

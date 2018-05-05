@@ -28,44 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pbPetro = new System.Windows.Forms.PictureBox();
-            this.pbBanner = new System.Windows.Forms.PictureBox();
             this.btDailyAnalysis = new System.Windows.Forms.Button();
             this.lbPetro = new System.Windows.Forms.Label();
             this.lbFajardo = new System.Windows.Forms.Label();
             this.lbVS = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbPetro = new System.Windows.Forms.PictureBox();
+            this.pbBanner = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPetro)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBanner)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::MainFrame.Properties.Resources.Fajardo;
-            this.pictureBox1.Location = new System.Drawing.Point(462, 201);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(200, 201);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pbPetro
-            // 
-            this.pbPetro.Image = global::MainFrame.Properties.Resources.Petro;
-            this.pbPetro.Location = new System.Drawing.Point(82, 201);
-            this.pbPetro.Name = "pbPetro";
-            this.pbPetro.Size = new System.Drawing.Size(202, 201);
-            this.pbPetro.TabIndex = 1;
-            this.pbPetro.TabStop = false;
-            // 
-            // pbBanner
-            // 
-            this.pbBanner.Image = global::MainFrame.Properties.Resources.bannere_elecciones_2018;
-            this.pbBanner.Location = new System.Drawing.Point(12, 12);
-            this.pbBanner.Name = "pbBanner";
-            this.pbBanner.Size = new System.Drawing.Size(736, 148);
-            this.pbBanner.TabIndex = 0;
-            this.pbBanner.TabStop = false;
             // 
             // btDailyAnalysis
             // 
@@ -81,6 +54,7 @@
             this.btDailyAnalysis.TabIndex = 3;
             this.btDailyAnalysis.Text = "Analisis Diario";
             this.btDailyAnalysis.UseVisualStyleBackColor = false;
+            this.btDailyAnalysis.Click += new System.EventHandler(this.btDailyAnalysis_Click);
             // 
             // lbPetro
             // 
@@ -114,6 +88,34 @@
             this.lbVS.Size = new System.Drawing.Size(121, 114);
             this.lbVS.TabIndex = 6;
             this.lbVS.Text = "VS";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::MainFrame.Properties.Resources.Fajardo;
+            this.pictureBox1.Location = new System.Drawing.Point(462, 201);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(200, 201);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pbPetro
+            // 
+            this.pbPetro.Image = global::MainFrame.Properties.Resources.Petro;
+            this.pbPetro.Location = new System.Drawing.Point(82, 201);
+            this.pbPetro.Name = "pbPetro";
+            this.pbPetro.Size = new System.Drawing.Size(202, 201);
+            this.pbPetro.TabIndex = 1;
+            this.pbPetro.TabStop = false;
+            // 
+            // pbBanner
+            // 
+            this.pbBanner.Image = global::MainFrame.Properties.Resources.bannere_elecciones_2018;
+            this.pbBanner.Location = new System.Drawing.Point(12, 12);
+            this.pbBanner.Name = "pbBanner";
+            this.pbBanner.Size = new System.Drawing.Size(736, 148);
+            this.pbBanner.TabIndex = 0;
+            this.pbBanner.TabStop = false;
+            this.pbBanner.Click += new System.EventHandler(this.pbBanner_Click);
             // 
             // HomePanel
             // 
@@ -150,5 +152,6 @@
         private System.Windows.Forms.Label lbPetro;
         private System.Windows.Forms.Label lbFajardo;
         private System.Windows.Forms.Label lbVS;
+        private DateWindow dateWindow;
     }
 }

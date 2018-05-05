@@ -8,7 +8,7 @@ using Lematization;
 
 namespace TextualProcessor
 {
-    interface IProcessor
+    public interface IProcessor
     {
         
         ISearchDataSet DataSet { get; set; }
@@ -17,5 +17,6 @@ namespace TextualProcessor
 
         IList<IPublication> LemmatizedPublications(string path);
         IList<IPublication> LemmatizedPublicationsWithResources(string resource);
+        IList<IPublication> LemmatizedPublications(IList<IPublication> path);
     }
 }

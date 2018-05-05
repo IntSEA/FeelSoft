@@ -51,3 +51,39 @@ C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcess
 C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.csproj.CopyComplete
 C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.dll
 C:\Users\Administrador\Documents\GitHub\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.pdb
+C:\Users\bayro\Pictures\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\TextualProcessor.dll.config
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\TextualProcessor.dll.config
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\TextualProcessor.dll
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\TextualProcessor.pdb
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\Lematization.dll
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\SocialNetworkConnection.dll
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\Lematization.pdb
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\SocialNetworkConnection.pdb
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\SocialNetworkConnection.dll.config
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.csprojResolveAssemblyReference.cache
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.Properties.Resources.resources
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.csproj.GenerateResource.cache
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.csproj.CoreCompileInputs.cache
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.csproj.CopyComplete
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.dll
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.pdb
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\TextualProcessor.dll.config
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\TextualProcessor.dll
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\TextualProcessor.pdb
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\Lematization.dll
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\SocialNetworkConnection.dll
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\HtmlAgilityPack.dll
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\Lematization.pdb
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\SocialNetworkConnection.pdb
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\SocialNetworkConnection.dll.config
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\bin\Debug\HtmlAgilityPack.xml
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.csprojResolveAssemblyReference.cache
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.Properties.Resources.resources
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.csproj.GenerateResource.Cache
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.csproj.CoreCompileInputs.cache
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.dll
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\TextualProcessor\obj\Debug\TextualProcessor.pdb

@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SocialNetworkConnection.PublicationSearcher">
+    <Position X="10.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>PublicationSearcher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SocialNetworkConnection.SocialNetwork">
+    <Position X="6.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAQBAAAAAQAAAQAAAAEAAAAAAAAQAogAAA=</HashCode>
+      <FileName>SocialNetwork.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Searcher" />
+    </ShowAsAssociation>
+    <Lollipop Orientation="Left" Position="0.1" />
+  </Class>
+  <Class Name="SocialNetworkConnection.Publication">
+    <Position X="1.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACAAAICAAgAAwAAAIBAAAiAACEgAAAhCABIAIAAiA=</HashCode>
+      <FileName>Publication.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SocialNetworkConnection.QueryConfiguration">
+    <Position X="9" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YCCQECgQCIAAAApkEAIEUBQiABAEBAAAABAACCIgkiA=</HashCode>
+      <FileName>QueryConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SocialNetworkConnection.SearchDataSet">
+    <Position X="11.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>REACBIBAFAAAIEACAgAIBgAAAAyAAAAAAIAABEQAAgQ=</HashCode>
+      <FileName>SearchDataSet.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="SocialNetworkConnection.IPublication">
+    <Position X="1.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACAAAACAAAAAAAAAIAAAAAAACAAAAABAABIAAAACA=</HashCode>
+      <FileName>IPublication.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SocialNetworkConnection.IQueryConfiguration">
+    <Position X="3.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAECAQCAAAAABAAAIAAAQAABAAAAAAAAAAAAAAgCA=</HashCode>
+      <FileName>IQueryConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SocialNetworkConnection.ISocialNetwork">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQBAAAAAAAAAQAAAAAAAAAAAAAAAogAAA=</HashCode>
+      <FileName>ISocialNetwork.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SocialNetworkConnection.ISearchDataSet">
+    <Position X="4.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAACBIBAAAAAAAAAAAAAAgAAAAQAAAAAAIAAAEAAAAA=</HashCode>
+      <FileName>ISearchDataSet.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="QueriesConfigurations" />
+      <Property Name="Publications" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Enum Name="SocialNetworkConnection.Filters">
+    <Position X="6.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAEAAEAAAg=</HashCode>
+      <FileName>Filters.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SocialNetworkConnection.Languages">
+    <Position X="6.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Languages.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SocialNetworkConnection.Locations">
+    <Position X="6.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Locations.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SocialNetworkConnection.SearchTypes">
+    <Position X="4.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAQAAAAABAAAAAAA=</HashCode>
+      <FileName>SearchTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

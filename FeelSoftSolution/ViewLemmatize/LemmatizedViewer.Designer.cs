@@ -61,18 +61,18 @@ namespace View
             // 
             // publicationViewerControl
             // 
-            this.publicationViewerControl.Location = new System.Drawing.Point(-2, 0);
+            this.publicationViewerControl.Location = new System.Drawing.Point(-11, -5);
             this.publicationViewerControl.Name = "publicationViewerControl";
             this.publicationViewerControl.Size = new System.Drawing.Size(436, 437);
             this.publicationViewerControl.TabIndex = 1;
             // 
-            // WebScrapperViewer
+            // LemmatizedViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(477, 456);
+            this.ClientSize = new System.Drawing.Size(451, 456);
             this.Controls.Add(this.splitContainer);
-            this.Name = "WebScrapperViewer";
+            this.Name = "LemmatizedViewer";
             this.Text = "FeelSoft";
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel1.PerformLayout();

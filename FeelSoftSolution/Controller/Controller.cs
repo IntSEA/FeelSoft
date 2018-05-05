@@ -14,7 +14,7 @@ namespace Controller
 {
     public class Controller
     {
-
+        
         private string path;
         private IProcessor processor;
         private DictionaryAn dictionaryAn;

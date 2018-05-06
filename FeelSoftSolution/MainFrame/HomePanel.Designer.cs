@@ -152,6 +152,6 @@
         private System.Windows.Forms.Label lbPetro;
         private System.Windows.Forms.Label lbFajardo;
         private System.Windows.Forms.Label lbVS;
-        private DateWindow dateWindow;
+        
     }
 }

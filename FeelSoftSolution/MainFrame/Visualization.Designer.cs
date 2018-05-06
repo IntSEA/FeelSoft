@@ -178,6 +178,7 @@ namespace MainFrame
         private System.Windows.Forms.Label lbStart;
         private System.Windows.Forms.Label lbEnd;
         private MainFrame main;
+        
         private System.Windows.Forms.CheckBox cbPetro;
         private System.Windows.Forms.CheckBox cbFajardo;
     }

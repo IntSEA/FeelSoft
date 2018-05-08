@@ -49,6 +49,8 @@ namespace View
 
         private void ShowPublication(int indexCurrentPublication)
         {
+            
+
             if (publications.Length > 0)
             {
                 if (indexCurrentPublication < 0 || indexCurrentPublication > publications.Length)

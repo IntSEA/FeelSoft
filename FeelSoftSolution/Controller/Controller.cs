@@ -8,6 +8,7 @@ using AnalyticDictionary;
 using TwitterConnection;
 using Tweetinvi;
 using FacebookConnection;
+using NaiveBayes;
 
 
 namespace Controller
@@ -18,9 +19,13 @@ namespace Controller
         private string path;
         private IProcessor processor;
         private DictionaryAn dictionaryAn;
+
+        private INaiveBayes naive;
         private ISearchDataSet dataSet;
         private ISocialNetwork twitter;
         private ISocialNetwork facebook;
+
+        public INaiveBayes Naive { get => naive; set => naive = value; }
 
         public Controller(string path)
         {
@@ -28,6 +33,7 @@ namespace Controller
             processor = new Processor();
             dictionaryAn = new DictionaryAn();
             dataSet = new SearchDataSet();
+            naive = new NaiveAnalytic();
             //InitializeFacebook();
             InitializeTwitter();
         }
@@ -130,7 +136,74 @@ namespace Controller
             }
             return betweenDates;
         }
+        public IDictionary<int,double> ReportWords(out int num)
+        {
+            IDictionary<string,int> words= naive.GetWordbank();
+            IList<string> keys = words.Keys.ToList();
+            num = keys.Count;
+            IDictionary<int, IList<string>> ret = new Dictionary<int, IList<string>>();
+            foreach(string tmp in keys)
+            {
+                words.TryGetValue(tmp, out int a);
+                bool des=ret.TryGetValue(a,out IList<string> lis);
+                if (des)
+                {
+                    lis.Add(tmp);
 
+                }
+                else
+                {
+                    lis = new List<string>();
+                    lis.Add(tmp);
+                    ret.Add(a,lis);
+                }
+
+            }
+            IDictionary<int, double> retorno = new Dictionary<int, double>();
+            IList<int> key = ret.Keys.ToList();
+
+            foreach (int item in key)
+            {
+                ret.TryGetValue(item, out IList<string> lis);
+                double value = (1.0 * lis.Count)/keys.Count;
+                retorno.Add(item, value);
+            }
+
+            return retorno;
+        }
+        public IDictionary<int, double> ReportSentences(out int num)
+        {
+            int[] training = naive.DataTestOutputTrainig;
+            num = training.Length;
+
+            IDictionary<int, int> keyValuePairs = new Dictionary<int, int>();
+            foreach (int a in training)
+            {
+                int lis = 0;
+                bool des = keyValuePairs.TryGetValue(a, out  lis);
+                lis++;
+                if (des)
+                {
+                    keyValuePairs[a] = lis;
+                }
+                else
+                {
+                    keyValuePairs.Add(a,lis);
+                }
+
+            }
+            List<int> keys = keyValuePairs.Keys.ToList();
+            IDictionary<int, double> retorno = new Dictionary<int,double>(); 
+            foreach (int item in keys) 
+            {
+               
+                retorno.Add(item, (1.0*keyValuePairs[item])/training.Length);
+            }
+            
+
+            
+            return retorno;
+        }
 
     }
 }

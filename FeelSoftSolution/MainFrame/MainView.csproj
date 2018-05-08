@@ -110,6 +110,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ReportPane.Designer.cs">
+      <DependentUpon>ReportPane.cs</DependentUpon>
+    </Compile>
     <Compile Include="Visualization.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,6 +135,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportPane.resx">
+      <DependentUpon>ReportPane.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Visualization.resx">
       <DependentUpon>Visualization.cs</DependentUpon>
@@ -160,6 +169,10 @@
       <Project>{ebbfd0cb-c589-47fa-b954-4432f1a86d63}</Project>
       <Name>AnalyticDictionary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Analytics\Analytics.csproj">
+      <Project>{ac298fa5-126e-444d-989f-56a84831ede9}</Project>
+      <Name>Analytics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Controller\Manager.csproj">
       <Project>{3ce89732-5cd6-49a9-825a-558b5294c651}</Project>
       <Name>Manager</Name>
@@ -167,6 +180,10 @@
     <ProjectReference Include="..\Lematization\Lemmatizer.csproj">
       <Project>{0d587104-16b1-4647-afce-ff9cd6f1718d}</Project>
       <Name>Lemmatizer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NaiveBayes\NaiveBayes.csproj">
+      <Project>{a0a89a20-0800-4385-bbec-ad7aa0fb842a}</Project>
+      <Name>NaiveBayes</Name>
     </ProjectReference>
     <ProjectReference Include="..\Qualifier\Qualifier.csproj">
       <Project>{07d2abb6-543f-4a0e-be83-7b3160d49802}</Project>

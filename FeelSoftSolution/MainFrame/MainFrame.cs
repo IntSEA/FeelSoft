@@ -8,11 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Controller;
+using View;
 using ViewQualifier;
 
 namespace MainFrame
 {
-    public partial class MainFrame : Form
+    public partial class MainFrame : Form, IScrapperHandler
     {
         public MainFrame()
         {
@@ -20,6 +21,7 @@ namespace MainFrame
             InitializeControls();
             ControllerPetro = new Controller.Controller("..//..//..//Database//LemmatizedPublications//Petro");
             ControllerFajardo = new Controller.Controller("..//..//..//Database//LemmatizedPublications//Fajardo");
+            report = new ReportPane(controllerFajardo);
             ShowFormHome();
 
         }
@@ -42,13 +44,17 @@ namespace MainFrame
 
         private void btnReports_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Muy pronto");
-            
+
+            containerPanel.Controls.Clear();
+            containerPanel.Controls.Add(report);
+            containerPanel.Tag = report;
+            report.Show();            
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            webScrapperViewer = new View.WebScrapperViewer();
+            webScrapperViewer = new WebScrapperViewer();
+            webScrapperViewer.AddHandler(this);
             webScrapperViewer.Show();
         }
 
@@ -88,6 +94,21 @@ namespace MainFrame
         private void btnViewPublications_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Muy pronto");
+        }
+
+        public void ExportEventHandler()
+        {
+            MessageBox.Show("Active Handler");
+        }
+
+        private void verticalMenu_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void containerPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

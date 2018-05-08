@@ -7,7 +7,7 @@ using Analytics;
 
 namespace NaiveBayes
 {
-    interface INaiveBayes:IAnalityc
+    public interface INaiveBayes:IAnalityc
     {
        
         int[][] DataTestinputTraining { get; set; }

@@ -19,7 +19,13 @@ namespace View
             InitializeSocialNetworks();
             InitializeDataset();
             IntializeControls();
+            InitializeHandlerList();
 
+        }
+
+        private void InitializeHandlerList()
+        {
+            handlers = new List<IScrapperHandler>();
         }
 
         private void InitializeDataset()
@@ -51,6 +57,11 @@ namespace View
             ParseTwitterCredentials(twitter.Credential, out string consumerKey, out string consumerSecret, out string accessToken, out string secretToken);
             TweetinviConfig.CurrentThreadSettings.TweetMode = TweetMode.Extended;
 
+        }
+
+        public void AddHandler(IScrapperHandler handler)
+        {
+            handlers.Add(handler);
         }
 
         private void ParseTwitterCredentials(string credential, out string consumerKey, out string consumerSecret, out string accessToken, out string secretToken)
@@ -290,7 +301,6 @@ namespace View
 
             if (dataset.TotalPublications > 0 && quantity != 0)
             {
-
                 Thread thread = new Thread(ExportTS(dataset, quantity));
                 thread.SetApartmentState(ApartmentState.STA);
                 Thread threadProcess = new Thread(ThreadProcessTS(thread));
@@ -323,8 +333,18 @@ namespace View
                 dataset.BasePath = folderName + "/";
                 dataset.BaseName = queriesControl.GetCurrentQueryConfiguration().SinceDate.ToShortDateString().Replace("/", "-") + "_" + queriesControl.GetCurrentQueryConfiguration().UntilDate.AddDays(-1).ToShortDateString().Replace("/", "-");
                 dataset.ExportDataSet(quantity);
+
+                InvokeHandlers invokeHandlers = new InvokeHandlers(InvokeScrapperHandlers);
+                this.Invoke(invokeHandlers);
             }
 
+        }
+
+        public delegate void InvokeHandlers();
+
+        private void InvokeScrapperHandlers()
+        {
+            handlers.ForEach(x=> x.ExportEventHandler());
         }
 
         private void ReadHtmlContents(IList<IPublication> publications)

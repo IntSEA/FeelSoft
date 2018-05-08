@@ -135,6 +135,7 @@
             this.Text = "Home";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.White;
+            this.Load += new System.EventHandler(this.HomePanel_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPetro)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBanner)).EndInit();

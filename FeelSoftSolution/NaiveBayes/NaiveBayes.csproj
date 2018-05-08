@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
+    <Compile Include="INaiveBayes.cs" />
     <Compile Include="MachingLearn.cs" />
     <Compile Include="NaiveAnalytic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

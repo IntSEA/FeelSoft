@@ -406,6 +406,11 @@ namespace View
 
 
         }
+        
+        public ISearchDataSet GetSearchDataSet(){
+        
+            return dataset;
+        }
 
         private ThreadStart ThreadProcessTS(Thread thread)
         {

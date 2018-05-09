@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using Controller;
 using View;
 using ViewQualifier;
+using SocialNetworkConnection;
+
 
 namespace MainFrame
 {
@@ -98,7 +100,15 @@ namespace MainFrame
 
         public void ExportEventHandler()
         {
-            MessageBox.Show("Active Handler");
+           ISearchDataSet dataset =  webScrapperViewer.GetSearchDataSet();
+           IList<IPublication> publications = dataset.GetPublications();
+           ToLemmatizePublications(publications);
+           
+        }
+        
+        public void ToLemmatizedPublications(IList<IPublication> publications){
+            
+            //TODO (CREATE A METHOD WHERE PUBlICATIONS'LL LEMMATIZE AND EXPORT IN ANY FORMAT)
         }
 
         private void verticalMenu_Paint(object sender, PaintEventArgs e)

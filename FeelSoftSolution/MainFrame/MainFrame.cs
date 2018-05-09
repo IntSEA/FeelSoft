@@ -11,6 +11,7 @@ using Controller;
 using View;
 using ViewQualifier;
 using SocialNetworkConnection;
+using TextualProcessor
 
 
 namespace MainFrame
@@ -101,14 +102,32 @@ namespace MainFrame
         public void ExportEventHandler()
         {
            ISearchDataSet dataset =  webScrapperViewer.GetSearchDataSet();
-           IList<IPublication> publications = dataset.GetPublications();
-           ToLemmatizePublications(publications);
+           ToLemmatizePublications(dataset);
+           ToExportPublications(dataset);
            
         }
         
-        public void ToLemmatizedPublications(IList<IPublication> publications){
+        public void ToLemmatizedPublications(ISearchDataSet dataset){
             
             //TODO (CREATE A METHOD WHERE PUBlICATIONS'LL LEMMATIZE AND EXPORT IN ANY FORMAT)
+            IProcessor processor = new Processor();
+            var publications = processor.LemmatizedPublications(dataset);
+            
+            dataset.AddOrReplacePublications(publications);
+            
+            
+        }
+        
+        public void ToExportPublications(ISearchDataSet dataset){
+            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
+            DialogResult resultFolderDialog = folderDialog.ShowDialog();
+            if (resultFolderDialog == DialogResult.OK)
+            {
+                string folderName = folderDialog.SelectedPath;
+
+                dataset.BasePath = folderName + "/";
+                dataset.ExportDataSet(-1);
+             }   
         }
 
         private void verticalMenu_Paint(object sender, PaintEventArgs e)

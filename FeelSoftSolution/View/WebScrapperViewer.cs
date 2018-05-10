@@ -323,20 +323,17 @@ namespace View
                 dataset.AddOrReplacePublications(publications);
 
             }
-
-            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
-            DialogResult resultFolderDialog = folderDialog.ShowDialog();
-            if (resultFolderDialog == DialogResult.OK)
-            {
-                string folderName = folderDialog.SelectedPath;
-
-                dataset.BasePath = folderName + "/";
-                dataset.BaseName = queriesControl.GetCurrentQueryConfiguration().SinceDate.ToShortDateString().Replace("/", "-") + "_" + queriesControl.GetCurrentQueryConfiguration().UntilDate.AddDays(-1).ToShortDateString().Replace("/", "-");
-                dataset.ExportDataSet(quantity);
-
-                InvokeHandlers invokeHandlers = new InvokeHandlers(InvokeScrapperHandlers);
-                this.Invoke(invokeHandlers);
+            
+            IQueryConfiguration queryConfiguration = queriesControl.GetCurrentQueryConfiguration();
+            if(queryConfiguration!=null){
+                dataset.BaseName = queryConfiguration.SinceDate.ToShortDateString().Replace("/","-")+"_"+queryConfiguration.UntilDate.AddDays(-1).ToShortDateString().Replace("/","-");
             }
+            else{
+                dataset.BaseName = DateTime.Now.AddDays(-1).ToShortDateString().Replace("/","-")+"_"+DateTime.Now.ToShortDateString().Replace("/","-");
+            }
+            
+            InvokeHandlers invokeHandlers = new InvokeHandlers(InvokeScrapperHandlers);
+            this.Invoke(invokeHandlers);
 
         }
 
@@ -405,6 +402,11 @@ namespace View
             }
 
 
+        }
+        
+        public ISearchDataSet GetSearchDataSet(){
+        
+            return dataset;
         }
 
         private ThreadStart ThreadProcessTS(Thread thread)

@@ -20,7 +20,7 @@ namespace SocialNetworkConnection
         IPublication[] ImportDataSet(string path);
         IPublication[] ImportDataset();
         IList<IPublication> GetPublications();
-        bool TranslateFromOldVersion(string initPath,string destinyPath,int version);
-        bool TranslateFromOldVersion(string initPath,string destinyPath);
+        bool TranslateFromOldVersion(string directoryPath,int version);
+        bool TranslateFromOldVersion(string directoryPath);
     }
 }

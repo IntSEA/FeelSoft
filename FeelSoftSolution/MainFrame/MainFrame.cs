@@ -33,6 +33,7 @@ namespace MainFrame
 
         public void ShowFormVisualization()
         {
+            this.WindowState = FormWindowState.Maximized;
             visualization = new Visualization(this);
             containerPanel.Controls.Clear();
             containerPanel.Controls.Add(visualization);
@@ -54,7 +55,7 @@ namespace MainFrame
 
         private void btnHome_Click(object sender, EventArgs e)
         {
-            
+            this.WindowState = FormWindowState.Normal;
             containerPanel.Controls.Clear();
             InitializeControls();
             ShowFormHome();

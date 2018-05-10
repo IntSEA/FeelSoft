@@ -8,28 +8,34 @@ using AnalyticDictionary;
 using TwitterConnection;
 using Tweetinvi;
 using FacebookConnection;
+using NaiveBayes;
 
 
 namespace Controller
 {
     public class Controller
     {
-        
-        private string path;
+
+        public const string path = "..//..//..//Database//LemmatizedPublications";
+
         private IProcessor processor;
         private DictionaryAn dictionaryAn;
+        private NaiveAnalytic naive;
         private ISearchDataSet dataSet;
         private ISocialNetwork twitter;
         private ISocialNetwork facebook;
+        private Dictionary<string, Candidate> candidates;
 
-        public Controller(string path)
+        public Controller()
         {
-            this.path = path;
+           
             processor = new Processor();
             dictionaryAn = new DictionaryAn();
             dataSet = new SearchDataSet();
+            dictionaryAn = new DictionaryAn();
             //InitializeFacebook();
             InitializeTwitter();
+            LoadPublications();
         }
 
         private void InitializeTwitter()
@@ -53,6 +59,18 @@ namespace Controller
             dataSet.BasePath = path;
             IList<IPublication> publications = dataSet.ImportDataset();
             dataSet.AddPublications(publications);
+            
+            foreach(IPublication publication in publications)
+            {
+                
+                if (!candidates.ContainsKey(publication.ConfigurationName))
+                {
+                    Candidate neww = new Candidate(publication.ConfigurationName);
+                    //Aqui se califica
+                    neww.AddPublication
+                    candidates.Add(publication.ConfigurationName, neww);
+                }
+            }
         }
 
         

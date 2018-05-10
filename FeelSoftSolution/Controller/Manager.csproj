@@ -112,6 +112,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Candidate.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -127,6 +128,10 @@
     <ProjectReference Include="..\FacebookConnection\FacebookConnection.csproj">
       <Project>{435bf8a2-aa2c-41de-b993-40aee4b11bca}</Project>
       <Name>FacebookConnection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NaiveBayes\NaiveBayes.csproj">
+      <Project>{a0a89a20-0800-4385-bbec-ad7aa0fb842a}</Project>
+      <Name>NaiveBayes</Name>
     </ProjectReference>
     <ProjectReference Include="..\SocialNetworkConnection\SocialNetworkConnection.csproj">
       <Project>{07de8bef-d893-4d9b-bbb1-c6e09b495c48}</Project>

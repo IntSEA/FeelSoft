@@ -69,9 +69,10 @@
             // failTraining
             // 
             this.failTraining.AutoSize = true;
+            this.failTraining.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.failTraining.Location = new System.Drawing.Point(51, 279);
             this.failTraining.Name = "failTraining";
-            this.failTraining.Size = new System.Drawing.Size(114, 13);
+            this.failTraining.Size = new System.Drawing.Size(205, 24);
             this.failTraining.TabIndex = 2;
             this.failTraining.Tag = "";
             this.failTraining.Text = "Error de entrenamiento";
@@ -79,27 +80,32 @@
             // failDic
             // 
             this.failDic.AutoSize = true;
+            this.failDic.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.failDic.Location = new System.Drawing.Point(51, 310);
             this.failDic.Name = "failDic";
-            this.failDic.Size = new System.Drawing.Size(89, 13);
+            this.failDic.Size = new System.Drawing.Size(160, 24);
             this.failDic.TabIndex = 3;
             this.failDic.Text = "Error de decision ";
             // 
             // failT
             // 
             this.failT.AutoSize = true;
-            this.failT.Location = new System.Drawing.Point(202, 279);
+            this.failT.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.failT.Location = new System.Drawing.Point(310, 279);
             this.failT.Name = "failT";
-            this.failT.Size = new System.Drawing.Size(0, 13);
+            this.failT.Size = new System.Drawing.Size(78, 24);
             this.failT.TabIndex = 4;
+            this.failT.Text = "Aqui toy";
             // 
             // failD
             // 
             this.failD.AutoSize = true;
-            this.failD.Location = new System.Drawing.Point(202, 310);
+            this.failD.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.failD.Location = new System.Drawing.Point(303, 310);
             this.failD.Name = "failD";
-            this.failD.Size = new System.Drawing.Size(0, 13);
+            this.failD.Size = new System.Drawing.Size(85, 24);
             this.failD.TabIndex = 5;
+            this.failD.Text = "y yo aqui";
             // 
             // ReportPane
             // 

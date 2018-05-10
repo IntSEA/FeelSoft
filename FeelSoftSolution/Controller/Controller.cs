@@ -20,34 +20,36 @@ namespace Controller
 
         private IProcessor processor;
         private DictionaryAn dictionaryAn;
-<<<<<<< HEAD
-        private NaiveAnalytic naive;
-=======
+
+
 
         private INaiveBayes naive;
->>>>>>> 6293f07458fe2111f912f53c180bd479ab3b401f
+
         private ISearchDataSet dataSet;
         private ISocialNetwork twitter;
         private ISocialNetwork facebook;
-        private Dictionary<string, Candidate> candidates;
+        //   private Dictionary<string, Candidate> candidates;
 
-<<<<<<< HEAD
+
         public Controller()
-=======
+        {
+
+        }
+
         public INaiveBayes Naive { get => naive; set => naive = value; }
 
         public Controller(string path)
->>>>>>> 6293f07458fe2111f912f53c180bd479ab3b401f
+
         {
            
             processor = new Processor();
             dictionaryAn = new DictionaryAn();
             dataSet = new SearchDataSet();
-<<<<<<< HEAD
+
             dictionaryAn = new DictionaryAn();
-=======
+
             naive = new NaiveAnalytic();
->>>>>>> 6293f07458fe2111f912f53c180bd479ab3b401f
+
             //InitializeFacebook();
             InitializeTwitter();
             LoadPublications();

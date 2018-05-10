@@ -209,7 +209,7 @@ namespace SocialNetworkConnection
         public bool TranslateFromOldVersion(string directoryPath,IList<IQueryConfiguration> queryFilter,int version){
         
             bool response = true;
-            string[] paths = Directory.GetFiles(initPath);
+            string[] paths = Directory.GetFiles(directoryPath);
             IList<IPublication> publications = new List<IPublication>();
             IList<Thread> threads = new List<Thread>();
 
@@ -249,7 +249,7 @@ namespace SocialNetworkConnection
             }
         }
         
-        private TranslateFrom0Version(string path, IList<IPublication> publications, IList<IQueryConfiguration> queryFilter){
+        private void TranslateFrom0Version(string path, IList<IPublication> publications, IList<IQueryConfiguration> queryFilter){
             StreamReader sr = new StreamReader(path);
 
             string line = "";
@@ -278,7 +278,7 @@ namespace SocialNetworkConnection
             }
             string id = info[0];
             string wroteBy = info[1];
-            DateTime createdDate = null;
+            DateTime createdDate = QueryConfiguration.NONE_DATE;
             
             //ParseDate include THE BAYRON'S PROBLEM
             if(!DateTime.TryParse(info[2],out createdDate))
@@ -296,7 +296,7 @@ namespace SocialNetworkConnection
                     }
                     string newDate = zero + dates[1] + "/" + zero2 + dates[0] + "/" + dates[2];
                     
-                    if(!DateTime.TryParse(newDate,createdDate){
+                    if(!DateTime.TryParse(newDate, out createdDate)){
                         throw new ArgumentException("Non Date");
                     }
                 }
@@ -324,8 +324,8 @@ namespace SocialNetworkConnection
         
         private string GetConfigurationName(string message, IList<IQueryConfiguration> queryFilter){
             string configurationName = "Not found";
-            if(queryFilter!=null{
-                var query = queryFilter.First(x=>IsMatch(message,x)).ToList();
+            if(queryFilter!=null){
+                var query = queryFilter.First(x=>IsMatch(message,x));
                 if(query!=null){
                    configurationName = query.Name;
                 }
@@ -347,7 +347,7 @@ namespace SocialNetworkConnection
         
         public bool TranslateFromOldVersion(string directoryPath, IList<IQueryConfiguration> queryFilter){
         
-           return TranslateFromOldVersion(initPath,0);
+           return TranslateFromOldVersion(directoryPath, queryFilter,0);
         
         }
         

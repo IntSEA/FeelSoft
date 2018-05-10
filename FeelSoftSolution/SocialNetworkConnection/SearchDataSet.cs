@@ -5,6 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+
 
 namespace SocialNetworkConnection
 {
@@ -140,7 +144,7 @@ namespace SocialNetworkConnection
             {
                 if (File.Exists(path))
                 {
-
+                    
                     Thread thread = new Thread(ImportFileAsync(path, publications));
                     thread.Start();
                     threads.Add(thread);
@@ -202,7 +206,158 @@ namespace SocialNetworkConnection
 
         }
 
+        public bool TranslateFromOldVersion(string directoryPath,IList<IQueryConfiguration> queryFilter,int version){
+        
+            bool response = true;
+            string[] paths = Directory.GetFiles(initPath);
+            IList<IPublication> publications = new List<IPublication>();
+            IList<Thread> threads = new List<Thread>();
 
+            
+            foreach (var path in paths)
+            {
+                if (File.Exists(path))
+                {
+                    try{
+                    
+                     response = true;
+                     Thread thread = new Thread(TranslateAsync(path, publications,queryFilter,version));
+                     thread.Start();
+                     threads.Add(thread);
+                    }catch(ArgumentException){
+                       response = false;
+                       
+                    }
+                }
+
+            }
+
+            WaitThreads(threads);
+            return response;
+        
+        }
+        
+        private ThreadStart TranslateAsync(string path, IList<IPublication> publications,IList<IQueryConfiguration> queryFilter,int version){
+            return ()=> {Translate(path,publications,queryFilter,version);};
+        }
+        
+        public void Translate(string path, IList<IPublication> publications,IList<IQueryConfiguration> queryFilter,int version){
+            if(version ==0){
+                TranslateFrom0Version(path,publications,queryFilter);
+            }else{
+                throw new Exception("TranslateFromVersion: "+version+" is not available");
+            }
+        }
+        
+        private TranslateFrom0Version(string path, IList<IPublication> publications, IList<IQueryConfiguration> queryFilter){
+            StreamReader sr = new StreamReader(path);
+
+            string line = "";
+            while ((line = sr.ReadLine()) != null)
+            {
+                while (!line.Contains(Publication.END_LINE))
+                {
+                    line += sr.ReadLine();
+                }
+
+                IPublication parsedPublication = ParsePublicationFrom0Version(line, queryFilter);
+                lock (this)
+                {
+                    publications.Add(parsedPublication);
+                }
+
+
+            }
+            sr.Close();
+        }
+        
+        private IPublication ParsePublicationFrom0Version(string line, IList<IQueryConfiguration> queryFilter){
+            string[] info = line.Split('|');
+            if(info.Length<6){
+                throw new ArgumentException("Non Date");
+            }
+            string id = info[0];
+            string wroteBy = info[1];
+            DateTime createdDate = null;
+            
+            //ParseDate include THE BAYRON'S PROBLEM
+            if(!DateTime.TryParse(info[2],out createdDate))
+                {
+                    string[] dates = info[2].Split('/');
+                    string zero = "";
+                    string zero2 = "";
+                    if (Convert.ToInt32(dates[1]) < 10)
+                    {
+                        zero = "0";
+                    }
+                    if (Convert.ToInt32(dates[0]) < 10)
+                    {
+                        zero2 = "0";
+                    }
+                    string newDate = zero + dates[1] + "/" + zero2 + dates[0] + "/" + dates[2];
+                    
+                    if(!DateTime.TryParse(newDate,createdDate){
+                        throw new ArgumentException("Non Date");
+                    }
+                }
+                
+            string message = info[3];
+            Languages language = QueryConfiguration.ParseLanguage(info[4]);
+            Locations location = QueryConfiguration.ParseLocation(info[5]);
+            string configurationName = GetConfigurationName(message,queryFilter);
+            
+            
+            IPublication publication = new Publication
+            {
+                Id = id,
+                WroteBy = wroteBy,
+                CreateDate = createdDate,
+                Message = message,
+                Language = language,
+                Location = location,
+                ConfigurationName = configurationName,
+                LemmatizedMessage = "Not yet lemmatized"
+            };
+            
+            return publication;
+        }
+        
+        private string GetConfigurationName(string message, IList<IQueryConfiguration> queryFilter){
+            string configurationName = "Not found";
+            if(queryFilter!=null{
+                var query = queryFilter.First(x=>IsMatch(message,x)).ToList();
+                if(query!=null){
+                   configurationName = query.Name;
+                }
+            }
+            return configurationName;
+        }
+        
+        private bool IsMatch(string message,IQueryConfiguration queryConfiguration){
+            bool isMatch = false;
+            if(queryConfiguration!=null){
+            
+                if(queryConfiguration.Keywords!=null && queryConfiguration.Keywords.Any(x=> CreateRegularExpresion(x).IsMatch(message))){
+                    isMatch = true;
+                }
+            }
+            
+            return isMatch;
+        }
+        
+        public bool TranslateFromOldVersion(string directoryPath, IList<IQueryConfiguration> queryFilter){
+        
+           return TranslateFromOldVersion(initPath,0);
+        
+        }
+        
+        private Regex CreateRegularExpresion(string word)
+        {
+            string upperCasePattern = @"[\s|\W|]" + word.ToUpper() + @"+\w?\b";
+            string lowerCasePattern = @"[\s|\W|]" + word.ToLower() + @"+\w?\b";
+            string normalCasePattern = @"[\s|\W|]" + word + @"+\w?\b";
+            return new Regex(normalCasePattern + "|" + lowerCasePattern + "|" + upperCasePattern);
+        }
 
         public IPublication[] ImportDataset()
         {

@@ -5,7 +5,7 @@ using System.IO;
 
 namespace NaiveBayes
 {
-    public class NaiveAnalytic : Analytic
+    public class NaiveAnalytic : Analytic,INaiveBayes
     {
         private MachingLearn machingLearn;
         private string pathTraining;

@@ -19,7 +19,13 @@ namespace View
             InitializeSocialNetworks();
             InitializeDataset();
             IntializeControls();
+            InitializeHandlerList();
 
+        }
+
+        private void InitializeHandlerList()
+        {
+            handlers = new List<IScrapperHandler>();
         }
 
         private void InitializeDataset()
@@ -51,6 +57,11 @@ namespace View
             ParseTwitterCredentials(twitter.Credential, out string consumerKey, out string consumerSecret, out string accessToken, out string secretToken);
             TweetinviConfig.CurrentThreadSettings.TweetMode = TweetMode.Extended;
 
+        }
+
+        public void AddHandler(IScrapperHandler handler)
+        {
+            handlers.Add(handler);
         }
 
         private void ParseTwitterCredentials(string credential, out string consumerKey, out string consumerSecret, out string accessToken, out string secretToken)
@@ -290,7 +301,6 @@ namespace View
 
             if (dataset.TotalPublications > 0 && quantity != 0)
             {
-
                 Thread thread = new Thread(ExportTS(dataset, quantity));
                 thread.SetApartmentState(ApartmentState.STA);
                 Thread threadProcess = new Thread(ThreadProcessTS(thread));
@@ -313,18 +323,25 @@ namespace View
                 dataset.AddOrReplacePublications(publications);
 
             }
-
-            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
-            DialogResult resultFolderDialog = folderDialog.ShowDialog();
-            if (resultFolderDialog == DialogResult.OK)
-            {
-                string folderName = folderDialog.SelectedPath;
-
-                dataset.BasePath = folderName + "/";
-                dataset.BaseName = queriesControl.GetCurrentQueryConfiguration().SinceDate.ToShortDateString().Replace("/", "-") + "_" + queriesControl.GetCurrentQueryConfiguration().UntilDate.AddDays(-1).ToShortDateString().Replace("/", "-");
-                dataset.ExportDataSet(quantity);
+            
+            IQueryConfiguration queryConfiguration = queriesControl.GetCurrentQueryConfiguration();
+            if(queryConfiguration!=null){
+                dataset.BaseName = queryConfiguration.SinceDate.ToShortDateString().Replace("/","-")+"_"+queryConfiguration.UntilDate.AddDays(-1).ToShortDateString().Replace("/","-");
             }
+            else{
+                dataset.BaseName = DateTime.Now.AddDays(-1).ToShortDateString().Replace("/","-")+"_"+DateTime.Now.ToShortDateString().Replace("/","-");
+            }
+            
+            InvokeHandlers invokeHandlers = new InvokeHandlers(InvokeScrapperHandlers);
+            this.Invoke(invokeHandlers);
 
+        }
+
+        public delegate void InvokeHandlers();
+
+        private void InvokeScrapperHandlers()
+        {
+            handlers.ForEach(x=> x.ExportEventHandler());
         }
 
         private void ReadHtmlContents(IList<IPublication> publications)
@@ -385,6 +402,11 @@ namespace View
             }
 
 
+        }
+        
+        public ISearchDataSet GetSearchDataSet(){
+        
+            return dataset;
         }
 
         private ThreadStart ThreadProcessTS(Thread thread)

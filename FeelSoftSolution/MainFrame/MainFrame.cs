@@ -8,11 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Controller;
+using View;
 using ViewQualifier;
+using SocialNetworkConnection;
+using TextualProcessor
+
 
 namespace MainFrame
 {
-    public partial class MainFrame : Form
+    public partial class MainFrame : Form, IScrapperHandler
     {
         public MainFrame()
         {
@@ -20,6 +24,7 @@ namespace MainFrame
             InitializeControls();
             ControllerPetro = new Controller.Controller("..//..//..//Database//LemmatizedPublications//Petro");
             ControllerFajardo = new Controller.Controller("..//..//..//Database//LemmatizedPublications//Fajardo");
+            report = new ReportPane(controllerFajardo);
             ShowFormHome();
 
         }
@@ -43,13 +48,17 @@ namespace MainFrame
 
         private void btnReports_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Muy pronto");
-            
+
+            containerPanel.Controls.Clear();
+            containerPanel.Controls.Add(report);
+            containerPanel.Tag = report;
+            report.Show();            
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            webScrapperViewer = new View.WebScrapperViewer();
+            webScrapperViewer = new WebScrapperViewer();
+            webScrapperViewer.AddHandler(this);
             webScrapperViewer.Show();
         }
 
@@ -89,6 +98,47 @@ namespace MainFrame
         private void btnViewPublications_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Muy pronto");
+        }
+
+        public void ExportEventHandler()
+        {
+           ISearchDataSet dataset =  webScrapperViewer.GetSearchDataSet();
+           ToLemmatizePublications(dataset);
+           ToExportPublications(dataset);
+           
+        }
+        
+        public void ToLemmatizedPublications(ISearchDataSet dataset){
+            
+            //TODO (CREATE A METHOD WHERE PUBlICATIONS'LL LEMMATIZE AND EXPORT IN ANY FORMAT)
+            IProcessor processor = new Processor();
+            var publications = processor.LemmatizedPublications(dataset);
+            
+            dataset.AddOrReplacePublications(publications);
+            
+            
+        }
+        
+        public void ToExportPublications(ISearchDataSet dataset){
+            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
+            DialogResult resultFolderDialog = folderDialog.ShowDialog();
+            if (resultFolderDialog == DialogResult.OK)
+            {
+                string folderName = folderDialog.SelectedPath;
+
+                dataset.BasePath = folderName + "/";
+                dataset.ExportDataSet(-1);
+             }   
+        }
+
+        private void verticalMenu_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void containerPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

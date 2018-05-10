@@ -28,5 +28,10 @@ namespace MainFrame
         {
             main.ShowFormVisualization();
         }
+
+        private void HomePanel_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

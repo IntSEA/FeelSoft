@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using SocialNetworkConnection;
 
 namespace Analytics
 {
@@ -226,7 +227,16 @@ namespace Analytics
             int[] inp = ConvertTextInNumber(input);
             return Decided(inp);
         }
-        
-        
+
+        public IDictionary<string, int> Decided(IList<IPublication> publications)
+        {
+            IDictionary<string, int> ret = new Dictionary<string,int>();
+            foreach (var item in publications)
+            {
+                int a = Decided(item.LemmatizedMessage.Split(' '));
+                ret.Add(item.Id, a);
+            }
+            return ret;
+        }
     }
 }

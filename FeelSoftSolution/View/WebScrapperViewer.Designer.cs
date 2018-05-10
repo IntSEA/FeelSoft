@@ -1,4 +1,5 @@
 ﻿using SocialNetworkConnection;
+using System.Collections.Generic;
 
 namespace View
 {
@@ -146,6 +147,7 @@ namespace View
         public const int FACEBOOK = 0;
         public const int TWITTER = 1;
         private System.Windows.Forms.Label lblLoad;
+        private List<IScrapperHandler> handlers;
     }
 }
 

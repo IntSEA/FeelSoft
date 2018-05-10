@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SocialNetworkConnection;
 
 namespace Analytics
 {
@@ -6,6 +7,8 @@ namespace Analytics
     {
        
         int[] Decided(int[][] input);
+        IDictionary<string,int> Decided(IList<IPublication> publications);
+
         int Decided(int[] input);
         int Decided(string[] input);
         int[] Decided(string path,int type);

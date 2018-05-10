@@ -76,6 +76,7 @@ namespace MainFrame
             this.verticalMenu.Name = "verticalMenu";
             this.verticalMenu.Size = new System.Drawing.Size(228, 627);
             this.verticalMenu.TabIndex = 2;
+            this.verticalMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.verticalMenu_Paint);
             // 
             // btnViewPublications
             // 
@@ -254,15 +255,16 @@ namespace MainFrame
             this.containerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.containerPanel.Location = new System.Drawing.Point(228, 0);
             this.containerPanel.Name = "containerPanel";
-            this.containerPanel.Size = new System.Drawing.Size(797, 627);
+            this.containerPanel.Size = new System.Drawing.Size(875, 627);
             this.containerPanel.TabIndex = 3;
+            this.containerPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.containerPanel_Paint);
             // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1025, 627);
+            this.ClientSize = new System.Drawing.Size(1103, 627);
             this.Controls.Add(this.containerPanel);
             this.Controls.Add(this.verticalMenu);
             this.Name = "MainFrame";
@@ -296,9 +298,12 @@ namespace MainFrame
         private System.Windows.Forms.Panel containerPanel;
         private Button btnViewPublications;
         private Panel panel6;
+        private ReportPane report;
+
 
         public Controller.Controller ControllerPetro { get => controllerPetro; set => controllerPetro = value; }
         public Controller.Controller ControllerFajardo { get => controllerFajardo; set => controllerFajardo = value; }
+
     }
 }
 

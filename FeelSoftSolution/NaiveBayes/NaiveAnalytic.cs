@@ -27,7 +27,7 @@ namespace NaiveBayes
         public NaiveAnalytic()
         {
             machingLearn = new MachingLearn();
-            porcentTrining = 1;
+            porcentTrining = 0.8;
 
             loadDataTraining("..//..//..//Analytics/DataTrainingText.txt", Analytic.TYPE_STRING);
 

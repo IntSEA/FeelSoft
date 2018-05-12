@@ -1,0 +1,98 @@
+C:\Users\bayro\Pictures\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Accord.dll.config
+C:\Users\bayro\Pictures\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.dll
+C:\Users\bayro\Pictures\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.pdb
+C:\Users\bayro\Pictures\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.dll
+C:\Users\bayro\Pictures\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.pdb
+C:\Users\bayro\Pictures\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.dll.config
+C:\Users\bayro\Pictures\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csprojResolveAssemblyReference.cache
+C:\Users\bayro\Pictures\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csproj.CoreCompileInputs.cache
+C:\Users\bayro\Pictures\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.dll
+C:\Users\bayro\Pictures\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.pdb
+C:\Users\bayro\Pictures\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.dll.config
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Accord.dll.config
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.dll.config
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.dll
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.pdb
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.dll
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.pdb
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.dll.config
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csprojResolveAssemblyReference.cache
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csproj.CoreCompileInputs.cache
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csproj.CopyComplete
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.dll
+C:\Users\Juan David\Downloads\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.pdb
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Accord.dll.config
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.dll.config
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.dll
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.pdb
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.dll
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.pdb
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.dll.config
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csprojResolveAssemblyReference.cache
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csproj.CoreCompileInputs.cache
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.dll
+C:\Users\bayro\Desktop\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.pdb
+C:\Users\Juan David\Downloads\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Accord.dll.config
+C:\Users\Juan David\Downloads\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.dll.config
+C:\Users\Juan David\Downloads\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.dll
+C:\Users\Juan David\Downloads\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.pdb
+C:\Users\Juan David\Downloads\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.dll
+C:\Users\Juan David\Downloads\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.pdb
+C:\Users\Juan David\Downloads\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.dll.config
+C:\Users\Juan David\Downloads\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csprojResolveAssemblyReference.cache
+C:\Users\Juan David\Downloads\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csproj.CoreCompileInputs.cache
+C:\Users\Juan David\Downloads\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csproj.CopyComplete
+C:\Users\Juan David\Downloads\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.dll
+C:\Users\Juan David\Downloads\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.pdb
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Accord.dll.config
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.dll.config
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.dll
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.pdb
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.dll
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.pdb
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.dll.config
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csprojResolveAssemblyReference.cache
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csproj.CoreCompileInputs.cache
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.dll
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.pdb
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\SocialNetworkConnection.dll
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\HtmlAgilityPack.dll
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\SocialNetworkConnection.pdb
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\SocialNetworkConnection.dll.config
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\bayro\Downloads\FS\FeelSoft 1\FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Accord.dll.config
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.dll.config
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.dll
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.pdb
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.dll
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\SocialNetworkConnection.dll
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.pdb
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.dll.config
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\SocialNetworkConnection.pdb
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\SocialNetworkConnection.dll.config
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csprojResolveAssemblyReference.cache
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csproj.CoreCompileInputs.cache
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csproj.CopyComplete
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.dll
+C:\Users\Alejandro\Source\Repos\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.pdb
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Accord.dll.config
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.dll.config
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.dll
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\AnalyticDictionary.pdb
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.dll
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\SocialNetworkConnection.dll
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\HtmlAgilityPack.dll
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.pdb
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\Analytics.dll.config
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\SocialNetworkConnection.pdb
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\SocialNetworkConnection.dll.config
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\bin\Debug\HtmlAgilityPack.xml
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csprojResolveAssemblyReference.cache
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.csproj.CoreCompileInputs.cache
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.dll
+C:\Users\bayro\Desktop\Integrador\Ultimate-FeelSoft\FeelSoftSolution\AnalyticDictionary\obj\Debug\AnalyticDictionary.pdb
